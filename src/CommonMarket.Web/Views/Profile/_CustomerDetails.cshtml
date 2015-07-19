@@ -1,0 +1,25 @@
+﻿@model CommonMarket.Web.Models.IndexViewModel
+
+
+<table class="table table-user-information table-responsive">
+    <tbody>
+        <tr>
+            <td>Alias:</td>
+            <td>@Html.DisplayFor(model => model.CustomerAlias)</td>
+        </tr>
+        <tr>
+            <td>Shipping Address:</td>
+            <td>@Html.DisplayFor(model => model.ShippingAddress)</td>
+        </tr>
+        <tr>
+            <td>Billing Address:</td>
+            <td>@Html.DisplayFor(model => model.BillingAddress)</td>
+        </tr>
+        
+        <tr>
+            <td>Notes</td>
+            <td>@Html.DisplayFor(model => model.Notes)</td>
+        </tr>
+
+    </tbody>
+</table>

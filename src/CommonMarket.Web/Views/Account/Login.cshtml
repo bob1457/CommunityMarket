@@ -1,0 +1,212 @@
+﻿@model CommonMarket.Web.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Sign in";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3"></div>
+
+            @*<h1 class="text-center login-title"><i class="icon-key" style="color:#ff0000"></i> Member Sign-in</h1>*@
+
+        <div class="col-md-6">
+            <div class="panel panel-default text-center" style="background-color: #FFF0E7; margin-top: 80px;">
+                <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%);">
+                    <h4><i class="icon-key" style="color:#ff0000"></i> &nbsp;Member Sign In</h4>
+                </div>
+                <div class="panel-body">
+                    <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
+                        <a href="#" class="btn btn-default">Learn More</a>-->
+
+                    @*<h1 class="text-center login-title"><i class="icon-key" style="color:#ff0000"></i> Member Sign-in</h1>*@
+
+                        
+
+                    <!--  
+
+                        <form role="form" action="#" method="POST">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="center-block">
+                                        <img class="profile-img"
+                                             src="~/Content/Assets/Images/user_default.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-user"></i>
+                                                </span>
+                                                <input class="form-control" placeholder="Username" name="loginname" type="text" autofocus style="height: 35px;">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-lock"></i>
+                                                </span>
+                                                <input class="form-control" placeholder="Password" name="password" type="password" value="" style="height: 35px;">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in">
+                                        </div>
+
+                                        <label class="checkbox pull-left">
+                                            <input type="checkbox" value="remember-me">
+                                            Remember me
+                                        </label>
+                                        <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+
+
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                        -->
+                        
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <fieldset>
+                            <div class="row">
+                                <div class="center-block">
+                                    <img class="profile-img"
+                                         src="~/Content/Assets/Images/user_default.png" alt="">
+                                </div>
+                            </div>
+                            <div id="message" style="color:#269226;"></div><br/>
+                            <div class="row">  
+                                <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-envelope"></i>
+                                            </span>
+                                            @*<input class="form-control" placeholder="Username" name="loginname" type="text" autofocus style="height: 35px;">*@
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", autofocus = "" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-lock"></i>
+                                            </span>
+                                            @*<input class="form-control" placeholder="Password" name="password" type="password" value="" style="height: 35px;">*@
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in">
+                                    </div>
+
+
+                                    <label class="checkbox pull-left">
+                                        @*@Html.CheckBoxFor(m => m.RememberMe)
+                                            @Html.LabelFor(m => m.RememberMe)*@
+                                        <input type="checkbox" value="remember-me">
+                                        Remember me
+                                    </label>
+                                    <a href="#" class="pull-right btn btn-default" data-toggle="modal" data-target="#forgetp">Forgot password? </a><span class="clearfix"></span>
+                                </div>
+                            </div>
+                                    
+                        </fieldset>
+
+                    }
+                    <div class="text-center" style="margin-top: -5px; color: #1a671a;">Not a member...yet?</div>
+                    <a href="#" class="text-center new-account">Create an account </a>
+
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3"></div>
+    </div>
+    
+</div>
+
+    
+<!-- Modal Dialog - forgot password -->
+<div class="modal fade" id="forgetp" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog" style="width: 100%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Forgot Password?</h4>
+            </div>
+            <div class="modal-body">
+               
+                @*<div>Provide your email address and click "Send". <br /><br/>
+    <input id="your_email" class="form-control" type="text" placeholder="Enter your email" style="height: 35px;">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>*@
+                
+                
+                @using (Html.BeginForm("ForgotPassword", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @*<h4>Enter your email.</h4>*@
+                    <div>Provide your email address and click "Send".</div>
+                   <!-- @Html.ValidationSummary("", new { @class = "text-danger" })-->
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id="your_email", @placeholder = "Enter your email", @style = "height: 35px;" })
+                        
+                
+                <br /><br/>
+                    <div class="modal-footer">
+                        @*<button id="send" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-ok-sign"></span> Send</button>*@
+                    
+                        <input type="submit" class="btn btn-warning" value="Send"/>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                    </div>
+                    
+                }
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+
+<!-- Forgot password 
+    <script type="text/javascript">
+    $(document).ready(function() {
+        //alert("start the page");
+
+        $('#forgetp').on('shown.bs.modal', function () {
+            $('#your_email').focus()
+        })
+        $("#send").click(function() {
+            var email = $("#your_email").val();
+            //alert("click send");
+            $.ajax({
+                url: "/Account/PasswordReset",
+                type: "POST",
+                data: {
+                    Email: email
+                },
+                dataType: 'json',
+                success: function (data) {
+
+                    $('#message').html(data);
+                    $('#message').delay(5000).fadeOut(400);
+
+                    $("#your_email").val("");
+
+                }
+            });
+
+            $('#forgetp').modal('hide'); //close the modal
+
+        });
+
+    });
+</script>
+    
+-->

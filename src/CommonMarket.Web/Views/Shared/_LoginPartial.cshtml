@@ -1,0 +1,344 @@
+﻿@model CommonMarket.Web.Models.IndexViewModel
+
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using CommonMarket.Web.Models;
+
+@{
+    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+}
+
+<style>
+   ul.dropdown-cart{
+    min-width:250px;
+    }
+    ul.dropdown-cart li .item{
+        display:block;
+        padding:3px 10px;
+        margin: 3px 0;
+    }
+    ul.dropdown-cart li .item:hover{
+        background-color:#fae7dc;
+    }
+    ul.dropdown-cart li .item:after{
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+
+    ul.dropdown-cart li .item-left{
+        float:left;
+    }
+    ul.dropdown-cart li .item-left img,
+    ul.dropdown-cart li .item-left span.item-info{
+        float:left;
+    }
+    ul.dropdown-cart li .item-left span.item-info{
+        margin-left:10px;   
+    }
+    ul.dropdown-cart li .item-left span.item-info span{
+        display:block;
+    }
+    ul.dropdown-cart li .item-right{
+        float:right;
+    }
+    ul.dropdown-cart li .item-right button{
+        margin-top:14px;
+    } 
+
+    .dropdown-menu {
+        width: 230px;
+    }
+</style>
+
+@if (Request.IsAuthenticated) {
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
+        @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right" id="nav1">
+        <li class="dropdown" id="sc">
+            <a class="dropdown-toggle" data-toggle="dropdown" style="color: #e2bba3; padding: 10px 0 10px 10px; cursor: pointer;" title="Your Cart (3 item(s))"><span class="glyphicon glyphicon-shopping-cart">(3)</span><b class="caret"></b></a>
+            <!--   <ul class="dropdown-menu" style="background-color: #efeceb;">
+                       <li style="margin-bottom: -30px;">
+                           <div class="panel panel-default" style="margin-top: -7px;">
+                               <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%);">
+                                   <h4><i class="fa fa-shopping-cart"></i> <span style="color: #5A70E2; font-size: .8em;">Your Cart (3)</span></h4>
+                               </div>
+                               <div class="panel-body" style="  margin-bottom: 5px;">
+                                   <div class="col-md-12 col-sm-12 col-xs-12">
+                                       <div class="container">
+                                           <div class="row">
+
+                                               <table id="cart" class="table table-responsive" >
+
+                                                   <tbody>
+                                                       <tr>
+                                                           <td class="col-sm-2">
+                                                               <img src="~/Content/Assets/Images/brockey.jpg" alt="" class="img-responsive img-circle" style="float: left;" width="25" height="25" title="Product Name" />ID:23
+                                                           </td>
+                                                           <td class="col-sm-5" style="text-align: left;">
+                                                               Product Name
+                                                           </td>
+                                                           <td class="col-sm-2" style="text-align: right;"><span style="color: #16851E;font-weight: bold;">$24.99</span></td>
+                                                           <td class="col-sm-1" style="text-align: right;">Units</td>
+                                                           <td class="col-sm-1" style="text-align: right;"><input type="text" style="width: 24px;" value="1"  /></td>
+                                                           <td class="col-sm-1" style="text-align: right;"><span class="glyphicon glyphicon-remove-sign" title="Remove from cart" style="font-size: 18px; text-align: right; color:#a52a2a;"></span></td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td class="col-sm-2">
+                                                               <img src="~/Content/Assets/Images/brockey.jpg" alt="" class="img-responsive img-circle" style="float: left;" width="25" height="25" />
+                                                           </td>
+                                                           <td class="col-sm-5" style="text-align: left;">
+                                                               Product Name
+                                                           </td>
+                                                           <td class="col-sm-2" style="text-align: right;"><span style="color: #16851E;font-weight: bold;">$29.99</span></td>
+                                                           <td class="col-sm-1" style="text-align: right;">Units</td>
+                                                           <td class="col-sm-1" style="text-align: right;"><input type="text" style="width: 24px;" value="1" /></td>
+                                                           <td class="col-sm-1" style="text-align: right;"><span class="glyphicon glyphicon-remove-sign" title="Remove from cart" style="font-size: 18px; text-align: right; color:#a52a2a;"></span></td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td class="col-sm-2">
+                                                               <img src="~/Content/Assets/Images/brockey.jpg" alt="" class="img-responsive img-circle" style="float: left;" width="25" height="25" />
+                                                           </td>
+                                                           <td class="col-sm-5" style="text-align: left;">
+                                                               Product Name
+                                                           </td>
+                                                           <td class="col-sm-2" style="text-align: right;"><span style="color: #16851E;font-weight: bold;">$14.99</span></td>
+                                                           <td class="col-sm-1" style="text-align: right;">Units</td>
+                                                           <td class="col-sm-1" style="text-align: right;"><input type="text" style="width: 24px;" value="1" /></td>
+                                                           <td class="col-sm-1" style="text-align: right;"><span class="glyphicon glyphicon-remove-sign" title="Remove from cart" style="font-size: 18px; text-align: right; color:#a52a2a;"></span></td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td class="col-sm-2"></td>
+                                                           <td class="col-sm-5"></td>
+                                                           <td class="col-sm-2" style="text-align: right;"></td>
+                                                           <td class="col-sm-1" colspan="2" style="text-align: right;">Subtotal:</td>
+                                                           <td class="col-sm-1" style="text-align: right;">$59.97</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <tr>
+                                                               <td class="col-sm-2"></td>
+                                                               <td class="col-sm-5"></td>
+                                                               <td class="col-sm-2" style="text-align: right;"></td>
+                                                               <td class="col-sm-1" colspan="2" style="text-align: right;">Tax:</td>
+                                                               <td class="col-sm-1" style="text-align: right;">$0.00</td>
+                                                           </tr>
+                                                       </tr>
+                                                       <tr>
+                                                           <td class="col-sm-2"></td>
+                                                           <td class="col-sm-5"></td>
+                                                           <td class="col-sm-2" style="text-align: right;"></td>
+                                                           <td class="col-sm-1" colspan="2" style="text-align: right; font-weight:bold;"><span>Total:</span></td>
+                                                           <td class="col-sm-1" style="text-align: right; font-weight:bold;">$59.97</td>
+                                                       </tr>
+                                                   </tbody>
+
+                                               </table>
+                                               <hr/>
+                                               <div id="chekcout" style="margin-left: 10px; margin-bottom: -10px;"><button class="btn btn-success" style="font-weight: bold;"><span class="glyphicon glyphicon-ok-sign"></span> Check Out</button></div>
+                                           </div>
+                                    
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="panel-footer" style="background-color: #F8E5C6;"><i class="fa fa-paypal" title="Paypal"></i> &nbsp;&nbsp;&nbsp;<i class="fa fa-money" title="Cash on Delivery"></i> </div>
+                           </div>
+                       </li>
+                
+                   </ul>-->
+            
+            <ul class="dropdown-menu dropdown-cart" role="menu" style="background-color: #FFF0E7;">
+                <li>
+                    <span class="item">
+                        <span class="item-left">
+                            <img src="~/Content/Assets/Images/broccoli.jpg" alt="" title="item name" height="40" width="40" />
+                            <span class="item-info">
+                                <span>Item name Unit <input type="text" value="1" style="width: 30px; vertical-align: baseline;" /></span>
+                                <span>23$</span>
+                                
+                            </span>
+                        </span>
+                        <span class="item-right">
+                            <span class="glyphicon glyphicon-remove-sign" title="Remove from cart" style="font-size: 28px; cursor: pointer; text-align: right; color:#a52a2a;"></span>
+                        </span>
+                    </span>
+                </li>
+                <li>
+                    <span class="item">
+                        <span class="item-left">
+                            <img src="~/Content/Assets/Images/broccoli.jpg" alt="" title="item name" height="40" width="40" />
+                            <span class="item-info">
+                                <span>Item name Unit <input type="text" value="1" style="width: 30px; vertical-align: baseline;" /></span>
+                                <span>23$</span>
+
+                            </span>
+                        </span>
+                        <span class="item-right">
+                            <span class="glyphicon glyphicon-remove-sign" title="Remove from cart" style="font-size: 28px; cursor: pointer; text-align: right; color:#a52a2a;"></span>
+                        </span>
+                    </span>
+                </li>
+                <li>
+                    <span class="item">
+                        <span class="item-left">
+                            <img src="~/Content/Assets/Images/broccoli.jpg" alt="" title="item name" height="40" width="40" />
+                            <span class="item-info">
+                                <span>Item name Unit <input type="text" value="1" style="width: 30px; vertical-align: baseline;" /></span>
+                                <span>23$</span>
+
+                            </span>
+                        </span>
+                        <span class="item-right">
+                            <span class="glyphicon glyphicon-remove-sign" title="Remove from cart" style="font-size: 28px; cursor: pointer; text-align: right; color:#a52a2a;"></span>
+                        </span>
+                    </span>
+                </li>
+                <li>
+                    <span class="item">
+                        <span class="item-left">
+                            <img src="~/Content/Assets/Images/broccoli.jpg" alt="" title="item name" height="40" width="40" />
+                            <span class="item-info">
+                                <span>Item name Unit <input type="text" value="1" style="width: 30px; vertical-align: baseline;" /></span>
+                                <span>23$</span>
+
+                            </span>
+                        </span>
+                        <span class="item-right">
+                            <span class="glyphicon glyphicon-remove-sign" title="Remove from cart" style="font-size: 28px; cursor: pointer; text-align: right; color:#a52a2a;"></span>
+                        </span>
+                    </span>
+                </li>
+                <li class="divider"></li>
+                <li style ="text-align: right;margin-right: 20px;"><span>Subtotal: $59.97</span></li>
+                <li style="text-align: right;margin-right: 20px;"><span>Tax: $0.00</span></li>
+                <li style="text-align: right;margin-right: 20px; color:#a52a2a; font-weight: bold;"><span>Total: $59.97</span></li>
+                <li class="divider"></li>
+                <li style="text-align: right;margin-right: 20px; margin-top: 10px;margin-bottom: 5px;">
+                    <span id="chekcout" ><button class="btn btn-success" style="font-weight: bold;"><span class="glyphicon glyphicon-ok-sign"></span> Check Out</button></span>
+                </li>
+            </ul>
+
+        </li>
+        <li>
+            @Html.ActionLink("Hello " + @currentUser.UserProfile.FirstName  @*User.Identity.GetUserName()*@ + "!", "Index", "Profile", routeValues: null, htmlAttributes: new { title = "My Profile" })
+        </li>
+        <li>
+            <img src="@Url.Content(@currentUser.UserProfile.AvatarImgUrl) " title="@currentUser.UserProfile.FirstName" height="25" width="25" style="margin-top: 8px;" />
+        </li>
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color: #E2BBA3; font-weight: normal;"><i class="icon-cog" title="Manage..."></i> <b class="caret"></b></a>
+            <ul class="dropdown-menu" style="background-color: #906347;">
+                <li> <a href="/Profile"><i class="glyphicon glyphicon-user"></i>&nbsp; My Profile</a></li>
+                <li class="divider"></li>
+                @if (@manager.GetRoles(User.Identity.GetUserId()).Contains("Merchant"))
+                {
+                    <li><a href="/Manage"><span class="glyphicon glyphicon-wrench"></span>&nbsp; Manage Panel</a></li>
+                }
+                else
+                {
+                    if (@manager.GetRoles(User.Identity.GetUserId()).Contains("Admin"))
+                    {
+                        <li><a href="/Admin"><span class="glyphicon glyphicon-wrench"></span>&nbsp; Administration</a></li>
+                    }
+                    
+
+                }
+
+            </ul>
+        </li>
+
+
+
+        <li><a id="logout" href="javascript:document.getElementById('logoutForm').submit()"><div class="btn btn-danger" style="margin-bottom: -25px; font-size: .8em; position: relative; top: -10px;">LOG OFF</div></a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+
+        <li class="dropdown">
+            <!--
+                <div class="btn btn-default btn-success">
+                    @Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new
+                    {
+                        id = "loginLink",
+                        @style = "color: #EBFA22;"  @*, @class = "btn btn-outline collapsed"*@
+                    })
+                </div>
+
+                -->
+
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">LOGIN <strong class="caret"></strong></a>
+            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0; background-color: rgb(245, 238, 223);">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @*<fieldset>*@
+
+
+                            <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                                <div class="form-group">
+                                    <div class="input-group" style="margin-left: -30px; margin-right: -30px;">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user"></i>
+                                        </span>
+                        @*<input class="form-control" placeholder="Username" name="loginname" type="text" autofocus style="height: 35px;">*@
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", autofocus = "" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group" style="margin-left: -30px; margin-right: -30px;">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                        @*<input class="form-control" placeholder="Password" name="password" type="password" value="" style="height: 35px;">*@
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in" style="margin-left: -30px; margin-right: -30px; width: 195px;">
+                                </div>
+
+
+                                <label class="checkbox pull-left">
+                        @*@Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)*@
+                        <input type="checkbox" value="remember-me" style="margin-left: -30px;">
+                        Remember me
+                        </label>
+                            </div>
+
+
+                    @*</fieldset>*@
+
+                }
+                </div>
+</li>
+    </ul>
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $('#sc').on('hide.bs.dropdown', function () {
+            return false;
+        });
+
+        $('body').on('click', function (e) {
+            if (!$('#sc').is(e.target)
+                && $('#sc').has(e.target).length === 0
+                && $('.open').has(e.target).length === 0
+            ) {
+                $('#sc').removeClass('open');
+            }
+        });
+    });
+</script>

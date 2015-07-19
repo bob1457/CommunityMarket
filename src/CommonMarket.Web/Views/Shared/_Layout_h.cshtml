@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Community Market - Enjoy by Share</title>
+
+        <!-- Favicon -->
+        <link href="~/Content/Assets/Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+        <!-- Jquery/jquery UI -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+        <!-- UI Responsive Styles -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap -->
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../content/styles/bootstrap-theme.css" rel="stylesheet" />
+
+        <!-- Font Awesome -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+        <!-- Metro -->
+        <link href="../../content/styles/metro-bootstrap.css" rel="stylesheet" />
+        <link href="../../content/styles/custom_live-tile.css" rel="stylesheet" />
+        <link href="../../content/styles/Custom_MetroJS.css" rel="stylesheet" />
+        <link href="../../content/styles/metro-bootstrap.css" rel="stylesheet" />
+        
+        <link href="~/Content/Styles/site.css" rel="stylesheet" />
+        <!-- Custom Site Style - Local -->
+        <link href="../../content/styles/site.css" rel="stylesheet" />
+
+        <!-- Knockout -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
+        <script src="~/Scripts/knockstrap.min.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="../../Scripts/bootstrap.min.js"></script>
+        
+        <style>
+            .dropdown-menu>li>a {
+                color: #E8E5E5;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="navbar navbar-inverse">
+            <div id="banner-wrapper">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar" id="ib2"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @*@Html.ActionLink("Commonity Market", "Index", "Home", null, new { @class = "navbar-brand" })*@
+                        <div class="navbar-brand" id="logo_h"><a href=""><!--Commnity Market--><img src="~/Content/Assets/Images/cm_logo_1.png" title="Community Market" height="35" width="35" style="margin-top: -8px" /></a></div>
+                        @*<i class="glyphicon glyphicon-knight navbar-brand rss_color" style="color: red; font-size: 2em;"></i>*@
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav" id="nav">
+                            <li>@Html.ActionLink("HOME", "Index", "Home")</li>
+                            <li>@Html.ActionLink("SHOPS", "Index", "Shop")</li>
+                            <li>@Html.ActionLink("LIFE STYLE", "Index", "LifeStyle")</li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color: #E2BBA3; font-weight: normal;">ABOUT <b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="background-color: #906347;">
+                                    <li>
+                                        @Html.ActionLink("ABOUT US", "About", "Home")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("SUPPORT", "Index", "Support")
+                                    </li>
+                                </ul>
+
+                            </li>
+
+                            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <!-- 
+                                <li class="dropdown">
+                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color: #CC6C6C; font-weight: normal;">Admin <b class="caret"></b></a>
+                                    <ul class="dropdown-menu" style="background-color: #906347;">
+                                        <li>@Html.ActionLink("Roles Admin", "Index", "RolesAdmin")</li>
+                                        @*<li class="nav-divider"></li>*@
+                                        <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
+                                    </ul>
+                                </li>
+                                -->
+                            }
+                        @*<li><a href="">HOME</a></li>
+                    <li><a href="">SHOP</a></li>
+                    <li><a href="">ABOUT</a></li>
+                    <li><a href="">ADMIN</a></li>*@
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div id="banner-content" style="margin-top: -20px;">
+            <div class="text-center">
+                <img src="~/Content/Assets/Images/cm_logo_0.png" style="margin-top: 95px;" /></div>
+            </div>
+        
+        <!-- Content Area -->
+        <div id="content-wrapper">
+            @RenderBody()
+        </div>
+        
+        <!-- Footer Area -->
+        <div id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-left" id="copyright-info">@DateTime.Now.Year &#169; &nbsp; <a href="#">MB Technologies, Inc.</a></p>
+
+                    </div>
+                    <div class="col-md-6">
+                        <p id="footer-info"><i class="icon-rss rss_color" title="RSS"></i> <i class="icon-facebook-sign facebook_color" title="Facebook"></i> <i class="icon-twitter twitter_color" title="Twitter"></i> <i class="icon-google-plus-sign google_p_Color " title="Google+"></i></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+
+            </div>
+        </div>
+        
+        <!-- Script Section -->
+
+        <script type="text/javascript"> 
+            var images = ['banner1.jpg', 'banner2.jpg', 'banner3.jpg', 'banner4.jpg'];
+            $("#banner-content").css({
+                'background-image': 'url(/Content/Assets/Images/Banners/' + images[Math.floor(Math.random() * images.length)] + ')'
+            });
+        </script>
+
+    </body>
+</html>
+

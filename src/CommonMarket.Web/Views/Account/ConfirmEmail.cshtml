@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Confirm Email";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="box" style="text-align: center; margin-top: 70px; margin-bottom: 100px;">
+                <div class="image"><i class="icon-thumbs-up" style="font-size: 4.25em; color: rgb(76, 150, 76);"></i></div>
+                <div class="info">
+                    <h3 class="title">Conformation Email</h3>
+                    <p>
+                        Thank you for confirming your email. <br />Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                    </p>
+                    <div class="more">
+                        <a href="#" title="Title Link">
+                            More information on site usage <i class="fa fa-angle-double-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="space"></div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+

@@ -1,0 +1,53 @@
+﻿@model CommonMarket.Web.Models.IndexViewModel
+    
+
+    <table class="table table-user-information table-responsive">
+        <tbody>
+            <tr>
+                <td>First Name:</td>
+                <td>@Html.DisplayFor(model => model.FirstName)</td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td>@Html.DisplayFor(model => model.LastName)</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>@Html.DisplayFor(model => model.Address1)</td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td>@Html.DisplayFor(model => model.City)</td>
+            </tr>
+            <tr>
+                <td>Province/Sate</td>
+                <td>@Html.DisplayFor(model => model.ProvState)</td>
+            </tr>
+
+
+            <tr>
+                <td>Post/Zip Code</td>
+                <td>@Html.DisplayFor(model => model.PostZipCode)</td>
+            </tr>
+            <tr>
+                <td>Country</td>
+                <td>@Html.DisplayFor(model => model.Country)</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><a href="mailto:info@support.com">@Html.DisplayFor(model => model.Email)</a></td>
+            </tr>
+
+            <tr>
+                <td>Phone Number</td>
+                <td>
+                    @*123-4567-890(Landline)<br><br>555-4567-890(Mobile)*@
+                    @Html.DisplayFor(model => model.Telephone)
+                </td>
+
+            </tr>
+
+        </tbody>
+    </table>
+    
+

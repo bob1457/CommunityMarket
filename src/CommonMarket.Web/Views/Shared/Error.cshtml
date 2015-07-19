@@ -1,0 +1,36 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+@*<hgroup>
+    <h1 class="text-error">Error.</h1>
+    <h2 class="text-error">An error occurred while processing your request.</h2>
+</hgroup>*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    <i class="icon-remove-sign" style="color: #bd2828;"></i> Oops!
+                </h1>
+                <br />
+                <h2 style="color: #bd2828;">
+                    Error Occured!
+                </h2><br />
+                <div class="error-details">
+                    Sorry, an error has occured, Please try it again!
+                </div>
+                <br />
+                <div class="error-actions">
+                    <a href="http://localhost:60000" class="btn btn-primary btn-lg">
+                        <span class="glyphicon glyphicon-home"></span>
+                        Take Me Home
+                    </a><a href="#" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span> Contact Support </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

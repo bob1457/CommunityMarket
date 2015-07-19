@@ -1,0 +1,278 @@
+﻿@model IEnumerable<CommonMarket.Web.Models.ApplicationRole>
+    
+
+    <table id="role-data" class="table table-responsive table-bordered table-striped panel-heading custom-table" style="padding: 3px; margin-left: 8px; margin-top: 5px; padding-right: 10px;">
+    <thead>
+        <tr>
+            @*<th><input type="checkbox" id="checkall" /></th>*@
+            <th>Role Name</th>
+            <th>Role Descriptioin</th>
+
+            <th style="text-align: center">Edit</th>
+            <th style="text-align: center">Manage</th>
+            <th style="text-align: center">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+
+                <td style="text-align: center">
+                    <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#e_@item.Id"><span class="glyphicon glyphicon-file"></span></span></p>
+                </td>
+                <td style="text-align: center">
+                    <p data-placement="top" data-toggle="tooltip" title="Manage"><span class="btn btn-primary btn-xs" data-title="Manage" data-toggle="modal" data-target="#m_@item.Id"><span class="glyphicon glyphicon-tasks"></span></span></p>
+                </td>
+                <td style="text-align: center">
+                    <p data-placement="top" data-toggle="tooltip" title="Delete"><span class="btn btn-warning btn-xs" data-title="Delete" data-toggle="modal" data-target="#d_@item.Id"><span class="glyphicon glyphicon-remove"></span></span></p>
+                </td>
+
+                <!-- Modal Dialogs - EDIT -->
+                <div class="modal " id="e_@item.Id" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="height: 230px;">
+                    <div class="modal-dialog" style="margin-top: 0;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                <h4 class="modal-title custom_align" id="Heading">Edit Role</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    @*@Html.TextBoxFor(@item.Name), new { @class = "form-control", @style = "height: 35px;", @id = "r_name" })*@
+                                    <input type="text" value="@item.Name" class="form-control" id="r_name_@item.Id" style="height: 35px;" autofocus="" />
+                                </div>
+                                <div class="form-group">
+
+                                    @*@Html.TextAreaFor(model => model.FirstOrDefault().Description, new { @class = "form-control", @id = "r_desc" })*@
+                                    <textarea class="form-control" id="r_desc_@item.Id">@item.Description</textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer ">
+                                <button id="go_edit_@item.Id" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                </div>
+
+
+                <!-- Modal Dialogs - MANAGE -->
+                <div class="modal " id="m_@item.Id" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="height:230px; ">
+                    <div class="modal-dialog" style="margin-top: 0;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                <h4 class="modal-title custom_align" id="Heading">Manage Roles and Users</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="radio" id="addu_@item.Id" name="action_@item.Id" checked="checked" style="vertical-align: baseline;" /> Add User to the Role: <span style="font-style: italic; font-weight: 800;">@item.Name</span><br />
+                                <input type="radio" name="action_@item.Id" style="vertical-align: baseline;" /> Remove User from the Role: <span style="font-style: italic; font-weight: 800;">@item.Name</span><br />
+                                <div class="form-group">
+                                    @*@Html.TextBoxFor(@item.Name), new { @class = "form-control", @style = "height: 35px;", @id = "r_name" })*@
+                                    <input type="text" value="" class="form-control" id="email_@item.Id" style="height: 35px; margin-top: 13px;" autofocus="" placeholder="User Email " />
+                                    <!--<select id="users" style="width: 100%;">
+
+                                    </select>-->
+                                </div>
+                                <div id="msg1" style="color: #b22222;"></div>
+                            </div>
+                            <div class="modal-footer ">
+                                <button id="go_@item.Id" type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> GO!</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                </div>
+
+
+
+                <!-- Modal Dialogs - DELETE -->
+                <div class="modal fade" id="d_@item.Id" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 100%;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+
+                            </div>
+                            <div class="modal-footer ">
+                                <button id="go_delete_@item.Id" type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        //Edit
+                        $('#edit').on('shown.bs.modal', function () {
+                            $('#r_name').focus();
+                        });
+
+                        $("#go_edit_@item.Id").click(function () {
+
+
+                            var rName = $("#r_name_@item.Id").val();
+                            var rDesc = $("#r_desc_@item.Id").val();
+
+                            var id = "@item.Id";
+
+                            $.ajax({
+                                url: "/RolesAdmin/Update",
+                                type: "POST",
+                                data: {
+                                    Id: id,
+                                    Name: rName,
+                                    Desc: rDesc
+                                },
+                                success: function (data) {
+
+                                    $('#msg').html(data);
+                                    $('#msg').delay(5000).fadeOut(400);
+
+                                    var url = "/RolesAdmin/GetAllRoles";
+                                    $.get(url, function (data) {
+                                        $("#rlist").html(data);
+
+
+                                        return false;
+                                    });
+                                }
+                            });
+
+                            $('#e_@item.Id').modal('hide'); //close the modal
+
+                        });
+
+                        //Delete
+                        $("#go_delete_@item.Id").click(function () {
+                            //Delete or disable the role
+
+                        });
+
+                    });
+
+
+                </script>
+                <!-- Populate dropdown box with user email -->
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        //debugger;
+                        //$.ajax({
+                        //    url: "/UsersAdmin/Listusers",
+                        //    type: "GET",
+                        //dataType: "json",
+                        //    success: function(data) {
+                        //        //load data to the dropdown box
+                        //        $.each(data, function() {
+                        //            $("#users").append($("<option />").val(this.id).html(this.name));
+                        //        });
+                        //        return false;
+
+                        //    }
+
+                        //$("#addu_@item.Id").prop('checked', true);
+
+                        //});
+
+
+                        //consider to use knockout js to do this job.....
+                        //
+                        var url = "/UsersAdmin/Listusers";
+
+                        $.getJSON(url, function (data) {
+                            $("#users").empty();
+
+                            /* alert(data);*/
+
+                            $.each(data, function () {
+                                $("#users").append($("<option />").val(this.id).html(this.name));
+                            });
+
+                        });
+                    });
+                </script>
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        //$("#addu_@item.Id").prop('checked', true);
+                        //var checked = $("#addu_@item.Id").prop('checked');
+
+                        //alert(checked);
+
+                        //debugger;
+                        $("#go_@item.Id").click(function () {
+
+                            var checked = $("#addu_@item.Id").prop('checked');
+
+                            //alert(checked);
+
+                            var email = $("#email_@item.Id").val();
+                            var rolename = "@item.Name";
+                            //debugger;
+                            if (checked) {
+                                @*var email = $("#email_@item.Id").val();
+                                                            var rolename = "@item.Name";*@
+                                $.ajax({
+                                    url: "/RolesAdmin/AddUserToRole",
+                                    type: "POST",
+                                    data: {
+                                        UserEmail: email,
+                                        RoleName: rolename
+                                    },
+                                    success: function (data) {
+
+                                        $('#msg').html(data);
+                                        $('#msg').delay(5000).fadeOut(400);
+
+                                    }
+                                });
+                            } else {
+                                //alert("remove");
+                                @*var email = $("#email_@item.Id").val();
+                                    var rolename = "@item.Name";*@
+                                $.ajax({
+                                    url: "/RolesAdmin/RemoveUserFromRole",
+                                    type: "POST",
+                                    data: {
+                                        UserEmail: email,
+                                        RoleName: rolename
+                                    },
+                                    success: function (data) {
+
+                                        $('#msg').html(data);
+                                        $('#msg').delay(5000).fadeOut(400);
+
+                                    }
+                                });
+                            }
+
+                            $("#email_@item.Id").val("");
+
+                            $('#m_@item.Id').modal('hide'); //close the modal
+                        });
+
+                    });
+                </script>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+

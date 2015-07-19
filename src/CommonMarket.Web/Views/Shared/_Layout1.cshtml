@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Community Market - Enjoy by Share</title>
+
+        <!-- Favicon -->
+        <link href="/content/assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+        <!-- UI Responsive Styles -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap -->
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../content/styles/bootstrap-theme.css" rel="stylesheet" />
+
+        <!-- Font Awesome -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+        <!-- Metro -->
+        <link href="../../content/styles/metro-bootstrap.css" rel="stylesheet" />
+        <link href="../../content/styles/custom_live-tile.css" rel="stylesheet" />
+        <link href="../../content/styles/Custom_MetroJS.css" rel="stylesheet" />
+        <link href="../../content/styles/metro-bootstrap.css" rel="stylesheet" />
+        <link href="../../content/styles/MetroJs.css" rel="stylesheet" />
+
+        <!-- Custom Site Style - Local -->
+        <link href="../content/styles/site.css" rel="stylesheet" />
+
+        <!-- Knockout -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+
+        <!-- Jquery/jquery UI -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="../../Scripts/bootstrap.min.js"></script>
+        
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--@Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })-->
+                    <div class="navbar-brand"><a href=""><!--Commnity Market--><img src="http://placehold.it/60x60" title="Community Market" /></a></div>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("HOME", "Index", "Home")</li>
+                        <li>@Html.ActionLink("STORES", "Index", "Stores")</li>
+                        <li>@Html.ActionLink("LIFE STYLE", "Index", "Life")</li>
+                        <li>@Html.ActionLink("ABOUT", "About", "Home")</li>
+
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
+                        <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
+                        <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
+                        }
+                        @*<li><a href="">HOME</a></li>
+                        <li><a href="">SHOP</a></li>
+                        <li><a href="">ABOUT</a></li>
+                        <li><a href="">ADMIN</a></li>*@
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+
+        <div id="banner-content1">
+            
+        </div>
+        
+        <!-- Content Area -->
+        <div id="content-wrapper">
+            @RenderBody()
+        </div>
+        
+        <!-- Footer Area -->
+        <div id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-left" id="copyright-info">2015 &#169; &nbsp; <a href="#">MB Technologies, Inc.</a></p>
+
+                    </div>
+                    <div class="col-md-6">
+                        <p id="footer-info"><i class="icon-rss rss_color" title="RSS"></i> <i class="icon-facebook-sign facebook_color" title="Facebook"></i> <i class="icon-twitter twitter_color" title="Twitter"></i> <i class="icon-google-plus-sign google_p_Color " title="Google+"></i></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+
+            </div>
+        </div>
+
+
+    </body>
+</html>
+

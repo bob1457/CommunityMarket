@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CommonMarket.Core.Entities.ProductCategory>
+
+<ul id="product_list">
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="col-md-4 col-sm-6">
+                <a href="#">
+                    <img src="@Url.Content(@item.ProductCategoryImgLargeUrl)" title="@item.ProductCategoryName" />
+                </a>
+            </div>
+        </li>
+    }
+    
+
+    
+</ul>

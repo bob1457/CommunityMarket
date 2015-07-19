@@ -1,0 +1,32 @@
+﻿@model CommonMarket.Web.Models.IndexViewModel
+
+
+<table class="table table-user-information table-responsive">
+    <tbody>
+        <tr>
+            <td>Merchant Compay Name:</td>
+            <td>@Html.DisplayFor(model => model.CompnayName)</td>
+        </tr>
+        <tr>
+            <td>Contact First Name:</td>
+            <td>@Html.DisplayFor(model => model.ContactFirstName)</td>
+        </tr>
+        <tr>
+            <td>Contact last Name:</td>
+            <td>@Html.DisplayFor(model => model.ContactLastName)</td>
+        </tr>
+        <tr>
+            <td>Company Website:</td>
+            <td>@Html.DisplayFor(model => model.SupplierWebSite)</td>
+        </tr>
+        <tr>
+            <td>Merchante Information</td>
+            <td>@Html.DisplayFor(model => model.ShortBio)</td>
+        </tr>
+        <tr>
+            <td>Company Logo Url</td>
+            <td>@Html.DisplayFor(model => model.CompanyLogoImgUrl)</td>
+        </tr>
+
+    </tbody>
+</table>

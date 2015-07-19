@@ -1,0 +1,277 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<div id="banner-content2"></div>*@
+<link href="~/Content/Styles/half-slider.css" rel="stylesheet" />
+
+<style>
+    .list-group-item {
+        background-color: #760012;
+        border: 0 solid transparent;
+    }
+
+    .list-group-item {
+        color: #F2E8E8;
+    }
+
+    .list-group-item:hover {
+        background-color: #8a2232;
+        border: 0 solid transparent;
+        color: #F2E8E8;
+        cursor: pointer;
+    }
+
+    .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+        text-shadow: 0 -1px 0 #580815;
+        background-image: linear-gradient(to bottom, #d07b60 0%, #f15013 100%);
+    }
+</style>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-3" style="margin-top: 25px;">
+            @*<p class="lead">Shop Name</p>*@
+            <div class="panel panel-default" style="margin-top: 1px;">
+                <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F07B69 0%, #c40425 100%);">
+                    <h4 style="padding-bottom: 8px;"><span class="glyphicon glyphicon-th-list" style="color: #1e50fc;"></span> <span style="color: #F2F3F8; padding-bottom: 10px; font-variant: small-caps;"> Categories</span></h4>
+                </div>
+            </div>
+            <div id="category_list">@Html.Action("GetCategoryList")</div>
+            
+
+
+            <div class="panel panel-default" style="margin-top: 1px;">
+                <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F0CA43 0%, #BDB448 100%);">
+                    <h4 style="padding-bottom: 8px;"><span class="glyphicon glyphicon-user" style="color: #e6331a;"></span> <span style="color: #1E50FC; padding-bottom: 10px; font-variant: small-caps;"> Suppliers</span></h4>
+                </div>
+            </div>
+            <div class="list-group" style="margin-top: -30px;">
+                <a href="#" class="list-group-item" style="background-color: #D0C460; border:1px solid #D0C460; color:#2f3d84">All Supplier List</a>
+                <a href="#" class="list-group-item" style="background-color: #D0C460; border:1px solid #D0C460; color:#2f3d84">Supplier by Category</a>
+            </div>
+
+            <div class="panel panel-default" style="margin-top: 25px;">
+                <div class="panel panel-default" style="margin-top: 0;">
+                    <div class="panel-heading" style="background-image: linear-gradient(to bottom, #74ED58 0%, #267113 100%);">
+                        <h4 style="padding-bottom: 8px;"><span class="glyphicon glyphicon-send" style="color: #E8C170;"></span> <span style="color: #E3ED36; padding-bottom: 10px; font-variant: small-caps;"> Promotions & Specials</span></h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="thumbnail">
+                                    <img src="~/Content/Assets/Images/eggs1t.png" />
+                                    <div class="caption">
+                                        <h4 class="pull-right product_price">$24.99</h4>
+                                        <h4>
+                                            <a href="#">First Good Product</a>
+                                        </h4>
+                                        <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p><br />
+
+                                        <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
+                                    </div>
+                                    <div class="ratings">
+                                        @*<p class="pull-right" id="produst_comment">11 reviews</p>*@
+                                        <p class="product_rating">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="thumbnail">
+                                    <img src="~/Content/Assets/Images/cupcakes.png" />
+                                    <div class="caption">
+                                        <h4 class="pull-right product_price">$24.99</h4>
+                                        <h4>
+                                            <a href="#">First Good Product</a>
+                                        </h4>
+                                        <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p><br />
+
+                                        <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
+                                    </div>
+                                    <div class="ratings">
+                                        @*<p class="pull-right" id="produst_comment">11 reviews</p>*@
+                                        <p class="product_rating">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="thumbnail">
+                                    <img src="~/Content/Assets/Images/meat.png" />
+                                    <div class="caption">
+                                        <h4 class="pull-right product_price">$24.99</h4>
+                                        <h4>
+                                            <a href="#">First Good Product</a>
+                                        </h4>
+                                        <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p><br />
+
+                                        <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
+                                    </div>
+                                    <div class="ratings">
+                                        @*<p class="pull-right" id="produst_comment">11 reviews</p>*@
+                                        <p class="product_rating">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="thumbnail">
+                                    <img src="~/Content/Assets/Images/fruit.png" />
+                                    <div class="caption">
+                                        <h4 class="pull-right product_price">$24.99</h4>
+                                        <h4>
+                                            <a href="#">First Good Product</a>
+                                        </h4>
+                                        <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p><br />
+
+                                        <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
+                                    </div>
+                                    <div class="ratings">
+                                        @*<p class="pull-right" id="produst_comment">11 reviews</p>*@
+                                        <p class="product_rating">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="thumbnail">
+                                    <img src="~/Content/Assets/Images/vegetables.png" />
+                                    <div class="caption">
+                                        <h4 class="pull-right product_price">$24.99</h4>
+                                        <h4>
+                                            <a href="#">First Good Product</a>
+                                        </h4>
+                                        <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p><br />
+
+                                        <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
+                                    </div>
+                                    <div class="ratings">
+                                        @*<p class="pull-right" id="produst_comment">11 reviews</p>*@
+                                        <p class="product_rating">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+
+                    </div>
+                    
+
+                    
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9" style="margin-top: 25px;">
+
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%);">
+                        <h4><span class="glyphicon glyphicon-asterisk" style="color: #ffff00"></span> <span style="color: #2F3D84; font-variant: small-caps;"><span id>Featured Products</span></span></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="feature">@Html.Partial("_FeaturedList")</div>
+                        
+                        <div id="by_category"></div>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ko script -- viewModel -->
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        function featheredProductViewModel() {
+            var self = this;
+            
+            self.products = ko.observableArray([{
+                name: "Broccoli Stalk",
+                description: "Fresh organic broccoli from local farm, good price in twon.",
+                price: "$24.99/case",
+                productImageUrl: "~/Content/Assets/Images/broccoli.jpp"
+            },
+            {
+                name: "Carrots",
+                description: "Fresh organic broccoli from local farm, good price in twon.",
+                price: "$4.99/bag",
+                productImageUrl: "~/Content/Assets/Images/carrots1.png"
+            },
+            {
+                name: "Broccoli Stalk",
+                description: "Fresh organic broccoli from local farm, good price in twon.",
+                price: "$24.99/case",
+                productImageUrl: "~/Content/Assets/Images/carrots1.png"
+            },
+            {
+                name: "Broccoli Stalk",
+                description: "Fresh organic broccoli from local farm, good price in twon.",
+                price: "$24.99/case",
+                productImageUrl: "~/Content/Assets/Images/carrots1.png"
+            },
+            {
+                name: "Broccoli Stalk",
+                description: "Fresh organic broccoli from local farm, good price in twon.",
+                price: "$24.99/case",
+                productImageUrl: "~/Content/Assets/Images/carrots1.png"
+            }
+
+            ]);
+        }
+
+        self.displayProducts = ko.mapping.fromJS({
+            name: "",
+            description: "",
+            price: "",
+            productImageUrl: ""
+        });
+
+
+    });
+    
+
+</script>

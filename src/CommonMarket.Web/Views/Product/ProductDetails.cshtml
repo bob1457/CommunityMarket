@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .panel-body table tr td {
+        padding-left: 0;
+    }
+
+    .list-inline > li {
+        display: inline;
+    }
+</style>
+
+<div class="container">
+    <div class="col-md-12" style=" margin-top: 45px;">
+        <div class="product col-md-4">
+            <img id="item-display" src="~/Content/Assets/Images/Products/broccoli.png" />
+            <div class="container col-sm-12 col-md-12 pull-left">
+                <ul class="list-inline">
+                    <li>
+                        <a id="item-1" class="service1-item"><img src="~/Content/Assets/Images/Products/broccoli.png" alt="" width="80" height="55" /></a>
+                    </li>
+                    <li>
+                        <a id="item-1" class="service1-item"><img src="~/Content/Assets/Images/Products/broccoli.png" alt="" width="80" height="55" /></a>
+                    </li>
+                    <li>
+                        <a id="item-1" class="service1-item"><img src="~/Content/Assets/Images/Products/broccoli.png" alt="" width="80" height="55" /></a>
+                    </li>
+                </ul>
+
+
+
+            </div>
+        </div>
+        
+        <div class="col-md-4 ">
+            <div class="product-title">Broccoli Stalk</div>
+            <div class="product-desc">Organic broccoli, fresh and high quality from professional organic farm</div>
+            <div class="product-rating" style="color:#f38c59"><img src="~/Content/Assets/Images/user_default.png" title="Supplied by Sample Supplier" width="25" height="25" />&nbsp; &nbsp; <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>
+            <hr>
+            <div class="product-price">$ 49.00 per case (25lb.)</div>
+            <div class="product-stock">In Stock</div>
+            <hr>
+            <div class="btn-group cart">
+                <button type="button" class="btn btn-success">
+                    Add to cart
+                </button>
+            </div>
+            <div class="btn-group wishlist">
+                <button type="button" class="btn btn-danger">
+                    Add to wishlist
+                </button>
+            </div>
+        </div>
+        <div class="col-md-4 ">
+            <div class="panel panel-default" style="margin-right: -30px;">
+                <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%);">
+                    <h4><i class="fa fa-shopping-cart"></i> <span style="color: #5A70E2; font-size: .8em;">Your Cart (3)</span></h4>
+                </div>
+                <div class="panel-body" style="  margin-bottom: 5px;">
+                    <div class="col-md-12">
+                        <div class="container">
+                            <div class="row">
+
+                                <table class="table" style="margin-left: 8px;">
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-sm-2">
+                                                <img src="~/Content/Assets/Images/broccoli.jpg" alt="" class="img-responsive img-circle" style="float: left;" width="25" height="25" title="Product Name"/>
+                                            </td>
+                                            <td class="col-sm-5" style="text-align: left;">
+                                                Product Name
+                                            </td>
+                                            <td class="col-sm-2" style="text-align: right;"><span style="color: #16851E;font-weight: bold;">$24.99</span></td>
+                                            <td class="col-sm-1" style="text-align: right;">Units</td>
+                                            <td class="col-sm-1" style="text-align: right;"><input type="text" style="width: 100%;" value="1" /></td>
+                                            <td class="col-sm-1" style="text-align: right;"><span class="glyphicon glyphicon-remove-sign" title="Remove from cart" style="font-size: 18px; text-align: right; color:#a52a2a;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-2">
+                                                <img src="~/Content/Assets/Images/broccoli.jpg" alt="" class="img-responsive img-circle" style="float: left;" width="25" height="25" />
+                                            </td>
+                                            <td class="col-sm-5" style="text-align: left;">
+                                                Product Name
+                                            </td>
+                                            <td class="col-sm-2" style="text-align: right;"><span style="color: #16851E;font-weight: bold;">$29.99</span></td>
+                                            <td class="col-sm-1" style="text-align: right;">Units</td>
+                                            <td class="col-sm-1" style="text-align: right;"><input type="text" style="width: 100%;" value="1" /></td>
+                                            <td class="col-sm-1" style="text-align: right;"><span class="glyphicon glyphicon-remove-sign" title="Remove from cart" style="font-size: 18px; text-align: right; color:#a52a2a;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-2">
+                                                <img src="~/Content/Assets/Images/" alt="" class="img-responsive img-circle" style="float: left;" width="25" height="25" />
+                                            </td>
+                                            <td class="col-sm-5" style="text-align: left;">
+                                                Product Name
+                                            </td>
+                                            <td class="col-sm-2" style="text-align: right;"><span style="color: #16851E;font-weight: bold;">$14.99</span></td>
+                                            <td class="col-sm-1" style="text-align: right;">Units</td>
+                                            <td class="col-sm-1" style="text-align: right;"><input type="text" style="width: 100%;" value="1" /></td>
+                                            <td class="col-sm-1" style="text-align: right;"><span class="glyphicon glyphicon-remove-sign" title="Remove from cart" style="font-size: 18px; text-align: right; color:#a52a2a;"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-sm-2"></td>
+                                            <td class="col-sm-5"></td>
+                                            <td class="col-sm-2" style="text-align: right;"></td>
+                                            <td class="col-sm-1" colspan="2" style="text-align: right;">Subtotal:</td>
+                                            <td class="col-sm-1" style="text-align: right;">$59.97</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td class="col-sm-2"></td>
+                                            <td class="col-sm-5"></td>
+                                            <td class="col-sm-2" style="text-align: right;"></td>
+                                            <td class="col-sm-1" colspan="2" style="text-align: right;">Tax:</td>
+                                            <td class="col-sm-1" style="text-align: right;">$0.00</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td class="col-sm-2"></td>
+                                            <td class="col-sm-5"></td>
+                                            <td class="col-sm-2" style="text-align: right;"></td>
+                                            <td class="col-sm-1" colspan="2" style="text-align: right; font-weight:bold;"><span>Total:</span></td>
+                                            <td class="col-sm-1" style="text-align: right; font-weight:bold;" >$59.97</td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                                <div id="chekcout" style="margin-left: 10px;"><button class="btn btn-success" style="font-weight: bold;"><span class="glyphicon glyphicon-ok-sign"></span> Check Out</button></div>
+                                
+                            </div>
+                            <!--     
+                                <ul class="list-inline" style="width: 100%;">
+                                    <li>
+                                        <img src="~/Content/Assets/Images/brockey.jpg" alt="" class="img-responsive img-circle" style="float: left;" width="25" height="25" />
+                                    </li>
+                                    <li style="width: 60%;">Product Name</li>
+                                
+                                    <li>
+                                        <select style="width: 15%; float: right;">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                        <span class="glyphicon glyphicon-remove-sign"></span>
+                                    </li>
+                                
+                                </ul>-->
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer" style="background-color: #F8AC79; color:rgb(33, 33, 122);"><i class=" fa fa-paypal" title="Paypal"></i> &nbsp;&nbsp;&nbsp;<i class="fa fa-money" title="Cash on Delivery"></i></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

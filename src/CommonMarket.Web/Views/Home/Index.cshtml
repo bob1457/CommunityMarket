@@ -1,0 +1,360 @@
+﻿@*@model CommonMarket.Web.Models.LoginViewModel*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_h.cshtml";
+}
+
+<style>
+    .c-search > .form-control {
+        border-radius: 0px;
+        border-width: 0px;
+        border-bottom-width: 1px;
+        font-size: 1.3em;
+        padding: 12px 12px;
+        height: 35px;
+        margin-left: 25px;
+        outline: none !important;
+    }
+    .c-search > .form-control:focus {
+        outline:0px !important;
+        -webkit-appearance:none;
+        box-shadow: none;
+    }
+    .c-search > .input-group-btn .btn {
+        border-radius: 0px;
+        border-width: 0px;
+        border-left-width: 1px;
+        border-bottom-width: 1px;
+        height: 44px;
+    }
+
+
+    .c-list {
+        padding: 0px;
+        min-height: 44px;
+    }
+    .title {
+        display: inline-block;
+        font-size: 1.7em;
+        font-weight: bold;
+        padding: 5px 15px;
+    }
+    ul.c-controls {
+        list-style: none;
+        margin: 0px;
+        min-height: 44px;
+    }
+
+    ul.c-controls li {
+        margin-top: 8px;
+        float: left;
+    }
+
+    ul.c-controls li a {
+        font-size: 1.7em;
+        padding: 11px 10px 6px;   
+    }
+    ul.c-controls li a i {
+        min-width: 24px;
+        text-align: center;
+    }
+
+    ul.c-controls li a:hover {
+        background-color: rgba(51, 51, 51, 0.2);
+    }
+
+    .c-toggle {
+        font-size: 1.7em;
+    }
+
+    .name {
+        font-size: 1.7em;
+        font-weight: 700;
+    }
+
+    .c-info {
+        padding: 5px 10px;
+        font-size: 1.25em;
+    }
+    .prod_list {
+        margin-top: 10px;
+        border-bottom: 1px solid #5a70e2;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header" style="margin-top: 15px;">
+                <img src="@Url.Content("~/Content/Assets/Images/cm.png")" />Welcome to Community Market...
+            </h3>
+            
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%);">
+                    <h4><i class="fa fa-shopping-cart"></i> <span style="color: #5A70E2;">Shop now!</span></h4>
+                </div>
+                <div class="panel-body" style="  margin-bottom: 5px;">
+                    <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
+                        <a href="#" class="btn btn-default">Learn More</a>-->
+                    <div class="col-lg-12">
+                        <h5>
+                            <ul id="panel_title">
+                                <li><input id="by_cate" type="radio" style="vertical-align: baseline;" checked="checked" name="selection" /> by Category</li>
+                                <li><input id="by_merchant" type="radio" style="vertical-align: baseline;" name="selection" /> by Supplier</li>
+                                <li><input id="search" type="radio" style="vertical-align: baseline;" name="selection" /> Search</li>
+                                <li>
+                                    <div id="search_panel">
+                                        <input class="input-group c-search" type="text" id="contact-list-search" style="height: 30px; margin-top:10px;" placeholder="Search" autofocus="" title="Search by Keyword">
+                                        <button class="btn btn-default" type="button" style=" height: 30px; margin-left: -13px;">
+                                            <span class="glyphicon glyphicon-search text-muted" style="margin-left: 11px;"></span>
+                                        </button>
+                                    </div>
+                                    
+
+                                </li>
+                            </ul>
+                        </h5>
+                    </div>
+                    
+                    <div id="category">@Html.Action("GetCategoryList")</div>
+                    
+                    <div id="merchant">
+                        <ul id="supplier_list">
+                            <li>
+                                <div class="col-md-5 no-padding lib-item" data-category="view">
+                                    <div class="lib-panel">
+                                        <div class="row box-shadow">
+                                            <div class="col-md-6 col-sm-4 col-xs-6">
+                                                <img class="lib-img-show" src="/Content/Assets/Images/user_default.png"><br/>
+                                                <span class="short_desc" style="color:rgb(182, 77, 42); margin-left: 10px;">
+                                                    <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-half"></i><i class="icon-star-empty"></i>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-6 col-sm-8 col-xs-6">
+                                                <div class="lib-row lib-header">
+                                                    Example Suppler
+                                                    <div class="lib-header-seperator"></div>
+                                                </div>
+                                                <div class="lib-row lib-desc">
+                                                    Major suppliers of organic products, including produce, fruits, etc.<br/>
+                                                    <span class="glyphicon glyphicon-envelope" style="color:#ac1717;"></span> <span class="glyphicon glyphicon-earphone" style="color:#1a671a;"></span > <span class="glyphicon glyphicon-comment" style="color:#408D2D"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-5 no-padding lib-item" data-category="ui">
+                                    <div class="lib-panel">
+                                        <div class="row box-shadow">
+                                            <div class="col-md-6 col-sm-4 col-xs-6">
+                                                <img class="lib-img" src="/Content/Assets/Images/user_default.png">
+                                                <span class="short_desc">
+                                                    <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-half"></i><i class="icon-star-empty"></i>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-6 ol-sm-8 col-xs-6">
+                                                <div class="lib-row lib-header">
+                                                    Example Supplier
+                                                    <div class="lib-header-seperator"></div>
+                                                </div>
+                                                <div class="lib-row lib-desc">
+                                                    Major suppliers of organic products, including produce, fruits, etc.<br />
+                                                    <span class="glyphicon glyphicon-envelope"></span><span class="glyphicon glyphicon-earphone"></span><span class="glyphicon glyphicon-comment"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-5 no-padding lib-item" data-category="ui">
+                                    <div class="lib-panel">
+                                        <div class="row box-shadow">
+                                            <div class="col-md-6 col-sm-4 col-xs-6">
+                                                <img class="lib-img" src="/Content/Assets/Images/user_default.png">
+                                                <span class="short_desc">
+                                                    <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-half"></i><i class="icon-star-empty"></i>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-6 ol-sm-8 col-xs-6">
+                                                <div class="lib-row lib-header">
+                                                    Example Supplier
+                                                    <div class="lib-header-seperator"></div>
+                                                </div>
+                                                <div class="lib-row lib-desc">
+                                                    Major suppliers of organic products, including produce, fruits, etc.<br />
+                                                    <span class="glyphicon glyphicon-envelope"></span><span class="glyphicon glyphicon-earphone"></span><span class="glyphicon glyphicon-comment"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-5 no-padding lib-item" data-category="ui">
+                                    <div class="lib-panel">
+                                        <div class="row box-shadow">
+                                            <div class="col-md-6 col-sm-4 col-xs-6">
+                                                <img class="lib-img" src="/Content/Assets/Images/user_default.png">
+                                                <span class="short_desc">
+                                                    <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-half"></i><i class="icon-star-empty"></i>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-6 ol-sm-8 col-xs-6">
+                                                <div class="lib-row lib-header">
+                                                    Example Supplier
+                                                    <div class="lib-header-seperator"></div>
+                                                </div>
+                                                <div class="lib-row lib-desc">
+                                                    Major suppliers of organic products, including produce, fruits, etc.<br />
+                                                    <span class="glyphicon glyphicon-envelope"></span><span class="glyphicon glyphicon-earphone"></span><span class="glyphicon glyphicon-comment"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                
+                            </li>
+                            <li>
+                                
+                            </li>
+                        </ul>
+
+                    </div>
+                    
+                    <div id="result">
+                        <ul id="search_list" class="list-unstyled">
+                            <li >
+                                <div class="col-md-12 prod_list">
+                                    <img src="~/Content/Assets/Images/broccoli.jpg" alt="" class="img-responsive img-circle" style="float: left;" />
+                                    <div class="pull-left" style="font-weight:800;">dfasfasfads<br /><span style="font-weight: normal;">rewtertwertrfdasg fdsafadsspan<br />Price: $1.29/lb</span> </div>
+                                    
+                                   
+
+                                    <div class="pull-right">Supplied by <span style="color: #ac1717;">Bob Yuan</span>&nbsp;<img src="../../Content/Assets/Images/user_default.png" alt="" width="25px;" height="25;" /><br/> <button class="btn btn-primary pull-right">Add to Cart</button> @*<button class="btn btn-danger">Add to Whishlist</button>*@</div>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="col-md-12 prod_list">
+                                    <img src="~/Content/Assets/Images/carrot.png" alt="" class="img-responsive img-circle" style="float: left;" />
+                                    <div class="pull-left" style="font-weight:800;">dfasfasfads<br /><span style="font-weight: normal;">rewtertwertrfdasg fdsafadsspan<br />Price: $1.29/lb</span> </div>
+
+
+
+                                    <div class="pull-right">Supplied by <span style="color: #ac1717;">Bob Yuan</span>&nbsp;<img src="../../Content/Assets/Images/user_default.png" alt="" width="25px;" height="25;" /><br /> <button class="btn btn-primary" style="float:right;">Add to Cart</button> @*<button class="btn btn-danger">Add to Whishlist</button>*@</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+           
+                <div class="panel panel-default" style="background-color: #FFF0E7;">
+                    <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%);">
+                        <h4><i class="icon-columns"></i> Latest News</h4>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <h1 class="text-center login-title"><i class="icon-rss" style="color: #ed7e30;"></i> What's happening</h1>
+                        This sample shows how you can use Two-Factor authentication. This sample has a SMS and email service registered where you can send SMS or email for sending the security code.
+                        You can add more two-factor authentication factors such as QR codes and plug them into ASP.NET Identity.
+                        <ul>
+                            <li>
+                                You can use a SMS using <a href="https://www.twilio.com/">Twilio</a> or use any means of sending SMS. Please <a href="https://www.twilio.com/docs/quickstart/csharp/sms/sending-via-rest">read</a> for more details on using Twilio.
+                                You can send SMS using the SmsService which is registered in App_Start\IdentityConfig.cs
+                            </li>
+                            <li>
+                                You can use an email service such as <a href="http://www.windowsazure.com/en-us/documentation/articles/sendgrid-dotnet-how-to-send-email/">SendGrid</a> or
+                                set up an SMTP server to send email.
+                                You can send email using the EmailService which is registered in App_Start\IdentityConfig.cs
+                            </li>
+
+                            <li>
+                                When you login, you can add a phone number by clicking the Manage page.
+                            </li>
+                            @*<li>
+                                Once you add a phone number and have the Phone service hooked to send a SMS, you will get a code through SMS to confirm your phone number.
+                            </li>
+                            <li>
+                                In the Manage page, you can turn on Two-Factor authentication.
+                            </li>
+                            <li>
+                                When you logout and login, after you enter the username and password, you will get an option of how to get the security code to use for two-factor authentication.
+                            </li>
+                            <li>
+                                You can copy the code from your SMS or email and enter in the form to login.
+                            </li>
+                            <li>
+                                The sample also shows how to protect against Brute force attacks against two-factor codes. When you enter a code incorrectly for 5 times then you will be
+                                lockedout for 5 min before you can enter a new code. These settings can be configured in App_Start\IdentityConfig.cs by setting  DefaultAccountLockoutTimeSpan and MaxFailedAccessAttemptsBeforeLockout on the UserManager.
+                            </li>
+                            <li>
+                                If the machine you are browsing this website is your own machine, you can choose to check the "Remember Me" option after you enter the code.
+                                This option will remember you forever on this machine and will not ask you for the two-factor authentication, the next time when you login to the website.
+                                You can change your "Remember Me" settings for two-factor authentication in the Manage page.
+                            </li>*@
+                        </ul>
+
+                    </div>
+                </div>
+            
+            
+            
+
+        </div>
+    </div>
+
+</div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#search_panel").hide();
+
+            $("#merchant").hide();
+            $("#result").hide();
+
+            $("#search").prop('checked', false);
+
+            //debugger;
+            $("#search").change(function () {
+
+                var isChecked = $(this).is(':checked');
+
+                //alert(isChecked);
+
+                if (isChecked) {
+                    $("#search_panel").show();
+                } else {
+                    $("#search_panel").hide();
+                }
+            });
+
+            $("#by_cate").click(function() {
+
+                $("#search_panel").hide();
+                $("#merchant").hide();
+                $("#category").show();
+            });
+
+            $("#by_merchant").click(function () {
+
+                $("#search_panel").hide();
+
+                $("#category").hide();
+                $("#merchant").show();
+            });
+        });
+    </script>

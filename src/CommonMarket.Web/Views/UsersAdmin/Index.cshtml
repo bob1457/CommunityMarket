@@ -1,0 +1,29 @@
+﻿@using Microsoft.Ajax.Utilities
+@model IEnumerable<CommonMarket.Web.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+        <div class="row">
+            
+            <div class="col-md-12">
+                
+                <div class="profile-title" style="margin-top: 30px;"><i class="icon-user"></i> Account Manager</div>
+                <div>
+                    Manage user accounts
+                </div>
+                <div id="user-list">@Html.Partial("_UserList")</div>
+               
+            </div>
+        </div>
+
+        <!-- Modal Dialogs -->
+       
+        
+       
+
+    </div>
+
+   

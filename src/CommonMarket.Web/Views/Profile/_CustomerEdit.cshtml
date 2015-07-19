@@ -1,0 +1,34 @@
+﻿@model CommonMarket.Web.Models.IndexViewModel
+
+<table class="table table-user-information">
+    <tbody>
+
+        <tr>
+            <td>Alias:</td>
+            <td>
+
+                <input id="c_alias" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.CustomerAlias)" autofocus="">
+
+            </td>
+        </tr>
+        <tr>
+            <td>Shipping Address:</td>
+            <td>
+                <textarea id="saddress" class="form-control" type="text" placeholder="Last Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;">@Html.DisplayFor(model => model.ShippingAddress)</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Billing Address:</td>
+            <td>
+                <textarea id="baddress" class="form-control" type="text" placeholder="Last Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;">@Html.DisplayFor(model => model.BillingAddress)</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Notes:</td>
+            <td>
+                <textarea id="notes" class="form-control" type="text" placeholder="Last Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;">@Html.DisplayFor(model => model.Notes)</textarea>
+            </td>
+        </tr>
+
+    </tbody>
+</table>

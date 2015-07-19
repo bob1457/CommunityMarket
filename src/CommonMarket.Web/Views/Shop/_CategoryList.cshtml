@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CommonMarket.Core.Entities.ProductCategory>
+
+<div class="list-group" style="margin-top: -30px;">
+    <ul id="side_nav" class="list-unstyled" style="margin-left: 0;">
+        @foreach (var item in Model)
+        {
+            <li id="@item.Id" class="list-group-item">
+                @item.ProductCategoryName
+            </li>
+
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#@item.Id").click(function () {
+                        $(this).parent().children().removeClass("active");
+                        $(this).addClass("active");
+                    });
+                });
+
+                //$("#side_nav").blur(function() {
+                //    $(this).removeClass("active");
+                //});
+            </script>
+        } 
+    </ul>
+
+</div>
+

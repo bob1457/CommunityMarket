@@ -1,0 +1,972 @@
+﻿@model CommonMarket.Web.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage your account";
+}
+
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using CommonMarket.Web.Models;
+@using System.Security.Claims;
+
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+@{
+    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+
+    var roles = manager.GetRoles(User.Identity.GetUserId());
+
+    var UserId = User.Identity.GetUserId();
+
+    var profileId = currentUser.UserProfile.Id;
+
+}
+
+<style>
+    .reviews {
+        color: #555;
+        /*font-weight: bold;*/
+        margin: 5px auto 10px;
+    }
+    .media-date {
+        /*position: absolute;*/
+        right: 25px;
+        top: 25px;
+    }
+
+    /* File upload */
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+
+</style>
+
+
+<div class="container">
+    <div class="row profile">
+
+        @*<div class="col-md-1"></div>*@
+        <div class="col-md-12">
+            <div class="profile-content">
+                @*Some user related content goes here...*@
+                <div class="profile-title"><i class="icon-cog" style="color:#65C27D;"></i> Profile Manager</div>
+                <div>
+                    Manage your profile and account settings
+                </div>
+
+
+                <!-- NEW CODE-->
+                <!-- ***************************************-->
+                <div class="" style="margin-top: 25px;">
+                    <ul class="nav nav-tabs" role="tablist" style="margin-bottom: 0;">
+                        <li class="active">
+                            <a href="#profile" role="tab" data-toggle="tab">
+                                <h4 class="text-capitalize"><i class="glyphicon glyphicon-user"></i> Profile</h4>
+                            </a>
+                        </li>
+                        @if (!roles.Contains("Admin"))
+                        {
+                            <li>
+                                <a href="#activities" role="tab" data-toggle="tab">
+                                    <h4 class="text-capitalize"><i class="glyphicon glyphicon-info-sign"></i> User Info</h4>
+                                </a>
+                            </li>
+                        }
+                        <li>
+                            <a href="#settings" role="tab" data-toggle="tab">
+                                <h4 class="text-capitalize"><i class="glyphicon glyphicon-wrench"></i> Settings</h4>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="tab-content" style="background-color: white;">
+                    <div class="tab-pane active" id="profile" style="background-color: white;">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#" style="margin-top: 15px; margin-left: 5px;">
+                                    <img class="media-object img-circle" src="@Html.DisplayFor(model=>model.AvatarImgUrl)" alt="profile" title="@currentUser.UserProfile.FirstName">
+                                </a>
+                                <div class="media-body">
+                                    <div class="well well-lg" style="margin-top: 15px;">
+                                        <h4 class="media-heading text-uppercase reviews">
+                                            <span id="name">@Html.Partial("_Name")</span>
+                                            <span class="pull-right" style="font-size: .8em;">Join date: @currentUser.UserProfile.CreateDate.ToShortDateString()</span>
+                                        </h4>
+                                        <div class="profile-stats">
+                                            Roles:
+                                            @foreach (var item in roles)
+                                            {
+                                                <span style="color: #20b2aa;">@item</span>
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div>
+
+                                        <div id="details">
+                                            <div id="uDetails">@Html.Partial("_ProfileDetails")</div>
+
+                                            <a href="#" id="toEdit" class="btn btn-primary">Edit</a>
+                                        </div>
+
+
+                                        <div id="edit" style="display: none">
+                                            <div class="panel-body" style="font-size: .8em;">
+                                                <div class="row">
+                                                    <div class="col-md-3 col-lg-3 " align="center">
+                                                        <img alt="User Pic" src="@Html.DisplayFor(model=>model.AvatarImgUrl)" class="img-circle">
+
+                                                        <br />
+                                                        <p></p>
+                                                        <div id="updateUrl">
+                                                            @*<button id="add" class="btn btn-primary" data-toggle="modal" data-target="#image">Update Image</button>*@
+                                                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" title="Update avatar image">
+                                                                Update Image
+                                                            </button>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class=" col-md-9 col-lg-9 ">
+                                                        <table class="table table-user-information">
+                                                            <tbody>
+
+                                                                <tr>
+                                                                    <td>First Name:</td>
+                                                                    <td>
+
+                                                                        <input id="fname" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.FirstName)" autofocus="">
+
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Last Name:</td>
+                                                                    <td>
+                                                                        <input id="lname" class="form-control" type="text" placeholder="Last Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.LastName)">
+                                                                    </td>
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td>Address:</td>
+                                                                    <td>
+
+                                                                        <input id="address" class="form-control" type="text" placeholder="Strret number and street name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.Address1)">
+
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>City:</td>
+                                                                    <td>
+                                                                        <input id="city" class="form-control" type="text" placeholder="City" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.City)">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Province/Sate</td>
+                                                                    <td>
+                                                                        <input id="provstate" class="form-control" type="text" placeholder="Province or State" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.ProvState)">
+                                                                    </td>
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td>Post/Zip Code</td>
+                                                                    <td>
+                                                                        <input id="postcode" class="form-control" type="text" placeholder="Post Code or Zip Code" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.PostZipCode)">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Country</td>
+                                                                    <td>
+                                                                        <input id="country" class="form-control" type="text" placeholder="Country" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.Country)">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td>
+                                                                        <input id="email" class="form-control" type="text" placeholder="Contact Email" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@currentUser.UserProfile.Email">
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Phone Number</td>
+                                                                    <td>
+                                                                        <input id="tele" class="form-control" type="text" placeholder="Contact Phone Number" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.Telephone)">
+                                                                    </td>
+
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                        <br />
+                                                        <a href="#" id="toSave" class="btn btn-primary">Save</a>
+                                                        <a href="#" id="toCancel" class="btn btn-warning">Cancel</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media">
+
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div id=""></div>
+
+                    <div class="tab-pane" id="settings">
+
+                        <div class="col-md-6">
+
+                            <fieldset style="margin-top: 25px;">
+                                <legend style="margin-top: 15px;"><span class="glyphicon glyphicon-lock"></span> Change Password</legend>
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input id="oldpass" type="password" class="form-control" placeholder="Old Password" type="text" style="height: 35px;" autofocus="">
+                                        @*@Html.TextBoxFor(m => m.OldPassword, new { @class = "form-control", placeholder = "Old Password", autofocus = "" })*@
+                                    </div>
+                                </div>
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input id="newpass" type="password" class="form-control" placeholder="New Password" type="text" style="height: 35px;">
+
+                                        @*@Html.TextBoxFor(m => m.NewPassword, new { @class = "form-control", placeholder = "New Password" })*@
+                                    </div>
+                                </div>
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input id="newpass2" type="password" class="form-control" placeholder="Confirm New Password" type="text" style="height: 35px;">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @*<input type="submit"  class="btn btn-primary btn-block" value="Change Password" style="height: 35px;" />*@
+                                    <button id="chgpass" class="btn btn-primary btn-block">Change Password</button>
+                                </div>
+                            </fieldset>
+
+
+                            <br />
+
+                            <div style="color: green;" id="msg"></div>
+                            <div style="color: red;" id="err"></div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <fieldset style="margin-top: 25px;">
+                                <legend style="margin-top: 15px;"></span><span class="glyphicon glyphicon-link"></span> Other Settings</legend>
+                                <p>
+                                    Phone Number: @(Model.PhoneNumber ?? "None") [
+                                    @if (Model.PhoneNumber != null)
+                                    {
+                                        @Html.ActionLink("Change", "AddPhoneNumber")
+                                        @: &nbsp;|&nbsp;
+                                        @Html.ActionLink("Remove", "RemovePhoneNumber")
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Add", "AddPhoneNumber")
+                                    }
+                                    ]
+                                </p>
+                                <p>
+                                    External Logins: @Model.Logins.Count
+                                    @Html.ActionLink("[Manage]", "ManageLogins")
+                                </p>
+                                @if (Model.TwoFactor)
+                                {
+                                    <form method="post" action="/Manage/DisableTFA">
+                                        <p>
+                                            Two factor is currently enabled:
+                                            <input type="submit" value="Disable" class="btn btn-default" />
+                                        </p>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form method="post" action="/Manage/EnableTFA">
+                                        <p>
+                                            Two factor is currently disabled:
+                                            <input type="submit" value="Enable" class="btn btn-default" />
+                                        </p>
+                                    </form>
+                                }
+                                @if (Model.BrowserRemembered)
+                                {
+                                    <form method="post" action="/Manage/ForgetBrowser">
+                                        <p>
+                                            Browser is curently remembered for two factor:
+                                            <input type="submit" value="Forget Browser" class="btn btn-default" />
+                                        </p>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form method="post" action="/Manage/RememberBrowser">
+                                        <p>
+                                            Browser is curently not remembered for two factor:
+                                            <input type="submit" value="Remember Browser" class="btn btn-default" />
+                                        </p>
+                                    </form>
+                                }
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="activities">
+                        <div class="col-md-6">
+                            <fieldset style="margin-top: 25px;">
+                                <legend>Customer Profile</legend>
+                                <div id="c_details">@Html.Partial("_CustomerDetails")</div>
+
+                                <div id="c_edit" style="display: none">Html.Partial("_CustomerEdit")</div>
+                                
+                                <a href="#" id="Edit_c" class="btn btn-primary">Edit</a>
+                            </fieldset>
+                        </div>
+
+                        <div class="col-md-6">
+                            @if (roles.Contains("Merchant"))
+                            {
+                                <fieldset style="margin-top: 25px;">
+                                    <legend style="margin-top: 15px;">Supplier Profile</legend>
+
+                                    <div id="details_m"></div><!-- Data loaded from JSON object from server side -->
+
+                                    <div id="edit_m" style="display: none"></div><!-- Data loaded from JSON object from server side -->
+
+                                    <a href="#" id="m_Edit" class="btn btn-primary">Edit</a>
+                                    <a href="#" id="m_Save" class="btn btn-success" style="display: none;">Save</a>
+                                    <a href="#" id="m_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
+                                </fieldset>
+                            }
+                            else
+                            {
+                                <fieldset style="margin-top: 25px;">
+                                    <legend style="margin-top: 15px;">Customer Activities</legend>
+
+                                </fieldset>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div id="content_da">
+                    @*Purchase History*@
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<!-- Modal Dialog -file upload -->
+<!-- Modal -->
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height: 186px;">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: -30px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Update Avatar Image </h4>
+            </div>
+            <form id="form" action="@Url.Content("/Profile/UpdateAvatarImg/")" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    @*<input id="uploadFile" placeholder="Choose File" disabled="disabled" />
+                        <div class="fileUpload btn btn-primary" style="margin-left: 0;">
+                            <span>Browse...</span>
+                            <input id="upload" type="file" class="upload" </>
+                        </div>*@
+                    <span>Select an image file and upload, need help?</span>
+                    <input id="upload" type="file" name="file" class="pull-right" />
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success" id="submit1" value="Upload" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> <!-- #/myModal -->
+<!-- Add Picture Dialog -->
+<div id="add_pic">
+    <p></p>
+    <h4 class="ui-dia">
+        <i class="icon-picture"></i> &nbsp; ADD NEW PICTURE
+
+    </h4>
+    <form id="form" action="@Url.Content("/Profile/UpdateAvatarImg/")" method="post" enctype="multipart/form-data">
+        <div class="edit_field ui-dia">
+
+            <div class="display-label">
+                Upload file:
+            </div>
+            <br />
+            <div class="display-field">
+                <input id="upload" type="file" name="file" />
+            </div>
+
+
+            <input class="edit_button" id="submit1" type="submit" value="Add" />
+            <input class="edit_button" type="button" value="Cancel" id="btncancel" />
+            <p></p>
+        </div>
+    </form>
+</div>
+
+
+<!-- Add Picture Script -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#add_pic").hide();
+        // $("#pltype").hide();
+    });
+
+    //$("#add").button();
+
+    $('#add').click(function () {
+
+        $("#t").val(1);
+
+
+        var dialogOpts = {
+            autoOpen: false,
+            modal: true,
+            resizable: false,
+            draggable: false,
+            closeOnEscape: false,
+            width: 480,
+            title: 'Update Avatar Image'
+
+
+        }
+
+        $("#add_pic").dialog(dialogOpts).dialog('open');
+
+        return false;
+    });
+
+    $("#submit1").click(function () {
+
+        //Upload file
+
+        $("#add_pic").dialog('close');
+
+
+        //Reload picture list partial view
+        @*var url = "/Tools/GetPictureList/";
+        var q = "id=" + @Model.PropertyId
+        //alert(q);
+        $.get(url, q, function (data) {
+            $("#pic_list").html(data);
+        });*@
+    });
+
+
+    $("#btncancel").click(function () {
+        $("#add_pic").dialog('close');
+    });
+
+
+
+</script>
+
+
+
+
+
+<!-- Script Section -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#content_pf").show();
+        $("#content_st").hide();
+        //$("#content_da").hide();
+        $("#pf").addClass("profile-active-button");
+
+        $("#pf").click(function () {
+            $("#content_pf").show();
+            $("#content_st").hide();
+            $("#content_da").hide();
+            //$("#content_db").hide();
+            $("#pf").addClass("profile-active-button"); //there is a class: active for button in bootstrap, good for all buttons are hte same color
+            $("#st").removeClass("profile-active-button");
+            $("#da").removeClass("profile-active-button");
+            //$("#db").removeClass("profile-active-button");
+        });
+        $("#st").click(function () {
+            $("#content_pf").hide();
+            $("#content_st").show();
+            $("#content_da").hide();
+            //$("#content_db").hide();
+            $("#st").addClass("profile-active-button");
+            $("#pf").removeClass("profile-active-button");
+            $("#da").removeClass("profile-active-button");
+            //$("#db").removeClass("profile-active-button");
+        });
+        $("#da").click(function () {
+            $("#content_pf").hide();
+            $("#content_st").hide();
+            $("#content_da").show();
+            //$("#content_db").hide();
+            $("#da").addClass("profile-active-button");
+            $("#pf").removeClass("profile-active-button");
+            $("#st").removeClass("profile-active-button");
+            //$("#db").removeClass("profile-active-button");
+        });
+        $("#db").click(function () {
+            $("#content_pf").hide();
+            $("#content_st").hide();
+            $("#content_da").hide();
+            //$("#content_db").show();
+            //$("#db").addClass("profile-active-button");
+            $("#pf").removeClass("profile-active-button");
+            $("#da").removeClass("profile-active-button");
+            $("#st").removeClass("profile-active-button");
+        });
+    });
+</script>
+
+<!-- Profile Details/Edit -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$("#updateUrl").hide();
+
+        $("#toEdit").click(function () {
+            $("#edit").show();
+            $("#details").hide();
+            $("#updateUrl").show();
+        });
+
+        $("#toSave").click(function () {
+            $("#edit").hide();
+            $("#details").show();
+            $("#updateUrl").hide();
+        });
+
+        $("#toCancel").click(function () {
+            $("#edit").hide();
+            $("#details").show();
+            $("#updateUrl").hide();
+        });
+
+    });
+</script>
+
+<!-- Change Password -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#chgpass").click(function () {
+            //alert("clicked!");
+            var oldp = $("#oldpass").val();
+            var newp = $("#newpass").val();
+            var newp2 = $("#newpass2").val();
+
+            if (newp == newp2) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Profile/PasswordChange",
+                    data: "oldPass=" + oldp + "&newPass=" + newp,
+                    contenType: "",
+                    dataType: "json",
+                    success: Suceeded
+
+                });
+
+                function Suceeded(data) {
+                    //alert('success');
+                    $('#msg').html(data);
+                    $('#err').html(""); //clear error message if exists
+
+                    $('#oldpass').val("");
+                    $('#newpass').val("");
+                    $('#newpass2').val("");
+
+                    $('#msg').delay(5000).fadeOut(400);
+
+                    return false;
+                }
+            }
+            else {
+                $('#err').html("The password does not match!");
+
+            }
+
+            return false;
+        });
+
+    });
+</script>
+
+<!-- Settings Panel -->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#instruction-chgpass").show();
+        $("#instruction-otehrs").hide();
+
+
+        $("#toSettings").click(function () {
+            $("#instruction-chgpass").hide();
+            $("#instruction-otehrs").show();
+        });
+
+        $("#toChange").click(function () {
+            $("#instruction-otehrs").hide();
+            $("#instruction-chgpass").show();
+        });
+
+    });
+</script>
+
+@*<script type="text/javascript">
+        $('input[type=file]').bootstrapFileInput();
+        $('.file-inputs').bootstrapFileInput();
+    </script>*@
+
+<script type="text/javascript">
+    $(document).on('change', '.btn-file :file', function () {
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+    });
+
+    $(document).ready(function () {
+        $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+                log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+            if (input.length) {
+                input.val(log);
+            } else {
+                if (log) alert(log);
+            }
+        });
+    });
+</script>
+
+<!-- Edit Profile -->
+<script type="text/javascript">
+    //$(document).on('change', '.btn-file :file', function () {
+    $(document).ready(function(){
+
+        //var fname = $("#fname").val();
+        //var lname = $("#lname").val();
+        //var address = $("#address").val();
+        //var city = $("#city").val();
+        //var pcode = $("#postcode").val();
+        //var prov = $("#provstate").val();
+        //var country = $("#country").val();
+        //var email = $("#email").val();
+        //var tele = $("#tele").val();
+
+        var UserId = "@UserId";
+
+
+        $("#toSave").click(function () {
+            debugger;
+            var fname = $("#fname").val();
+            var lname = $("#lname").val();
+            var address = $("#address").val();
+            var city = $("#city").val();
+            var pcode = $("#postcode").val();
+            var prov = $("#provstate").val();
+            var country = $("#country").val();
+            var email = $("#email").val();
+            var tele = $("#tele").val();
+
+
+
+            $.ajax({
+                url: "/Profile/Update",
+                type: "POST",
+                data: {
+                    Id: UserId,
+                    FirstName: fname,
+                    LastName: lname,
+                    Address: address,
+                    City: city,
+                    Province: prov,
+                    PostalCode: pcode,
+                    Country: country,
+                    Email: email,
+                    Telephone: tele
+
+                },
+                success: function () {
+
+                    //$('#msg').html(data);
+                    //$('#msg').delay(5000).fadeOut(400);
+
+                    var url = "/Profile/GetProfileDetails";
+                    $.get(url, function (data) {
+                        $("#uDetails").html(data);
+                        return false;
+                    });
+
+                    var url2 = "/Profile/GetFullName";
+                    $.get(url2, function (data) {
+                        $("#name").html(data);
+                        return false;
+                    });
+                }
+            });
+        });
+
+
+    });
+</script>
+
+<!-- Merchant Info -->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //Dsiplay control
+        $("#m_Edit").click(function() {
+            $("#details_m").hide();
+            $("#m_Edit").hide();
+            $("#m_Save").show();
+            $("#m_Cancel").show();
+            $("#edit_m").show();
+        });
+
+        $("#m_Save").click(function () {
+            $("#details_m").show();
+            $("#m_Edit").show();
+            $("#m_Save").hide();
+            $("#m_Cancel").hide();
+            $("#edit_m").hide();
+        });
+
+        $("#m_Cancel").click(function () {
+            $("#details_m").show();
+            $("#m_Edit").show();
+            $("#m_Save").hide();
+            $("#m_Cancel").hide();
+            $("#edit_m").hide();
+        });
+
+
+
+        //debugger;
+        var url = "/Merchant/GetMerchantDetails/";
+        var q = "id=@UserId";
+        debugger;
+        $.get(url, q, function (data) {
+
+            var table = $("<table></table>").addClass("table");
+
+
+            var tr;
+            var tr1;
+            var tr2;
+            var tr3;
+            var tr4;
+            var tr5;
+
+            tr = $('<tr/>');
+            tr1 = $('<tr/>');
+            tr2 = $('<tr/>');
+            tr3 = $('<tr/>');
+            tr4 = $('<tr/>');
+            tr5 = $('<tr/>');
+
+            tr.append("<td>Contact First Name:</td><td>" + data.ContactFirstName + "</td>");
+
+            if (data.ContactLastName == null) {
+                tr1.append("<td>Contact Last Name::</td><td></td>");
+            } else {
+                tr1.append("<td>Contact Last Name::</td><td>" + data.ContactLastName + "</td>");
+            }
+            if (data.CompnayName == null) {
+                tr2.append("<td>Business Name:</td><td></td>");
+            } else {
+                tr2.append("<td>Business Name:</td><td>" + data.CompnayName + "</td>");
+            }
+           
+            if (data.SupplierWebSite == null) {
+                tr3.append("<td>Web Site:</td><td></td>");
+            } else {
+                tr3.append("<td>Web Site:</td><td>" + data.SupplierWebSite + "</td>");
+            }
+            if (data.ShortBio == null) {
+                tr4.append("<td>Busness Description:</td><td></td>");
+            } else {
+                tr4.append("<td>Busness Description:</td><td>" + data.ShortBio + "</td>");
+            }
+
+            if (data.CompanyLogoImgUrl == null) {
+                tr5.append("<td>Business Logo:</td><td></td>");
+            } else {
+                tr5.append("<td>Business Logo:</td><td>" + data.CompanyLogoImgUrl + "</td>");
+            }
+            
+            //tr.append("<td>" + data.UserOrifukeUd + "</td>");
+            //tr.append("<td>" + data.CompanyName + "</td>");
+            //tr.append("<td>" + data.IsActive + "</td>");
+            //tr.append("<td>" + data.ContactLastName + "</td>");
+            //tr.append("<td>" + data.SupplierWebSite + "</td>");
+
+            table.append(tr);
+            table.append(tr1);
+            table.append(tr2);
+            table.append(tr3);
+            table.append(tr4);
+            table.append(tr5);
+
+            $("#details_m").append(table);
+
+
+
+
+
+            //Load edit form
+
+            var table_0 = $("<table></table>").addClass("table");
+
+            var tr_0;
+            //var tr1_0;
+            //var tr2_0;
+            //var tr3_0;
+            //var tr4_0;
+            //var tr5_0;
+
+            tr_0 = $('<tr/>');
+            //tr1_0 = $('<tr/>');
+            //tr2_0 = $('<tr/>');
+            //tr3_0 = $('<tr/>');
+            //tr4_0 = $('<tr/>');
+            //tr5_0 = $('<tr/>');
+
+            tr_0.append("<td>Contact First Name:</td><td><input type='text' value= '" + data.ContactFirstName + "' /></td>");
+
+            //if (data.ContactLastName == null) {
+            //    tr1.append("<td>Contact Last Name::</td><td></td>");
+            //} else {
+            //    tr1.append("<td>Contact Last Name::</td><td>" + data.ContactLastName + "</td>");
+            //}
+            //if (data.CompnayName == null) {
+            //    tr2.append("<td>Business Name:</td><td></td>");
+            //} else {
+            //    tr2.append("<td>Business Name:</td><td>" + data.CompnayName + "</td>");
+            //}
+
+            //if (data.SupplierWebSite == null) {
+            //    tr3.append("<td>Web Site:</td><td></td>");
+            //} else {
+            //    tr3.append("<td>Web Site:</td><td>" + data.SupplierWebSite + "</td>");
+            //}
+            //if (data.ShortBio == null) {
+            //    tr4.append("<td>Busness Description:</td><td></td>");
+            //} else {
+            //    tr4.append("<td>Busness Description:</td><td>" + data.ShortBio + "</td>");
+            //}
+
+            //if (data.CompanyLogoImgUrl == null) {
+            //    tr5.append("<td>Business Logo:</td><td></td>");
+            //} else {
+            //    tr5.append("<td>Business Logo:</td><td>" + data.CompanyLogoImgUrl + "</td>");
+            //}
+
+            //tr.append("<td>" + data.UserOrifukeUd + "</td>");
+            //tr.append("<td>" + data.CompanyName + "</td>");
+            //tr.append("<td>" + data.IsActive + "</td>");
+            //tr.append("<td>" + data.ContactLastName + "</td>");
+            //tr.append("<td>" + data.SupplierWebSite + "</td>");
+
+            table_0.append(tr_0);
+            //table.append(tr1);
+            //table.append(tr2);
+            //table.append(tr3);
+            //table.append(tr4);
+            //table.append(tr5);
+
+            $("#edit_m").append(table_0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //debugger;
+            //$("#details_m").html(data);
+            return false;
+        });
+
+    });
+</script>
+
+
+
+
+
+<script type="text/javascript">
+    //$(document).ready(function() {
+    //    $("#uploadBtn").onChange(function() {
+
+    //    });
+    //});
+    document.getElementById("upload").onchange = function () {
+        document.getElementById("uploadFile").value = this.value;
+    };
+</script>

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<CommonMarket.Web.Models.ApplicationUser>
+
+<div class="form-group">
+    <input class="form-control" type="text" value="@item.Email" placeholder="" style="height: 35px;">
+    @*@Html.LabelFor(model => model.FirstOrDefault().Email)
+        @Html.TextBoxFor(m => m.FirstOrDefault().Email, new { @class = "form-control", @style = "height: 35px;", @id = "email" })*@
+</div>
+<div class="form-group">
+    @*@Html.LabelFor(model => model.FirstOrDefault().UserProfile.FirstName)
+        @Html.TextBoxFor(m => m.FirstOrDefault().UserProfile.FirstName, new { @class = "form-control", @style = "height: 35px;" })*@
+    <input class="form-control " value="@item.UserProfile.FirstName" type="text" placeholder="" style="height: 35px;">
+</div>
+<div class="form-group">
+    @*<textarea rows="2" class="form-control" placeholder=""></textarea>
+        @Html.LabelFor(model => model.FirstOrDefault().UserProfile.LastName)
+        @Html.TextBoxFor(m => m.FirstOrDefault().UserProfile.LastName, new { @class = "form-control", @style = "height: 35px;" })*@
+    <input class="form-control " value="@item.UserProfile.LastName" type="text" placeholder="" style="height: 35px;">
+</div>

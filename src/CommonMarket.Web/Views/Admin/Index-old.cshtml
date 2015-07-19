@@ -1,0 +1,462 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .panel-default > .panel-heading {
+        background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%);
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default" style="margin-top: 25px;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title" style="font-weight: normal">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                <span class="glyphicon glyphicon-grain" style="color: #373794;">
+                                </span>&nbsp; Site Management
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-th text-primary"></span><a href="#" id="d_show">&nbsp; Department</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-th-list text-success"></span><a href="#" id="c_show">&nbsp; Categories</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-file text-info"></span><a href="#">&nbsp; Newsletters</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-comment text-success"></span><a href="#">&nbsp; Comments</a>
+                                        <span class="badge">42</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div><!-- End of CollapseOne-->
+                </div>
+                <div class="panel panel-default" style="margin-top: 0;">
+                    <div class=" panel-heading">
+                        <h4 class="panel-title" style="font-weight: normal">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                <span class="glyphicon glyphicon-th">
+                                </span>&nbsp; Application Administration
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Orders</a> <span class="label label-success">$ 320</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Invoices</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Shipments</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Tex</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div><!-- End of CollapseTwo-->
+
+
+                </div>
+            
+                <div class="panel panel-default " style="margin-top: 0;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title " style="font-weight: normal">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                <span class="glyphicon glyphicon-user">
+                                </span>&nbsp; Account Management
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="#" id="u_show"><i class="icon-user"></i>&nbsp; User and Roles</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Notifications</a> <span class="label label-info">5</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Import/Export</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
+                                                                                                       Delete Account
+                                                                                                   </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default " style="margin-top: 0;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title" style="font-weight: normal">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                <span class="glyphicon glyphicon-signal">
+                                </span>&nbsp; Reporting & Stats
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-shopping-cart"></span><a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div> <!-- End of Accordion -->
+
+        </div><!-- End of Col-sm-3 -->
+        <div class="col-sm-9 col-md-9">
+            
+            <div id="content">
+                <div class="profile-title" style="margin-top: 30px;"><i class="icon-cog"></i> Admin Panel </div>
+                <span>
+                    Manage the product categories, site configurations and view business activities and financial reports.
+                </span>
+                <div id="cover">
+                    Cover page
+                </div>
+                <div id="dept">
+                    Department page (Not In Use)
+                </div>
+                <div id="category">
+                    <div><button class="btn btn-primary" style="margin-bottom: -25px; margin-left: 7px; color: rgb(241, 198, 128);" data-title="Add" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus-sign"></span> Add New</button></div>
+
+                    <div>
+                        <table id="cate-list" class="table table-responsive table-bordered table-striped panel-heading custom-table" style="padding: 3px; margin-left: 8px; margin-top: 35px; padding-right: 5px;">
+                            <thead>
+                                <tr>
+                                    @*<th><input type=" checkbox" id="checkall" /></th>*@
+                                    <th>ID</th>
+                                    <th></th>
+                                    <th>Category Name</th>
+                                    <th>Descriptioin</th>
+                                    <th style="text-align: center">Edit</th>
+                                    <th style="text-align: center">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <img src="~/Content/Assets/Images/broccoli.jpg" />
+                                    </td>
+                                    <td>Brockly</td>
+                                    <td>Home grown organic</td>
+                                    <td style="text-align: center">
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#d"><span class="glyphicon glyphicon-file"></span></span></p>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><span class="btn btn-warning btn-xs" data-title="Delete" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-remove"></span></span></p>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        <img src="~/Content/Assets/Images/carrot.png" />
+                                    </td>
+                                    <td>carrot</td>
+                                    <td>Home grown organic</td>
+                                    
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-file"></span></span></p>
+                                    </td>
+                                    
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><span class="btn btn-warning btn-xs" data-title="Delete" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-remove"></span></span></p>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>
+                                        <img src="~/Content/Assets/Images/cauliflower.png" />
+                                    </td>
+                                    <td>
+                                        Cauliflower
+                                    </td>
+                                    <td>Home grown organic</td>
+                                    
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
+                                    </td>
+                                    
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Delete"><span class="btn btn-warning btn-xs" data-title="Delete" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-remove"></span></span></p>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                
+                
+                
+                
+                
+                
+                <div id="users_roles">
+                    <div class="" style="margin-top: 25px;">
+                        <ul class="nav nav-tabs" role="tablist" style="margin-bottom: 0;">
+                            @*<li ><a href="#users" role="tab" data-toggle="tab" style="padding: 0 10px 0 10px;"><h4 class="text-capitalize"><i class="glyphicon glyphicon-user"></i> Users</h4></a></li>*@
+                            
+                            <li class="active"><a href="#managers" role="tab" data-toggle="tab" style="padding: 0 10px 0 10px;"><h4 class="text-capitalize"><i class="icon-user"></i> Users</h4></a></li>
+                            <li ><a href="#roles" role="tab" data-toggle="tab" style="padding: 0 10px 0 10px;"><h4 class="text-capitalize"><i class="icon-retweet"></i> Roles</h4></a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" style="background-color: white;">
+                        
+                        <div class="tab-pane active" id="managers" style="background-color: white;">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#" style="margin-top: 15px;">
+                                        <img class="media-object img-circle" src="~/Content/Assets/Images/users.png" alt="Users" width="60" height="60" style="margin-left: 5px;" />
+                                    </a>
+                                    <div class="media-body">
+                                        @*<div id="find">
+                                            <input type="text" style="height: 30px; margin-bottom: 0;" placeholder="Find User" />
+                                        </div>*@
+                                        
+                                        <div id="ulist" style="margin-top: 20px;">@Html.Action("GetUserList")</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-pane" id="roles">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#" style="margin-top: 15px;">
+                                        <img class="media-object img-circle" src="~/Content/Assets/Images/work.png" alt="Roles" width="60" height="60" style="margin-left: 5px;" />
+                                    </a>
+                                    <div class="media-body">
+                                        <div> 
+                                            <button class="btn btn-primary" style="margin-bottom: -25px; margin-left: 7px; margin-top: 25px; color: rgb(241, 198, 128);" data-title="Add" data-toggle="modal" data-target="#addrole"><span class="glyphicon glyphicon-plus-sign"></span> Add New</button>
+                                            <input type="text" id="filter" style="height: 30px; float: right; margin-right: 4px;" placeholder="Filter by role" />
+                                            
+                                        </div>
+                                        
+                                        
+                                        <div id="rlist" style="position: relative; top: 10px;" >@Html.Action("GetRoleList")</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+
+        <!-- Modal Dialogs - ADD Category -->
+        <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="height: 245px;">
+            <div class="modal-dialog" style="margin-top: 0;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Add New Category</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="by_cate_name" class="form-control" type="text" placeholder="Category Name" style="height: 35px;" autofocus="">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="cate_desc" rows="2" class="form-control" placeholder="Category Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button id="go_add" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
+        
+        
+        <!-- Modal Dialogs - ADD Role -->
+        <div class="modal fade" id="addrole" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="height: 245px;">
+            <div class="modal-dialog" style="margin-top: 0;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Add New Role</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input id="role_name" class="form-control" type="text" placeholder="Role Name" style="height: 35px;" autofocus="">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="role_desc" rows="2" class="form-control" placeholder="Role Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button id="go_add" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
+        
+        
+        
+         
+
+    </div>
+    
+
+</div>
+
+
+
+
+
+<!-- Script Section -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#category").hide();
+        $("#cover").show();
+        $("#dept").hide();
+        //$("#pf").addClass("profile-active-button");
+        $("#users_roles").hide();
+
+        $("#d_show").click(function () {
+            $("#dept").show();
+            $("#cover").hide();
+            $("#category").hide()
+        });
+        $("#c_show").click(function () {
+            $("#dept").hide();
+            $("#cover").hide();
+            $("#category").show();
+            $("#users_roles").hide();
+        });
+        $("#u_show").click(function () {
+            $("#dept").hide();
+            $("#cover").hide();
+            $("#category").hide();
+            $("#users_roles").show();
+        });
+
+    });
+</script>
+
+<!-- Add Category -->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //Add
+        $('#add').on('shown.bs.modal', function () {
+            $('#cate_name').focus()
+        })
+
+        $("#go_add").click(function () {
+            //alert("add");
+
+            var cateName = $("#cate_name").val();
+            var cateDesc = $("#cate_desc").val();
+            //debugger; 
+            //Ajax call - possibility to create a dedicated ajax layer that accepts the parameters to avoid duplicate ajax code
+            //
+            $.ajax({
+                url: "/Product/AddCategory",
+                type: "POST",
+                data: {
+                    CateName: cateName,
+                    CateDesc: cateDesc
+                },
+                success: function (data) {
+
+                    $('#msg').html(data);
+                    $('#msg').delay(5000).fadeOut(400);
+
+                    //var url = "/RolesAdmin/GetAllRoles";
+                    //$.get(url, function (data) {
+                    //    $("#role_list").html(data);
+                    //    return false;
+                    //});
+                }
+            });
+
+            $('#add').modal('hide'); //close the modal
+        });
+
+
+    });
+</script>
+
+<!-- Knockout JS view models -->
+
+@*<script src="~/Scripts/viewModels/roleViewModel.js"></script>*@
+@*<script src="~/Scripts/viewModels/userViewModel.js"></script>*@

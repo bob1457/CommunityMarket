@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Market - Enjoy by Share</title>
+
+    <!-- Favicon -->
+    <link href="~/Content/Assets/Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <!-- Jquery/jquery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <!-- UI Responsive Styles -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../content/styles/bootstrap-theme.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">*@
+
+    <!-- Font Awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Metro -->
+    @*<link href="~/Content/Styles/metro.css" rel="stylesheet" />*@
+    <link href="~/Content/Styles/metro-icons.css" rel="stylesheet" />
+
+
+    <link href="../../content/styles/metro-bootstrap.css" rel="stylesheet" />
+    <link href="../../content/styles/custom_live-tile.css" rel="stylesheet" />
+    <link href="../../content/styles/Custom_MetroJS.css" rel="stylesheet" />
+    <link href="../../content/styles/metro-bootstrap.css" rel="stylesheet" />
+    <link href="../../content/styles/MetroJs.css" rel="stylesheet" />
+
+    @*<script src="~/Scripts/bootstrap.file-input.js"></script>*@
+
+    <!-- Custom Site Style - Local -->
+    <link href="~/Content/Styles/site.css" rel="stylesheet" />
+    <link href="~/Content/Styles/dialog.css" rel="stylesheet" />
+
+    <!-- Knockout -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
+    <script src="~/Scripts/knockstrap.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+
+    <!-- Jquery File Upload -->
+    <script src="~/Scripts/jquery.fileupload.js"></script>
+    <script src="~/Scripts/jquery.iframe-transport.js"></script>
+    <script src="~/Scripts/jquery.fileupload-ui.js"></script>
+
+    
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <style>
+        .dropdown-menu > li > a {
+            color: #E8E5E5;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse ">
+        <div id="banner-wrapper" >
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--@Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })-->
+                    <div id="nav-brand" class="navbar-brand"><a href=""><!--Commnity Market--><img id="logo_img" src="~/Content/Assets/Images/cm_logo_1.png" title="Community Market" /></a></div>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav" id="nav2" style="margin-left: -10px;">
+                        <li>@Html.ActionLink("HOME", "Index", "Home")</li>
+                        <li>@Html.ActionLink("SHOPS", "Index", "Shop")</li>
+                        <li>@Html.ActionLink("LIFE STYLE", "Index", "LifeStyle")</li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color: #E2BBA3; font-weight: normal;">ABOUT <b class="caret"></b></a>
+                            <ul class="dropdown-menu" style="background-color: #906347;">
+                                <li>
+                                    @Html.ActionLink("ABOUT US", "About", "Home")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("SUPPORT", "Index", "Support")
+                                </li>
+                            </ul>
+                            
+                        </li>
+
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <!-- 
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="color: #E2BBA3; font-weight: normal;">Admin <b class="caret"></b></a>
+                                <ul class="dropdown-menu" style="background-color: #906347;">
+                                    <li>@Html.ActionLink("Roles Admin", "Index", "RolesAdmin"@*, new { @style = "color:#E8E5E5;" }*@)</li>
+                                    <li>@Html.ActionLink("Users Admin", "Index", "UsersAdmin")</li>
+                                </ul>
+                            </li>
+                            -->
+
+                            @*<li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
+                <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>*@
+                        }
+                        @*<li><a href="">HOME</a></li>
+            <li><a href="">SHOP</a></li>
+            <li><a href="">ABOUT</a></li>
+            <li><a href="">ADMIN</a></li>*@
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="banner-content1">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-md-3 pull-right" style=" margin-right: 15px;">
+                    <div id="imaginary_container">
+                        <div class="input-group stylish-input-group">
+                            <input type="text" class="form-control" placeholder="Site Search">
+                            <span class="input-group-addon">
+                                <button type="submit" style="height: 21px;">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div id="content-wrapper">
+        @RenderBody()
+    </div>
+
+    <!-- Footer Area -->
+    <div id="footer" style="background-color: #363636;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-left" id="copyright-info">@DateTime.Now.Year &#169; &nbsp; <a href="#">MB Technologies, Inc.</a></p>
+                </div>
+                <div class="col-md-6">
+                    <p id="footer-info"><i class="icon-rss rss_color" title="RSS"></i> <i class="icon-facebook-sign facebook_color" title="Facebook"></i> <i class="icon-twitter twitter_color" title="Twitter"></i> <i class="icon-google-plus-sign google_p_Color " title="Google+"></i></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>
+

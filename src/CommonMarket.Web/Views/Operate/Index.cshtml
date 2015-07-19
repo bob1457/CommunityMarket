@@ -1,0 +1,498 @@
+﻿@using CommonMarket.Web.Models
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+
+    var level = currentUser.UserProfile.Address2;
+}
+
+<style>
+    .panel-default > .panel-heading {
+        background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%);
+    }
+
+    .modal-body {
+        max-height: 650px;
+    }
+
+    .regular_weight {
+        font-weight: normal;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default" style="margin-top: 25px;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title regular_weight">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                <span class="glyphicon glyphicon-grain" style="color: #373794;">
+                                </span>&nbsp; Management
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-gift text-primary"></span><a id="p_show" href="#"> Products</a>
+                                        <span class="badge">3</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-blackboard text-success"></span><a href="http://www.jquery2dotnet.com"> Inventory</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-flash text-info"></span><a href="http://www.jquery2dotnet.com"> Discount & Promotion</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-fire text-success"></span><a href="http://www.jquery2dotnet.com"> Tax and Fee</a>
+                                        @*<span class="badge">42</span>*@
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div><!-- End of CollapseOne-->
+                </div>
+                <div class="panel panel-default" style="margin-top: 0;">
+                    <div class=" panel-heading">
+                        <h4 class="panel-title regular_weight">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                <span class="glyphicon glyphicon-shopping-cart">
+                                </span>&nbsp; Order Processing
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-shopping-cart text-primary"></span><a href="http://www.jquery2dotnet.com"> Orders and Status</a> <span class="label label-success">25</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-file text-primary"></span><a href="http://www.jquery2dotnet.com"> Invoices and Payments</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-send text-primary"></span><a href="http://www.jquery2dotnet.com"> Shipments and Tracking</a>
+                                    </td>
+                                </tr>
+                                @*<tr>
+                                        <td>
+                                            <a href="http://www.jquery2dotnet.com">Tex</a>
+                                        </td>
+                                    </tr>*@
+                            </table>
+                        </div>
+                    </div><!-- End of CollapseTwo-->
+
+
+                </div>
+                <div class="panel panel-default " style="margin-top: 0;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title regular_weight">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                <span class="glyphicon glyphicon-user">
+                                </span>&nbsp; Customer Services
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com"> Change Password</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com"> Notifications</a> <span class="label label-info">5</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com"> Import/Export</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
+                                            Delete Account
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default " style="margin-top: 0;">
+                    <div class="panel-heading">
+                        <h4 class="panel-title regular_weight">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                <span class="glyphicon glyphicon-signal">
+                                </span>&nbsp; Reporting
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com"> Change Password</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com"> Notifications</a> <span class="label label-info">5</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com"> Import/Export</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
+                                            Delete Account
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div id="content" style="margin-top:25px;">
+
+                <div class="profile-title" style="margin-top: 30px;"><i class="icon-cog"></i> Business Manager </div>
+                <span>
+                    Manage the products, orders, customers and viwe your business and financial reports.
+                </span>
+                <div id="cover">
+                    Cover page
+                </div>
+                <div id="product">
+                    <div><button class="btn btn-primary" style="margin-bottom: -25px; color: rgb(241, 198, 128);" data-title="Add" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus-sign"></span> Add New</button></div>
+
+                    <div class="table-responsive">
+                        <table id="prod-list" class="table table-bordred table-striped panel-heading custom-table ">
+                            <thead>
+                                <tr>
+                                    @*<th><input type="checkbox" id="checkall" /></th>*@
+                                    <th>ID</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Descriptioin</th>
+                                    <th>Unit Price</th>
+                                    <th style="text-align: center">Edit</th>
+                                    <th style="text-align: center">Manage</th>
+                                    <th style="text-align: center">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <img src="~/Content/Assets/Images/broccoli.jpg" />
+                                    </td>
+                                    <td>Brockly</td>
+                                    <td>Home grown organic</td>
+                                    <td>$1.29</td>
+                                    <td style="text-align: center">
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#d"><span class="glyphicon glyphicon-file" style="margin: 0 auto 0 auto;"></span></span></p>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file" style="margin: 0 auto 0 auto;"></span></span></p>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file" style="margin: 0 auto 0 auto;"></span></span></p>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        <img src="~/Content/Assets/Images/carrot.png" />
+                                    </td>
+                                    <td>carrot</td>
+                                    <td>Home grown organic</td>
+                                    <td>$1.29</td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-file"></span></span></p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>
+                                        <img src="~/Content/Assets/Images/cauliflower.png" />
+                                    </td>
+                                    <td>
+                                        Cauliflower
+                                    </td>
+                                    <td>Home grown organic</td>
+                                    <td>$1.29</td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
+                                    </td>
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div id="inventory">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+        <!-- Modal Dialogs - ADD -->
+        <div class="modal " id="add" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="overflow: visible;">
+            <div class="modal-dialog" style="width: 100%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading"><span class="glyphicon glyphicon-plus-sign"></span> Add New Product</h4>
+                    </div>
+                    <div class="modal-body" @*style="overflow: visible;"*@>
+                        <div class="form-group">
+                            <input id="pro_nmae" class="form-control" type="text" placeholder=" Product Name" style="height: 35px; margin-bottom: -5px;" autofocus="">
+                        </div>
+                        <!--
+                            <div class="form-group">
+                                <input id="pro_vId" class="form-control" type="text" placeholder="Vendor Product ID -- Optional" style="height: 35px; margin-bottom: -5px;" >
+                            </div>
+                            <div class="form-group">
+                                <input id="pro_sku" class="form-control" type="text" placeholder="Product SKU Nubmer -- Optional" style="height: 35px; margin-bottom: -5px;" >
+                            </div>
+                            -->
+                        <div class="form-group">
+                            <select id="prod_unit" style="margin-bottom: -5px;">
+                                <option>-- Select Product Category --</option>
+                                <option>Vegetables</option>
+                                <option>Fruits</option>
+                                <option>Bakery</option>
+                                <option>Meats</option>
+                                <option>Eggs & Poultry</option>
+                                <option>Snacks</option>
+                            </select>
+                        </div>
+                        <!--
+                        <div class="form-group">
+                            <input id="pro_desc1" class="form-control" type="text" placeholder="Short Description" style="height: 35px; margin-bottom: -5px;" >
+                        </div>-->
+                        <div class="form-group">
+                            <textarea id="pro_desc2" rows="2" class="form-control" placeholder="Long Description" style="margin-bottom: -5px;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <select id="prod_unit" style="margin-bottom: -5px;">
+                                <option>-- Select Unit Name --</option>
+                                <option>lb(Weight)</option>
+                                <option>kg(Weight)</option>
+                                <option>Case</option>
+                                <option>Package</option>
+                                <option>Each</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input id="prod_price" class="form-control" type="text" placeholder="Unit Price" style="height: 35px; margin-bottom: -5px;">
+                        </div>
+                        <div class="form-group">
+                            <input id="qty_perUnit" class="form-control" type="text" placeholder="Quantity per Unit if unit name is Case or Package" style="height: 35px; margin-bottom: -5px;">
+                        </div>
+                        <div class="form-group">
+                            <input id="unit_inStock" class="form-control" type="text" placeholder="Units In Stock" style="height: 35px; margin-bottom: -5px;">
+                        </div>
+                        <div class="form-group">
+                            <input id="availabe" type="checkbox" checked="checked" style="vertical-align: baseline;"> &nbsp;Available
+                        </div>
+                        <div class="form-group">
+                            <textarea id="pro_notes" rows="2" class="form-control" placeholder="Additional Notes" style="margin-bottom: -5px;"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer ">
+                        <button id="go_add" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Script Section -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#product").hide();
+        $("#cover").show();
+        //$("#content_da").hide();
+        //$("#pf").addClass("profile-active-button");
+
+        $("#p_show").click(function () {
+            $("#product").show();
+            $("#cover").hide();
+
+        });
+        $("#cover").click(function () {
+            $("#product").hide();
+            $("#cover").show();
+
+        });
+
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#toEdit").click(function () {
+            $("#edit").show();
+            $("#details").hide();
+        });
+
+        $("#toSave").click(function () {
+            $("#edit").hide();
+            $("#details").show();
+        });
+
+        $("#toCancel").click(function () {
+            $("#edit").hide();
+            $("#details").show();
+        });
+
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#chgpass").click(function () {
+            alert("clicked!");
+            var oldp = $("#oldpass").val();
+            var newp = $("#newpass").val();
+            var newp2 = $("#newpass2").val();
+
+            if (newp == newp2) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Manage/PasswordChange",
+                    data: "oldPass=" + oldp + "&newPass=" + newp,
+                    contenType: "",
+                    dataType: "json",
+                    success: Suceeded
+
+                });
+
+                function Suceeded(data) {
+
+                    $('#msg').html(data);
+                    $('#err').html("");
+
+                    $('#oldp').val("");
+                    $('#newp').val("");
+                    $('#newp2').val("");
+
+                    $('#msg').delay(5000).fadeOut(400);
+
+                    return false;
+                }
+            }
+            else {
+                $('#err').html("The password does not match!");
+
+            }
+
+            return false;
+        });
+
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#instruction-chgpass").show();
+        $("#instruction-otehrs").hide();
+
+
+        $("#toSettings").click(function () {
+            $("#instruction-chgpass").hide();
+            $("#instruction-otehrs").show();
+        });
+
+        $("#toChange").click(function () {
+            $("#instruction-otehrs").hide();
+            $("#instruction-chgpass").show();
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+    $('input[type=file]').bootstrapFileInput();
+    $('.file-inputs').bootstrapFileInput();
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cover").hide();
+        $("#inventory").hide();
+    });
+</script>
