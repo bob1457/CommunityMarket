@@ -45,6 +45,7 @@ namespace CommonMarket.Web.Infrastructure
             kernel.Bind<ICategoryService>().To<CategoryService>();
             kernel.Bind<ICustomerService>().To<CustomerService>();
             kernel.Bind<IMerchantService>().To<MerchantService>();
+            kernel.Bind<IProductServices>().To<ProductServices>();
         }
     }
 }

@@ -98,7 +98,7 @@ namespace CommonMarket.Web.Controllers
             return PartialView("_RoleList", roles);//Json(roles.ToList(), JsonRequestBehavior.AllowGet); //
         }
 
-        [ChildActionOnly]
+        //[ChildActionOnly]  //Create another method for ajax paging, leave this as it was
         public ActionResult GetCategoryList(int? page)
         {
             const int pageSize = 2; //for testing purpose, to be adjustetd
@@ -107,7 +107,12 @@ namespace CommonMarket.Web.Controllers
 
             IEnumerable<ProductCategory> allCategories = _categoryService.FindAllCategories().OrderByDescending(d => d.CreateDate);
 
+            ViewBag.CategoryCount = allCategories.Count();
+
             var categories = allCategories.ToPagedList(pageNumber, pageSize);
+
+            //if(Request.IsAjaxRequest())
+            //    return PartialView()
 
             return PartialView("_AllCategories", categories);
         }

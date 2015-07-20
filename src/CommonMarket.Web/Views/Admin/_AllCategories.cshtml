@@ -352,10 +352,9 @@
         <tfoot>
             <tr>
                 <td colspan="8">
-                    <span id="pager" class="pagination pagination-sm" style="float:right;   margin-top: -20px; margin-bottom: -10px;
-}">
+                    <span id="pager" class="" style="float:right;   margin-top: -20px; margin-bottom: -10px; }">
 
-                        @Html.PagedListPager(Model, page => Url.Action("allCategories", new { page }), new PagedListRenderOptions
+                        @Html.PagedListPager(Model, page => Url.Action("GetCategoryList", new { page }), new PagedListRenderOptions
                        {
 
                            LinkToFirstPageFormat = "<<",
@@ -371,3 +370,20 @@
         </tfoot>
 </table>
 
+<!-- Ajax Paging -->
+<script type="text/javascript">
+    $('#pager').on('click', 'a', function () {
+        //alert(this.href);
+        debugger;
+        $.ajax({            
+            url: this.href,
+            type: 'GET',
+            data: '',
+            cache: false,
+            success: function (result) {
+                $('#clist').html(result);
+            }
+        });
+        return false;
+    });
+</script>
