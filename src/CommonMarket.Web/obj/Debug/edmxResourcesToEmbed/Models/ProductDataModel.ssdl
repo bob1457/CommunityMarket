@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CommonMarketModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductCategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductCategoryImgLargeUrl" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProductCategoryImgSamllUrl" Type="nvarchar" MaxLength="250" />
+    <Property Name="ProductCategoryDesc" Type="nvarchar" MaxLength="255" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreateDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="CommonMarketModelStoreContainer">
+    <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

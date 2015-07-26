@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CommonMarketModelStoreContainer" CdmEntityContainer="CommonMarketEntities">
+    <EntitySetMapping Name="ProductCategories">
+      <EntityTypeMapping TypeName="CommonMarketModel.ProductCategory">
+        <MappingFragment StoreEntitySet="ProductCategory">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProductCategoryName" ColumnName="ProductCategoryName" />
+          <ScalarProperty Name="ProductCategoryImgLargeUrl" ColumnName="ProductCategoryImgLargeUrl" />
+          <ScalarProperty Name="ProductCategoryImgSamllUrl" ColumnName="ProductCategoryImgSamllUrl" />
+          <ScalarProperty Name="ProductCategoryDesc" ColumnName="ProductCategoryDesc" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
