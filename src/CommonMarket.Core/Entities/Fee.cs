@@ -1,17 +1,15 @@
 namespace CommonMarket.Core.Entities
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Fee")]
     public partial class Fee
     {
         public Fee()
         {
-            OrderFees = new HashSet<OrderFee>();
+            Orders = new HashSet<Order>();
         }
 
         public int Id { get; set; }
@@ -26,6 +24,6 @@ namespace CommonMarket.Core.Entities
         [StringLength(255)]
         public string FeeDesc { get; set; }
 
-        public virtual ICollection<OrderFee> OrderFees { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

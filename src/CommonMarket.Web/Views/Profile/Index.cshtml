@@ -350,11 +350,15 @@
                         <div class="col-md-6">
                             <fieldset style="margin-top: 25px;">
                                 <legend>Customer Profile</legend>
-                                <div id="c_details">@Html.Partial("_CustomerDetails")</div>
+                                <div id="c_details"></div>
 
-                                <div id="c_edit" style="display: none">Html.Partial("_CustomerEdit")</div>
+                                <div id="c_edit"></div>
                                 
+                                <div id="c_add"></div>
+
                                 <a href="#" id="Edit_c" class="btn btn-primary">Edit</a>
+
+                                <a href="#" id="Add_c" class="btn btn-primary">Create</a>
                             </fieldset>
                         </div>
 
@@ -430,6 +434,7 @@
         </div>
     </div>
 </div> <!-- #/myModal -->
+
 <!-- Add Picture Dialog -->
 <div id="add_pic">
     <p></p>
@@ -796,7 +801,7 @@
         //debugger;
         var url = "/Merchant/GetMerchantDetails/";
         var q = "id=@UserId";
-        debugger;
+        //debugger;
         $.get(url, q, function (data) {
 
             var table = $("<table></table>").addClass("table");
@@ -877,13 +882,14 @@
             //var tr5_0;
 
             tr_0 = $('<tr/>');
-            //tr1_0 = $('<tr/>');
+            tr1_0 = $('<tr/>');
             //tr2_0 = $('<tr/>');
             //tr3_0 = $('<tr/>');
             //tr4_0 = $('<tr/>');
             //tr5_0 = $('<tr/>');
 
             tr_0.append("<td>Contact First Name:</td><td><input type='text' value= '" + data.ContactFirstName + "' /></td>");
+            tr1_0.append("<td>Contact Last Name:</td><td><input type='text' value= '" + data.ContactLastName + "' /></td>");
 
             //if (data.ContactLastName == null) {
             //    tr1.append("<td>Contact Last Name::</td><td></td>");
@@ -920,7 +926,7 @@
             //tr.append("<td>" + data.SupplierWebSite + "</td>");
 
             table_0.append(tr_0);
-            //table.append(tr1);
+            table_0.append(tr1_0);
             //table.append(tr2);
             //table.append(tr3);
             //table.append(tr4);
@@ -953,9 +959,108 @@
             return false;
         });
 
+
+        ////////////////
+
+        var url2 = "/Customer/GetCustomerDetails/";
+        var q2= "id=@UserId";
+        debugger;
+        $.get(url2, q2, function (data) {
+
+            var table_c = $("<table></table>").addClass("table");
+
+            var tr;
+            var tr1;
+            var tr2;
+            var tr3;
+
+            tr = $('<tr/>');
+            tr1 = $('<tr/>');
+            tr2 = $('<tr/>');
+            tr3 = $('<tr/>');
+
+
+
+
+            if (data == null) {
+                $("#Edit_c").hide();
+                //$("#c_edit").hide();
+                $("#Add_c").show();
+
+                tr.append("<td>Customer Alias:</td><td><input type='text' /></td>");
+                tr1.append("<td>Shipping Address:</td><td><input type='text' /></td>");
+                tr2.append("<td>Billing Address:</td><td><input type='text' /></td>");
+                tr3.append("<td>CNotes:</td><td><textarea></textarea></td>");
+
+                table_c.append(tr);
+                table_c.append(tr1);
+                table_c.append(tr2);
+                table_c.append(tr3);
+
+                $("#c_add").append(table_c);
+
+                return false;
+
+            }
+            else {
+
+                $("#Edit_c").show();
+                //$("#c_edit").hide();
+                $("#Add_c").hide();
+
+                tr.append("<td>Customer Alias:</td><td><input type='text' value= '" + data.CustomerAlias + "'/></td>");
+                if (data.ShippingAddress == null) {
+                    tr1.append("<td>Shipping Address:</td><td><input type='text' value= '' /></td>");
+                } else {
+                    tr1.append("<td>Shipping Address:</td><td><input type='text' value= '" + data.ShippingAddress + "'/></td>");
+                }
+                if (data.BillingAddress == null) {
+                    tr2.append("<td>Shipping Address:</td><td><input type='text' value= '' /></td>");
+                } else {
+                    tr2.append("<td>Shipping Address:</td><td><input type='text' value= '" + data.ShippingAddress + "'/></td>");
+                }
+                if (data.Notes == null) {
+                    tr3.append("<td>Notes:</td><td><textarea></textarea></td>");
+                } else {
+                    tr3.append("<td>CNotes:</td><td><textarea>" + data.Notes + "</textarea></td>");
+                }
+
+                
+               
+
+                table_c.append(tr);
+                table_c.append(tr1);
+                table_c.append(tr2);
+                table_c.append(tr3);
+
+                $("#c_add").append(table_c);
+
+
+
+
+
+
+            }
+
+
+
+        });
+
+        ////////////////////
+
     });
 </script>
 
+
+<!-- Customer Info -->
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        
+
+
+    });
+</script>
 
 
 

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using CommonMarket.Core.Entities;
+using CommonMarket.core.Entities;
 
 namespace CommonMarket.Core.Interface
 {
@@ -8,6 +8,8 @@ namespace CommonMarket.Core.Interface
         IEnumerable<Customer> FindAllCustomers();
 
         Customer FindCustomerById(int id);
+
+        Customer FindCustomerBy(int id);
 
         void AddCustomer(Customer customer);
 

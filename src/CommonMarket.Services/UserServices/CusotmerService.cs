@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommonMarket.Core.Entities;
+using CommonMarket.core.Entities;
 using CommonMarket.Core.Interface;
 using CommonMarket.DataAccess;
 
@@ -69,6 +70,11 @@ namespace CommonMarket.Services.UserServices
             
         }
 
+
+        public Customer FindCustomerBy(int id)
+        {
+            return _customerRepository.FindBy(p => p.UserProfileId == id).FirstOrDefault();
+        }
 
         #endregion
 

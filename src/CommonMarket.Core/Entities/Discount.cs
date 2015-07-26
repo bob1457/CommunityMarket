@@ -4,14 +4,13 @@ namespace CommonMarket.Core.Entities
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Discount")]
     public partial class Discount
     {
         public Discount()
         {
-            ProductDiscounts = new HashSet<ProductDiscount>();
+            Products = new HashSet<Product>();
         }
 
         public int Id { get; set; }
@@ -35,6 +34,6 @@ namespace CommonMarket.Core.Entities
 
         public virtual DiscountType DiscountType { get; set; }
 
-        public virtual ICollection<ProductDiscount> ProductDiscounts { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

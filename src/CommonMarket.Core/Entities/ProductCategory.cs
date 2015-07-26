@@ -1,5 +1,3 @@
-using System.Web;
-
 namespace CommonMarket.Core.Entities
 {
     using System;
@@ -13,10 +11,10 @@ namespace CommonMarket.Core.Entities
     {
         public ProductCategory()
         {
-            CategoryProducts = new HashSet<CategoryProduct>();
-            SupplierCategories = new HashSet<SupplierCategory>();
+            Products = new HashSet<Product>();
+            Suppliers = new HashSet<Supplier>();
         }
-                
+
         public int Id { get; set; }
 
         [Required]
@@ -43,12 +41,10 @@ namespace CommonMarket.Core.Entities
         [Column(TypeName = "datetime2")]
         public DateTime UpdateDate { get; set; }
 
-        public virtual ICollection<CategoryProduct> CategoryProducts { get; set; }
-
         public virtual Department Department { get; set; }
 
-        public virtual ICollection<SupplierCategory> SupplierCategories { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
 
-
+        public virtual ICollection<Supplier> Suppliers { get; set; }
     }
 }

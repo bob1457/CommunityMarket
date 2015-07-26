@@ -335,6 +335,9 @@ namespace CommonMarket.Web.Controllers
 
                     emailNotification.SendEmail("bob.yuan@yahoo.com", "New User Registration", message);
 
+                    ////Create an entry in customer entity
+                    //var admin = new AdminController();
+                    //admin.AddCustomer(user.UserProfile.FirstName);
 
 
                     //Uri locationHeader = new Uri(Url.Link("GetUserById", new {id = user.Id}));
@@ -363,6 +366,7 @@ namespace CommonMarket.Web.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
+            
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 

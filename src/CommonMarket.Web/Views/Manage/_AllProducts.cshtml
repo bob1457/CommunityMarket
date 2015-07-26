@@ -1,4 +1,4 @@
-﻿
+﻿@model PagedList.IPagedList<CommonMarket.Core.Entities.Product>
 
 <div><button class="btn btn-primary" style="margin-bottom: -25px; color: rgb(241, 198, 128);" data-title="Add" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus-sign"></span> Add New</button></div>
 
@@ -12,71 +12,42 @@
                 <th>Name</th>
                 <th>Descriptioin</th>
                 <th>Unit Price</th>
-                <th style="text-align: center">Edit</th>
+                <th>Unit Name</th>
                 <th style="text-align: center">Manage</th>
                 <th style="text-align: center">Delete</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>
-                    <img src="~/Content/Assets/Images/broccoli.jpg" />
-                </td>
-                <td>Brockly</td>
-                <td>Home grown organic</td>
-                <td>$1.29</td>
-                <td style="text-align: center">
-                    <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#d"><span class="glyphicon glyphicon-file" style="margin: 0 auto 0 auto;"></span></span></p>
-                </td>
-                <td style="text-align: center">
-                    <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file" style="margin: 0 auto 0 auto;"></span></span></p>
-                </td>
-                <td style="text-align: center">
-                    <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file" style="margin: 0 auto 0 auto;"></span></span></p>
-                </td>
-
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>
-                    <img src="~/Content/Assets/Images/carrot.png" />
-                </td>
-                <td>carrot</td>
-                <td>Home grown organic</td>
-                <td>$1.29</td>
-                <td>
-                    <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-file"></span></span></p>
-                </td>
-                <td>
-                    <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
-                </td>
-                <td>
-                    <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
-                </td>
-
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>
-                    <img src="~/Content/Assets/Images/cauliflower.png" />
-                </td>
-                <td>
-                    Cauliflower
-                </td>
-                <td>Home grown organic</td>
-                <td>$1.29</td>
-                <td>
-                    <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
-                </td>
-                <td>
-                    <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
-                </td>
-                <td>
-                    <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
-                </td>
-
-            </tr>
+            @if (Model.Count() != 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td></td>
+                        <td>@item.ProductName</td>
+                        <td>@item.ProductDescLong</td>
+                        <td>@item.UnitPrice</td>
+                        <td>@item.UnitName</td>
+                        <td>
+                            <p data-placement="top" data-toggle="tooltip" title="Manage"><span class="btn btn-primary btn-xs" data-title="Manage_p" data-toggle="modal" data-target="#p_@item.Id"><span class="glyphicon glyphicon-tasks"></span></span></p>
+                        </td>
+                        <td>
+                            <p data-placement="top" data-toggle="tooltip" title="Delete"><span class="btn btn-warning btn-xs" data-title="Delete_c" data-toggle="modal" data-target="#p_@item.Id"><span class="glyphicon glyphicon-remove"></span></span></p>
+                        </td>
+                        
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8">No products</td>
+                </tr>
+            }
+            
+            
+            
         </tbody>
     </table>
 </div>

@@ -1,3 +1,6 @@
+using CommonMarket.Core.Entities;
+using CommonMarket.core.Entities;
+
 namespace CommonMarket.Core.Entities
 {
     using System;
@@ -12,8 +15,8 @@ namespace CommonMarket.Core.Entities
         public Order()
         {
             OrderItems = new HashSet<OrderItem>();
-            OrderFees = new HashSet<OrderFee>();
             Shippings = new HashSet<Shipping>();
+            Fees = new HashSet<Fee>();
         }
 
         public int Id { get; set; }
@@ -45,8 +48,8 @@ namespace CommonMarket.Core.Entities
 
         public virtual ICollection<OrderItem> OrderItems { get; set; }
 
-        public virtual ICollection<OrderFee> OrderFees { get; set; }
-
         public virtual ICollection<Shipping> Shippings { get; set; }
+
+        public virtual ICollection<Fee> Fees { get; set; }
     }
 }

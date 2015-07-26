@@ -5,6 +5,7 @@ using CommonMarket.Core.Product;
 using CommonMarket.DataAccess;
 //using CommonMarket.DataAccess.UserProfile;
 //using CommonMarket.Services.UserServices;
+using CommonMarket.Services.ProductServices;
 using CommonMarket.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -20,16 +21,16 @@ namespace CommonMarket.Web.Controllers
     [Authorize]
     public class ManageController : BaseController
     {
-        
+        private IProductServices _productServices;
 
         public ManageController()
         {
         }
 
-        public ManageController(ApplicationUserManager userManager)
+        public ManageController(ApplicationUserManager userManager, IProductServices productServices)
         {
             UserManager = userManager;
-            
+            _productServices = productServices;
         }
 
         private ApplicationUserManager _userManager;
@@ -94,6 +95,14 @@ namespace CommonMarket.Web.Controllers
         //New Implementation
         //
 
+
+        [ChildActionOnly]
+        public ActionResult GetProductList()
+        {
+            var products = _productServices.FindAllProducts();
+
+            return PartialView("_AllProducts");
+        }
 
 
 

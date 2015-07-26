@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 //using System.Web.HttpContext;
 using CommonMarket.Core.Entities;
+using CommonMarket.core.Entities;
 using CommonMarket.Core.Interface;
 using CommonMarket.Web.Models;
 using ImageResizer;
@@ -21,7 +22,7 @@ namespace CommonMarket.Web.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        
+        #region Identity implementation
 
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
@@ -49,6 +50,7 @@ namespace CommonMarket.Web.Controllers
             }
         }
 
+        #endregion
 
         private readonly ICategoryService _categoryService;
         private readonly ICustomerService _customerService;
@@ -71,8 +73,7 @@ namespace CommonMarket.Web.Controllers
             return View();
         }
 
-
-
+        
         //Users and Roles
         [ChildActionOnly]
         public ActionResult GetUserList()
@@ -98,14 +99,19 @@ namespace CommonMarket.Web.Controllers
             return PartialView("_RoleList", roles);//Json(roles.ToList(), JsonRequestBehavior.AllowGet); //
         }
 
+        #endregion
+
+        #region Category
+
+
         //[ChildActionOnly]  //Create another method for ajax paging, leave this as it was
         public ActionResult GetCategoryList(int? page)
         {
-            const int pageSize = 2; //for testing purpose, to be adjustetd
+            const int pageSize = 10; //for testing purpose, to be adjustetd
             int pageIndex = (page ?? 1) - 1;
             int pageNumber = (page ?? 1);
 
-            IEnumerable<ProductCategory> allCategories = _categoryService.FindAllCategories().OrderByDescending(d => d.CreateDate);
+            IEnumerable<Core.Entities.ProductCategory> allCategories = _categoryService.FindAllCategories().OrderBy(d => d.CreateDate);
 
             ViewBag.CategoryCount = allCategories.Count();
 
@@ -117,11 +123,20 @@ namespace CommonMarket.Web.Controllers
             return PartialView("_AllCategories", categories);
         }
 
+        //public JsonResult CategoryList()
+        //{
+            
+        //    var category = _categoryService.FindAllCategories();
+            
+        //    return Json(category, JsonRequestBehavior.AllowGet);
+        //}
+
+
 
         [HttpPost]
-        public void AddCategory(ProductCategory category)
+        public void AddCategory(Core.Entities.ProductCategory category)
         {
-            var newCategory = new ProductCategory();
+            var newCategory = new Core.Entities.ProductCategory();
 
             if (ModelState.IsValid)
             {
@@ -142,7 +157,7 @@ namespace CommonMarket.Web.Controllers
 
 
         [HttpPost]
-        public void UpdateCategory(ProductCategory category)
+        public void UpdateCategory(Core.Entities.ProductCategory category)
         {
             //ProductCategory categoryForUpdate = _categoryService.FindCategoryById(category.Id);
 
@@ -156,7 +171,23 @@ namespace CommonMarket.Web.Controllers
 
         }
 
+        public ActionResult ListCategories(int? page)
+        {
+            const int pageSize = 10; //for testing purpose, to be adjustetd
+            int pageIndex = (page ?? 1) - 1;
+            int pageNumber = (page ?? 1);
 
+            var allCategories = _categoryService.FindAllCategories().OrderBy(d => d.CreateDate);
+
+            var categoryList = allCategories.ToPagedList(pageNumber, pageSize);
+
+            return PartialView("_AllCategories", categoryList);
+        }
+
+        #endregion
+
+
+        #region Helper
         /**/
         [HttpPost]
         public ActionResult FileUpload(int id)
@@ -251,8 +282,6 @@ namespace CommonMarket.Web.Controllers
             return Json("Image has been updated!");
         }
 
-
-
         private bool CreateFolderIfNeeded(string path)
         {
             bool result = true;
@@ -271,24 +300,9 @@ namespace CommonMarket.Web.Controllers
             return result;
         }
 
+        #endregion
 
-        
-
-
-
-        public ActionResult ListCategories(int? page)
-        {
-            const int pageSize = 2; //for testing purpose, to be adjustetd
-            int pageIndex = (page ?? 1) - 1;
-            int pageNumber = (page ?? 1);
-
-            var allCategories = _categoryService.FindAllCategories().OrderByDescending(d => d.CreateDate);
-
-            var categoryList = allCategories.ToPagedList(pageNumber, pageSize);
-
-            return PartialView("_AllCategories", categoryList);
-        }
-
+        #region Merchant Service
 
         public JsonResult MerchantStatus(string id) //user id
         {
@@ -300,12 +314,6 @@ namespace CommonMarket.Web.Controllers
 
             return Json(isActive);
         }
-
-
-
-
-
-
 
 
         public JsonResult ActivateMerchantAccount(string id) // id = user id 
@@ -331,6 +339,7 @@ namespace CommonMarket.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     newSupplier.ContactFirstName = UserManager.FindById(id).UserProfile.FirstName;
+                    newSupplier.ContactLastName = UserManager.FindById(id).UserProfile.LastName;
                     newSupplier.IsActive = true;
                     
                     _merchantServie.AddSupplier(newSupplier);
@@ -362,17 +371,23 @@ namespace CommonMarket.Web.Controllers
 
         #endregion
 
-        #region Product Management
+        #region Customer Service
 
-        public ActionResult AddCatetgory()
+        public void AddCustomer(string customerAlias)
         {
+            var customer = new Customer();
 
-
-            return Json("");
+            if (ModelState.IsValid)
+            {
+                customer.CustomerAlias = customerAlias;
+                customer.IsActive = true;
+                _customerService.AddCustomer(customer);
+            }
         }
 
-
         #endregion
+
+        
 
     }
 }

@@ -19,7 +19,5 @@ namespace CommonMarket.Core.Entities
 
         [Column(TypeName = "datetime2")]
         public DateTime CreateDate { get; set; }
-
-        public virtual DomainEntity DomainEntity { get; set; }
     }
 }

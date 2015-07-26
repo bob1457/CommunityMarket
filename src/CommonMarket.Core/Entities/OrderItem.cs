@@ -1,3 +1,5 @@
+using CommonMarket.Core.Entities;
+
 namespace CommonMarket.Core.Entities
 {
     using System;

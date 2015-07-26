@@ -9,12 +9,16 @@ namespace CommonMarket.Services.ProductServices
 {
     public class ProductServices : IProductServices
     {
-        private readonly IRepository<Product> _productRepository;
+        private readonly IProductRepository _productRepository;
+        private readonly IRepository<ProductCategory> _categoryRepository;
+
         private readonly IUnitOfWork _uow;
 
-        public ProductServices(IRepository<Product> productRepository, IUnitOfWork uow)
+        public ProductServices(IProductRepository productRepository, IRepository<ProductCategory> categoryRepository, IUnitOfWork uow)
         {
             _productRepository = productRepository;
+            _categoryRepository = categoryRepository;
+
             _uow = uow;
         }
 
@@ -30,14 +34,22 @@ namespace CommonMarket.Services.ProductServices
             return _productRepository.GetAll().FirstOrDefault(c => c.Id == id);
         }
 
-        public void AddNewProduct(Product product)
+        public void AddNewProduct(Product product, ProductCategory category)
         {
             try
             {
-                product.CreateDate = DateTime.Now;
+                //var existCategory = new ProductCategory() 
+                //{
+                //    Id = category.Id
+                //}; // _categoryRepository.GetAll().Where(i => i.Id == category.Id);
 
-                _productRepository.Add(product);
-                _uow.Save();
+                //product.ProductCategories.Add(existCategory);
+
+                product.ProductCategories.Add(category);
+                
+                _productRepository.Add(product, category);
+                //_uow.Save();
+
             }
             catch (Exception ex)
             {

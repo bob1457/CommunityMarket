@@ -1,10 +1,10 @@
-namespace CommonMarket.Core.Entities
+using CommonMarket.Core.Entities;
+
+namespace CommonMarket.core.Entities
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Customer")]
     public partial class Customer

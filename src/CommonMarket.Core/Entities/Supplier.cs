@@ -13,7 +13,7 @@ namespace CommonMarket.Core.Entities
         {
             OrderItems = new HashSet<OrderItem>();
             Products = new HashSet<Product>();
-            SupplierCategories = new HashSet<SupplierCategory>();
+            ProductCategories = new HashSet<ProductCategory>();
         }
 
         public int Id { get; set; }
@@ -51,6 +51,6 @@ namespace CommonMarket.Core.Entities
 
         public virtual ICollection<Product> Products { get; set; }
 
-        public virtual ICollection<SupplierCategory> SupplierCategories { get; set; }
+        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
     }
 }

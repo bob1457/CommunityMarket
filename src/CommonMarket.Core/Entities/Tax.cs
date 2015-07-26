@@ -11,7 +11,7 @@ namespace CommonMarket.Core.Entities
     {
         public Tax()
         {
-            ProductTaxes = new HashSet<ProductTax>();
+            Products = new HashSet<Product>();
         }
 
         public int Id { get; set; }
@@ -24,6 +24,6 @@ namespace CommonMarket.Core.Entities
         [StringLength(255)]
         public string TaxDesc { get; set; }
 
-        public virtual ICollection<ProductTax> ProductTaxes { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

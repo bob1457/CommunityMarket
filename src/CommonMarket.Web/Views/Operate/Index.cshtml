@@ -2,6 +2,7 @@
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNet.Identity.EntityFramework
 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,7 +13,8 @@
     var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
     var currentUser = manager.FindById(User.Identity.GetUserId());
 
-    var level = currentUser.UserProfile.Address2;
+    var level = currentUser.UserProfile.Address2; //special consideration on temperory basis
+    
 }
 
 <style>
@@ -197,89 +199,7 @@
                 <div id="cover">
                     Cover page
                 </div>
-                <div id="product">
-                    <div><button class="btn btn-primary" style="margin-bottom: -25px; color: rgb(241, 198, 128);" data-title="Add" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus-sign"></span> Add New</button></div>
-
-                    <div class="table-responsive">
-                        <table id="prod-list" class="table table-bordred table-striped panel-heading custom-table ">
-                            <thead>
-                                <tr>
-                                    @*<th><input type="checkbox" id="checkall" /></th>*@
-                                    <th>ID</th>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Descriptioin</th>
-                                    <th>Unit Price</th>
-                                    <th style="text-align: center">Edit</th>
-                                    <th style="text-align: center">Manage</th>
-                                    <th style="text-align: center">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <img src="~/Content/Assets/Images/broccoli.jpg" />
-                                    </td>
-                                    <td>Brockly</td>
-                                    <td>Home grown organic</td>
-                                    <td>$1.29</td>
-                                    <td style="text-align: center">
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#d"><span class="glyphicon glyphicon-file" style="margin: 0 auto 0 auto;"></span></span></p>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file" style="margin: 0 auto 0 auto;"></span></span></p>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file" style="margin: 0 auto 0 auto;"></span></span></p>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        <img src="~/Content/Assets/Images/carrot.png" />
-                                    </td>
-                                    <td>carrot</td>
-                                    <td>Home grown organic</td>
-                                    <td>$1.29</td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-file"></span></span></p>
-                                    </td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
-                                    </td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>
-                                        <img src="~/Content/Assets/Images/cauliflower.png" />
-                                    </td>
-                                    <td>
-                                        Cauliflower
-                                    </td>
-                                    <td>Home grown organic</td>
-                                    <td>$1.29</td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
-                                    </td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
-                                    </td>
-                                    <td>
-                                        <p data-placement="top" data-toggle="tooltip" title="Edit"><span class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#"><span class="glyphicon glyphicon-file"></span></span></p>
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
+                <div id="product">@Html.Action("GetProductList")</div>
                 <div id="inventory">
 
                 </div>
@@ -295,9 +215,9 @@
 
 
 
-        <!-- Modal Dialogs - ADD -->
+        <!-- Modal Dialogs - ADD Product -->
         <div class="modal " id="add" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="overflow: visible;">
-            <div class="modal-dialog" style="width: 100%;">
+            <div class="modal-dialog" style="width: 100%; margin-top: 0;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
@@ -305,7 +225,7 @@
                     </div>
                     <div class="modal-body" @*style="overflow: visible;"*@>
                         <div class="form-group">
-                            <input id="pro_nmae" class="form-control" type="text" placeholder=" Product Name" style="height: 35px; margin-bottom: -5px;" autofocus="">
+                            <input id="pro_name" class="form-control" type="text" placeholder=" Product Name" style="height: 35px; margin-bottom: -5px;" autofocus="">
                         </div>
                         <!--
                             <div class="form-group">
@@ -314,24 +234,19 @@
                             <div class="form-group">
                                 <input id="pro_sku" class="form-control" type="text" placeholder="Product SKU Nubmer -- Optional" style="height: 35px; margin-bottom: -5px;" >
                             </div>
-                            -->
+                        -->
                         <div class="form-group">
-                            <select id="prod_unit" style="margin-bottom: -5px;">
-                                <option>-- Select Product Category --</option>
-                                <option>Vegetables</option>
-                                <option>Fruits</option>
-                                <option>Bakery</option>
-                                <option>Meats</option>
-                                <option>Eggs & Poultry</option>
-                                <option>Snacks</option>
+                            <select id="all_category" style="margin-bottom: -5px;">
+                               <option aria-valuemax="0">--Select Major Cateegory</option>
                             </select>
                         </div>
-                        <!--
+                        
                         <div class="form-group">
-                            <input id="pro_desc1" class="form-control" type="text" placeholder="Short Description" style="height: 35px; margin-bottom: -5px;" >
-                        </div>-->
+                            <textarea id="pro_desc" rows="2" class="form-control" placeholder=" Description - Short" style="margin-bottom: -5px;"></textarea>
+                        </div>
+                       
                         <div class="form-group">
-                            <textarea id="pro_desc2" rows="2" class="form-control" placeholder="Long Description" style="margin-bottom: -5px;"></textarea>
+                            <textarea id="pro_desc2" rows="2" class="form-control" placeholder=" Description - Long" style="margin-bottom: -5px;"></textarea>
                         </div>
 
                         <div class="form-group">
@@ -350,9 +265,9 @@
                         <div class="form-group">
                             <input id="qty_perUnit" class="form-control" type="text" placeholder="Quantity per Unit if unit name is Case or Package" style="height: 35px; margin-bottom: -5px;">
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <input id="unit_inStock" class="form-control" type="text" placeholder="Units In Stock" style="height: 35px; margin-bottom: -5px;">
-                        </div>
+                        </div>-->
                         <div class="form-group">
                             <input id="availabe" type="checkbox" checked="checked" style="vertical-align: baseline;"> &nbsp;Available
                         </div>
@@ -483,10 +398,10 @@
     });
 </script>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     $('input[type=file]').bootstrapFileInput();
     $('.file-inputs').bootstrapFileInput();
-</script>
+</script>*@
 
 
 
@@ -494,5 +409,93 @@
     $(document).ready(function () {
         $("#cover").hide();
         $("#inventory").hide();
+    });
+</script>
+
+<!-- populate category dropdown box -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        //debugger;
+        var url = "/Product/CategoryList";
+        var option = $('<option />');
+
+        $.getJSON(url, function (data) {
+
+            //$("#all_category").empty();
+
+            $.each(data, function (i) {
+                $("#all_category").append($("<option />").val(data[i].id).html(data[i].name));
+            });
+
+
+        });
+
+    });
+</script>
+
+<!-- Add Product -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $("#go_add").click(function () {
+            debugger;
+
+            var product = {
+                ProductName: $("#pro_name").val(),
+                ProductDescShort: $("#pro_desc").val(),
+                ProductDescLong: $("#pro_desc2").val(),
+                UnitName: $("#prod_unit option:selected").text(),
+                UnitPrice: $("#prod_price").val(),
+                QuantityPerUnit: $("#qty_perUnit").val(),
+                Notes: $("#pro_notes").val(),
+                ProductAvailable: $('#availabe').prop('checked')
+            };
+
+            var category = {
+                Id: $("#all_category").val(),
+                DepartmentId: 1,
+                ProductCategoryName: $("#all_category option:selected").text()
+            };
+
+
+            $.ajax({
+                url: '/Product/AddProduct',
+                type: 'post',
+                dataType: 'json',
+                // It is important to set the content type
+                // request header to application/json because
+                // that's how the client will send the request
+                contentType: 'application/json',
+                data: JSON.stringify({ product: product, category: category }),
+                cache: false,
+                success: function (data) {
+                    //alert("All good
+                    $('#msg').html(data);
+                    $('#msg').delay(5000).fadeOut(400);
+
+
+                    debugger;
+                    var url = "/Operate/ListProducts";
+                    $.get(url, function (data) {
+                        $("#product").html(data);
+                        return false;
+                    });
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert(thrownError);
+                    debugger;
+                    var url = "/Operate/ListProducts";
+                    $.get(url, function (data) {
+                        $("#product").html(data);
+                        return false;
+                    });
+                }
+            });
+
+            $('#add').modal('hide'); //close the modal
+        });
+
+
     });
 </script>

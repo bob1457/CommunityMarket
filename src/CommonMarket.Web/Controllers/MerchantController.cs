@@ -12,11 +12,13 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace CommonMarket.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class MerchantController : BaseController
     {
         private readonly ICustomerService _customerService;
         private readonly IMerchantService _merchantServie;
+
+        #region Identity system
 
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
@@ -43,6 +45,8 @@ namespace CommonMarket.Web.Controllers
                 _roleManager = value;
             }
         }
+
+        #endregion
 
         public MerchantController(ICustomerService customerService, IMerchantService merchantServie)
         {
@@ -73,5 +77,13 @@ namespace CommonMarket.Web.Controllers
             //return PartialView("_MerchantDetails", merchant);
             return Json(merchant, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult MerchantDetails(int id)
+        {
+
+
+            return View();
+        }
+
     }
 }

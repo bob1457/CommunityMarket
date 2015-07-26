@@ -7,7 +7,7 @@ namespace CommonMarket.Services.ProductServices
     {
         IEnumerable<Product> FindAllProducts();
         Product FindProductById(int id);
-        void AddNewProduct(Product product);
+        void AddNewProduct(Product product, ProductCategory category);
         void UpdateProduct(Product product);
         void DeleteProduct(int id);
     }

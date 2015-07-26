@@ -21,6 +21,28 @@ body {
     display: none;
 }
 
+.navbar-custom {
+    background-color:#229922;
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+
+.modal {
+  overflow-y:auto;
+}
+
+
 article,
 aside,
 details,
@@ -482,7 +504,19 @@ tbody tr:nth-child(odd){
     text-align: center;
 }*/
 
+#merchant_info {
+    position: relative;
+    left: 30px;
+}
 
+#shop_menu a {
+    color: #E87128;
+}
+
+
+#shop_menu a:hover {
+    color: #E78E58;
+}
 .display-label{
     display:inline-block;
     margin-top:0.5em;
@@ -1149,6 +1183,11 @@ background-color: #00aced;
     }
 */
 
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
 #find, #filter {
     margin-left: 8px;
     margin-top: 20px;
@@ -1310,9 +1349,15 @@ background-color: #00aced;
 .blockquote-box.blockquote-danger{border-color:#D43F3A}
 .blockquote-box.blockquote-danger .square{background-color:#D9534F;color:#FFF}
 
+#display_selector {
+    /*border: 1px solid black;
+    width: 70px;*/
+}
 
-
-
+#shop-content {
+    position: relative;
+    top: 0;
+}
 
 
 
@@ -1399,5 +1444,9 @@ background-color: #00aced;
 
     #label1, #label2, #label3 {
         text-align: left;
+    }
+
+    #shop_bar, #shop_panel {
+        margin-right: 10px;
     }
 }

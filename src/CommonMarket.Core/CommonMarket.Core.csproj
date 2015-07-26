@@ -47,26 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\AdditionalProductImg.cs" />
-    <Compile Include="Entities\CategoryProduct.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Discount.cs" />
     <Compile Include="Entities\DiscountType.cs" />
-    <Compile Include="Entities\DomainEntity.cs" />
     <Compile Include="Entities\Fee.cs" />
     <Compile Include="Entities\Invoice.cs" />
     <Compile Include="Entities\Order.cs" />
-    <Compile Include="Entities\OrderFee.cs" />
     <Compile Include="Entities\OrderItem.cs" />
     <Compile Include="Entities\OrderStatu.cs" />
     <Compile Include="Entities\Payment.cs" />
     <Compile Include="Entities\PaymentMethod.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductCategory.cs" />
-    <Compile Include="Entities\ProductDiscount.cs" />
-    <Compile Include="Entities\ProductTax.cs" />
     <Compile Include="Entities\ProductWishList.cs" />
     <Compile Include="Entities\Rating.cs" />
     <Compile Include="Entities\Shipper.cs" />
@@ -75,8 +69,8 @@
     <Compile Include="Entities\ShoppingList.cs" />
     <Compile Include="Entities\ShoppingListStatu.cs" />
     <Compile Include="Entities\Supplier.cs" />
-    <Compile Include="Entities\SupplierCategory.cs" />
     <Compile Include="Entities\SupplierProduct.cs" />
+    <Compile Include="Entities\sysdiagram.cs" />
     <Compile Include="Entities\Tax.cs" />
     <Compile Include="Entities\WishList.cs" />
     <Compile Include="Entity.cs" />

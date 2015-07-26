@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CommonMarket.Core.Entities
 {
     using System;
@@ -25,7 +28,5 @@ namespace CommonMarket.Core.Entities
         [Required]
         [StringLength(250)]
         public string CommentedBy { get; set; }
-
-        public virtual DomainEntity DomainEntity { get; set; }
     }
 }

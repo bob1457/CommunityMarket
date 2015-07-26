@@ -11,11 +11,10 @@ namespace CommonMarket.Core.Entities
     {
         public Product()
         {
-            AdditionalProductImgs = new HashSet<AdditionalProductImg>();
-            CategoryProducts = new HashSet<CategoryProduct>();
             OrderItems = new HashSet<OrderItem>();
-            ProductDiscounts = new HashSet<ProductDiscount>();
-            ProductTaxes = new HashSet<ProductTax>();
+            ProductCategories = new HashSet<ProductCategory>();
+            Discounts = new HashSet<Discount>();
+            Taxes = new HashSet<Tax>();
         }
 
         public int Id { get; set; }
@@ -66,16 +65,14 @@ namespace CommonMarket.Core.Entities
         [Column(TypeName = "datetime2")]
         public DateTime UpdateDate { get; set; }
 
-        public virtual ICollection<AdditionalProductImg> AdditionalProductImgs { get; set; }
-
-        public virtual ICollection<CategoryProduct> CategoryProducts { get; set; }
-
         public virtual ICollection<OrderItem> OrderItems { get; set; }
 
         public virtual Supplier Supplier { get; set; }
 
-        public virtual ICollection<ProductDiscount> ProductDiscounts { get; set; }
+        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
 
-        public virtual ICollection<ProductTax> ProductTaxes { get; set; }
+        public virtual ICollection<Discount> Discounts { get; set; }
+
+        public virtual ICollection<Tax> Taxes { get; set; }
     }
 }

@@ -150,6 +150,8 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Cors">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -251,6 +253,7 @@
     <Content Include="Content\Assets\Images\strawberries.png" />
     <Content Include="Content\Assets\Images\users.png" />
     <Content Include="Content\Assets\Images\category_produce_sm.png" />
+    <Content Include="Content\Assets\Images\Users\shop_logo_default.png" />
     <Content Include="Content\Assets\Images\user_default.png" />
     <Content Include="Content\Assets\Images\cm.png" />
     <Content Include="Content\Assets\Images\vegetables.png" />
@@ -271,6 +274,16 @@
     <Content Include="Content\Styles\MetroJs.css" />
     <Content Include="Content\Styles\Site-BAK.css" />
     <Content Include="Content\Styles\site.css" />
+    <Content Include="Models\ProductDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductDataModel.edmx</DependentUpon>
+      <LastGenOutput>ProductDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProductDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductDataModel.edmx</DependentUpon>
+      <LastGenOutput>ProductDataModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\jquery.fileupload-ui.js" />
     <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\jquery.iframe-transport.js" />
@@ -306,6 +319,13 @@
     <Content Include="Content\Styles\fonts\metro.eot" />
     <Content Include="Content\Styles\fonts\metro.ttf" />
     <Content Include="Content\Styles\fonts\metro.woff" />
+    <EntityDeploy Include="Models\ProductDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ProductDataModel.edmx.diagram">
+      <DependentUpon>ProductDataModel.edmx</DependentUpon>
+    </Content>
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -346,6 +366,9 @@
     <Content Include="Views\Shop\_CategoryList.cshtml" />
     <Content Include="Views\Shop\_FeaturedList.cshtml" />
     <Content Include="Views\Manage\_AllProducts.cshtml" />
+    <Content Include="Views\Operate\_AllProducts.cshtml" />
+    <Content Include="Views\Home\_SupplierList.cshtml" />
+    <Content Include="Views\Merchant\MerchantDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -430,6 +453,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LifeStyleController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -453,6 +477,24 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityRepository.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ProductCategory.cs">
+      <DependentUpon>ProductDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductDataModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -478,7 +520,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Assets\Images\Users\" />
+    <Folder Include="Views\Customer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
