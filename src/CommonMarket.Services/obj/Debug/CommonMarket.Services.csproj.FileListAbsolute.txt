@@ -26,7 +26,6 @@ C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Co
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\EntityFramework.dll
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\CommonMarket.Core.pdb
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\CommonMarket.DataAccess.pdb
-C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\EntityFramework.xml
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\CommonMarket.Services.dll
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\CommonMarket.Services.pdb
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\CommonMarket.Core.dll

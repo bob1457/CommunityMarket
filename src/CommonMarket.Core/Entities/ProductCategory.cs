@@ -45,6 +45,6 @@ namespace CommonMarket.Core.Entities
 
         public virtual ICollection<Product> Products { get; set; }
 
-        public virtual ICollection<Supplier> Suppliers { get; set; }
+        public ICollection<Supplier> Suppliers { get; set; }
     }
 }

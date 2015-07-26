@@ -484,7 +484,7 @@
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     //alert(thrownError);
-                    debugger;
+                    //debugger; this part will be fixed when the jquery error "unexpected end of input: is resolved
                     var url = "/Operate/ListProducts";
                     $.get(url, function (data) {
                         $("#product").html(data);

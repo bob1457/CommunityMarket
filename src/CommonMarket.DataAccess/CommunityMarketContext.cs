@@ -14,6 +14,7 @@ namespace CommonMarket.DataAccess
         public CommunityMarketContext()
             : base("name=CommunityMarketContext")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         public virtual DbSet<Comment> Comments { get; set; }
