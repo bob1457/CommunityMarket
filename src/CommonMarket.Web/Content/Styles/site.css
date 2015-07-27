@@ -100,7 +100,9 @@ legend {
     width: auto;
 }
 
-
+.form_bottom {
+    margin-bottom: 5px;
+}
 
 #banner-wrapper {
     margin-right: -5px;

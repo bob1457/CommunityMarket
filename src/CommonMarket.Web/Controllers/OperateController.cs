@@ -43,6 +43,10 @@ namespace CommonMarket.Web.Controllers
 
             var allProducts = _productServices.FindAllProducts().OrderByDescending(d => d.CreateDate);
 
+            int TotalProductCount = allProducts.Count();
+
+            ViewBag.ProductCount = TotalProductCount;
+
             var products = allProducts.ToPagedList(pageNumber, pageSize);
 
             return PartialView("_AllProducts", products);

@@ -225,108 +225,112 @@
 
                     <!-- File Upload -->
                     <script type="text/javascript">
-                            $(document).ready(function() {
-                                $('#upload_@item.Id').on('click', function () {
-                                    debugger;
-                                    var data = new FormData();
+                    $(document).ready(function() {
+                        $('#upload_@item.Id').on('click', function () {
+                            debugger;
+                            var data = new FormData();
 
-                                    var files = $("#file_upload_@item.Id").get(0).files;
+                            var files = $("#file_upload_@item.Id").get(0).files;
 
-                                    //if (files == null) {
+                            //if (files == null) {
 
-                                    //}
+                            //}
 
-                                    // Add the uploaded image content to the form data collection
-                                    if (files.length > 0) {
-                                        data.append("UploadedImage", files[0]);
-                                    }
+                            // Add the uploaded image content to the form data collection
+                            if (files.length > 0) {
+                                data.append("UploadedImage", files[0]);
+                            }
 
-                                    // Make Ajax request with the contentType = false, and procesDate = false
-                                    var ajaxRequest = $.ajax({
-                                        type: "POST",
-                                        url: "/Admin/FileUpload?id=" + @item.Id,
-                                        contentType: false,
-                                        processData: false,
-                                        data: data
-                                    });
+                            // Make Ajax request with the contentType = false, and procesDate = false
+                            var ajaxRequest = $.ajax({
+                                type: "POST",
+                                url: "/Admin/FileUpload?id=" + @item.Id,
+                                contentType: false,
+                                processData: false,
+                                data: data
+                            });
 
-                                    debugger;
-                                    ajaxRequest.done(function () {
-                                        // Do other operation
-                                        //$("#msg_@item.Id").text(data);
-                                        $("#file_upload_@item.Id").val('');
-
-                                        
-
-                                        $('#ec_@item.Id').removeClass('modal-open');
-                                        $('.modal-backdrop').remove();
+                            debugger;
+                            ajaxRequest.done(function () {
+                                // Do other operation
+                                //$("#msg_@item.Id").text(data);
+                                $("#file_upload_@item.Id").val('');
 
 
-                                        var url = "/Admin/ListCategories";
-                                        $.get(url, function (response) {
-                                            $("#clist").html(response);
-                                            return false;
-                                        });
+
+                                //$('#ec_@item.Id').removeClass('modal-open');
+                                //$('.modal-backdrop').remove();
 
 
-                                        @*debugger;
-                                    //Update the image url in the backend server db
-
-                                    var fname = $("#fn").val();
-
-                                    var cateName = $("#c_name_@item.Id").val();
-                                    var cateDesc = $("#c_desc_@item.Id").val();
-                                    var cateImgSm = "/Content/Assets/Images/" + fname;
-                                    var departid = $("#d_@item.Id").val();
-                                    var cateImgLg = cateImgSm;
-                                    var c_date = "@item.CreateDate";
-                                    //var u_date = $("#uDate").val();
-                                    var notes = $("#c_notes_@item.Id").val();
-
-
-                                    //debugger;
-
-                                    var category = {
-                                        'Id': '@item.Id',
-                                        'ProductCategoryName': cateName,
-                                        'ProductCategoryDesc': cateDesc,
-                                        'Notes': notes,
-                                        'ProductCategoryImgLargeUrl': cateImgLg,
-                                        'ProductCategoryImgSamllUrl': cateImgSm,
-                                        'DepartmentId': departid,
-                                        'CreateDate': c_date
-                                        //'UpdateDate': u_date
-                                    };
-
-                                    $.ajax({
-                                        url: "/Admin/UpdateCategory",
-                                        type: "POST",
-                                        data: JSON.stringify(category),
-                                        contentType: 'application/json',
-
-                                        success: function (data) {
-
-                                            $('#ec_@item.Id').modal('hide');
-
-                                            //$('#msg').html(data);
-                                            //$('#msg').delay(5000).fadeOut(400);
-
-                                            var url = "/Admin/ListCategories";
-                                            $.get(url, function (data) {
-                                                $("#clist").html(data);
-                                                return false;
-                                            });
-                                        }
-
-                                    });*@
-
-                                        //Update the current url on the page
-                                        $('#ec_@item.Id').modal('hide');
-                                    });
+                                var url = "/Admin/ListCategories";
+                                $.get(url, function (data) {
+                                    $("#clist").html(data);
+                                    return false;
                                 });
 
 
+                                @*debugger;
+                                                    //Update the image url in the backend server db
+
+                                                    var fname = $("#fn").val();
+
+                                                    var cateName = $("#c_name_@item.Id").val();
+                                                    var cateDesc = $("#c_desc_@item.Id").val();
+                                                    var cateImgSm = "/Content/Assets/Images/" + fname;
+                                                    var departid = $("#d_@item.Id").val();
+                                                    var cateImgLg = cateImgSm;
+                                                    var c_date = "@item.CreateDate";
+                                                    //var u_date = $("#uDate").val();
+                                                    var notes = $("#c_notes_@item.Id").val();
+
+
+                                                    //debugger;
+
+                                                    var category = {
+                                                        'Id': '@item.Id',
+                                                        'ProductCategoryName': cateName,
+                                                        'ProductCategoryDesc': cateDesc,
+                                                        'Notes': notes,
+                                                        'ProductCategoryImgLargeUrl': cateImgLg,
+                                                        'ProductCategoryImgSamllUrl': cateImgSm,
+                                                        'DepartmentId': departid,
+                                                        'CreateDate': c_date
+                                                        //'UpdateDate': u_date
+                                                    };
+
+                                                    $.ajax({
+                                                        url: "/Admin/UpdateCategory",
+                                                        type: "POST",
+                                                        data: JSON.stringify(category),
+                                                        contentType: 'application/json',
+
+                                                        success: function (data) {
+
+                                                            $('#ec_@item.Id').modal('hide');
+
+                                                            //$('#msg').html(data);
+                                                            //$('#msg').delay(5000).fadeOut(400);
+
+                                                            var url = "/Admin/ListCategories";
+                                                            $.get(url, function (data) {
+                                                                $("#clist").html(data);
+                                                                return false;
+                                                            });
+                                                        }
+
+                                                    });*@
+
+                                                        //Update the current url on the page
+
+                                                        $('#ec_@item.Id').removeClass('modal-open');
+                                                        $('.modal-backdrop').remove();
+
+                                                        $('#ec_@item.Id').modal('hide');
                             });
+                        });
+
+
+                    });
                     </script>
 
                 </tr>

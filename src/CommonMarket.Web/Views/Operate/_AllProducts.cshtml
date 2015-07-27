@@ -30,11 +30,144 @@
                         <td>@item.UnitPrice</td>
                         <td>@item.UnitName</td>
                         <td>
-                            <p data-placement="top" data-toggle="tooltip" title="Manage"><span class="btn btn-primary btn-xs" data-title="Manage_p" data-toggle="modal" data-target="#p_@item.Id"><span class="glyphicon glyphicon-tasks"></span></span></p>
+                            <p data-placement="top" data-toggle="tooltip" title="Manage"><span class="btn btn-primary btn-xs" data-title="Manage_p" data-toggle="modal" data-target="#ec_@item.Id"><span class="glyphicon glyphicon-tasks"></span></span></p>
                         </td>
                         <td>
                             <p data-placement="top" data-toggle="tooltip" title="Delete"><span class="btn btn-warning btn-xs" data-title="Delete_c" data-toggle="modal" data-target="#p_@item.Id"><span class="glyphicon glyphicon-remove"></span></span></p>
                         </td>
+                        
+                        <!-- Modal - Details/Update -->
+                        <div class="modal fade" id="ec_@item.Id" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="height: 365px;">
+                            <div class="modal-dialog" style="margin-top: 0;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                        <h4 class="modal-title custom_align" id="Heading">Category Detail</h4>
+                                    </div>
+                                    <div class="modal-body" style="overflow-y: hidden;">
+
+                                        <fieldset style="margin-top: 0;">
+                                            <legend><span class="glyphicon glyphicon-pushpin"></span> Details</legend>
+                                            <!-- -->
+
+                                            <div class="row" style="margin-top: -20px;">
+                                                <div class="col-sm-12">
+                                                    <div class="panel-body form-horizontal payment-form">
+                                                        <div class="form-group form_bottom">
+                                                            <label id="label1" for="name" class="col-sm-5 control-label">Product Name</label>
+                                                            <div class="col-sm-7">
+                                                                <input id="c_name_@item.Id" class="form-control" style="margin-bottom: -10px; height: 30px;" value="@item.ProductName" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group form_bottom">
+                                                            <label id="label2" for="description" class="col-sm-5 control-label">Short Descriptoin</label>
+                                                            <div class="col-sm-7">
+                                                                <textarea id="c_desc_@item.Id" class="form-control" style="margin-bottom: -10px;" name="description">@item.ProductDescShort</textarea>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group form_bottom">
+                                                            <label id="label2" for="description" class="col-sm-5 control-label">Long Descriptoin</label>
+                                                            <div class="col-sm-7">
+                                                                <textarea id="c_desc_@item.Id" class="form-control" style="margin-bottom: -10px;" name="description">@item.ProductDescLong</textarea>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group form_bottom">
+                                                            <label id="label1" for="name" class="col-sm-5 control-label">Unit Price</label>
+                                                            <div class="col-sm-7">
+                                                                <input id="c_name_@item.Id" class="form-control" style="margin-bottom: -10px; height: 30px;" value="@item.UnitPrice" />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group form_bottom">
+                                                            <label id="label1" for="name" class="col-sm-5 control-label">Unit Namee</label>
+                                                            <div class="col-sm-7">
+                                                                @*<input id="c_name_@item.Id" class="form-control" style="margin-bottom: -10px; height: 30px;" value="@item.UnitName" />*@
+                                                                <select id="unit_@item.Id" style="margin-bottom: -5px;">
+                                                                    @*<option>-- Select Unit Name --</option>*@
+                                                                    <option>lb(Weight)</option>
+                                                                    <option>kg(Weight)</option>
+                                                                    <option>Case</option>
+                                                                    <option>Package</option>
+                                                                    <option>Each</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group form_bottom">
+                                                            <label id="label3" for="notes" class="col-sm-5 control-label"></label>
+                                                            <div class="col-sm-7">
+                                                                <input id="availabe" type="checkbox" checked="checked" style="vertical-align: baseline;"> &nbsp;Available
+                                                            </div>
+                                                            
+                                                        </div>
+
+                                                        <div class="form-group form_bottom">
+                                                            <div class="form-group form_bottom">
+                                                                <label id="label4" for="notes" class="col-sm-5 control-label">Notes</label>
+                                                                <div class="col-sm-7">
+                                                                    <textarea id="c_notes_@item.Id" class="form-control" style="margin-bottom: -10px; margin-left: 10px;" name="notes">@item.Notes</textarea>
+                                                                </div>
+                                                            </div>
+
+                                                            <div id="update_@item.Id">
+                                                                <a href="#">Update Image</a>
+                                                            </div>
+                                                            <div id="cancel_@item.Id" style="display: none;"><a href="#">Cancel</a></div>
+                                                            <div id="update_img_@item.Id" style="display: none;">
+                                                                <img src="@Url.Content(@item.ProductImgSmallUrl)" style="float: left; margin-right: 20px;" /> <input id="file_upload_@item.Id" type="file" />
+                                                                <a href="#" id="upload_@item.Id">Upload</a><br /><br />
+                                                                <div id="msg_@item.Id"></div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                                </div>
+
+
+
+                                            <input id="d_@item.Id" type="hidden" value="@item.Id" />
+                                            <input id="img_@item.Id" type="hidden" value="@item.ProductImgSmallUrl" /><div id="fn" style="display: none">@ViewBag.FileName</div>
+
+                                        </fieldset>
+
+
+
+
+                                    </div>
+
+
+                                    <div class="modal-footer ">
+                                        <button id="edit_@item.Id" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- Script -->
+                        <script type="text/javascript">
+                            debugger;
+                            $(document).ready(function () {
+                                $("#unit_@item.Id option").filter(function () {
+                                    return $(this).text() == "@item.UnitName";
+                                }).attr("selected", true); //.text("@item.UnitName");
+
+                            });
+                        </script>
+                        
+                        
+                        
+
                         
                     </tr>
                 }
@@ -51,3 +184,4 @@
         </tbody>
     </table>
 </div>
+<input id="p_count" type="hidden" value="@Model.Count()" />

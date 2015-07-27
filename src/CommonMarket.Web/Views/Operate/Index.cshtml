@@ -50,7 +50,7 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-gift text-primary"></span><a id="p_show" href="#"> Products</a>
-                                        <span class="badge">3</span>
+                                        <span class="badge"><span id="product_count" class="badge"></span></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -329,6 +329,10 @@
             $("#edit").hide();
             $("#details").show();
         });
+
+
+        var p_count = $("#p_count").val();
+        $("#product_count").text(p_count);
 
     });
 </script>
