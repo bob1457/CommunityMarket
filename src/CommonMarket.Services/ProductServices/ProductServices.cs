@@ -9,13 +9,15 @@ namespace CommonMarket.Services.ProductServices
 {
     public class ProductServices : IProductServices
     {
+        private readonly IRepository<Product> _proRepository;
         private readonly IProductRepository _productRepository;
         private readonly IRepository<ProductCategory> _categoryRepository;
 
         private readonly IUnitOfWork _uow;
 
-        public ProductServices(IProductRepository productRepository, IRepository<ProductCategory> categoryRepository, IUnitOfWork uow)
+        public ProductServices(IRepository<Product> proRepository, IProductRepository productRepository, IRepository<ProductCategory> categoryRepository, IUnitOfWork uow)
         {
+            _proRepository = proRepository;
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
 
@@ -66,7 +68,7 @@ namespace CommonMarket.Services.ProductServices
                 product.UpdateDate = DateTime.Now;
                 //category.DepartmentId = 1;
 
-                _productRepository.Update(product);
+                _proRepository.Update(product);
                 _uow.Save();
             }
             catch (Exception ex)

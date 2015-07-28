@@ -520,6 +520,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Assets\Images\Products\Originals\" />
     <Folder Include="Views\Customer\" />
   </ItemGroup>
   <ItemGroup>

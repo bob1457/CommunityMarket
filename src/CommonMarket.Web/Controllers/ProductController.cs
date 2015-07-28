@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -6,8 +7,11 @@ using CommonMarket.Core.Entities;
 using CommonMarket.Core.Interface;
 using CommonMarket.Services.ProductServices;
 using CommonMarket.Web.Models;
+using ImageResizer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+
+using CommonMarket.Infrastructure.Utilities;
 
 namespace CommonMarket.Web.Controllers
 {
@@ -117,6 +121,100 @@ namespace CommonMarket.Web.Controllers
                 _productServices.AddNewProduct(newProduct, category);
             }
 
+        }
+
+        [HttpPost]
+        public ActionResult FileUpload(int id)
+        {
+            HttpPostedFile myFile = System.Web.HttpContext.Current.Request.Files["UploadedImage"];// Request.Files["MyFile"];
+
+            string fName = myFile.FileName;
+            string fileExtenstion = FileProcessor.GetFileExtension(fName);
+
+            string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("/Content/Assets/Images/Products/Originals"), Path.GetFileName(myFile.FileName));
+            string purePath = System.Web.HttpContext.Current.Server.MapPath("/Content/Assets/Images/Products");
+
+
+            var fileUpload = new FileUpload();
+
+            fileUpload.Upload(myFile, path);
+
+
+
+            #region Generate small and large image
+
+            ResizeSettings settings_sm = new ResizeSettings();
+            ResizeSettings settings_lg = new ResizeSettings();
+
+            switch (fileExtenstion)
+            {
+                case ".png":
+                    settings_sm = new ResizeSettings("width=60&height=60&crop=auto&format=png");
+                    settings_lg = new ResizeSettings("width=400&height=300&crop=auto&format=png");
+                    break;
+                case ".jpg":
+                    settings_sm = new ResizeSettings("width=60&height=60&crop=auto&format=jpg");
+                    settings_lg = new ResizeSettings("width=400&height=300&crop=auto&format=jpg");
+                    break;
+                case ".jepg":
+                    settings_sm = new ResizeSettings("width=60&height=60&crop=auto&format=jpg");
+                    settings_lg = new ResizeSettings("width=400&height=300&crop=auto&format=jpg");
+                    break;
+                case ".gif":
+                    settings_sm = new ResizeSettings("width=60&height=60&crop=auto&format=gif");
+                    settings_lg = new ResizeSettings("width=400&height=300&crop=auto&format=gif");
+                    break;
+                default:
+                    settings_sm = new ResizeSettings("width=60&height=60&crop=auto&format=jpg");
+                    settings_lg = new ResizeSettings("width=400&height=3000&crop=auto&format=jpg");
+                    break;
+
+            }
+
+            string fileName_sm = "product_" + id + "_sm";
+            string fileName_lg = "product" + id + "_lg";
+
+            string newFileName_sm = Path.Combine(purePath, fileName_sm);
+            string newFileName_lg = Path.Combine(purePath, fileName_lg);
+
+            ImageBuilder.Current.Build(myFile, newFileName_sm, settings_sm, false,
+                  true);
+            ImageBuilder.Current.Build(myFile, newFileName_lg, settings_lg, false,
+               true);
+
+
+            
+
+            #endregion
+
+
+
+            //Update image url in db
+            var product = _productServices.FindProductById(id);
+
+            product.ProductImgSmallUrl = "/Content/Assets/Images/products/" + fileName_sm + fileExtenstion;
+            product.ProductImgLargeUrl = "/Content/Assets/Images/products/" + fileName_lg + fileExtenstion;
+
+            _productServices.UpdateProduct(product);
+
+            return Json("Image has been updated!");
+        }
+
+
+        [HttpPost]
+        public void UpdateProduct(Product product)
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var prfileId = currentUser.UserProfile.Id;
+            var supplierId = _merchantService.FindSupplierBy(prfileId).Id;
+
+            //product.ProductImgLargeUrl = "";
+            //product.ProductImgSmallUrl = "";
+            product.SupplierId = supplierId;
+
+            //var updatedProduct = _productServices.FindProductById(product.Id);
+            
+            _productServices.UpdateProduct(product);
         }
     }
 }

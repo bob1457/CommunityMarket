@@ -42,7 +42,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                                        <h4 class="modal-title custom_align" id="Heading">Category Detail</h4>
+                                        <h4 class="modal-title custom_align" id="Heading">Product Detail/Update</h4>
                                     </div>
                                     <div class="modal-body" style="overflow-y: hidden;">
 
@@ -56,31 +56,31 @@
                                                         <div class="form-group form_bottom">
                                                             <label id="label1" for="name" class="col-sm-5 control-label">Product Name</label>
                                                             <div class="col-sm-7">
-                                                                <input id="c_name_@item.Id" class="form-control" style="margin-bottom: -10px; height: 30px;" value="@item.ProductName" />
+                                                                <input id="p_name_@item.Id" class="form-control" style="margin-bottom: -10px; height: 30px;" value="@item.ProductName" />
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group form_bottom">
                                                             <label id="label2" for="description" class="col-sm-5 control-label">Short Descriptoin</label>
                                                             <div class="col-sm-7">
-                                                                <textarea id="c_desc_@item.Id" class="form-control" style="margin-bottom: -10px;" name="description">@item.ProductDescShort</textarea>
+                                                                <textarea id="p_desc_@item.Id" class="form-control" style="margin-bottom: -10px;" name="description">@item.ProductDescShort</textarea>
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="form-group form_bottom">
                                                             <label id="label2" for="description" class="col-sm-5 control-label">Long Descriptoin</label>
                                                             <div class="col-sm-7">
-                                                                <textarea id="c_desc_@item.Id" class="form-control" style="margin-bottom: -10px;" name="description">@item.ProductDescLong</textarea>
+                                                                <textarea id="p_desc2_@item.Id" class="form-control" style="margin-bottom: -10px;" name="description">@item.ProductDescLong</textarea>
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="form-group form_bottom">
                                                             <label id="label1" for="name" class="col-sm-5 control-label">Unit Price</label>
                                                             <div class="col-sm-7">
-                                                                <input id="c_name_@item.Id" class="form-control" style="margin-bottom: -10px; height: 30px;" value="@item.UnitPrice" />
+                                                                <input id="p_unit_@item.Id" class="form-control" style="margin-bottom: -10px; height: 30px;" value="@item.UnitPrice" />
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="form-group form_bottom">
                                                             <label id="label1" for="name" class="col-sm-5 control-label">Unit Namee</label>
                                                             <div class="col-sm-7">
@@ -95,41 +95,49 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        
+                                                        <div class="form-group">
+                                                            <label id="label1" for="name" class="col-sm-5 control-label">Quantity Per Unit</label>
+                                                            <div class="col-sm-7">
+                                                                <input id="qty_perUnit_@item.Id" class="form-control" type="text" value="@item.QuantityPerUnit" placeholder="Quantity per Unit if unit name is Case or Package" style="height: 35px; margin-bottom: -5px;">
+                                                            </div>
+                                                        </div>
                                                         <div class="form-group form_bottom">
                                                             <label id="label3" for="notes" class="col-sm-5 control-label"></label>
                                                             <div class="col-sm-7">
                                                                 <input id="availabe" type="checkbox" checked="checked" style="vertical-align: baseline;"> &nbsp;Available
                                                             </div>
-                                                            
+
                                                         </div>
 
                                                         <div class="form-group form_bottom">
                                                             <div class="form-group form_bottom">
                                                                 <label id="label4" for="notes" class="col-sm-5 control-label">Notes</label>
                                                                 <div class="col-sm-7">
-                                                                    <textarea id="c_notes_@item.Id" class="form-control" style="margin-bottom: -10px; margin-left: 10px;" name="notes">@item.Notes</textarea>
+                                                                    <textarea id="p_notes_@item.Id" class="form-control" style="margin-bottom: -10px; margin-left: 10px;" name="notes">@item.Notes</textarea>
                                                                 </div>
                                                             </div>
 
-                                                            <div id="update_@item.Id">
+                                                            <div id="update_@item.Id" style="margin-left: 25px;">
                                                                 <a href="#">Update Image</a>
                                                             </div>
-                                                            <div id="cancel_@item.Id" style="display: none;"><a href="#">Cancel</a></div>
+
+                                                            <div id="cancel_@item.Id" style="display: none;"><a href="#" style="margin-left: 25px;">Cancel</a></div>
                                                             <div id="update_img_@item.Id" style="display: none;">
-                                                                <img src="@Url.Content(@item.ProductImgSmallUrl)" style="float: left; margin-right: 20px;" /> <input id="file_upload_@item.Id" type="file" />
+                                                                <img src="@Url.Content(@item.ProductImgSmallUrl)" style="float: left; margin-right: 20px; margin-left: 25px;" /> <input id="file_upload_@item.Id" type="file" />
                                                                 <a href="#" id="upload_@item.Id">Upload</a><br /><br />
                                                                 <div id="msg_@item.Id"></div>
                                                             </div>
+
+
                                                         </div>
 
 
 
+                                                    </div>
+
                                                 </div>
 
                                             </div>
-
-                                                </div>
 
 
 
@@ -156,16 +164,153 @@
                         
                         <!-- Script -->
                         <script type="text/javascript">
-                            debugger;
+                            
+                            //debugger;
                             $(document).ready(function () {
                                 $("#unit_@item.Id option").filter(function () {
                                     return $(this).text() == "@item.UnitName";
-                                }).attr("selected", true); //.text("@item.UnitName");
+                                }).attr("selected", true);
+
+
+                                $("#update_@item.Id").click(function () {
+                                    $("#update_img_@item.Id").show();
+                                    $("#cancel_@item.Id").show();
+                                    $("#update_@item.Id").hide();
+                                });
+
+                                $("#cancel_@item.Id").click(function () {
+                                    $("#update_img_@item.Id").hide();
+                                    $("#cancel_@item.Id").hide();
+                                    $("#update_@item.Id").show();
+                                });
 
                             });
                         </script>
                         
+                        <!-- Product Updates -->
+                        <script type="text/javascript">
+
+                            $(document).ready(function() {
+                                
+
+                                debugger;
+                                $("#edit_@item.Id").click(function() {
+
+                                    var product = {
+                                        Id: "@item.Id",
+                                        ProductName: $("#p_name_@item.Id").val(),
+                                        ProductDescShort: $("#p_desc_@item.Id").val(),
+                                        ProductDescLong: $("#p_desc2_@item.Id").val(),
+                                        ProductImgLargeUrl:"@item.ProductImgLargeUrl",
+                                        ProductImgSmallUrl:"@item.ProductImgSmallUrl",
+                                        UnitName: $("#unit_@item.Id option:selected").text(),
+                                        UnitPrice: $("#p_unit_@item.Id").val(),
+                                        QuantityPerUnit: $("#qty_perUnit_@item.Id").val(),
+                                        Notes: $("#p_notes_@item.Id").val(),
+                                        ProductAvailable: $('#availabe').prop('checked')
+                                    };
+
+
+                                    $.ajax({
+                                        url: "/Product/UpdateProduct",
+                                        type: "POST",
+                                        data: JSON.stringify(product),
+                                        contentType: 'application/json',
+
+                                        success: function (data) {
+
+                                            $('#msg').html(data);
+                                            $('#msg').delay(5000).fadeOut(400);
+
+
+
+                                            $('#ec_@item.Id').removeClass('modal-open');
+                                            $('.modal-backdrop').remove();
+
+
+
+                                            //$('#msg').html(data);
+                                            //$('#msg').delay(5000).fadeOut(400);
+
+                                            var url = "/Operate/ListProducts";
+                                            $.get(url, function (data) {
+                                                $("#product").html(data);
+                                                return false;
+                                            });
+                                        }
+
+                                    });
+
+
+                                });
+                               
+
+
+                            });
+
+                        </script>
                         
+                        
+                        
+
+
+                        <!-- File Upload -->
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $('#upload_@item.Id').on('click', function () {
+                                    //debugger;
+                                    var data = new FormData();
+
+                                    var files = $("#file_upload_@item.Id").get(0).files;
+
+                                    //if (files == null) {
+
+                                    //}
+
+                                    // Add the uploaded image content to the form data collection
+                                    if (files.length > 0) {
+                                        data.append("UploadedImage", files[0]);
+                                    }
+
+                                    // Make Ajax request with the contentType = false, and procesDate = false
+                                    var ajaxRequest = $.ajax({
+                                        type: "POST",
+                                        url: "/Product/FileUpload?id=" + @item.Id,
+                                        contentType: false,
+                                        processData: false,
+                                        data: data
+                                    });
+
+                                    //debugger;
+                                    ajaxRequest.done(function () {
+                                        // Do other operation
+                                        //$("#msg_@item.Id").text(data);
+                                        $("#file_upload_@item.Id").val('');
+
+                                        //$('#ec_@item.Id').removeClass('modal-open');
+                                        //$('.modal-backdrop').remove();
+
+
+                                        var url = "/Operate/ListProducts";
+                                        $.get(url, function (data) {
+                                            $("#product").html(data);
+                                            return false;
+                                        });
+                                        
+
+                                        //Update the current url on the page
+
+                                        $('#ec_@item.Id').removeClass('modal-open');
+                                        $('.modal-backdrop').remove();
+
+                                        $('#ec_@item.Id').modal('hide');
+                                    });
+                                });
+
+
+
+                            });
+                        </script>
                         
 
                         
