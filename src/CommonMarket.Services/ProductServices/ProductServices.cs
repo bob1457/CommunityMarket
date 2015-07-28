@@ -77,6 +77,24 @@ namespace CommonMarket.Services.ProductServices
             }
         }
 
+        public void UpdateProductImg(Product product)
+        {
+            try
+            {
+                //ProductCategory category = _categoryRepository.GetAll().FirstOrDefault(i => i.Id == id);
+                product.UpdateDate = DateTime.Now;
+                //category.DepartmentId = 1;
+
+                _productRepository.Update(product);
+                _uow.Save();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed updating the product", ex);
+            }
+        }
+
+
         public void DeleteProduct(int id)
         {
 

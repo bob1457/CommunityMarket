@@ -9,6 +9,9 @@ namespace CommonMarket.Services.ProductServices
         Product FindProductById(int id);
         void AddNewProduct(Product product, ProductCategory category);
         void UpdateProduct(Product product);
+
+        void UpdateProductImg(Product product);
+
         void DeleteProduct(int id);
     }
 }

@@ -195,7 +195,7 @@ namespace CommonMarket.Web.Controllers
             product.ProductImgSmallUrl = "/Content/Assets/Images/products/" + fileName_sm + fileExtenstion;
             product.ProductImgLargeUrl = "/Content/Assets/Images/products/" + fileName_lg + fileExtenstion;
 
-            _productServices.UpdateProduct(product);
+            _productServices.UpdateProductImg(product);
 
             return Json("Image has been updated!");
         }
@@ -215,6 +215,22 @@ namespace CommonMarket.Web.Controllers
             //var updatedProduct = _productServices.FindProductById(product.Id);
             
             _productServices.UpdateProduct(product);
+        }
+
+        [HttpPost]
+        public void UpdateProductImg(Product product)
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var prfileId = currentUser.UserProfile.Id;
+            var supplierId = _merchantService.FindSupplierBy(prfileId).Id;
+
+            //product.ProductImgLargeUrl = "";
+            //product.ProductImgSmallUrl = "";
+            product.SupplierId = supplierId;
+
+            //var updatedProduct = _productServices.FindProductById(product.Id);
+
+            _productServices.UpdateProductImg(product);
         }
     }
 }
