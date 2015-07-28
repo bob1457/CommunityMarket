@@ -1,168 +1,34 @@
-﻿
+﻿@model IEnumerable<CommonMarket.Core.Entities.Product>
 
 <ul class="list-unstyled ">
-    <li>
-        <div class="col-sm-3 col-lg-3 col-md-3">
-            <div class="thumbnail">
-                <a href="~/Product/ProductDetails/1"><img src="~/Content/Assets/Images/broccoli1.png" /></a>
-                <div class="caption">
-                    <h4>
-                        <a href="#">First Product</a>
-                    </h4>
-                    <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p><br />
-                    <h4 class="pull-left product_price">$24.99</h4>
-                    <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
-                </div>
-                <div class="ratings">
-                    @*<p class="pull-right" id="produst_comment">15 reviews</p>
-                        <p class="product_rating">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                        </p>*@
-                </div>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="col-sm-3 col-lg-3 col-md-3">
-            <div class="thumbnail">
-                <img src="~/Content/Assets/Images/carrots1.png" />
-                <div class="caption">
-
-                    <h4>
-                        <a href="#">Second Product</a>
-                    </h4>
-                    <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <h4 class="pull-left">$64.99</h4>
-                    <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
-                </div>
-                <div class="ratings">
-                    @*<p class="pull-right">12 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                        </p>*@
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="col-sm-3 col-lg-3 col-md-3">
+                <div class="thumbnail">
+                    <a href="#"><img src="@Url.Content(@item.ProductImgLargeUrl)" /></a>
+                    <div class="caption">
+                        <h4>
+                            <a href="#">@item.ProductName</a>
+                        </h4>
+                        <p>@item.ProductDescLong</p><br />
+                        <h4 class="pull-left product_price">$@item.UnitPrice</h4>
+                        <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
+                    </div>
+                    <div class="ratings">
+                        @*<p class="pull-right" id="produst_comment">15 reviews</p>
+                            <p class="product_rating">
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            </p>*@
+                    </div>
                 </div>
             </div>
-        </div>
-    </li>
-    <li>
-        <div class="col-sm-3 col-lg-3 col-md-3">
-            <div class="thumbnail">
-                <img src="~/Content/Assets/Images/egg1.png" />
-                <div class="caption">
-                    <h4>
-                        <a href="#">Third Product</a>
-                    </h4>
-                    <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <h4 class="pull-left">$74.99</h4>
-                    <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
-                </div>
-                <div class="ratings">
-                    @*<p class="pull-right">31 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                        </p>*@
-                </div>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="col-sm-3 col-lg-3 col-md-3">
-            <div class="thumbnail">
-                <img src="~/Content/Assets/Images/onion1.png" />
-                <div class="caption">
-                    <h4>
-                        <a href="#">Fourth Product</a>
-                    </h4>
-                    <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <h4 class="pull-left">$84.99</h4>
-                    <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
-                </div>
-                <div class="ratings">
-                    @*<p class="pull-right">6 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                        </p>*@
-                </div>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="col-sm-3 col-lg-3 col-md-3">
-            <div class="thumbnail">
-                <img src="~/Content/Assets/Images/strawberries.png" />
-                <div class="caption">
-                    <h4>
-                        <a href="#">Fifth Product</a>
-                    </h4>
-                    <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-                    <h4 class="pull-left">$94.99</h4>
-                    <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
-                </div>
-
-                <div class="ratings">
-                    @*<p class="pull-right"><i class="fa fa-comment"></i></p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                        </p>*@
-                </div>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="col-sm-3 col-lg-3 col-md-3">
-            <div class="thumbnail">
-                <img src="~/Content/Assets/Images/strawberries.png" />
-                <div class="caption">
-                    <h4>
-                        <a href="#">Fifth Product</a>
-                    </h4>
-                    <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-                    <h4 class="pull-left">$94.99</h4>
-                    <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
-                </div>
-
-                <div class="ratings">
-                    @*<p class="pull-right"><i class="fa fa-comment"></i></p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                        </p>*@
-                </div>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="col-sm-3 col-lg-3 col-md-3">
-            <h4>
-                <a href="#">Like this template?</a>
-            </h4>
-            <p>If you like this template, then check out <a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> on how to build a working review system for your online store!</p>
-            <a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View Tutorial</a>
-        </div>
-    </li>
+        </li>
+    }
+    
+    
 </ul>
