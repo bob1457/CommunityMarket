@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 using System.Web.UI.WebControls.WebParts;
 using CommonMarket.Core.Interface;
 using CommonMarket.DataAccess;
@@ -12,6 +13,8 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace CommonMarket.Web.Controllers
 {
+
+
     //[Authorize]
     public class MerchantController : BaseController
     {
@@ -62,7 +65,7 @@ namespace CommonMarket.Web.Controllers
         }
 
 
-        public ActionResult GetMerchantDetails(string id)
+        public ActionResult GetMerchantDetails(string id) //to load to user profile page for editing
         {
             //CommunityMarketContext db = new CommunityMarketContext();
 
@@ -78,11 +81,12 @@ namespace CommonMarket.Web.Controllers
             return Json(merchant, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult MerchantDetails(int id)
+        public ActionResult MerchantDetails(int id) //load to MerchantDetails page
         {
-
+            var merchant = UserManager.Users.Where(p => p.UserProfile.Id == id);
 
             return View();
+            //return PartialView("_MerchanteInfo", merchant);
         }
 
     }

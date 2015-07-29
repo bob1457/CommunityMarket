@@ -3,14 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CommonMarket.Core.Entities;
 using CommonMarket.Core.Interface;
 using CommonMarket.Services.ProductServices;
+using CommonMarket.Web.Models;
+using Microsoft.AspNet.Identity.Owin;
+using ProductCategory = CommonMarket.Core.Entities.ProductCategory;
 
 namespace CommonMarket.Web.Controllers
 {
     public class ShopController : BaseController
     {
+        #region Identity implementation
+
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+
+        #endregion
+
+
         private readonly ICategoryService _categoryService;
         private readonly IMerchantService _merchantServie;
         private readonly IProductServices _productServices;
@@ -43,6 +76,13 @@ namespace CommonMarket.Web.Controllers
             var products = _productServices.FindAllProducts().OrderByDescending(d => d.CreateDate).Take(8); //get latest or newest products (4)
 
             return PartialView("_FeaturedList", products);
+        }
+
+        public ActionResult GetAllSuppliers()
+        {
+            var supplier = UserManager.Users.Where(m => m.Roles.Any(r => r.RoleId == "6ca46ec2-a996-4788-92ec-5c255a174eb4"));
+            
+            return PartialView("_SupplierList", supplier);
         }
     }
 }

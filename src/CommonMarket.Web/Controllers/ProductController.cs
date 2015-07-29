@@ -68,6 +68,7 @@ namespace CommonMarket.Web.Controllers
         public ActionResult ProductDetails(int id)
         {
 
+
             return View();
         }
 

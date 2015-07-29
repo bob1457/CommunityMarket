@@ -1,18 +1,30 @@
-﻿@model IEnumerable<CommonMarket.Core.Entities.Product>
+﻿@using System.Web.Razor.Parser.SyntaxTree
+@model IEnumerable<CommonMarket.Core.Entities.Product>
 
 <ul class="list-unstyled ">
     @foreach (var item in Model)
     {
         <li>
             <div class="col-sm-3 col-lg-3 col-md-3">
-                <div class="thumbnail">
+                <div class="thumbnail" style="height: 341px; margin-bottom: 0;">
                     <a href="#"><img src="@Url.Content(@item.ProductImgLargeUrl)" /></a>
                     <div class="caption">
                         <h4>
                             <a href="#">@item.ProductName</a>
                         </h4>
-                        <p>@item.ProductDescLong</p><br />
-                        <h4 class="pull-left product_price">$@item.UnitPrice</h4>
+                        <p style="margin-bottom: 0;">
+                            
+                            @if ((@item.ProductDescLong).Length > 45)
+                            {
+                                <span>@item.ProductDescLong.Substring(0, 40)  <a href="#">&nbsp;more...</a></span>
+                            }
+                            else
+                            {
+                                @item.ProductDescLong
+                            }
+
+                        </p><br />
+                        <h4 class="pull-left product_price" style="margin-top: 0;">$@item.UnitPrice.ToString().Remove((@item.UnitPrice).ToString().Length -2)/@item.UnitName</h4>
                         <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
                     </div>
                     <div class="ratings">
@@ -29,6 +41,6 @@
             </div>
         </li>
     }
-    
-    
+
+
 </ul>

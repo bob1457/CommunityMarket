@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 //using System.Web.HttpContext;
 using CommonMarket.Core.Entities;
+//using CommonMarket.core.Entities;
 using CommonMarket.core.Entities;
 using CommonMarket.Core.Interface;
 using CommonMarket.Web.Models;
@@ -88,6 +90,22 @@ namespace CommonMarket.Web.Controllers
         {
             var roles = RoleManager.Roles;
             return PartialView("_RoleList", roles);
+        }
+
+
+
+        public ActionResult GetSuppliers() //Testing
+        {
+            //var suppliers = RoleManager.FindByName("Merchant").Users;
+
+            //var merchant = from role in RoleManager.Roles
+            //    where role.Name == "Merchant"
+            //    from user in role.Users
+            //    select user.UserId;
+
+            var supplier = UserManager.Users.Where(m => m.Roles.Any(r => r.RoleId == "6ca46ec2-a996-4788-92ec-5c255a174eb4"));
+
+            return PartialView("_SupplierList", supplier);
         }
         
         //Ajax operations

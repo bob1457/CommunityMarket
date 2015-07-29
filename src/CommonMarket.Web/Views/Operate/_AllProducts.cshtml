@@ -116,7 +116,7 @@
                                                                     <textarea id="p_notes_@item.Id" class="form-control" style="margin-bottom: -10px; margin-left: 10px;" name="notes">@item.Notes</textarea>
                                                                 </div>
                                                             </div>
-
+                                                            <!-- Update main image -->
                                                             <div id="update_@item.Id" style="margin-left: 25px;">
                                                                 <a href="#">Update Image</a>
                                                             </div>
@@ -127,7 +127,19 @@
                                                                 <a href="#" id="upload_@item.Id">Upload</a><br /><br />
                                                                 <div id="msg_@item.Id"></div>
                                                             </div>
-
+                                                            
+                                                            <!-- Add additional images -->
+                                                            <div id="additional_@item.Id" style="margin-left: 25px; clear: both;">
+                                                                <a href="#">Add More Images</a>
+                                                            </div>
+                                                            
+                                                            <div id="Add_cancel_@item.Id" style="display: none;"><a href="#" style="margin-left: 25px; clear: both;">Cancel</a></div>
+                                                            <div id="addi_img_@item.Id" style="display: none;">
+                                                                <input id="addi_file_upload_@item.Id" type="file" style="float: left; margin-right: 20px; margin-left: 25px;" />
+                                                                <a href="#" id="add_upload_@item.Id">Upload</a><br /><br />
+                                                                <div id="msg1_@item.Id"></div>
+                                                            </div>
+                                                            
 
                                                         </div>
 
@@ -171,19 +183,32 @@
                                     return $(this).text() == "@item.UnitName";
                                 }).attr("selected", true);
 
-
+                                //Main image update
                                 $("#update_@item.Id").click(function () {
                                     $("#update_img_@item.Id").show();
                                     $("#cancel_@item.Id").show();
                                     $("#update_@item.Id").hide();
                                 });
 
+                                $("#additional_@item.Id").click(function () {
+                                    $("#addi_img_@item.Id").show();
+                                    $("#Add_cancel_@item.Id").show();
+                                    $("#additional_@item.Id").hide();
+                                });
+
+                                //Additional image upload
                                 $("#cancel_@item.Id").click(function () {
                                     $("#update_img_@item.Id").hide();
                                     $("#cancel_@item.Id").hide();
                                     $("#update_@item.Id").show();
                                 });
 
+
+                                $("#Add_cancel_@item.Id").click(function () {
+                                    $("#addi_img_@item.Id").hide();
+                                    $("#Add_cancel_@item.Id").hide();
+                                    $("#additional_@item.Id").show();
+                                });
                             });
                         </script>
                         

@@ -369,6 +369,8 @@
     <Content Include="Views\Operate\_AllProducts.cshtml" />
     <Content Include="Views\Home\_SupplierList.cshtml" />
     <Content Include="Views\Merchant\MerchantDetails.cshtml" />
+    <Content Include="Views\Admin\_SupplierList.cshtml" />
+    <Content Include="Views\Shop\_SupplierList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

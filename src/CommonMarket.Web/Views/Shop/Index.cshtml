@@ -48,8 +48,8 @@
                 </div>
             </div>
             <div class="list-group" style="margin-top: -30px;">
-                <a href="#" class="list-group-item" style="background-color: #D0C460; border:1px solid #D0C460; color:#2f3d84">All Supplier List</a>
-                <a href="#" class="list-group-item" style="background-color: #D0C460; border:1px solid #D0C460; color:#2f3d84">Suppliers by Category</a>
+                <a href="#" class="list-group-item" id="all_supplier" style="background-color: #D0C460; border:1px solid #D0C460; color:#2f3d84">All Supplier List</a>
+                <a href="#" class="list-group-item" id="supplier_category" style="background-color: #D0C460; border:1px solid #D0C460; color:#2f3d84">Suppliers by Category</a>
             </div>
 
             <div class="panel panel-default" style="margin-top: 25px;">
@@ -194,12 +194,12 @@
 
                 </div>
             </div>
-        </div>
+        </div><!-- Side Panel -->
 
-        <div class="col-md-9" style="margin-top: 25px;">
+        <div class="col-md-9" style="margin-top: 25px;"> <!-- Main Panel -->
 
             <div class="row">
-                <div class="panel panel-default">
+                <div id="feature_panel" class="panel panel-default">
                     <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%);">
                         <h4><span class="glyphicon glyphicon-asterisk" style="color: #ffff00"></span> <span style="color: #2F3D84; font-variant: small-caps;"><span id>Featured Products</span></span></h4>
                     </div>
@@ -211,14 +211,45 @@
 
 
                 </div>
+                
+                <div id="supplier_panel" class="panel panel-default">
+                    <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%);">
+                        <h4><span class="glyphicon glyphicon-user" style="color: #ffff00"></span> <span style="color: #2F3D84; font-variant: small-caps;"><span >Supplier List</span></span></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="all_supplier">@Html.Action("GetAllSuppliers")</div>
+
+                        
+                    </div>
 
 
+                </div>
 
+                <div id="by_category"></div>
 
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#supplier_panel").hide();
+
+        $("#all_supplier").click(function () {
+
+            $("#feature_panel").hide();
+            $("#supplier_panel").show();
+
+
+
+        });
+
+        
+    });
+</script>
+
+
 
 
 
@@ -230,35 +261,35 @@
             var self = this;
             
             self.products = ko.observableArray([{
-                name: "Broccoli Stalk",
-                description: "Fresh organic broccoli from local farm, good price in twon.",
-                price: "$24.99/case",
-                productImageUrl: "~/Content/Assets/Images/broccoli.jpp"
-            },
-            {
-                name: "Carrots",
-                description: "Fresh organic broccoli from local farm, good price in twon.",
-                price: "$4.99/bag",
-                productImageUrl: "~/Content/Assets/Images/carrots1.png"
-            },
-            {
-                name: "Broccoli Stalk",
-                description: "Fresh organic broccoli from local farm, good price in twon.",
-                price: "$24.99/case",
-                productImageUrl: "~/Content/Assets/Images/carrots1.png"
-            },
-            {
-                name: "Broccoli Stalk",
-                description: "Fresh organic broccoli from local farm, good price in twon.",
-                price: "$24.99/case",
-                productImageUrl: "~/Content/Assets/Images/carrots1.png"
-            },
-            {
-                name: "Broccoli Stalk",
-                description: "Fresh organic broccoli from local farm, good price in twon.",
-                price: "$24.99/case",
-                productImageUrl: "~/Content/Assets/Images/carrots1.png"
-            }
+                    name: "Broccoli Stalk",
+                    description: "Fresh organic broccoli from local farm, good price in twon.",
+                    price: "$24.99/case",
+                    productImageUrl: "~/Content/Assets/Images/broccoli.jpp"
+                },
+                {
+                    name: "Carrots",
+                    description: "Fresh organic broccoli from local farm, good price in twon.",
+                    price: "$4.99/bag",
+                    productImageUrl: "~/Content/Assets/Images/carrots1.png"
+                },
+                {
+                    name: "Broccoli Stalk",
+                    description: "Fresh organic broccoli from local farm, good price in twon.",
+                    price: "$24.99/case",
+                    productImageUrl: "~/Content/Assets/Images/carrots1.png"
+                },
+                {
+                    name: "Broccoli Stalk",
+                    description: "Fresh organic broccoli from local farm, good price in twon.",
+                    price: "$24.99/case",
+                    productImageUrl: "~/Content/Assets/Images/carrots1.png"
+                },
+                {
+                    name: "Broccoli Stalk",
+                    description: "Fresh organic broccoli from local farm, good price in twon.",
+                    price: "$24.99/case",
+                    productImageUrl: "~/Content/Assets/Images/carrots1.png"
+                }
 
             ]);
         }
