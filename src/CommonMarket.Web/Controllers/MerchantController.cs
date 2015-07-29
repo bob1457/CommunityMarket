@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web.UI.WebControls.WebParts;
 using CommonMarket.Core.Interface;
 using CommonMarket.DataAccess;
+using CommonMarket.Services.ProductServices;
 using CommonMarket.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -20,6 +21,7 @@ namespace CommonMarket.Web.Controllers
     {
         private readonly ICustomerService _customerService;
         private readonly IMerchantService _merchantServie;
+        private readonly IProductServices _productServices;
 
         #region Identity system
 
@@ -51,10 +53,11 @@ namespace CommonMarket.Web.Controllers
 
         #endregion
 
-        public MerchantController(ICustomerService customerService, IMerchantService merchantServie)
+        public MerchantController(ICustomerService customerService, IMerchantService merchantServie, IProductServices productServices)
         {
             _customerService = customerService;
             _merchantServie = merchantServie;
+            _productServices = productServices;
         }
 
 
@@ -81,12 +84,39 @@ namespace CommonMarket.Web.Controllers
             return Json(merchant, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult MerchantDetails(int id) //load to MerchantDetails page
+        public ActionResult MerchantDetails(string id) //load to MerchantDetails page here id is userId in asp.net identity db
         {
-            var merchant = UserManager.Users.Where(p => p.UserProfile.Id == id);
+            //var merchant = UserManager.Users.Where(p => p.UserProfile.Id == id);
+
+            ViewBag.ProfileId = id;
+
+            //Get supplierId
+
+            var profileId = UserManager.FindById(id).UserProfile.Id;
+
+            int supplierId = _merchantServie.FindSupplierBy(profileId).Id;
+
+            ViewBag.SupplierId = supplierId;
 
             return View();
             //return PartialView("_MerchanteInfo", merchant);
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetMerchantInfo(string id)
+        {
+            var merchant = UserManager.FindById(id);
+
+            return PartialView("_MerchantInfo", merchant);
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetProductListByMerchant(int id) //id = SupplierId
+        {
+            var products =
+                _productServices.FindAllProducts().OrderByDescending(d => d.CreateDate).Where(s => s.SupplierId == id && s.ProductAvailable == true);
+
+            return PartialView("_ProductInfo", products);
         }
 
     }

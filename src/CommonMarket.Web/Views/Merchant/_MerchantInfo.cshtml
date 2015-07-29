@@ -1,0 +1,18 @@
+﻿@model CommonMarket.Web.Models.ApplicationUser
+
+<div class="pull-left ">
+    <img src="@Url.Content(@Model.UserProfile.AvatarImgUrl)" width="100" height="100" class="img-circle">
+</div>
+<div id="merchant_info">
+    <h4 style="margin-top: 0;">@Model.UserProfile.FirstName @Model.UserProfile.LastName</h4>
+    <h6 style="margin: 0;">Email: @Model.UserProfile.Email</h6>
+    <h6 style="margin: 0;"></h6>
+
+    <h6><a href="#">More... </a></h6>
+</div>
+<div class="col-md-12">
+    <div id="more">
+        <i class="icon-chevron-down text-muted"></i>More information panel...
+    </div>
+
+</div>

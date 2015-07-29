@@ -8,7 +8,9 @@
                 <div class="lib-panel">
                     <div class="row box-shadow">
                         <div class="col-md-6 col-sm-4 col-xs-6">
-                            <img class="lib-img-show" src="@Url.Content(@item.UserProfile.AvatarImgUrl)" title="@item.UserProfile.FirstName @item.UserProfile.LastName"><br />
+                            <a href="@Url.Content("/Merchant/MerchantDetails/" + @item.Id)">
+                                <img class="lib-img-show" src="@Url.Content(@item.UserProfile.AvatarImgUrl)" title="@item.UserProfile.FirstName @item.UserProfile.LastName">
+                            </a><br />
                             <span class="short_desc" style="color:rgb(182, 77, 42); margin-left: 10px;">
                                 <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-half"></i><i class="icon-star-empty"></i>
                             </span>

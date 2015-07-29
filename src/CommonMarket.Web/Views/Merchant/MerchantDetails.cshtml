@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Web.UI.WebControls
+@{
     ViewBag.Title = "MerchantDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -45,22 +46,8 @@
 <div class="container">
     <div class="row" style="margin-top: 25px;">
         <div class=" col-md-4" id="left_panel">
-            <div class="pull-left ">
-                <img src="https://secure.gravatar.com/avatar/de9b11d0f9c0569ba917393ed5e5b3ab?s=140&r=g&d=mm" width="100" height="100" class="img-circle">
-            </div>
-            <div id="merchant_info">
-                <h4 style="margin-top: 0;">User Name</h4>
-                <h6 style="margin: 0;">Email: MyEmail@servidor.com</h6>
-                <h6 style="margin: 0;">Ubication: Colombia</h6>
-                
-                <h6><a href="#">More... </a></h6>
-            </div>
-            <div class="col-md-12">
-                <div id="more">
-                    <i class="icon-chevron-down text-muted"></i>More information panel...
-                </div>
-
-            </div>
+            @*@Html.Partial("_MerchantInfo")*@
+            @Html.Action("GetMerchantInfo", new { id = ViewBag.ProfileId })
         </div>
 
         <div class=" col-md-8">
@@ -95,160 +82,9 @@
                             
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <div id="thumb">
-                            <ul class="list-unstyled" style="margin-left: 0;">
-                                <li>
-                                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                                        </a>
-                                        <h3>
-                                            <a href="#">Project Name</a>
-                                        </h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                                        </a>
-                                        <h3>
-                                            <a href="#">Project Name</a>
-                                        </h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                                        </a>
-                                        <h3>
-                                            <a href="#">Project Name</a>
-                                        </h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                                        </a>
-                                        <h3>
-                                            <a href="#">Project Name</a>
-                                        </h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                                        </a>
-                                        <h3>
-                                            <a href="#">Project Name</a>
-                                        </h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                                        </a>
-                                        <h3>
-                                            <a href="#">Project Name</a>
-                                        </h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                                        </a>
-                                        <h3>
-                                            <a href="#">Project Name</a>
-                                        </h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                                        </a>
-                                        <h3>
-                                            <a href="#">Project Name</a>
-                                        </h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-
-
-                        <div id="list">
-                            <ul class="list-unstyled" style="margin-left: 0;" >
-                                <li style="overflow: hidden;">
-                                    <div class="col-md-3 col-sm-3 col-xs-3">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/200x150" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <h4 style="margin-top: 0; margin-bottom: 0;">Project One</h4>
-                                        <h5 style="margin-top: 0; margin-bottom: 0;">Subheading</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-                                        <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                    </div>
-                                </li>
-                                <li style="overflow: hidden;">
-                                    <div class="col-md-3 col-sm-3 col-xs-3">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/200x150" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <h3>Project One</h3>
-                                        <h4>Subheading</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-                                        <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                    </div>
-                                </li>
-                                <li style="overflow: hidden;">
-                                    <div class="col-md-3 col-sm-3 col-xs-3">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/200x150" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <h3>Project One</h3>
-                                        <h4>Subheading</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-                                        <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                    </div>
-                                </li>
-                                <li style="overflow: hidden;">
-                                    <div class="col-md-3 col-sm-3 col-xs-3">
-                                        <a href="#">
-                                            <img class="img-responsive" src="http://placehold.it/200x150" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-9 col-sm-9 col-xs-9">
-                                        <h3>Project One</h3>
-                                        <h4>Subheading</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-                                        <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-
+                    <div id="product_info">
+                        @*@Html.Partial("_ProductInfo")*@
+                        @Html.Action("GetProductListByMerchant", new { id = ViewBag.SupplierId})
                     </div>
 
 
