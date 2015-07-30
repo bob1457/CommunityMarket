@@ -200,7 +200,31 @@
                     Cover page
                 </div>
                 <div id="dept">
-                    Department page (Not In Use)
+                    @*Department page (Not In Use)*@
+                    <div style="margin-top: 25px;">
+                        <ul class="nav nav-tabs" role="tablist" style="margin-bottom: 0;">
+                            <li class="active"><a href="#all" role="tab" data-toggle="tab" style="padding: 0 10px 0 10px;"><h4 class="text-capitalize"><span class="glyphicon glyphicon-th-list"></span> All Departments</h4></a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" style="background-color: white;">
+                        <div class="tab-pane active" id="all" style="background-color: white;">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <div class="media-body">
+                                        <div><button class="btn btn-primary disabled" style="margin-bottom: -25px; margin-left: 7px; margin-top: 15px; color: rgb(241, 198, 128);" data-title="Add" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus-sign"></span> Add New</button></div>
+                                        <span id="msg6"></span>
+                                        <div id="clist" style="margin-top: 40px;">@Html.Action("GetDepartmentList")</div>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+
+                        </div>
+
+                    </div>
+                    
+                    
+
                 </div>
                 <div id="category">
                     
@@ -216,9 +240,9 @@
                         <div class="tab-pane active" id="all" style="background-color: white;">
                             <ul class="media-list">
                                 <li class="media">
-                                    <a class="pull-left" href="#" style="margin-top: 15px;">
+                                    @*<a class="pull-left" href="#" style="margin-top: 15px;">
                                         <img class="media-object img-circle" src="~/Content/Assets/Images/Products/categories.png" title="Categories" alt="" width="60" height="60" style="margin-left: 5px;" />
-                                    </a>
+                                    </a>*@
                                     <div class="media-body">
                                         <div><button class="btn btn-primary" style="margin-bottom: -25px; margin-left: 7px; margin-top: 15px; color: rgb(241, 198, 128);" data-title="Add" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus-sign"></span> Add New</button></div>
                                         <span id="msg3" ></span>

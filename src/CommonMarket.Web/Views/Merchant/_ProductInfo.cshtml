@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CommonMarket.Core.Entities.Product>
+
+<div class="panel-body">
+    <div id="thumb">
+        <ul class="list-unstyled" style="margin-left: 0;">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item">
+                        <a href="#">
+                            <img class="img-responsive" src="@Url.Content(@item.ProductImgLargeUrl)" alt="@item.ProductName">
+                        </a>
+                        <h3>
+                            <a href="#">Project Name</a>
+                        </h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                    </div>
+                </li>
+            }
+            
+            
+        </ul>
+    </div>
+
+
+
+    <div id="list">
+        <ul class="list-unstyled" style="margin-left: 0;">
+            @foreach (var item in Model)
+            {
+                <li style="overflow: hidden;">
+                    <div class="col-md-3 col-sm-3 col-xs-3">
+                        <a href="#">
+                            <img class="img-responsive" src="@Url.Content(@item.ProductImgLargeUrl)" alt="@item.ProductName">
+                        </a>
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-9">
+                        <h4 style="margin-top: 0; margin-bottom: 0;">@item.ProductName</h4>
+                        <h5 style="margin-top: 0; margin-bottom: 0;">Subheading</h5>
+                        <p>@item.ProductDescLong</p>
+                        <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                </li>
+            }
+            
+            
+        </ul>
+    </div>
+
+
+</div>

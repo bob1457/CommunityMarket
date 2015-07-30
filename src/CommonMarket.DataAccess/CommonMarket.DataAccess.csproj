@@ -51,6 +51,7 @@
     <Compile Include="Base\IBaseRepository.cs" />
     <Compile Include="Base\IBaseRepositoryAsync.cs" />
     <Compile Include="CommunityMarketContext.cs" />
+    <Compile Include="EF\AddedContext.cs" />
     <Compile Include="IDbContext.cs" />
     <Compile Include="IRepositoryAsync.cs" />
     <Compile Include="IRepository.cs" />
@@ -67,9 +68,7 @@
       <Name>CommonMarket.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EF\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="CodeTemplates\ReverseEngineerCodeFirst\Context.tt" />
     <Content Include="CodeTemplates\ReverseEngineerCodeFirst\Entity.tt" />

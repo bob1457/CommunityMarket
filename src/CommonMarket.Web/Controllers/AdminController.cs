@@ -12,6 +12,7 @@ using CommonMarket.core.Entities;
 using CommonMarket.Core.Interface;
 using CommonMarket.Web.Models;
 using ImageResizer;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -57,13 +58,15 @@ namespace CommonMarket.Web.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ICustomerService _customerService;
         private readonly IMerchantService _merchantServie;
+        private readonly IDepartmentService _departmentService;
 
 
-        public AdminController(ICategoryService categoryService, ICustomerService customerService, IMerchantService merchantServie)
+        public AdminController(ICategoryService categoryService, ICustomerService customerService, IMerchantService merchantServie, IDepartmentService departmentService)
         {
             _categoryService = categoryService;
             _customerService = customerService;
             _merchantServie = merchantServie;
+            _departmentService = departmentService;
         }
 
         #region Home page with partial view
@@ -202,8 +205,29 @@ namespace CommonMarket.Web.Controllers
             return PartialView("_AllCategories", categoryList);
         }
 
+
+
+
         #endregion
 
+        #region Department
+
+        [ChildActionOnly]
+        public ActionResult GetDepartmentList(int? page)
+        {
+            const int pageSize = 10; //for testing purpose, to be adjustetd
+            int pageIndex = (page ?? 1) - 1;
+            int pageNumber = (page ?? 1);
+
+            IEnumerable<Department> allDepartments =
+                _departmentService.FindAllDepartments().OrderByDescending(n => n.DepartmentName);
+
+            var departments = allDepartments.ToPagedList(pageNumber, pageSize);
+
+            return PartialView("_AllDepartments", departments);
+        }
+
+        #endregion
 
         #region Helper
         /**/

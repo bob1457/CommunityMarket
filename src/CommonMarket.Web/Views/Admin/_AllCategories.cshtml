@@ -256,76 +256,25 @@
                                 //$("#msg_@item.Id").text(data);
                                 $("#file_upload_@item.Id").val('');
 
-
+                                //alert("upload good!");
 
                                 //$('#ec_@item.Id').removeClass('modal-open');
                                 //$('.modal-backdrop').remove();
 
-
+                                debugger;
                                 var url = "/Admin/ListCategories";
                                 $.get(url, function (data) {
                                     $("#clist").html(data);
                                     return false;
                                 });
 
+                                //Update the current url on the page
 
-                                @*debugger;
-                                                    //Update the image url in the backend server db
+                                $('#ec_@item.Id').removeClass('modal-open');
+                                $('.modal-backdrop').remove();
 
-                                                    var fname = $("#fn").val();
-
-                                                    var cateName = $("#c_name_@item.Id").val();
-                                                    var cateDesc = $("#c_desc_@item.Id").val();
-                                                    var cateImgSm = "/Content/Assets/Images/" + fname;
-                                                    var departid = $("#d_@item.Id").val();
-                                                    var cateImgLg = cateImgSm;
-                                                    var c_date = "@item.CreateDate";
-                                                    //var u_date = $("#uDate").val();
-                                                    var notes = $("#c_notes_@item.Id").val();
-
-
-                                                    //debugger;
-
-                                                    var category = {
-                                                        'Id': '@item.Id',
-                                                        'ProductCategoryName': cateName,
-                                                        'ProductCategoryDesc': cateDesc,
-                                                        'Notes': notes,
-                                                        'ProductCategoryImgLargeUrl': cateImgLg,
-                                                        'ProductCategoryImgSamllUrl': cateImgSm,
-                                                        'DepartmentId': departid,
-                                                        'CreateDate': c_date
-                                                        //'UpdateDate': u_date
-                                                    };
-
-                                                    $.ajax({
-                                                        url: "/Admin/UpdateCategory",
-                                                        type: "POST",
-                                                        data: JSON.stringify(category),
-                                                        contentType: 'application/json',
-
-                                                        success: function (data) {
-
-                                                            $('#ec_@item.Id').modal('hide');
-
-                                                            //$('#msg').html(data);
-                                                            //$('#msg').delay(5000).fadeOut(400);
-
-                                                            var url = "/Admin/ListCategories";
-                                                            $.get(url, function (data) {
-                                                                $("#clist").html(data);
-                                                                return false;
-                                                            });
-                                                        }
-
-                                                    });*@
-
-                                                        //Update the current url on the page
-
-                                                        $('#ec_@item.Id').removeClass('modal-open');
-                                                        $('.modal-backdrop').remove();
-
-                                                        $('#ec_@item.Id').modal('hide');
+                                $('#ec_@item.Id').modal('hide');
+                                                       
                             });
                         });
 

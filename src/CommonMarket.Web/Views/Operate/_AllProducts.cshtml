@@ -27,7 +27,7 @@
                         <td><img src="@Url.Content(@item.ProductImgSmallUrl)" title="@item.ProductName"/></td>
                         <td>@item.ProductName</td>
                         <td>@item.ProductDescLong</td>
-                        <td>@item.UnitPrice</td>
+                        <td>$@item.UnitPrice.ToString().Remove((@item.UnitPrice).ToString().Length - 2)</td>
                         <td>@item.UnitName</td>
                         <td>
                             <p data-placement="top" data-toggle="tooltip" title="Manage"><span class="btn btn-primary btn-xs" data-title="Manage_p" data-toggle="modal" data-target="#ec_@item.Id"><span class="glyphicon glyphicon-tasks"></span></span></p>
@@ -130,7 +130,7 @@
                                                             
                                                             <!-- Add additional images -->
                                                             <div id="additional_@item.Id" style="margin-left: 25px; clear: both;">
-                                                                <a href="#">Add More Images</a>
+                                                                <a href="#">Add More Images</a> <span style="vertical-align: middle; font-size: 1.25em; color: #34A93D;" class="glyphicon glyphicon-question-sign"></span>
                                                             </div>
                                                             
                                                             <div id="Add_cancel_@item.Id" style="display: none;"><a href="#" style="margin-left: 25px; clear: both;">Cancel</a></div>
@@ -140,7 +140,14 @@
                                                                 <div id="msg1_@item.Id"></div>
                                                             </div>
                                                             
-
+                                                            <!-- View Additional Images -->
+                                                            <div id="view_@item.Id" style="margin-left: 25px; clear: both;">
+                                                                <a href="#">View</a><a id="mge_cancle" style="display: none;" href="#">Cancel</a> <span style="vertical-align: middle; font-size: 1.25em; color: #34A93D;" class="glyphicon glyphicon-question-sign"></span>
+                                                            </div>
+                                                            <div style="margin-left: 25px;" id="msg3_@item.Id"></div>
+                                                            <div id="mge_img">
+                                                                
+                                                            </div>
                                                         </div>
 
 
@@ -275,8 +282,27 @@
 
                         </script>
                         
-                        
-                        
+                        <!-- Load additional images -->
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                debugger;
+                                var url = "/Product/GetAdditionalImages?id=@item.Id";
+                                $.get(url, function(data) {
+                                    //$("#mge_img").html(data);
+                                    //return false;
+                                    //Load images to list
+                                    //
+                                    if (data == 'object') {
+                                        var ul = $('<ul>');
+                                        for (var i in data) {
+                                            ul.append($('<li>')).text(i).append(tree(data[i]));
+                                        }
+                                        return ul;
+                                    }
+                                });
+
+                            });
+                        </script>
 
 
                         <!-- File Upload -->
@@ -336,6 +362,66 @@
 
                             });
                         </script>
+                        
+                        <!-- Additionia Image Upload -->
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $('#add_upload_@item.Id').on('click', function () {
+                                    //debugger;
+                                    var data = new FormData();
+
+                                    var files = $("#addi_file_upload_@item.Id").get(0).files;
+
+                                    //if (files == null) {
+
+                                    //}
+
+                                    // Add the uploaded image content to the form data collection
+                                    if (files.length > 0) {
+                                        data.append("UploadedImage", files[0]);
+                                    }
+
+                                    // Make Ajax request with the contentType = false, and procesDate = false
+                                    var ajaxRequest = $.ajax({
+                                        type: "POST",
+                                        url: "/Product/AddotionalImageUploade?id=" + @item.Id,
+                                        contentType: false,
+                                        processData: false,
+                                        data: data
+                                    });
+
+                                    //debugger;
+                                    ajaxRequest.done(function (data) {
+                                        // Do other operation
+                                        //$("#msg_@item.Id").text(data);
+                                        $("#addi_file_upload_@item.Id").val('');
+
+                                        //$('#ec_@item.Id').removeClass('modal-open');
+                                        //$('.modal-backdrop').remove();
+                                        $("#msg3_@item.Id").text(data);
+                                        $("#addi_img_@item.Id").hide();
+                                        $("#Add_cancel_@item.Id").hide();
+                                        
+                                        //Load images to list
+                                        //
+                                        if (data == 'object') {
+                                            var ul = $('<ul>');
+                                            for (var i in data) {
+                                                ul.append($('<li>')).text(i).append(tree(data[i]));
+                                            }
+                                            return ul;
+                                        }
+
+                                        
+                                    });
+                                });
+
+
+
+                            });
+                        </script>
+                        
+                        
                         
 
                         

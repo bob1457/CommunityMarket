@@ -12,14 +12,17 @@ namespace CommonMarket.Services.ProductServices
         private readonly IRepository<Product> _proRepository;
         private readonly IProductRepository _productRepository;
         private readonly IRepository<ProductCategory> _categoryRepository;
+        private readonly IRepository<AdditionalProductImg> _addImageRepository;
 
         private readonly IUnitOfWork _uow;
 
-        public ProductServices(IRepository<Product> proRepository, IProductRepository productRepository, IRepository<ProductCategory> categoryRepository, IUnitOfWork uow)
+        public ProductServices(IRepository<Product> proRepository, IProductRepository productRepository, 
+            IRepository<ProductCategory> categoryRepository, IRepository<AdditionalProductImg> addImageRepository, IUnitOfWork uow)
         {
             _proRepository = proRepository;
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
+            _addImageRepository = addImageRepository;
 
             _uow = uow;
         }
@@ -60,6 +63,15 @@ namespace CommonMarket.Services.ProductServices
 
         }
 
+        public void AddAdditionalImage(AdditionalProductImg image)
+        {
+            _addImageRepository.Add(image);
+
+        }
+
+
+
+
         public void UpdateProduct(Product product)
         {
             try
@@ -94,6 +106,11 @@ namespace CommonMarket.Services.ProductServices
             }
         }
 
+        public IEnumerable<AdditionalProductImg> GetImgListByProduct(int id)
+        {
+            return _addImageRepository.GetAll().Where(p => p.ProductId == id);
+        }
+
 
         public void DeleteProduct(int id)
         {
@@ -104,5 +121,8 @@ namespace CommonMarket.Services.ProductServices
         #endregion
 
 
+
+
+        
     }
 }

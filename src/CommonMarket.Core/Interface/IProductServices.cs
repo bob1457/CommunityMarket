@@ -7,7 +7,11 @@ namespace CommonMarket.Services.ProductServices
     {
         IEnumerable<Product> FindAllProducts();
         Product FindProductById(int id);
+
         void AddNewProduct(Product product, ProductCategory category);
+        void AddAdditionalImage(AdditionalProductImg image);
+
+        IEnumerable<AdditionalProductImg> GetImgListByProduct(int id);
         void UpdateProduct(Product product);
 
         void UpdateProductImg(Product product);

@@ -17,6 +17,7 @@ namespace CommonMarket.DataAccess
             this.Configuration.LazyLoadingEnabled = false;
         }
 
+        public virtual DbSet<AdditionalProductImg> AdditionalProductImgs { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Department> Departments { get; set; }

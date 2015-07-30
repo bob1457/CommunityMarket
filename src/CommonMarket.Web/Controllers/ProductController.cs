@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -46,6 +47,8 @@ namespace CommonMarket.Web.Controllers
         }
 
         #endregion
+
+        private static int counter;
 
         private readonly ICategoryService _categoryService;
         private readonly IProductServices _productServices;
@@ -199,6 +202,95 @@ namespace CommonMarket.Web.Controllers
             _productServices.UpdateProductImg(product);
 
             return Json("Image has been updated!");
+        }
+
+        [HttpPost]
+        public ActionResult AddotionalImageUploade(int id) //id is product Id
+        {
+            HttpPostedFile myFile = System.Web.HttpContext.Current.Request.Files["UploadedImage"];// Request.Files["MyFile"];
+
+            string fName = myFile.FileName;
+            string fileExtenstion = FileProcessor.GetFileExtension(fName);
+
+            string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("/Content/Assets/Images/Products/Originals"), Path.GetFileName(myFile.FileName));
+            string purePath = System.Web.HttpContext.Current.Server.MapPath("/Content/Assets/Images/Products");
+
+
+            var fileUpload = new FileUpload();
+
+            fileUpload.Upload(myFile, path);
+
+            #region Generate small and large image
+
+            ResizeSettings settings_sm = new ResizeSettings();
+            ResizeSettings settings_lg = new ResizeSettings();
+
+            switch (fileExtenstion)
+            {
+                case ".png":
+                    settings_sm = new ResizeSettings("width=60&height=60&crop=auto&format=png");
+                    settings_lg = new ResizeSettings("width=400&height=300&crop=auto&format=png");
+                    break;
+                case ".jpg":
+                    settings_sm = new ResizeSettings("width=60&height=60&crop=auto&format=jpg");
+                    settings_lg = new ResizeSettings("width=400&height=300&crop=auto&format=jpg");
+                    break;
+                case ".jepg":
+                    settings_sm = new ResizeSettings("width=60&height=60&crop=auto&format=jpg");
+                    settings_lg = new ResizeSettings("width=400&height=300&crop=auto&format=jpg");
+                    break;
+                case ".gif":
+                    settings_sm = new ResizeSettings("width=60&height=60&crop=auto&format=gif");
+                    settings_lg = new ResizeSettings("width=400&height=300&crop=auto&format=gif");
+                    break;
+                default:
+                    settings_sm = new ResizeSettings("width=60&height=60&crop=auto&format=jpg");
+                    settings_lg = new ResizeSettings("width=400&height=3000&crop=auto&format=jpg");
+                    break;
+
+            }
+
+            counter = counter + 1;
+            
+            string fileName_addi_sm = "product_" + id + "addi_sm_" + counter;
+            string fileName_addi_lg = "product" + id + "addi_lg_" + counter;
+
+            string fileUrl_sm = "/Content/Assets/Images/products/" + fileName_addi_sm + fileExtenstion;
+            string fileUrl_lg = "/Content/Assets/Images/products/" + fileName_addi_lg + fileExtenstion;
+
+            string newFileName_sm = Path.Combine(purePath, fileName_addi_sm);
+            string newFileName_lg = Path.Combine(purePath, fileName_addi_lg);
+
+            ImageBuilder.Current.Build(myFile, newFileName_sm, settings_sm, false,
+                  true);
+            ImageBuilder.Current.Build(myFile, newFileName_lg, settings_lg, false,
+               true);
+
+            #endregion
+
+            //Add to database
+            AddProductImages(id, fileUrl_sm, fileUrl_lg);
+
+            return Json("Image loaded successfully!");
+        }
+
+        private void AddProductImages(int id, string fileNameSm, string fileNameLg)
+        {
+            var Image = new AdditionalProductImg();
+
+            Image.AdditionalImgLargeUrl = fileNameLg;
+            Image.AdditionalImgSmallUrl = fileNameSm;
+            Image.ProductId = id;
+
+            _productServices.AddAdditionalImage(Image);
+
+        }
+
+        public JsonResult GetAdditionalImages(int id) //id: product id
+        {
+            var images = _productServices.GetImgListByProduct(id);
+
+            return Json(images.ToList(), JsonRequestBehavior.AllowGet);
         }
 
 
