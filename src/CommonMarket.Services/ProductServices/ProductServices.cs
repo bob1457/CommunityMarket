@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Web.UI.WebControls;
 using CommonMarket.Core.Entities;
 using CommonMarket.DataAccess;
 
@@ -70,8 +70,6 @@ namespace CommonMarket.Services.ProductServices
         }
 
 
-
-
         public void UpdateProduct(Product product)
         {
             try
@@ -106,6 +104,15 @@ namespace CommonMarket.Services.ProductServices
             }
         }
 
+
+
+        public IEnumerable<Product> FindProductByCategory(int id)
+        {
+            //throw new NotImplementedException();
+            return _productRepository.FindByCategory(id);
+        }
+
+
         public IEnumerable<AdditionalProductImg> GetImgListByProduct(int id)
         {
             return _addImageRepository.GetAll().Where(p => p.ProductId == id);
@@ -117,12 +124,16 @@ namespace CommonMarket.Services.ProductServices
 
         }
 
+        //public Supplier GetSupplierByProduct(int id) //id is product id
+        //{
+            
+           
+        //}
+
 
         #endregion
 
 
 
-
-        
     }
 }

@@ -48,6 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AdditionalProductImg.cs" />
+    <Compile Include="Entities\AppUserProfile.cs" />
+    <Compile Include="Entities\Cart.cs" />
+    <Compile Include="Entities\CartItem.cs" />
+    <Compile Include="Entities\CartItemExt.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Department.cs" />
@@ -76,6 +80,7 @@
     <Compile Include="Entities\WishList.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="Interface\ICartService.cs" />
     <Compile Include="Interface\ICategoryService.cs" />
     <Compile Include="Interface\ICustomerService.cs" />
     <Compile Include="Interface\IDepartmentService.cs" />

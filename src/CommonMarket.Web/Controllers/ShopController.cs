@@ -62,7 +62,7 @@ namespace CommonMarket.Web.Controllers
         }
 
 
-        [ChildActionOnly]
+        //[ChildActionOnly]
         public ActionResult GetCategoryList()
         {
             IEnumerable<ProductCategory> allCategories = _categoryService.FindAllCategories();
@@ -73,10 +73,23 @@ namespace CommonMarket.Web.Controllers
         [ChildActionOnly]
         public ActionResult GetFeaturedProducts() //Actually newest products
         {
-            var products = _productServices.FindAllProducts().OrderByDescending(d => d.CreateDate).Take(8); //get latest or newest products (4)
+            var products = _productServices.FindAllProducts().OrderByDescending(d => d.CreateDate).Take(12); //get latest or newest products (4)
 
             return PartialView("_FeaturedList", products);
         }
+
+        
+        public ActionResult GetProductListByCategory(int id)
+        {
+            var products = _productServices.FindProductByCategory(id);
+
+            return PartialView("_FeaturedList", products);
+        }
+
+
+
+
+
 
         public ActionResult GetAllSuppliers()
         {
@@ -84,5 +97,13 @@ namespace CommonMarket.Web.Controllers
             
             return PartialView("_SupplierList", supplier);
         }
+
+
+        //public ActionResult Cart()
+        //{
+
+        //    return View();
+        //}
+
     }
 }

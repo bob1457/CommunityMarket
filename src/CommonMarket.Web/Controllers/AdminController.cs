@@ -383,6 +383,7 @@ namespace CommonMarket.Web.Controllers
                     newSupplier.ContactFirstName = UserManager.FindById(id).UserProfile.FirstName;
                     newSupplier.ContactLastName = UserManager.FindById(id).UserProfile.LastName;
                     newSupplier.IsActive = true;
+                    newSupplier.UserProfileId = profileId;
                     
                     _merchantServie.AddSupplier(newSupplier);
                 }

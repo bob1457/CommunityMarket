@@ -21,6 +21,37 @@
                 //    $(this).removeClass("active");
                 //});
             </script>
+            
+            <script type="text/javascript">
+                $(document).ready(function() {
+
+                    debugger;
+
+                    $("#@item.Id").click(function() {
+
+
+                        var url = "/Shop/GetProductListByCategory";
+                        var q = "id=" + @item.Id;
+                            
+                                $.get(url, q, function  (data) {
+                                    $("#feature").hide();
+                                    $("#pro_cate").html("");
+                                    $("#pro_cate").html(data);
+
+                                    $("#supplier_panel").hide();
+                                    $("#feature_panel").show();
+
+                                    return false;
+                                });
+                            
+
+                       
+
+                    });
+
+                });
+            </script>
+            
         } 
     </ul>
 

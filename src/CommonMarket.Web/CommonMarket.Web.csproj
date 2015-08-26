@@ -288,6 +288,8 @@
     <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\jquery.iframe-transport.js" />
     <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Scripts\viewModels\productImgViewModel.js" />
     <Content Include="Scripts\viewModels\roleModalViewModel.js" />
     <Content Include="Scripts\viewModels\roleViewModel.js" />
     <Content Include="packages.config" />
@@ -298,6 +300,7 @@
     <Content Include="Scripts\metro.js" />
     <Content Include="Scripts\metro.min.js" />
     <Content Include="Scripts\nivo-lightbox.min.js" />
+    <Content Include="Scripts\viewModels\ShoppingCartViewModel.js" />
     <Content Include="Scripts\viewModels\userViewModel.js" />
     <Content Include="Views\Shared\_Layout_h.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -375,6 +378,15 @@
     <Content Include="Views\Merchant\_ProductInfo.cshtml" />
     <Content Include="Views\Product\_AdditionalImgList.cshtml" />
     <Content Include="Views\Admin\_AllDepartments.cshtml" />
+    <Content Include="Views\Product\_ProductInfo.cshtml" />
+    <Content Include="Views\Shared\_CartView1.cshtml" />
+    <Content Include="Views\Product\_VenderInfo.cshtml" />
+    <Content Include="Views\Product\_ProductImages.cshtml" />
+    <Content Include="Views\Shop\Cart.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Product\_CartView.cshtml" />
+    <Content Include="Views\Product\_InfoView.cshtml" />
+    <Content Include="Views\Operate\_AdditionalImagList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -459,6 +471,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LifeStyleController.cs" />
@@ -468,6 +481,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -527,7 +541,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Assets\Images\Products\Originals\" />
+    <Folder Include="Models\ViewModels\" />
     <Folder Include="Views\Customer\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

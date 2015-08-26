@@ -8,6 +8,7 @@ using CommonMarket.Core.Interface;
 using CommonMarket.Core.Product;
 using CommonMarket.DataAccess;
 using CommonMarket.Services.ProductServices;
+using CommonMarket.Services.ShopServices;
 using CommonMarket.Services.UserServices;
 using Ninject;
 
@@ -46,6 +47,8 @@ namespace CommonMarket.Web.Infrastructure
             kernel.Bind<ICustomerService>().To<CustomerService>();
             kernel.Bind<IMerchantService>().To<MerchantService>();
             kernel.Bind<IProductServices>().To<ProductServices>();
+            kernel.Bind <ICartService>().To<CartService>();
+
             kernel.Bind<IDepartmentService>().To<DepartmentService>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
 

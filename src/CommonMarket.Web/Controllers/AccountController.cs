@@ -255,7 +255,7 @@ namespace CommonMarket.Web.Controllers
                             Country = "",
                             PostZipCode = "",
                             Email = model.Email,
-                            AvatarImgUrl = "~/Content/Assets/Images/user_default.png",
+                            AvatarImgUrl = "/Content/Assets/Images/user_default.png",
                             CreateDate = DateTime.Now,
                             UpdateDate = DateTime.Now
                         }

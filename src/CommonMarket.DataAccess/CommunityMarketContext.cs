@@ -1,5 +1,6 @@
 using CommonMarket.Core.Entities;
 using CommonMarket.core.Entities;
+using CommonMarket.DataAccess.EF;
 
 
 namespace CommonMarket.DataAccess
@@ -15,9 +16,13 @@ namespace CommonMarket.DataAccess
             : base("name=CommunityMarketContext")
         {
             this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
+        public virtual DbSet<AppUserProfile> AppUserProfiles { get; set; }
         public virtual DbSet<AdditionalProductImg> AdditionalProductImgs { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<CartItem> CartItems { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
@@ -193,6 +198,17 @@ namespace CommonMarket.DataAccess
             modelBuilder.Entity<Tax>()
                 .Property(e => e.TaxRate)
                 .HasPrecision(18, 0);
+
+            //modelBuilder.Entity<Cart>()
+            //    .HasMany(e => e.CartItems)
+            //    .WithMany(e => e.Carts)
+            //    .Map(m => m.ToTable("ItemCart").MapLeftKey("CartId").MapRightKey("CartItemId"));
+
+            modelBuilder.Entity<Cart>()
+                .HasMany(e => e.CartItems)
+                .WithRequired(e => e.Cart)
+                .WillCascadeOnDelete(false);
+
         }
     }
 }

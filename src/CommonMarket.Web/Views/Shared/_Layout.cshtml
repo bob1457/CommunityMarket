@@ -22,6 +22,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../content/styles/bootstrap-theme.css" rel="stylesheet" />
     @*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">*@
+    <script src="~/Scripts/typeahead.bundle.js"></script>
 
     <!-- Font Awesome -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -62,6 +63,9 @@
     <style>
         .dropdown-menu > li > a {
             color: #E8E5E5;
+        }
+        .input-group-addon {
+            padding: 3px;
         }
     </style>
 
@@ -128,13 +132,13 @@
             <div class="row">
                 <div class="col-sm-3 col-md-3 pull-right" style=" margin-right: 15px;">
                     <div id="imaginary_container">
-                        <div class="input-group stylish-input-group">
-                            <input type="text" class="form-control" placeholder="Site Search">
-                            <span class="input-group-addon">
+                        <div class="input-group stylish-input-group" style="float:right;">
+                            <input id="site_search" type="text" class="form-control typeahead" placeholder="Site Search">
+                            @*<span class="input-group-addon">
                                 <button type="submit" style="height: 21px;">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
-                            </span>
+                            </span>*@
                         </div>
                     </div>
 
@@ -168,8 +172,19 @@
         </div>
 
     </div>
-
+    
+    
 
 </body>
 </html>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        //debugger;
+        var colors = ["red", "blue", "green", "yellow", "brown", "black"];
+
+        $('#site_search').autocomplete({
+            source: colors
+        });
+    });
+</script>

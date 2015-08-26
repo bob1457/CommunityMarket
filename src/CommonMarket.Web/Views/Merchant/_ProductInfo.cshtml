@@ -6,14 +6,25 @@
             @foreach (var item in Model)
             {
                 <li>
-                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item">
-                        <a href="#">
-                            <img class="img-responsive" src="@Url.Content(@item.ProductImgLargeUrl)" alt="@item.ProductName">
+                    <div class="col-md-3 col-sm-4 col-xs-6 portfolio-item" style="height: 350px;">
+                        <a href="@Url.Action("ProductDetails", "Product", new {id=@item.Id})">
+                            <img class="img-responsive" src="@Url.Content(@item.ProductImgLargeUrl)" title="@item.ProductName">
                         </a>
                         <h3>
-                            <a href="#">Project Name</a>
+                            <a href="#">@item.ProductName</a>
                         </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                        <h5 style="margin-top: 0; margin-bottom: 0;">$@item.UnitPrice.ToString().Remove((@item.UnitPrice).ToString().Length - 2)/@item.UnitName</h5>
+                        <p>
+                            @if ((@item.ProductDescLong).Length > 45)
+                            {
+                                <span>@item.ProductDescLong.Substring(0, 40)  <a href="#">&nbsp;more...</a></span>
+                            }
+                            else
+                            {
+                                @item.ProductDescLong
+                            }
+                        </p>
+                        <a class="btn btn-success" href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
                 </li>
             }
@@ -30,15 +41,15 @@
             {
                 <li style="overflow: hidden;">
                     <div class="col-md-3 col-sm-3 col-xs-3">
-                        <a href="#">
-                            <img class="img-responsive" src="@Url.Content(@item.ProductImgLargeUrl)" alt="@item.ProductName">
+                        <a href="@Url.Action("ProductDetails", "Product", new {id=@item.Id})">
+                            <img class="img-responsive" src="@Url.Content(@item.ProductImgLargeUrl)" title="@item.ProductName">
                         </a>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-9">
                         <h4 style="margin-top: 0; margin-bottom: 0;">@item.ProductName</h4>
-                        <h5 style="margin-top: 0; margin-bottom: 0;">Subheading</h5>
+                        <h5 style="margin-top: 0; margin-bottom: 0;">$@item.UnitPrice.ToString().Remove((@item.UnitPrice).ToString().Length - 2)/@item.UnitName</h5>
                         <p>@item.ProductDescLong</p>
-                        <a class="btn btn-primary" href="#">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <a class="btn btn-success" href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
                 </li>
             }

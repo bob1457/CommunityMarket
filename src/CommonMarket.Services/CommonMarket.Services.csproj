@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ShopServices\CartService.cs" />
     <Compile Include="ProductServices\CategoryService.cs" />
     <Compile Include="ProductServices\DepartmentService.cs" />
     <Compile Include="ProductServices\ProductServices.cs" />

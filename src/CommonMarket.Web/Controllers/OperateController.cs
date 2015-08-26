@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls.WebParts;
 using CommonMarket.Core.Interface;
 using CommonMarket.Services.ProductServices;
 using CommonMarket.Web.Models;
@@ -90,6 +91,14 @@ namespace CommonMarket.Web.Controllers
             return PartialView("_AllProducts", products);
         }
 
+        public ActionResult ListAdditionalImag(int id) //product id
+        {
+            var imgList = _productServices.GetImgListByProduct(id);
+
+            ViewBag.pId = id;
+
+            return PartialView("_AdditionalImagList", imgList);
+        }
 
         public ActionResult ListProducts(int? page)
         {

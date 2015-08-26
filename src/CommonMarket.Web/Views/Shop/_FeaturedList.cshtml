@@ -4,42 +4,62 @@
 <ul class="list-unstyled ">
     @foreach (var item in Model)
     {
-        <li>
-            <div class="col-sm-3 col-lg-3 col-md-3">
-                <div class="thumbnail" style="height: 341px; margin-bottom: 0;">
-                    <a href="#"><img src="@Url.Content(@item.ProductImgLargeUrl)" /></a>
-                    <div class="caption">
-                        <h4>
-                            <a href="#">@item.ProductName</a>
-                        </h4>
-                        <p style="margin-bottom: 0;">
-                            
-                            @if ((@item.ProductDescLong).Length > 45)
+        if (Model.Count() != 0)
+        {
+            <li>
+                <div class="col-sm-3 col-lg-3 col-md-3">
+                    <div class="thumbnail" style="height: 341px; margin-bottom: 0;">
+                        <a href="@Url.Action("ProductDetails", "Product", new {id=@item.Id})"><img src="@Url.Content(@item.ProductImgLargeUrl)" /></a>
+                        <div class="caption">
+                            <h4>
+                                <a href="#">@item.ProductName</a>
+                            </h4>
+                            <p style="margin-bottom: 0;">
+
+                                @if ((@item.ProductDescLong).Length > 45)
+                                {
+                                    <span>@item.ProductDescLong.Substring(0, 40)  <a href="#">&nbsp;more...</a></span>
+                                }
+                                else
+                                {
+                                    @item.ProductDescLong
+                                }
+
+                            </p><br />
+                            <h4 class="pull-left product_price" style="margin-top: 0;">$@item.UnitPrice.ToString().Remove((@item.UnitPrice).ToString().Length - 2)/@item.UnitName</h4>
+                            @if (User.Identity.IsAuthenticated)
                             {
-                                <span>@item.ProductDescLong.Substring(0, 40)  <a href="#">&nbsp;more...</a></span>
+                                <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
                             }
                             else
                             {
-                                @item.ProductDescLong
+                                <a href="@Url.Content("~/Account/Login?returnUrl=/Shop")" class="btn btn-warning"><span class="glyphicon glyphicon-lock"></span>&nbsp; Login to Buy</a>
                             }
-
-                        </p><br />
-                        <h4 class="pull-left product_price" style="margin-top: 0;">$@item.UnitPrice.ToString().Remove((@item.UnitPrice).ToString().Length -2)/@item.UnitName</h4>
-                        <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
-                    </div>
-                    <div class="ratings">
-                        @*<p class="pull-right" id="produst_comment">15 reviews</p>
-                            <p class="product_rating">
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                            </p>*@
+                            
+                        </div>
+                        <div class="ratings">
+                            @*<p class="pull-right" id="produst_comment">15 reviews</p>
+                                <p class="product_rating">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>*@
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
+            </li>
+        }
+        else
+        {
+            <li>
+                <div class="col-md-12">
+                    <em> No results!</em>
+                </div>
+            </li>
+        }
+
     }
 
 

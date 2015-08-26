@@ -48,17 +48,19 @@ namespace CommonMarket.Web.Controllers
 
         #endregion
 
-        private static int counter;
+        //private static int counter;
 
         private readonly ICategoryService _categoryService;
         private readonly IProductServices _productServices;
         private readonly IMerchantService _merchantService;
+        //private readonly ICartService _cartService;
 
-        public ProductController(ICategoryService categoryService, IProductServices productServices, IMerchantService merchantService)
+        public ProductController(ICategoryService categoryService, IProductServices productServices, IMerchantService merchantService)//, ICartService cartService)
         {
             _categoryService = categoryService;
             _productServices = productServices;
             _merchantService = merchantService;
+            //_cartService = cartService;
         }
 
 
@@ -70,10 +72,51 @@ namespace CommonMarket.Web.Controllers
 
         public ActionResult ProductDetails(int id)
         {
-
+            ViewBag.Productid = id;
 
             return View();
         }
+
+        [ChildActionOnly]
+        public ActionResult GetProductDetails(int id)
+        {
+            var product = _productServices.FindProductById(id);
+
+            ViewBag.SupplierId = product.SupplierId;
+
+            return PartialView("_ProductInfo", product);
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetProductImages(int id) //product id
+        {
+
+
+            return PartialView("_ProductImages");
+        }
+        
+
+        [ChildActionOnly]
+        public ActionResult GetVendorInfo(int id) //supplier id
+        {
+            var vendor = _merchantService.FindSupplierById(id);
+
+            int profileId = vendor.UserProfileId;
+
+            var vendorProfile = UserManager.Users.Single(p => p.UserProfile.Id == profileId);
+
+
+            return PartialView("_VenderInfo", vendorProfile);
+        }
+
+        //[ChildActionOnly]
+        //public ActionResult GetCartView()
+        //{
+        //    var cart = _cartService.Lines;
+
+        //    return PartialView("_CartView", cart);
+        //}
+
 
 
 
@@ -92,6 +135,18 @@ namespace CommonMarket.Web.Controllers
 
         }
 
+        public ActionResult GetProductBySupplierId(int id)
+        {
+
+            return PartialView("");
+        }
+
+        public JsonResult GetSupplierByProductId(int id)
+        {
+            
+
+            return Json("");
+        }
 
         [HttpPost]
         public void AddProduct(Product product, Core.Entities.ProductCategory category)
@@ -205,7 +260,7 @@ namespace CommonMarket.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddotionalImageUploade(int id) //id is product Id
+        public ActionResult AdditionalImageUploade(int id) //id is product Id
         {
             HttpPostedFile myFile = System.Web.HttpContext.Current.Request.Files["UploadedImage"];// Request.Files["MyFile"];
 
@@ -250,10 +305,12 @@ namespace CommonMarket.Web.Controllers
 
             }
 
-            counter = counter + 1;
+            //counter = counter + 1;
+
+            Guid guid = Guid.NewGuid();
             
-            string fileName_addi_sm = "product_" + id + "addi_sm_" + counter;
-            string fileName_addi_lg = "product" + id + "addi_lg_" + counter;
+            string fileName_addi_sm = "product_" + id + "addi_sm_" + guid;
+            string fileName_addi_lg = "product" + id + "addi_lg_" + guid;
 
             string fileUrl_sm = "/Content/Assets/Images/products/" + fileName_addi_sm + fileExtenstion;
             string fileUrl_lg = "/Content/Assets/Images/products/" + fileName_addi_lg + fileExtenstion;
@@ -286,13 +343,21 @@ namespace CommonMarket.Web.Controllers
 
         }
 
-        public JsonResult GetAdditionalImages(int id) //id: product id
+        //[ChildActionOnly]
+        public ActionResult GetAdditionalImages(int id) //id: product id
         {
             var images = _productServices.GetImgListByProduct(id);
 
-            return Json(images.ToList(), JsonRequestBehavior.AllowGet);
+            //return Json(images.ToList(), JsonRequestBehavior.AllowGet);
+            return PartialView("_ProductImages", images);
         }
 
+        public ActionResult ListAdditionalImag(int id) //product id
+        {
+            var imgList = _productServices.GetImgListByProduct(id);
+
+            return PartialView("_AdditionalImagList", imgList);
+        }
 
         [HttpPost]
         public void UpdateProduct(Product product)
