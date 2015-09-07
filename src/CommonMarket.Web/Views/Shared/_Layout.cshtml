@@ -23,6 +23,7 @@
     <link href="../../content/styles/bootstrap-theme.css" rel="stylesheet" />
     @*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">*@
     <script src="~/Scripts/typeahead.bundle.js"></script>
+    <script src="~/Scripts/bootstrap-typeahead.min.js"></script>
 
     <!-- Font Awesome -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -183,26 +184,14 @@
         //debugger;
         var colors = ["red", "blue", "green", "yellow", "brown", "black"];
 
+        /*
         $('#site_search').autocomplete({
             source: colors
-
-            @*source: function(request, response) {
-                $.ajax({
-                    url: '@Html.Action("SiteSearch", "Search")',
-                    dataType: 'json',
-                    contentType: 'application/json, charset=utf-8',
-                    data: { search: $("#site_search").val() },
-                    success: function(data) {
-                        //response($.map(data, function(item) {
-                        //    return {
-                        //        label: item
-                        //    };
-                        //}));
-                    }
-                });
-                minLength: 2
-            }*@
-            
         });
+        */
+        $('#site_search').typeahead({
+            source: colors
+        });
+
     });
 </script>
