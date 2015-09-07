@@ -66,6 +66,7 @@ namespace CommonMarket.DataAccess
             var entry = _context.Entry(entity);
             entry.State = EntityState.Deleted;
             _dbset.Remove(entity);
+            _context.SaveChanges();
         }
 
         public virtual void DeleteAll(IEnumerable<T> entity)

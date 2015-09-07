@@ -364,6 +364,7 @@ namespace CommonMarket.Web.Controllers
             //Check if supplier account exists, if not, create an account
             //
             var profileId = UserManager.FindById(id).UserProfile.Id;
+            var email = UserManager.FindById(id).UserName; //find user login name (in email) by userid
 
             var supplier = _merchantServie.FindSupplierById(profileId);
 
@@ -371,6 +372,7 @@ namespace CommonMarket.Web.Controllers
             {
                 supplier.IsActive = true;
                 supplier.UserProfileId = profileId;
+                supplier.CompanyIconImgUrl = email; //user this field to pass the username(email) to supplier information table
 
                 _merchantServie.UpdateSupplier(supplier.Id);
             }

@@ -56,7 +56,7 @@
     <script src="~/Scripts/jquery.fileupload.js"></script>
     <script src="~/Scripts/jquery.iframe-transport.js"></script>
     <script src="~/Scripts/jquery.fileupload-ui.js"></script>
-
+    <script src="~/Scripts/accounting.min.js"></script>
     
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -185,6 +185,24 @@
 
         $('#site_search').autocomplete({
             source: colors
+
+            @*source: function(request, response) {
+                $.ajax({
+                    url: '@Html.Action("SiteSearch", "Search")',
+                    dataType: 'json',
+                    contentType: 'application/json, charset=utf-8',
+                    data: { search: $("#site_search").val() },
+                    success: function(data) {
+                        //response($.map(data, function(item) {
+                        //    return {
+                        //        label: item
+                        //    };
+                        //}));
+                    }
+                });
+                minLength: 2
+            }*@
+            
         });
     });
 </script>

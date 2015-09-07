@@ -82,7 +82,13 @@ namespace CommonMarket.Web.Controllers
 
 
 
+        public JsonResult GeneralSearch()
+        {
 
+
+
+            return Json("");
+        }
 
 
 

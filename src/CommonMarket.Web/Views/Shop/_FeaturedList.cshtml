@@ -1,5 +1,10 @@
 ﻿@using System.Web.Razor.Parser.SyntaxTree
+@using Microsoft.AspNet.Identity
 @model IEnumerable<CommonMarket.Core.Entities.Product>
+
+@{
+    var userId = User.Identity.GetUserId();
+}
 
 <ul class="list-unstyled ">
     @foreach (var item in Model)
@@ -8,7 +13,7 @@
         {
             <li>
                 <div class="col-sm-3 col-lg-3 col-md-3">
-                    <div class="thumbnail" style="height: 341px; margin-bottom: 0;">
+                    <div class="thumbnail" style="height: auto; margin-bottom: 0;">
                         <a href="@Url.Action("ProductDetails", "Product", new {id=@item.Id})"><img src="@Url.Content(@item.ProductImgLargeUrl)" /></a>
                         <div class="caption">
                             <h4>
@@ -26,16 +31,33 @@
                                 }
 
                             </p><br />
-                            <h4 class="pull-left product_price" style="margin-top: 0;">$@item.UnitPrice.ToString().Remove((@item.UnitPrice).ToString().Length - 2)/@item.UnitName</h4>
+                            <h4 class="pull-left product_price" style="margin-top: 0;">@item.UnitPrice.ToString("c")/@item.UnitName.ToLower()</h4>
+                            @*<br/>*@
+                            @*<div>
+                                <input type="text" id="qty_@item.Id" style="display: inline-block;width: 35px;height: 25px;vertical-align: baseline;" value="1" /> @if (@item.UnitName == "Each")
+                                {
+                                    <em>unit</em>
+                                }
+                                else
+                                {
+                                    <em>@item.UnitName.ToLower()</em>
+                                }
+                            </div>*@
+
+                            &nbsp;
+                            <input id="sId" type="hidden" value="@userId" /> 
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</button>
+                                <input type="text" id="qty_@item.Id" style="display: inline-block;width: 35px;height: 25px;vertical-align: baseline;" value="1" title="Quantity" /> 
+                                
+                                <a class="btn btn-success" id="add_@item.Id"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</a>
                             }
                             else
                             {
-                                <a href="@Url.Content("~/Account/Login?returnUrl=/Shop")" class="btn btn-warning"><span class="glyphicon glyphicon-lock"></span>&nbsp; Login to Buy</a>
+                                <a href="@Url.Content("~/Account/Login?returnUrl=/Shop")" class="btn btn-warning"><span class="glyphicon glyphicon-lock" style="color: #F70808;"></span>&nbsp; Login to Buy</a>
                             }
                             
+                            <div id="msg" style="color:#8b0000;"></div>
                         </div>
                         <div class="ratings">
                             @*<p class="pull-right" id="produst_comment">15 reviews</p>
@@ -49,6 +71,48 @@
                         </div>
                     </div>
                 </div>
+                
+                <script type="text/javascript">
+                    $(document).ready(function() {
+
+                        
+
+                        $("#add_@item.Id").click(function() {
+                            //debugger;
+                            var item = {
+                                productId: @item.Id,
+                                quantity:$("#qty_@item.Id").val()
+                            };
+
+                            $.ajax({
+                                url: "/Cart/AddToCart",
+                                type: "POST",
+                                data: JSON.stringify(item),
+                                contentType: 'application/json',
+
+                                success: function (data) {
+
+                                   
+                                    //$('#msg').html(data);
+                                    //$('#msg').delay(5000).fadeOut(400);
+                                    //debugger;
+                                    var q = $("#sId").val();
+                                    //var url = "/Cart/GetCartContent/" + q;
+
+                                    var url = "/Cart/GetCartByUser/" + q;
+
+                                    $.get(url, function (res) {
+                                        $("#cv").html(res);
+                                        return false;
+                                    });
+                                }
+
+                            });
+                        });
+
+
+                    });
+</script>
             </li>
         }
         else
@@ -64,3 +128,4 @@
 
 
 </ul>
+

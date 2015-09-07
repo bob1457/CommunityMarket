@@ -116,6 +116,17 @@ namespace CommonMarket.Web.Controllers
             var products =
                 _productServices.FindAllProducts().OrderByDescending(d => d.CreateDate).Where(s => s.SupplierId == id && s.ProductAvailable == true);
 
+            //Get merchant idenytity userid
+
+            var merchant = _merchantServie.FindSupplierById(id);
+
+            var merchantProfilid = merchant.UserProfileId;
+
+            var user = UserManager.FindByName(merchant.CompanyIconImgUrl);
+
+
+            ViewBag.MerchantId = user.Id;
+
             return PartialView("_ProductInfo", products);
         }
 

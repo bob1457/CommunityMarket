@@ -284,6 +284,7 @@
       <DependentUpon>ProductDataModel.edmx</DependentUpon>
       <LastGenOutput>ProductDataModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\accounting.min.js" />
     <Content Include="Scripts\jquery.fileupload-ui.js" />
     <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\jquery.iframe-transport.js" />
@@ -387,6 +388,10 @@
     <Content Include="Views\Product\_CartView.cshtml" />
     <Content Include="Views\Product\_InfoView.cshtml" />
     <Content Include="Views\Operate\_AdditionalImagList.cshtml" />
+    <Content Include="Views\Shared\_CartView1_old.cshtml" />
+    <Content Include="Views\Cart\_NoCartView.cshtml" />
+    <Content Include="Views\Cart\_CartSummary.cshtml" />
+    <Content Include="Views\Product\_VenderInfo2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -541,7 +546,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Assets\Images\Products\Originals\" />
-    <Folder Include="Models\ViewModels\" />
     <Folder Include="Views\Customer\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>

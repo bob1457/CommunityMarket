@@ -1,5 +1,6 @@
 ﻿@model CommonMarket.Web.Models.IndexViewModel
 
+@using System.Web.UI.HtmlControls
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNet.Identity.EntityFramework;
 @using CommonMarket.Web.Models;
@@ -7,6 +8,7 @@
 @{
     var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
     var currentUser = manager.FindById(User.Identity.GetUserId());
+    
 }
 
 <style>
@@ -60,7 +62,8 @@
         @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right" id="nav1">
-        @Html.Partial("_CartView1")
+        
+        <span id="cv">  @Html.Action("GetCartByUser", "Cart", new { id = currentUser.Id })</span>
         <li>
             @Html.ActionLink("Hello " + @currentUser.UserProfile.FirstName  @*User.Identity.GetUserName()*@ + "!", "Index", "Profile", routeValues: null, htmlAttributes: new { title = "My Profile" })
         </li>

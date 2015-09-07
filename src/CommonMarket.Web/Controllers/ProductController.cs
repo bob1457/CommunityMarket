@@ -109,6 +109,18 @@ namespace CommonMarket.Web.Controllers
             return PartialView("_VenderInfo", vendorProfile);
         }
 
+        [ChildActionOnly]
+        public ActionResult GetVendorInfo2(int id) //supplier id
+        {
+            var vendor = _merchantService.FindSupplierById(id);
+
+            int profileId = vendor.UserProfileId;
+
+            var vendorProfile = UserManager.Users.Single(p => p.UserProfile.Id == profileId);
+
+
+            return PartialView("_VenderInfo2", vendorProfile);
+        }
         //[ChildActionOnly]
         //public ActionResult GetCartView()
         //{

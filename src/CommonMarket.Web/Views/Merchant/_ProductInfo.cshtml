@@ -13,7 +13,7 @@
                         <h3>
                             <a href="#">@item.ProductName</a>
                         </h3>
-                        <h5 style="margin-top: 0; margin-bottom: 0;">$@item.UnitPrice.ToString().Remove((@item.UnitPrice).ToString().Length - 2)/@item.UnitName</h5>
+                        <h4 class="product_price" style="margin-top: 0; margin-bottom: 0;">@item.UnitPrice.ToString("c")/@item.UnitName.ToLower()</h4>
                         <p>
                             @if ((@item.ProductDescLong).Length > 45)
                             {
@@ -24,7 +24,25 @@
                                 @item.ProductDescLong
                             }
                         </p>
-                        <a class="btn btn-success" href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <em>Quantity:</em> <input type="text" id="qty_m_@item.Id" style="display: inline-block;width: 35px;height: 25px;vertical-align: baseline;" value="1" title="Quantity" /> if (@item.UnitName == "Each")
+                             {
+                                <em>unit</em>
+                             }
+                             else
+                             {
+                                <em>@item.UnitName.ToLower()</em>
+                             }
+                            <a class="btn btn-success" href="#" id="add_m_@item.Id"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Content("~/Account/Login?returnUrl=/Merchant/MerchantDetails/" + @ViewBag.MerchantId)" type="button" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-lock"></span>&nbsp;Login to Buy
+                            </a>
+                        }
+                        
                     </div>
                 </li>
             }
@@ -47,9 +65,27 @@
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-9">
                         <h4 style="margin-top: 0; margin-bottom: 0;">@item.ProductName</h4>
-                        <h5 style="margin-top: 0; margin-bottom: 0;">$@item.UnitPrice.ToString().Remove((@item.UnitPrice).ToString().Length - 2)/@item.UnitName</h5>
+                        <h4 class="product_price" style="margin-top: 0; margin-bottom: 0;">@item.UnitPrice.ToString("c")/@item.UnitName</h4>
                         <p>@item.ProductDescLong</p>
-                        <a class="btn btn-success" href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart <span class="glyphicon glyphicon-chevron-right"></span></a>
+                         @if (User.Identity.IsAuthenticated)
+                         {
+                            <em>Quantity:</em> <input type="text" id="qty_l_@item.Id" style="display: inline-block;width: 35px;height: 25px;vertical-align: baseline;" value="1" title="Quantity" /> if (@item.UnitName == "Each")
+                             {
+                                <em>unit</em>
+                             }
+                             else
+                             {
+                                <em>@item.UnitName.ToLower()</em>
+                             }
+                            <a class="btn btn-success" href="#" id="add_l_@item.Id"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart <span class="glyphicon glyphicon-chevron-right"></span></a>
+                         }
+                         else
+                         {
+                            <a href="@Url.Content("~/Account/Login?returnUrl=/Merchant/MerchantDetails/" + @ViewBag.MerchantId)" type="button" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-lock"></span>&nbsp;Login to Buy
+                            </a>
+                         }
+                        
                     </div>
                 </li>
             }

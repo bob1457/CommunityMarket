@@ -50,6 +50,7 @@
     <Compile Include="Base\BaseRepository.cs" />
     <Compile Include="Base\IBaseRepository.cs" />
     <Compile Include="Base\IBaseRepositoryAsync.cs" />
+    <Compile Include="CartContentRepository.cs" />
     <Compile Include="CommunityMarketContext.cs" />
     <Compile Include="EF\UpdatedContext.cs" />
     <Compile Include="IDbContext.cs" />

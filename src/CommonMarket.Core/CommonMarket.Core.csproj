@@ -86,10 +86,12 @@
     <Compile Include="Interface\IDepartmentService.cs" />
     <Compile Include="Interface\IMerchantService.cs" />
     <Compile Include="Interface\IProductServices.cs" />
+    <Compile Include="Interface\ISearchSerivce.cs" />
     <Compile Include="Interface\IValueCalculator.cs" />
     <Compile Include="Interface\ValueCalculator.cs" />
     <Compile Include="Product\TestProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CartContentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
