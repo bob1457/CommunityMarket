@@ -58,6 +58,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="ProductRepository.cs" />
+    <Compile Include="QuickSearchRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork-bak.cs" />
