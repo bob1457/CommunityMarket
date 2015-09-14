@@ -43,7 +43,7 @@ namespace CommonMarket.DataAccess
                             Name = product.ProductName,
                             Id = product.Id,
                             ImgUrl = product.ProductImgSmallUrl,
-                            Path = "/Product/ProductDeatails"
+                            Path = "/Product/ProductDetails/"
                         };
 
                 return products.ToList();

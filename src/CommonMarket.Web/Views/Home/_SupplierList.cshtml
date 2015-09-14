@@ -1,28 +1,29 @@
 ﻿@model IEnumerable<CommonMarket.Web.Models.ApplicationUser>
 
-<ul id="supplier_list" class="list-unstyled">
+<ul id="supplier_list" class="list-unstyled" style="margin-left: 40px;">
     @foreach (var item in Model)
     {
         <li>
             <div class="col-md-5 no-padding lib-item" data-category="view">
                 <div class="lib-panel">
                     <div class="row box-shadow">
-                        <div class="col-md-6 col-sm-4 col-xs-6">
+                        <div class="col-md-5 col-sm-4 col-xs-6">
                             <a href="@Url.Content("/Merchant/MerchantDetails/" + @item.Id)">
                                 <img class="lib-img-show" src="@Url.Content(@item.UserProfile.AvatarImgUrl)" title="@item.UserProfile.FirstName @item.UserProfile.LastName">
                             </a><br />
+
                             <span class="short_desc" style="color:rgb(182, 77, 42); margin-left: 10px;">
                                 <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-half"></i><i class="icon-star-empty"></i>
                             </span>
                         </div>
-                        <div class="col-md-6 col-sm-8 col-xs-6">
+                        <div class="col-md-7 col-sm-8 col-xs-6">
                             <div class="lib-row lib-header">
-                                <h4>@item.UserProfile.FirstName @item.UserProfile.LastName</h4><br/>
-                                <div class="lib-header-seperator"></div>
+                                <h4 style="margin-bottom: 0;">@item.UserProfile.FirstName @item.UserProfile.LastName</h4>
+                                <span class="glyphicon glyphicon-envelope" style="color:#ac1717;"></span> <span class="glyphicon glyphicon-earphone" style="color:#1a671a;"></span> <span class="glyphicon glyphicon-comment" style="color:#408D2D"></span>
                             </div>
+                            <br />
                             <div class="lib-row lib-desc">
                                 Major suppliers of organic products, including produce, fruits, etc.<br />
-                                <span class="glyphicon glyphicon-envelope" style="color:#ac1717;"></span> <span class="glyphicon glyphicon-earphone" style="color:#1a671a;"></span> <span class="glyphicon glyphicon-comment" style="color:#408D2D"></span>
                             </div>
                         </div>
                     </div>

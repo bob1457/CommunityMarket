@@ -53,17 +53,20 @@ namespace CommonMarket.Web.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IProductServices _productServices;
         private readonly IMerchantService _merchantService;
+        private readonly IDiscountService _discountService;
         //private readonly ICartService _cartService;
 
-        public ProductController(ICategoryService categoryService, IProductServices productServices, IMerchantService merchantService)//, ICartService cartService)
+        public ProductController(ICategoryService categoryService, IProductServices productServices, 
+            IMerchantService merchantService, IDiscountService discountService)
         {
             _categoryService = categoryService;
             _productServices = productServices;
             _merchantService = merchantService;
+            _discountService = discountService;
             //_cartService = cartService;
         }
 
-
+      
         // GET: Product
         public ActionResult Index()
         {
@@ -129,23 +132,32 @@ namespace CommonMarket.Web.Controllers
         //    return PartialView("_CartView", cart);
         //}
 
+       
 
 
 
-        public JsonResult CategoryList()
-        {
-            var db = new CommonMarketEntities(); //this implementation is violation of layered architecture, will fix later.
+        //public JsonResult CategoryList()
+        //{
+        //    var db = new CommonMarketEntities(); //this implementation is violation of layered architecture, will fix later.
 
-            var result = from category in db.ProductCategories
-                select new
-                {
-                    id = category.Id,
-                    name = category.ProductCategoryName
-                };            
+        //    var result = from category in db.ProductCategories
+        //        select new
+        //        {
+        //            id = category.Id,
+        //            name = category.ProductCategoryName
+        //        };            
             
-            return Json(result.ToList(), JsonRequestBehavior.AllowGet);
+        //    return Json(result.ToList(), JsonRequestBehavior.AllowGet);
 
+        //}
+
+        public JsonResult GetGategoryList()
+        {
+            var result = _categoryService.FindAllCategories();
+
+            return Json(result.ToList(), JsonRequestBehavior.AllowGet);
         }
+
 
         public ActionResult GetProductBySupplierId(int id)
         {
@@ -402,5 +414,19 @@ namespace CommonMarket.Web.Controllers
 
             _productServices.UpdateProductImg(product);
         }
+
+
+
+        #region Product Discount and Promotion
+
+        public JsonResult DiscountTypeList()
+        {
+            var allTypes = _discountService.GetAllTypeList();
+
+            return Json(allTypes.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+
+        #endregion
     }
 }

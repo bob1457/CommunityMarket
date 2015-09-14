@@ -84,6 +84,7 @@
     <Compile Include="Interface\ICategoryService.cs" />
     <Compile Include="Interface\ICustomerService.cs" />
     <Compile Include="Interface\IDepartmentService.cs" />
+    <Compile Include="Interface\IDiscountService.cs" />
     <Compile Include="Interface\IMerchantService.cs" />
     <Compile Include="Interface\IProductServices.cs" />
     <Compile Include="Interface\ISearchSerivce.cs" />

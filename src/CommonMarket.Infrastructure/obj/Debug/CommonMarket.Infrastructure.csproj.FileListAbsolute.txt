@@ -34,10 +34,11 @@ C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\D
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Ninject.xml
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Ninject.Web.Common.xml
-C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\obj\Debug\CommonMarket.Infrastructure.csprojResolveAssemblyReference.cache
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\obj\Debug\CommonMarket.Infrastructure.dll
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\obj\Debug\CommonMarket.Infrastructure.pdb
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\PagedList.dll
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\PagedList.Mvc.dll
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\PagedList.xml
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\PagedList.Mvc.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\CommonMarket.Infrastructure.dll.CodeAnalysisLog.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\CommonMarket.Infrastructure.dll.lastcodeanalysissucceeded

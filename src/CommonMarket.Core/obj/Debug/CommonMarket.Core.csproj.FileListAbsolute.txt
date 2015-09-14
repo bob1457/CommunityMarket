@@ -28,3 +28,5 @@ C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Core\bin\Debug\Entit
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Core\obj\Debug\CommonMarket.Core.dll
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Core\obj\Debug\CommonMarket.Core.pdb
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Core\obj\Debug\CommonMarket.Core.csprojResolveAssemblyReference.cache
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Core\bin\Debug\CommonMarket.Core.dll.CodeAnalysisLog.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Core\bin\Debug\CommonMarket.Core.dll.lastcodeanalysissucceeded

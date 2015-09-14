@@ -1,21 +1,21 @@
 using System.Collections.Generic;
 using CommonMarket.Core.Entities;
 
-namespace CommonMarket.Services.ProductServices
+namespace CommonMarket.Core.Interface
 {
     public interface IProductServices
     {
-        IEnumerable<Product> FindAllProducts();
-        Product FindProductById(int id);
-        IEnumerable<Product> FindProductByCategory(int id); //id: category id
+        IEnumerable<Entities.Product> FindAllProducts();
+        Entities.Product FindProductById(int id);
+        IEnumerable<Entities.Product> FindProductByCategory(int id); //id: category id
 
-        void AddNewProduct(Product product, ProductCategory category);
+        void AddNewProduct(Entities.Product product, ProductCategory category);
         void AddAdditionalImage(AdditionalProductImg image);
 
         IEnumerable<AdditionalProductImg> GetImgListByProduct(int id);
-        void UpdateProduct(Product product);
+        void UpdateProduct(Entities.Product product);
 
-        void UpdateProductImg(Product product);
+        void UpdateProductImg(Entities.Product product);
 
         void DeleteProduct(int id);
     }

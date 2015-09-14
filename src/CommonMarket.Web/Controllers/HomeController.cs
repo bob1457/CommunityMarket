@@ -3,7 +3,9 @@ using System.Web;
 using System.Collections.Generic;
 using CommonMarket.Core.Entities;
 using CommonMarket.Core.Interface;
+using CommonMarket.DataAccess;
 using CommonMarket.Services;
+using CommonMarket.Services.ProductServices;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
@@ -46,11 +48,16 @@ namespace CommonMarket.Web.Controllers
 
         private readonly ICategoryService _categoryService;
         private readonly IMerchantService _merchantServie;
+        private readonly IProductServices _productServie;
+        private readonly ISearchSerivce _searchSerivce;
 
-        public HomeController(ICategoryService categoryService, IMerchantService merchantServie)
+        public HomeController(ICategoryService categoryService, IMerchantService merchantServie, 
+            IProductServices productServices, ISearchSerivce serviceSerivce )
         {
             _categoryService = categoryService;
             _merchantServie = merchantServie;
+            _productServie = productServices;
+            _searchSerivce = serviceSerivce;
         }
 
 
@@ -79,18 +86,22 @@ namespace CommonMarket.Web.Controllers
         }
 
 
-
-
-
-        public JsonResult GeneralSearch()
+        public ActionResult GetAllProducts()
         {
+            var products = _productServie.FindAllProducts();
 
-
-
-            return Json("");
+            return PartialView("_ProductList", products);
         }
 
 
+        public JsonResult ProductSearch(string term)
+        {
+            var products = _searchSerivce.FindProduct(term);
+
+            return Json(products.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        
 
 
 

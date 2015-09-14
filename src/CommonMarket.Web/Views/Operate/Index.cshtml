@@ -35,6 +35,15 @@
     <div class="row">
         <div class="col-md-3">
             <div class="panel-group" id="accordion">
+                
+                <div style="margin-top: 35px;">
+                    <img src="@Url.Content(@currentUser.UserProfile.AvatarImgUrl)" width="50" height="50" title="@currentUser.UserProfile.FirstName" style="float: left;" />
+                    <div style="position: relative; left: 15px;">
+                        <h5><a href="#">@currentUser.UserProfile.FirstName @currentUser.UserProfile.LastName</a></h5>
+                        <span><a href="#">@currentUser.UserProfile.Email</a></span>
+                    </div>
+                </div>
+                
                 <div class="panel panel-default" style="margin-top: 25px;">
                     <div class="panel-heading">
                         <h4 class="panel-title regular_weight">
@@ -55,12 +64,13 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-blackboard text-success"></span><a href="http://www.jquery2dotnet.com"> Inventory</a>
+                                        <span class="glyphicon glyphicon-blackboard text-success"></span><a href="http://www.jquery2dotnet.com"> Inventory Control</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-flash text-info"></span><a href="http://www.jquery2dotnet.com"> Discount & Promotion</a>
+                                        <span class="glyphicon glyphicon-flash text-info"></span><a id="d_show" href="#"> Discount & Promotion</a>
+                                        <span class="badge"><span id="discount_count" class="badge">0</span></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -141,8 +151,8 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
-                                            Delete Account
-                                        </a>
+                                                                                                       Delete Account
+                                                                                                   </a>
                                     </td>
                                 </tr>
                             </table>
@@ -179,8 +189,8 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
-                                            Delete Account
-                                        </a>
+                                                                                                       Delete Account
+                                                                                                   </a>
                                     </td>
                                 </tr>
                             </table>
@@ -199,7 +209,11 @@
                 <div id="cover">
                     Cover page
                 </div>
-                <div id="product" style="display: none;">@Html.Action("GetProductList")</div>
+                <div id="product" style="display: none; margin-top: 19px;">@Html.Action("GetProductList")</div>
+                
+                
+                <div id="discount" style="display: none; margin-top: 19px;">@Html.Partial("_DiscountPromotion")</div>
+
                 <div id="inventory">
 
                 </div>
@@ -221,7 +235,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                        <h4 class="modal-title custom_align" id="Heading"><span class="glyphicon glyphicon-plus-sign"></span> Add New Product</h4>
+                        <h4 class="modal-title custom_align" id="Heading"><span class="glyphicon glyphicon-plus-sign" style="color:#239C23"></span> Add New Product</h4>
                     </div>
                     <div class="modal-body" @*style="overflow: visible;"*@>
                         <div class="form-group">
@@ -284,7 +298,74 @@
                 <!-- /.modal-content -->
             </div>
         </div>
+        
+        <!-- Modal Dialogs - ADD Discount -->
+        <div class="modal " id="add_dis" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="overflow: visible;">
+            <div class="modal-dialog" style="width: 100%; margin-top: 0;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading"><span class="glyphicon glyphicon-plus-sign" style="color:#239C23"></span> Add New Discount or Promotion</h4>
+                    </div>
+                    <div class="modal-body" @*style="overflow: visible;"*@>
+                        <div class="form-group">
+                            <select id="all_type" style="margin-bottom: -5px;">
+                                <option aria-valuemax="0">--Select Discount Type</option>
+                            </select>
+                        </div>
 
+                        <div class="form-group">
+                            <input id="disc_code" class="form-control" type="text" placeholder="Discount Code" style="height: 35px; margin-bottom: -5px;" title="Discount Code">
+                        </div>
+                        <!--
+                            <div class="form-group">
+                                <input id="pro_vId" class="form-control" type="text" placeholder="Vendor Product ID -- Optional" style="height: 35px; margin-bottom: -5px;" >
+                            </div>
+                            <div class="form-group">
+                                <input id="pro_sku" class="form-control" type="text" placeholder="Product SKU Nubmer -- Optional" style="height: 35px; margin-bottom: -5px;" >
+                            </div>
+                            -->
+                        
+
+                        <div class="form-group">
+                            <textarea id="disc_desc" rows="2" class="form-control" placeholder=" Description" style="margin-bottom: -5px;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <select id="prod_unit" style="margin-bottom: -5px;">
+                                <option>-- Select Unit Name --</option>
+                                <option>lb</option>
+                                <option>kg</option>
+                                <option>Case</option>
+                                <option>Package</option>
+                                <option>Each</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input id="prod_price" class="form-control" type="text" placeholder="Unit Price" style="height: 35px; margin-bottom: -5px;">
+                        </div>
+                        <div class="form-group">
+                            <input id="qty_perUnit" class="form-control" type="text" placeholder="Quantity per Unit if unit name is Case or Package" style="height: 35px; margin-bottom: -5px;">
+                        </div>
+                        <!--<div class="form-group">
+                                <input id="unit_inStock" class="form-control" type="text" placeholder="Units In Stock" style="height: 35px; margin-bottom: -5px;">
+                            </div>-->
+                        <div class="form-group">
+                            <input id="availabe" type="checkbox" checked="checked" style="vertical-align: baseline;"> &nbsp;Available
+                        </div>
+                        <div class="form-group">
+                            <textarea id="pro_notes" rows="2" class="form-control" placeholder="Additional Notes" style="margin-bottom: -5px;"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer ">
+                        <button id="go_add" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
     </div>
 </div>
 
@@ -295,18 +376,25 @@
     $(document).ready(function () {
         $("#product").hide();
         $("#cover").show();
+        $("#discount").hide();
         //$("#content_da").hide();
         //$("#pf").addClass("profile-active-button");
 
         $("#p_show").click(function () {
             $("#product").show();
             $("#cover").hide();
-
+            $("#discount").hide();
         });
         $("#cover").click(function () {
             $("#product").hide();
             $("#cover").show();
+            $("#discount").hide();
+        });
 
+        $("#d_show").click(function () {
+            $("#product").hide();
+            $("#cover").hide();
+            $("#discount").show();
         });
 
     });
@@ -420,7 +508,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         //debugger;
-        var url = "/Product/CategoryList";
+        var url = "/Product/GetGategoryList";
         var option = $('<option />');
 
         $.getJSON(url, function (data) {
@@ -428,7 +516,7 @@
             //$("#all_category").empty();
 
             $.each(data, function (i) {
-                $("#all_category").append($("<option />").val(data[i].id).html(data[i].name));
+                $("#all_category").append($("<option />").val(data[i].Id).html(data[i].ProductCategoryName));
             });
 
 
@@ -436,6 +524,29 @@
 
     });
 </script>
+
+<!-- populate diccount type dropdown box -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        var url = "/Product/DiscountTypeList";
+        var option = $('<option />');
+
+        $.getJSON(url, function (data) {
+
+            //$("#all_category").empty();
+
+            $.each(data, function (i) {
+                $("#all_type").append($("<option />").val(data[i].Id).html(data[i].DiscountTypeName));
+            });
+
+
+        });
+
+    });
+</script>
+
+
+
 
 <!-- Add Product -->
 <script type="text/javascript">

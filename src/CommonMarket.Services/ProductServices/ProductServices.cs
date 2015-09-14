@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
 using CommonMarket.Core.Entities;
+using CommonMarket.Core.Interface;
 using CommonMarket.DataAccess;
 
 namespace CommonMarket.Services.ProductServices

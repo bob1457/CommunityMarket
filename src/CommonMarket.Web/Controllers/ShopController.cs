@@ -87,10 +87,6 @@ namespace CommonMarket.Web.Controllers
         }
 
 
-
-
-
-
         public ActionResult GetAllSuppliers()
         {
             var supplier = UserManager.Users.Where(m => m.Roles.Any(r => r.RoleId == "6ca46ec2-a996-4788-92ec-5c255a174eb4"));
@@ -99,11 +95,11 @@ namespace CommonMarket.Web.Controllers
         }
 
 
-        //public ActionResult Cart()
-        //{
+        public JsonResult GetSpecialProducts() //get products on promotion with lower price
+        {
 
-        //    return View();
-        //}
+            return Json("");
+        }
 
     }
 }

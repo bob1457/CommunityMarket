@@ -107,13 +107,11 @@
                                 <li><input id="search" type="radio" style="vertical-align: baseline;" name="selection" /> Search</li>
                                 <li>
                                     <div id="search_panel">
-                                        <input class="input-group c-search" type="text" id="search" style="height: 30px; margin-top:10px;" placeholder="Search" autofocus="" title="Search by Keyword">
+                                        <input class="input-group c-search" type="text" id="search_box" style="height: 30px; margin-top:10px;" placeholder="Search" autofocus="" title="Search by Keyword">
                                         <button class="btn btn-default" type="button" style=" height: 30px; margin-left: -13px;">
                                             <span class="glyphicon glyphicon-search text-muted" style="margin-left: 11px;"></span>
                                         </button>
                                     </div>
-                                    
-
                                 </li>
                             </ul>
                         </h5>
@@ -123,31 +121,7 @@
                     
                     <div id="merchant">@Html.Action("GetSuppliers")</div>
                     
-                    <div id="result">
-                        <ul id="search_list" class="list-unstyled">
-                            <li >
-                                <div class="col-md-12 prod_list">
-                                    <img src="~/Content/Assets/Images/broccoli.jpg" alt="" class="img-responsive img-circle" style="float: left; margin-right: 15px;" />
-                                    <div class="pull-left" style="font-weight:800;">dfasfasfads<br /><span style="font-weight: normal;">rewtertwertrfdasg fdsafadsspan<br />Price: $1.29/lb</span> </div>
-                                    
-                                   
-
-                                    <div class="pull-right">Supplied by <span style="color: #ac1717;">Bob Yuan</span>&nbsp;<img src="../../Content/Assets/Images/user_default.png" alt="" width="25px;" height="25;" /><br/> <button class="btn btn-primary pull-right">Add to Cart</button> @*<button class="btn btn-danger">Add to Whishlist</button>*@</div>
-                                </div>
-
-                            </li>
-                            <li>
-                                <div class="col-md-12 prod_list">
-                                    <img src="~/Content/Assets/Images/carrot.png" alt="" class="img-responsive img-circle" style="float: left;" />
-                                    <div class="pull-left" style="font-weight:800;">dfasfasfads<br /><span style="font-weight: normal;">rewtertwertrfdasg fdsafadsspan<br />Price: $1.29/lb</span> </div>
-
-
-
-                                    <div class="pull-right">Supplied by <span style="color: #ac1717;">Bob Yuan</span>&nbsp;<img src="../../Content/Assets/Images/user_default.png" alt="" width="25px;" height="25;" /><br /> <button class="btn btn-primary" style="float:right;">Add to Cart</button> @*<button class="btn btn-danger">Add to Whishlist</button>*@</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <div id="result">@Html.Action("GetAllProducts")</div>
 
                 </div>
             </div>
@@ -178,27 +152,7 @@
                             <li>
                                 When you login, you can add a phone number by clicking the Manage page.
                             </li>
-                            @*<li>
-                                Once you add a phone number and have the Phone service hooked to send a SMS, you will get a code through SMS to confirm your phone number.
-                            </li>
-                            <li>
-                                In the Manage page, you can turn on Two-Factor authentication.
-                            </li>
-                            <li>
-                                When you logout and login, after you enter the username and password, you will get an option of how to get the security code to use for two-factor authentication.
-                            </li>
-                            <li>
-                                You can copy the code from your SMS or email and enter in the form to login.
-                            </li>
-                            <li>
-                                The sample also shows how to protect against Brute force attacks against two-factor codes. When you enter a code incorrectly for 5 times then you will be
-                                lockedout for 5 min before you can enter a new code. These settings can be configured in App_Start\IdentityConfig.cs by setting  DefaultAccountLockoutTimeSpan and MaxFailedAccessAttemptsBeforeLockout on the UserManager.
-                            </li>
-                            <li>
-                                If the machine you are browsing this website is your own machine, you can choose to check the "Remember Me" option after you enter the code.
-                                This option will remember you forever on this machine and will not ask you for the two-factor authentication, the next time when you login to the website.
-                                You can change your "Remember Me" settings for two-factor authentication in the Manage page.
-                            </li>*@
+                            
                         </ul>
 
                     </div>
@@ -213,42 +167,54 @@
 </div>
 
 
-    <script type="text/javascript">
-        $(document).ready(function () {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#search_panel").hide();
+
+        $("#merchant").hide();
+        $("#result").hide();
+
+        $("#search").prop('checked', false);
+
+        //debugger;
+        $("#search").change(function () {
+
+            var isChecked = $(this).is(':checked');
+
+            //alert(isChecked);
+
+            if (isChecked) {
+                $("#search_panel").show();
+            } else {
+                $("#search_panel").hide();
+            }
+        });
+
+        $("#by_cate").click(function() {
+
+            $("#search_panel").hide();
+            $("#merchant").hide();
+            $("#category").show();
+        });
+
+        $("#by_merchant").click(function () {
+
             $("#search_panel").hide();
 
-            $("#merchant").hide();
-            $("#result").hide();
-
-            $("#search").prop('checked', false);
-
-            //debugger;
-            $("#search").change(function () {
-
-                var isChecked = $(this).is(':checked');
-
-                //alert(isChecked);
-
-                if (isChecked) {
-                    $("#search_panel").show();
-                } else {
-                    $("#search_panel").hide();
-                }
-            });
-
-            $("#by_cate").click(function() {
-
-                $("#search_panel").hide();
-                $("#merchant").hide();
-                $("#category").show();
-            });
-
-            $("#by_merchant").click(function () {
-
-                $("#search_panel").hide();
-
-                $("#category").hide();
-                $("#merchant").show();
-            });
+            $("#category").hide();
+            $("#merchant").show();
         });
-    </script>
+
+
+        $("#search_box").keypress(function() {
+            $("#category").hide();
+            $("#merchant").hide();
+            $("#result").show();
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){})
+</script>

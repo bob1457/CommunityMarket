@@ -49,11 +49,14 @@ namespace CommonMarket.Web.Infrastructure
             kernel.Bind<IProductServices>().To<ProductServices>();
             kernel.Bind <ICartService>().To<CartService>();
             kernel.Bind<ISearchSerivce>().To<SearchSerivce>();
+            kernel.Bind<IDiscountService>().To<DiscountService>();
+
             kernel.Bind<IQuickSearchRepository>().To<QuickSearchRepository>();
 
             kernel.Bind<IDepartmentService>().To<DepartmentService>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
             kernel.Bind<ICartContentRepository>().To<CartContentRepository>();
+
         }
     }
 }

@@ -18,11 +18,9 @@ namespace CommonMarket.Core.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(50)]
         public string DiscountTypeName { get; set; }
-
-        public double DiscountAmount { get; set; }
-
+        
         public virtual ICollection<Discount> Discounts { get; set; }
     }
 }

@@ -207,8 +207,8 @@
                                             //$('#msg').delay(5000).fadeOut(400);
 
                                             var url = "/Admin/ListCategories";
-                                            $.get(url, function (data) {
-                                                $("#clist").html(data);
+                                            $.get(url, function (response) {
+                                                $("#clist").html(response);
                                                 return false;
                                             });
                                         }

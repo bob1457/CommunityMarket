@@ -133,7 +133,7 @@
             <div class="row">
                 <div class="col-sm-3 col-md-3 pull-right" style=" margin-right: 15px;">
                     <div id="imaginary_container">
-                        <div class="input-group stylish-input-group" style="float:right;">
+                        <div class="input-group stylish-input-group" style="float:right; margin-right: 0;">
                             <input id="site_search" type="text" class="form-control typeahead" placeholder="Site Search">
                             @*<span class="input-group-addon">
                                 <button type="submit" style="height: 21px;">
@@ -188,10 +188,34 @@
         $('#site_search').autocomplete({
             source: colors
         });
-        */
+
         $('#site_search').typeahead({
             source: colors
         });
+
+        */
+        //debugger;
+
+        $('#site_search').autocomplete({
+
+            minLength: 2,
+            source: '@Url.Action("QuickSearch", "Search")',
+            select: function (event, ui) {
+                //debugger;
+                var path = ui.item.Path;
+                window.location.href = path + ui.item.Id
+
+            }
+
+        }).data("uiAutocomplete")._renderItem = function (ul, item) {
+            return $('<li></li>')
+                .data("item.autocomplete", item)
+                .append("<a>" + "<img src='/" + (item.ImgUrl).substring(1) + "' + 'height=28px width=28px' />" + " " + item.Name + "</a>")
+                .appendTo(ul);
+        };
+
+
+
 
     });
 </script>
