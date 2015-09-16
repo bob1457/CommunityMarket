@@ -1,0 +1,190 @@
+﻿
+
+
+<style>
+    .list-group-item {
+        margin-left: -40px;
+        margin-right: -15px;
+    }
+    .row {
+        margin-left: 0;
+    }
+</style>
+
+<div id="chekcout" class="panel panel-default" style="margin-top: 25px;">
+    <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%); height: 55px;">
+        <div class="col-md-9 col-sm-9 col-xs-6">
+            <h5><span class="glyphicon glyphicon-shopping-cart" style="color: #b4f808;"></span> <span style="color: #6F0A18; font-size: 1.25em;">&nbsp;Welcome to Checkout </span></h5>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h5 style="color: #DC6161;">Please folloing the steps to submit your order.</h5>
+                    </div>
+                    <div class="col-xs-4">
+
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#" type="button" class="btn btn-success btn-block">
+                            <span class="glyphicon glyphicon-ok-sign"></span> Submit Order
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="panel-heading checkout-panel" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%); height: 75px;">
+                        <h3 style="font-size: 1.25em; color: #6B5F5F;"><span style="font-size: 1.5em; color:#ff4500">1</span>. SHIPPING METHOD</h3>
+                    </div>
+                    <div class="panel-body checkout-panel" style="height: 517px;">
+                        <div>Please select a shipping method, which may be suject to handling and shipping fees. </div>
+                        <br />
+                        <div id="shipping-method">
+                            <input type="radio" name="smethod" id="pickup" checked="checked" style="vertical-align: top;" /> Pickup<br />
+                            <input type="radio" name="smethod" id="express" disabled="" style="vertical-align: top;" /> Express Shipping<br />
+                            <input type="radio" name="smethod" id="regular " disabled="" style="vertical-align: top;" /> Regular Shipping<br />
+                        </div>
+
+                        <div>
+                            <fieldset>
+                                <legend> <i class="fa fa-info-circle"></i> Details </legend>
+                                <div id="d_pickup">
+                                    <p>You will receive notification through email that contains information on the pickup date, time and location when the order is ready.</p>
+
+                                    <p>For more information, please contact the vendor directly. You can find the vendors of your products and their contact information in your copy of order.</p>
+                                </div>
+                                <div id="d_shipp" style="display: none;">
+                                    <!--  request shipping address here-->
+
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="panel-heading checkout-panel" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%); height: 75px;">
+                        <h3 style="font-size: 1.25em; color: #6B5F5F;"><span style="font-size: 1.5em; color:#ff4500">2</span>. PAYMENT METHOD</h3>
+                    </div>
+                    <div class="panel-body checkout-panel" style="height: 517px;">
+                        <div>Please select a payment method, and enter required information to proceed. </div>
+                        <br />
+                        <div id="payment-method">
+                            <input type="radio" name="pmethod" id="cash" checked="checked" style="vertical-align: top;" title="Cash On Delivery" /> Cash on Delivery <i class="fa fa-money" style="color: #228b22"></i><br />
+                            <input type="radio" name="pmethod" id="paypal" disabled="" style="vertical-align: top;" title="PayPal" /> PayPal <i class="fa fa-cc-paypal" style="color: #3b7bbf"></i><br />
+                            <input type="radio" name="pmethod" id="credit-card " disabled="" style="vertical-align: top;" title="Major Credit Cards" /> Credit Card <i class="fa fa-cc-amex" style="color: #38a671"></i> <i class="fa fa-cc-visa" style="color: #1a1171f"></i> <i class="fa fa-cc-mastercard" style="color: #ff9900"></i><br />
+                        </div>
+
+                        <div id="d_payment">
+                            <fieldset>
+                                <legend> <i class="fa fa-info-circle"></i> Details </legend>
+                                <p>You will pay for your order in cash when you pickup the order or when you receive your order if you have chosen shipping.</p>
+
+                                <p>For more information, please contact the vendor directly. You can find the vendors of your product in your order.</p>
+                            </fieldset>
+                        </div>
+                        <div id="d_paypal"></div>
+                        <div id="d_cc"></div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="panel-heading checkout-panel" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%); height: 75px;">
+                        <h3 style="font-size: 1.25em; color: #6B5F5F;"><span style="font-size: 1.5em; color:#ff4500">3</span>. ORDER SUMMARY</h3>
+                    </div>
+                    <div class="panel-body checkout-panel">
+                        <div class="panel-heading " style="background-image: linear-gradient(to bottom, #AFC9F1 0%, #7D98CA 100%); height: 35px;">
+                            <h5 style="margin-top: 0; color: #FDF8F8;"> Order Summary</h5>
+                        </div>
+                        <div id="order_review" class="panel-body" style="height: 200px; background-color: #DAD7D7;">
+                            <!-- 
+                                <ul class="list-group" style="margin-left: 0;">
+                                    <li class="list-group-item">
+                                        <div class="row toggle" id="dropdown-detail-1" data-toggle="detail-1">
+                                            <div class="col-xs-10">
+                                                Item 1
+                                            </div>
+                                            <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+                                        </div>
+                                        <div id="detail-1">
+                                            <hr /><br/>
+                                            <div class="container">
+                                                <div class="fluid-row">
+                                                    <div class="col-xs-1">
+                                                        Detail:
+                                                    </div>
+                                                    <div class="col-xs-5">
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                    </div>
+                                                    <div class="col-xs-1">
+                                                        Detail:
+                                                    </div>
+                                                    <div class="col-xs-5">
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                    </div>
+                                                    <div class="col-xs-1">
+                                                        Detail:
+                                                    </div>
+                                                    <div class="col-xs-5">
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                    </div>
+                                                    <div class="col-xs-1">
+                                                        Detail:
+                                                    </div>
+                                                    <div class="col-xs-5">
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                -->
+                            <div class="well" style="height: 190px;overflow: auto; margin-left: -10px; margin-right: -10px; margin-top: -10px;">
+                                <ul class="list-group checked-list-box" style="margin-top: -20px;">
+                                    <li class="list-group-item">
+                                        <div class="row toggle" data-toggle="de">Cras justo odio <span style="float: right; cursor: pointer; margin-right: 5px;" title="Details"><i class="fa fa-chevron-down pull-right"></i></span></div>
+                                        <div id="de">
+                                            Details
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" data-checked="true">Dapibus ac facilisis in</li>
+                                    <li class="list-group-item">Morbi leo risus</li>
+                                    <li class="list-group-item">Porta ac consectetur ac</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div id="order_info" class="panel-body" style="height: 130px; background-color: #DAD7D7;">
+
+                        </div>
+
+                        <div style="font-size: .8em;">Please review and confirm your order. Make changes in shoppign cart as needed. </div><br />
+                        <button class="btn btn-block btn-success"><h4>SUBMIT ORDER</h4></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#de').hide();
+        $('.toggle').click(function () {
+            $input = $(this);
+            $target = $('#' + $input.attr('data-toggle'));
+            $target.slideToggle();
+        });
+    });
+</script>
