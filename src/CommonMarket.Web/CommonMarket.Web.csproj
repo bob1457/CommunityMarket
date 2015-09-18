@@ -400,6 +400,7 @@
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Checkout\_OrderView.cshtml" />
     <Content Include="Views\Cart\_OrderView.cshtml" />
+    <Content Include="Views\Cart\_CartSummary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

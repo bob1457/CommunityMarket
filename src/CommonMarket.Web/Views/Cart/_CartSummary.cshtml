@@ -1,0 +1,138 @@
+﻿@model CommonMarket.Core.Entities.Cart
+
+<div id="cart" class="panel panel-default" style="margin-top: 25px;">
+    <div class="panel-heading" style="background-image: linear-gradient(to bottom, #F8B688 0%, #F38C59 100%); height: 55px;">
+        <div class="col-md-9 col-sm-9 col-xs-6">
+            <h5><span class="glyphicon glyphicon-shopping-cart" style="color: #b4f808;"></span> <span style="color: #1F7D98;">&nbsp; My Cart ( @Model.CartItems.Count() Items, Value: @ViewBag.Total.ToString("c"))</span></h5>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            @*<button type="button" class="btn btn-info btn-sm btn-block" style="margin-top: 7px;">
+        <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+    </button>*@
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @*<h5 style="margin-left: 25px; color: #DC6161; margin-left: 15px;" >Please review your cart and make changes</h5>
+                    <hr />*@
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h5 style="margin-left:30px; color: #DC6161;">Please review your cart, and make changes as needed, before checkout.</h5>
+                    </div>
+                    <div class="col-xs-4">
+                        
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="#" type="button" class="btn btn-success btn-block">
+                            <span class="glyphicon glyphicon-ok-sign"></span> Checkout
+                        </a>
+                    </div>
+                </div>
+
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <td class="col-sm-1">Item</td>
+                            <td class="col-sm-3">Description</td>
+                            <td class="col-sm-3">Unit Price</td>
+                            <td class="col-sm-1">Quantiy</td>
+                            <td class="col-sm-2">Price</td>
+                            <td class="col-sm-2"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartItems)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <a class="pull-left" href="#">
+                                            <a href="@Url.Content("~/Product/ProductDetails/" + @item.Product.Id)"><img src="@Url.Content(@item.Product.ProductImgSmallUrl)" title="@item.Product.ProductName" style="min-width: 60px;" /></a>
+                                        </a>
+
+                                    </div>
+                                </td>
+                                <td style="width: 100%;">
+
+                                    <span style="font-size: 1.25em; font-weight: bold;"><a href="#">@item.Product.ProductName</a></span>
+                                    <span class="media-heading"> by <a href="#">@Html.Action("GetVendorInfo2", "Product", new { id = @item.Product.SupplierId })</a></span><br />
+                                    <span>@item.Product.ProductDescLong</span><br />
+                                    <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+
+                                </td>
+                                <td>
+                                    <strong>@item.Product.UnitPrice.ToString("c") <span class="text-muted"></span></strong>
+                                </td>
+                                <td>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" value="@item.Quantity" disabled="" />
+                                </td>
+                                <td>
+                                    <strong>@((item.Quantity * item.Product.UnitPrice).ToString("c")) <span class="text-muted"></span></strong>
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-remove-sign remove_link" title="Remove from cart" style="font-size: 1.5em; cursor: pointer; text-align: right; color:#a52a2a; visibility: hidden;"></span>
+                                </td>
+                            </tr>
+
+
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+            <hr />
+        </div>
+    </div>
+
+
+</div>
+
+<div class="panel-footer" style="margin-top: -20px; background-color: #FDE0C2;">
+    <div class="row">
+        <div class="col-xs-10">
+            <h5 class="text-right">Subtotal </h5>
+        </div>
+        <div class="col-xs-2">
+            <h5 class="text-center" style="color: #e47527;">@ViewBag.Total.ToString("c")</h5>
+        </div>
+        <div class="col-xs-10" style="margin-top: -20px;">
+            <h5 class="text-right">Tax </h5>
+        </div>
+        <div class="col-xs-2" style="margin-top: -20px;">
+            <h5 class="text-center">$0.00 </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-10">
+            <h4 class="text-right">Total </h4>
+        </div>
+        <div class="col-xs-2">
+            <h4 class="text-center"><strong style="color: #a52a2a;">@ViewBag.Total.ToString("c")</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6"></div>
+        <div class="col-xs-4">
+            <a href="/Shop" type="button" class="btn btn-info btn-block">
+                <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+            </a>
+        </div>
+        <div class="col-xs-2">
+            <a href="/Checkout" type="button" class="btn btn-success btn-block">
+                <span class="glyphicon glyphicon-ok-sign"></span> Checkout
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- script to remove items and update quantity -->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+
+    });
+</script>
