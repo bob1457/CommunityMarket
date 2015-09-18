@@ -19,7 +19,7 @@ namespace CommonMarket.Core.Entities
 
         public int SupplierId { get; set; }
 
-        public short Quantity { get; set; }
+        public int Quantity { get; set; }
 
         [Column(TypeName = "money")]
         public decimal SubTotal { get; set; }

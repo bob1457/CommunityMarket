@@ -33,8 +33,6 @@ namespace CommonMarket.Core.Entities
 
         public bool IsPaid { get; set; }
 
-        public int InvoiceId { get; set; }
-
         public bool IsCanceled { get; set; }
 
         [Column(TypeName = "money")]

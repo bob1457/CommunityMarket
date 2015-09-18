@@ -55,6 +55,7 @@
     <Compile Include="ProductServices\DepartmentService.cs" />
     <Compile Include="ProductServices\ProductServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopServices\CheckOutService.cs" />
     <Compile Include="UserServices\CusotmerService.cs" />
     <Compile Include="UserServices\MerchantService.cs" />
     <Compile Include="ValueCalculator\ValueCalculator.cs" />

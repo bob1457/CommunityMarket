@@ -82,6 +82,7 @@
     <Compile Include="IEntity.cs" />
     <Compile Include="Interface\ICartService.cs" />
     <Compile Include="Interface\ICategoryService.cs" />
+    <Compile Include="Interface\ICheckOutService.cs" />
     <Compile Include="Interface\ICustomerService.cs" />
     <Compile Include="Interface\IDepartmentService.cs" />
     <Compile Include="Interface\IDiscountService.cs" />

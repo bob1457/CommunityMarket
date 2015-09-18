@@ -57,6 +57,7 @@
     <Compile Include="IRepositoryAsync.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="OrderRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="QuickSearchRepository.cs" />
     <Compile Include="Repository.cs" />

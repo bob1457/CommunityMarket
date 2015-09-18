@@ -13,29 +13,30 @@
 
 
 
-<div class="well" style="max-height: 190px;overflow: auto; margin-left: -10px; margin-right: -10px; margin-top: -10px;">
+<div class="well" style="max-height: 190px; overflow: auto; margin-left: -10px; margin-right: -10px; margin-top: -10px;">
     <ul class="list-group checked-list-box" style="margin-top: -20px;">
         @foreach (var item in Model.CartItems)
         {
             <li class="list-group-item">
-                <div class="row toggle" data-toggle="de_@item.Id">@item.Product.ProductName @item.Quantity @item.Product.UnitName, subtotal:  $3.98<span style="float: right; cursor: pointer; margin-right: 5px;" title="Details"><span id="symbo"><i class="fa fa-chevron-down pull-right"></i></span><span id="symbo2"><i class="fa fa-chevron-up pull-right" style="display: none"></i></span></span></div>
+                <div class="row toggle" data-toggle="de_@item.Id">@item.Product.ProductName @item.Quantity @item.Product.UnitName.ToLower(), subtotal:  @((@item.Quantity * @item.Product.UnitPrice).ToString("c") )<span style="float: right; cursor: pointer; margin-right: 5px;" title="Details"><span id="symbo"><i class="fa fa-chevron-down pull-right"></i></span><span id="symbo2"><i class="fa fa-chevron-up pull-right" style="display: none"></i></span></span></div>
                 <div class="divider"></div>
-                <div id="de_@item.Id" style="font-size:.8em;">
-                    <img src="@Url.Content(@item.Product.ProductImgSmallUrl)" height="32" width="32" style="float: left; margin-right: 10px; margin-top: 5px;" /> <span style="font-weight: bold; font-size: 1em;">Broccoli</span><br /> 2 lbs at $1.99 per lb.
+                <div id="de_@item.Id" style="font-size:.8em; display: none;">
+                    <img src="@Url.Content(@item.Product.ProductImgSmallUrl)" height="32" width="32" style="float: left; margin-right: 10px; margin-top: 5px;" /> <span style="font-weight: bold; font-size: 1em;">Broccoli</span><br /> 2 lbs at @item.Product.UnitPrice per @item.Product.UnitName.ToLower().
                 </div>
             </li>
-
+            /*
             <script type="text/javascript">
-            $(document).ready(function () {
-                $('#de_@item.Id').hide();
-                $('.toggle').click(function () {
-                    $input = $(this);
-                    $target = $('#' + $input.attr('data-toggle'));
-                    $target.slideToggle();
+                $(document).ready(function () {
+                    $('#de_@item.Id').hide();
+                    $('.toggle').click(function () {
+                        $input = $(this);
+                        $target = $('#' + $input.attr('data-toggle'));
+                        $target.slideToggle();
 
+                    });
                 });
-            });
             </script>
+              */
         }
         
     </ul>
@@ -44,4 +45,15 @@
         <div id="total" style="float: right; font-weight: bold; color:#ff0000;">Total:  $25.99</div>
     </div>
 </div>
-<!-- need to move to inside of <li></li> update id to a dynamic one -->
+
+<!-- script to show details of entry -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#' + $input.attr('id')).hide();
+        $('.toggle').click(function () {
+            $input = $(this);
+            $target = $('#' + $input.attr('data-toggle'));
+            $target.slideToggle();
+        });
+    });
+</script>

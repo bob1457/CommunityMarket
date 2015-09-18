@@ -22,5 +22,3 @@ C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.DataAccess\bin\Debug
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.DataAccess\obj\Debug\CommonMarket.DataAccess.csprojResolveAssemblyReference.cache
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.DataAccess\obj\Debug\CommonMarket.DataAccess.dll
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.DataAccess\obj\Debug\CommonMarket.DataAccess.pdb
-C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.DataAccess\bin\Debug\CommonMarket.DataAccess.dll.CodeAnalysisLog.xml
-C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.DataAccess\bin\Debug\CommonMarket.DataAccess.dll.lastcodeanalysissucceeded

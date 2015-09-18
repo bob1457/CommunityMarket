@@ -40,5 +40,3 @@ C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\N
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\obj\Debug\CommonMarket.Services.csprojResolveAssemblyReference.cache
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\obj\Debug\CommonMarket.Services.dll
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\obj\Debug\CommonMarket.Services.pdb
-C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\CommonMarket.Services.dll.CodeAnalysisLog.xml
-C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\CommonMarket.Services.dll.lastcodeanalysissucceeded
