@@ -400,7 +400,13 @@
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Checkout\_OrderView.cshtml" />
     <Content Include="Views\Cart\_OrderView.cshtml" />
-    <Content Include="Views\Cart\_CartSummary.cshtml" />
+    <Content Include="Views\Checkout\SendMail.cshtml" />
+    <Content Include="Views\Checkout\_OrderSummary.cshtml" />
+    <Content Include="Views\Profile\Index - Copy.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\_CustomerDetails.cshtml" />
+    <Content Include="Views\Checkout\OrderSumbmitted.cshtml" />
+    <Content Include="Views\Checkout\_OrderFullfilmentNotificatoin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -508,6 +514,8 @@
     <Compile Include="Infrastructure\BooleanRequiredAttribute.cs" />
     <Compile Include="Infrastructure\CustomJsonResult.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Infrastructure\RenderViewToString.cs" />
+    <Compile Include="Infrastructure\ViewRender.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -557,7 +565,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Assets\Images\Products\Originals\" />
-    <Folder Include="Views\Customer\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>

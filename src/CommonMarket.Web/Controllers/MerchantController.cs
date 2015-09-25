@@ -80,8 +80,8 @@ namespace CommonMarket.Web.Controllers
 
             //var merchant = db.Suppliers.SqlQuery(query, profileId).SingleOrDefault();
 
-            //return PartialView("_MerchantDetails", merchant);
-            return Json(merchant, JsonRequestBehavior.AllowGet);
+            return PartialView("_MerchantDetails", merchant);
+            //return Json(merchant, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult MerchantDetails(string id) //load to MerchantDetails page here id is userId in asp.net identity db

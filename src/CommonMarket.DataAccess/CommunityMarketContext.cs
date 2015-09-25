@@ -1,14 +1,9 @@
 using CommonMarket.Core.Entities;
-using CommonMarket.core.Entities;
-using CommonMarket.DataAccess.EF;
 
 
 namespace CommonMarket.DataAccess
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class CommunityMarketContext : DbContext, IDbContext
     {
@@ -49,6 +44,8 @@ namespace CommonMarket.DataAccess
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tax> Taxes { get; set; }
         public virtual DbSet<WishList> WishLists { get; set; }
+        public virtual DbSet<ClaimedCoupon> ClaimedCoupons { get; set; }
+        public virtual DbSet<Coupon> Coupons { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -66,10 +63,6 @@ namespace CommonMarket.DataAccess
                 .HasMany(e => e.ProductCategories)
                 .WithRequired(e => e.Department)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Discount>()
-                .Property(e => e.VoucherCode)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Discount>()
                 .Property(e => e.Notes)

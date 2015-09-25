@@ -58,6 +58,7 @@ namespace CommonMarket.Web.Infrastructure
             kernel.Bind<IProductRepository>().To<ProductRepository>();
             kernel.Bind<ICartContentRepository>().To<CartContentRepository>();
             kernel.Bind<IOrderRepository>().To<OrderRepository>();
+            kernel.Bind<IMerchantRepository>().To<MerchantRepository>();
 
         }
     }

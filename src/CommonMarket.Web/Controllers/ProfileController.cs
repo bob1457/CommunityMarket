@@ -85,6 +85,9 @@ namespace CommonMarket.Web.Controllers
                 AvatarImgUrl = currentUser.UserProfile.AvatarImgUrl,
 
             };
+
+            ViewBag.UserId = User.Identity.GetUserId();
+
             return View(model);
         }
 

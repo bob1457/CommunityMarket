@@ -24,10 +24,12 @@
                     <img src="@Url.Content(@item.Product.ProductImgSmallUrl)" height="32" width="32" style="float: left; margin-right: 10px; margin-top: 5px;" /> <span style="font-weight: bold; font-size: 1em;">@item.Product.ProductName</span><br /> @item.Quantity @item.Product.UnitName at @item.Product.UnitPrice per @item.Product.UnitName.ToLower().
                 </div>
             </li>
+            <input id="order_count" type="hidden" value="@Model.CartItems.Count()" />
         }
         
     </ul>
     <div id="oreder_result" style=" color: #000;">
+        <div id="voucher" style="margin-top: 5px; margin-bottom: -15px; float: right;">Voucher Code: <input type="text" style="width:75px; vertical-align: top;" /></div><br/>
         <div id="subtotal" style="margin-top: 10px; float: right; color: #D85210">Subtotal: @ViewBag.Total.ToString("c")</div><br /><br />
         <div id="total" style="float: right; font-weight: bold; color:#ff0000;">Total:  @ViewBag.Total.ToString("c")</div>
     </div>
@@ -36,6 +38,9 @@
 <!-- script to show details of entry -->
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $("#count_order").text($("#order_count").val());
+
         //$('#' + $input.attr('id')).hide();
         $('.toggle').click(function () {
             $input = $(this);

@@ -1,4 +1,4 @@
-﻿@model CommonMarket.Web.Models.IndexViewModel
+﻿@model CommonMarket.Core.Entities.Supplier
 
 
 <table class="table table-user-information table-responsive">
@@ -14,6 +14,10 @@
         <tr>
             <td>Contact last Name:</td>
             <td>@Html.DisplayFor(model => model.ContactLastName)</td>
+        </tr>
+        <tr>
+            <td>Contact Email</td>
+            <td>@Html.DisplayFor(model => model.CompanyIconImgUrl)</td>
         </tr>
         <tr>
             <td>Company Website:</td>

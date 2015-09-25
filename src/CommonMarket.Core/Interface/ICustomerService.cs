@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using CommonMarket.core.Entities;
+using CommonMarket.Core.Entities;
 
 namespace CommonMarket.Core.Interface
 {

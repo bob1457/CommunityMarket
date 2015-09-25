@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommonMarket.Core.Entities;
-using CommonMarket.core.Entities;
 using CommonMarket.Core.Interface;
 using CommonMarket.DataAccess;
 

@@ -12,11 +12,13 @@ namespace CommonMarket.Services.UserServices
     public class MerchantService : IMerchantService
     {
         private readonly IRepository<Supplier> _supplierRepository;
+        private readonly IMerchantRepository _merchantRepository;
         private readonly IUnitOfWork _uow;
 
-        public MerchantService(IRepository<Supplier> supplierRepository, IUnitOfWork uow )
+        public MerchantService(IRepository<Supplier> supplierRepository, IMerchantRepository merchantRepository, IUnitOfWork uow )
         {
             _supplierRepository = supplierRepository;
+            _merchantRepository = merchantRepository;
             _uow = uow;
         }
 
@@ -76,6 +78,16 @@ namespace CommonMarket.Services.UserServices
         public Supplier FindSupplierBy(int id)
         {
             return _supplierRepository.FindBy(p => p.UserProfileId == id).FirstOrDefault();
+        }
+
+        public IEnumerable<int> GetAllSupplierId()
+        {
+            return _merchantRepository.GetAllSupplierIds();
+        }
+
+        public IEnumerable<CartItem> GetCartItemsBySupplier(int id, int cid)
+        {
+            return _merchantRepository.GetCartItmesBySupplier(id, cid);
         }
     }
 }

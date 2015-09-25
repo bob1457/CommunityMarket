@@ -52,11 +52,11 @@
     <Compile Include="Base\IBaseRepositoryAsync.cs" />
     <Compile Include="CartContentRepository.cs" />
     <Compile Include="CommunityMarketContext.cs" />
-    <Compile Include="EF\UpdatedContext.cs" />
     <Compile Include="IDbContext.cs" />
     <Compile Include="IRepositoryAsync.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="MerchantRepository.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="QuickSearchRepository.cs" />
@@ -71,7 +71,9 @@
       <Name>CommonMarket.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="EF\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="CodeTemplates\ReverseEngineerCodeFirst\Context.tt" />
     <Content Include="CodeTemplates\ReverseEngineerCodeFirst\Entity.tt" />

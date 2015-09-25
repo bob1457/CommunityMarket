@@ -10,6 +10,10 @@ namespace CommonMarket.Core.Interface
 
         Supplier FindSupplierBy(int id);
 
+        IEnumerable<int> GetAllSupplierId();
+
+        IEnumerable<CartItem> GetCartItemsBySupplier(int id, int cid); //id is supplier id, cid is cart id
+
         void AddSupplier(Supplier supplier);
 
         void UpdateSupplier(int id); //supplier id

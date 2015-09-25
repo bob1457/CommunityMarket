@@ -52,7 +52,9 @@
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\CartItem.cs" />
     <Compile Include="Entities\CartItemExt.cs" />
+    <Compile Include="Entities\ClaimedCoupon.cs" />
     <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\Coupon.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Discount.cs" />

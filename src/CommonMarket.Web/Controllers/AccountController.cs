@@ -121,6 +121,9 @@ namespace CommonMarket.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+
+                    //CreateActionInvoker();
+
                     return Json("");
                 //case SignInStatus.LockedOut:
                 //    return View("Lockout");
@@ -335,17 +338,11 @@ namespace CommonMarket.Web.Controllers
 
                     emailNotification.SendEmail("bob.yuan@yahoo.com", "New User Registration", message);
 
-                    ////Create an entry in customer entity
-                    //var admin = new AdminController();
-                    //admin.AddCustomer(user.UserProfile.FirstName);
-
-
-                    //Uri locationHeader = new Uri(Url.Link("GetUserById", new {id = user.Id}));
-
-                    //ViewBag.Link = callbackUrl;
-                    //return View("DisplayEmail"); //Demo email confirmation
+                    //Create an entry in customer entity
+                    //
                     
-                    //return RedirectToAction("Index", "Home");  //consider redirect to a dedicated page with message that check your email and confirm the registration
+                    //CreateCustomer();
+                    
 
                     return View("AccountConfirmation");
                 }
@@ -368,6 +365,12 @@ namespace CommonMarket.Web.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        }
+
+
+        private void CreateCustomer()
+        {
+            
         }
 
 

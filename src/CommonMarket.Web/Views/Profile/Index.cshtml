@@ -146,7 +146,7 @@
 
 
                                                     <div class=" col-md-9 col-lg-9 ">
-                                                        <table class="table table-user-information">
+                                                        <table class="table table-user-information" style="font-size: 14px;">
                                                             <tbody>
 
                                                                 <tr>
@@ -350,15 +350,15 @@
                         <div class="col-md-6">
                             <fieldset style="margin-top: 25px;">
                                 <legend>Customer Profile</legend>
-                                <div id="c_details"></div>
+                                <div id="c_details">@Html.Action("GetCustomerDetails", "Customer", new { id = @ViewBag.UserId})</div>
 
                                 <div id="c_edit"></div>
                                 
                                 <div id="c_add"></div>
 
-                                <a href="#" id="Edit_c" class="btn btn-primary">Edit</a>
-
-                                <a href="#" id="Add_c" class="btn btn-primary">Create</a>
+                                <a href="#" id="Edit_c" class="btn btn-primary" style="display: none;">Edit</a>
+                                <a href="#" id="c_Save" class="btn btn-success" style="display: none;">Save</a>
+                                <a href="#" id="Add_c" class="btn btn-primary" style="display: none;">Create</a>
                             </fieldset>
                         </div>
 
@@ -368,7 +368,7 @@
                                 <fieldset style="margin-top: 25px;">
                                     <legend style="margin-top: 15px;">Supplier Profile</legend>
 
-                                    <div id="details_m"></div><!-- Data loaded from JSON object from server side -->
+                                    <div id="details_m">@Html.Action("GetMerchantDetails", "Merchant", new { id = @ViewBag.UserId })</div><!-- Data loaded from JSON object from server side -->
 
                                     <div id="edit_m" style="display: none"></div><!-- Data loaded from JSON object from server side -->
 
@@ -377,8 +377,7 @@
                                     <a href="#" id="m_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
                                 </fieldset>
                             }
-                            else
-                            {
+                            else{
                                 <fieldset style="margin-top: 25px;">
                                     <legend style="margin-top: 15px;">Customer Activities</legend>
 
@@ -408,7 +407,7 @@
 
 <!-- Modal Dialog -file upload -->
 <!-- Modal -->
-<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height: 186px;">
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height: 156px;">
     <div class="modal-dialog">
         <div class="modal-content" style="margin-top: -30px;">
             <div class="modal-header">
@@ -798,8 +797,8 @@
 
 
 
-        debugger;
-        var url = "/Merchant/GetMerchantDetails/";
+        //debugger;
+        @*var url = "/Merchant/GetMerchantDetails/";
         var q = "id=@UserId";
         debugger;
         $.get(url, q, function (data) {
@@ -957,94 +956,10 @@
             //debugger;
             //$("#details_m").html(data);
             return false;
-        });
+        });*@
 
 
-        ////////////////
-
-        var url2 = "/Customer/GetCustomerDetails/";
-        var q2= "id=@UserId";
-        debugger;
-        $.get(url2, q2, function (data) {
-
-            var table_c = $("<table></table>").addClass("table");
-
-            var tr;
-            var tr1;
-            var tr2;
-            var tr3;
-
-            tr = $('<tr/>');
-            tr1 = $('<tr/>');
-            tr2 = $('<tr/>');
-            tr3 = $('<tr/>');
-
-
-
-
-            if (data == null) {
-                $("#Edit_c").hide();
-                //$("#c_edit").hide();
-                $("#Add_c").show();
-
-                tr.append("<td>Customer Alias:</td><td><input type='text' /></td>");
-                tr1.append("<td>Shipping Address:</td><td><input type='text' /></td>");
-                tr2.append("<td>Billing Address:</td><td><input type='text' /></td>");
-                tr3.append("<td>CNotes:</td><td><textarea></textarea></td>");
-
-                table_c.append(tr);
-                table_c.append(tr1);
-                table_c.append(tr2);
-                table_c.append(tr3);
-
-                $("#c_add").append(table_c);
-
-                return false;
-
-            }
-            else {
-
-                $("#Edit_c").show();
-                //$("#c_edit").hide();
-                $("#Add_c").hide();
-
-                tr.append("<td>Customer Alias:</td><td><input type='text' value= '" + data.CustomerAlias + "'/></td>");
-                if (data.ShippingAddress == null) {
-                    tr1.append("<td>Shipping Address:</td><td><input type='text' value= '' /></td>");
-                } else {
-                    tr1.append("<td>Shipping Address:</td><td><input type='text' value= '" + data.ShippingAddress + "'/></td>");
-                }
-                if (data.BillingAddress == null) {
-                    tr2.append("<td>Shipping Address:</td><td><input type='text' value= '' /></td>");
-                } else {
-                    tr2.append("<td>Shipping Address:</td><td><input type='text' value= '" + data.ShippingAddress + "'/></td>");
-                }
-                if (data.Notes == null) {
-                    tr3.append("<td>Notes:</td><td><textarea></textarea></td>");
-                } else {
-                    tr3.append("<td>CNotes:</td><td><textarea>" + data.Notes + "</textarea></td>");
-                }
-
-                
-               
-
-                table_c.append(tr);
-                table_c.append(tr1);
-                table_c.append(tr2);
-                table_c.append(tr3);
-
-                $("#c_add").append(table_c);
-
-
-
-
-
-
-            }
-
-
-
-        });
+        
 
         ////////////////////
 

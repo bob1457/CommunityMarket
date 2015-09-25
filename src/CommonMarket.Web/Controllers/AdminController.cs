@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 //using System.Web.HttpContext;
 using CommonMarket.Core.Entities;
 //using CommonMarket.core.Entities;
-using CommonMarket.core.Entities;
 using CommonMarket.Core.Interface;
 using CommonMarket.Web.Models;
 using ImageResizer;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -418,6 +415,7 @@ namespace CommonMarket.Web.Controllers
 
         #region Customer Service
 
+        [HttpPost]
         public void AddCustomer(string customerAlias)
         {
             var customer = new Customer();

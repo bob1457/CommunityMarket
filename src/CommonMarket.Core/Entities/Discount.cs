@@ -11,13 +11,10 @@ namespace CommonMarket.Core.Entities
         public Discount()
         {
             Products = new HashSet<Product>();
+            Coupons = new HashSet<Coupon>();
         }
 
         public int Id { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string VoucherCode { get; set; }
 
         [StringLength(450)]
         public string Description { get; set; }
@@ -26,13 +23,11 @@ namespace CommonMarket.Core.Entities
 
         public int DiscountTypeId { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal? Threshold { get; set; }
+        public int DiscountValue { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal? DiscountAmount { get; set; }
+        public int ValueType { get; set; }
 
-        public int? DiscountPercent { get; set; }
+        public int? ValueThreshold { get; set; }
 
         [Column(TypeName = "datetime2")]
         public DateTime StartDate { get; set; }
@@ -50,6 +45,8 @@ namespace CommonMarket.Core.Entities
         public string Notes { get; set; }
 
         public virtual DiscountType DiscountType { get; set; }
+
+        public virtual ICollection<Coupon> Coupons { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
     }
