@@ -84,6 +84,19 @@ namespace CommonMarket.Web.Controllers
             //return Json(merchant, JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult GetMerchantEdit(string id)
+        {
+            var profileId = UserManager.FindById(id).UserProfile.Id;
+
+            //var currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+            var merchant = _merchantServie.FindSupplierBy(profileId);
+
+
+            return PartialView("_MerchantEdit", merchant);
+        }
+
         public ActionResult MerchantDetails(string id) //load to MerchantDetails page here id is userId in asp.net identity db
         {
             //var merchant = UserManager.Users.Where(p => p.UserProfile.Id == id);

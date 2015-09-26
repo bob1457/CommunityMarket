@@ -411,6 +411,7 @@
     <Content Include="Views\Checkout\_OrderFullfilmentNotificatoin.cshtml" />
     <Content Include="Views\Product\_MoreInfo.cshtml" />
     <Content Include="Views\Product\_VenderImg.cshtml" />
+    <Content Include="Views\Merchant\_MerchantEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

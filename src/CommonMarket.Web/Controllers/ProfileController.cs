@@ -193,7 +193,17 @@ namespace CommonMarket.Web.Controllers
         }
 
 
+        public ActionResult GetMerchantEdit(string id)
+        {
+            var profileId = UserManager.FindById(id).UserProfile.Id;
 
+            //var currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+            var merchant = _merchantServie.FindSupplierBy(profileId);
+
+
+            return PartialView("_MerchantEdit", merchant);
+        }
 
 
         //Ajax call to get full name

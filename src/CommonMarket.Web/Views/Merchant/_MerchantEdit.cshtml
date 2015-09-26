@@ -1,0 +1,48 @@
+﻿@model CommonMarket.Core.Entities.Supplier
+
+<table class="table table-user-information">
+    <tbody>
+
+        <tr>
+            <td>Compay Name:</td>
+            <td>
+
+                <input id="c_alias" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.CompnayName)" autofocus="">
+
+            </td>
+        </tr>
+        <tr>
+            <td>Contact First Name:</td>
+            <td>
+
+                <input id="c_alias" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.ContactFirstName)" >
+
+            </td>
+        </tr>
+        <tr>
+            <td>Contact Last Name:</td>
+            <td>
+
+                <input id="c_alias" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.ContactLastName)" >
+
+            </td>
+        </tr>
+        <tr>
+            <td>Company Website:</td>
+            <td>
+
+                <input id="c_alias" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.SupplierWebSite)">
+
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>Notes:</td>
+            <td>
+                <textarea id="baddress" class="form-control" type="text" placeholder="Last Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;">@Html.DisplayFor(model => model.Notes)</textarea>
+            </td>
+        </tr>
+
+    </tbody>
+</table>

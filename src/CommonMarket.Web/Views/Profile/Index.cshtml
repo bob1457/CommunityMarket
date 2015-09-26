@@ -356,9 +356,9 @@
                                 
                                 <div id="c_add"></div>
 
-                                <a href="#" id="Edit_c" class="btn btn-primary" style="display: none;">Edit</a>
+                                <a href="#" id="Edit_c" class="btn btn-primary">Edit</a>
                                 <a href="#" id="c_Save" class="btn btn-success" style="display: none;">Save</a>
-                                <a href="#" id="Add_c" class="btn btn-primary" style="display: none;">Create</a>
+                                <a href="#" id="c_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
                             </fieldset>
                         </div>
 
@@ -368,9 +368,16 @@
                                 <fieldset style="margin-top: 25px;">
                                     <legend style="margin-top: 15px;">Supplier Profile</legend>
 
-                                    <div id="details_m">@Html.Action("GetMerchantDetails", "Merchant", new { id = @ViewBag.UserId })</div><!-- Data loaded from JSON object from server side -->
-
-                                    <div id="edit_m" style="display: none"></div><!-- Data loaded from JSON object from server side -->
+                                    <div id="details_m">
+                                        @Html.Action("GetMerchantDetails", "Merchant", new { id = @ViewBag.UserId })
+                                    </div><!-- Data loaded from JSON object from server side -->
+                                    <div id="edit_m" style="display: none;">
+                                        @Html.Action("GetMerchantEdit", "Merchant", new { id = @ViewBag.UserId })
+                                    </div>
+                                        
+                                    <div id="edit_m" style="display: none">
+                                        
+                                    </div><!-- Data loaded from JSON object from server side -->
 
                                     <a href="#" id="m_Edit" class="btn btn-primary">Edit</a>
                                     <a href="#" id="m_Save" class="btn btn-success" style="display: none;">Save</a>
