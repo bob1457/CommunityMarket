@@ -15,8 +15,8 @@ namespace CommonMarket.Core.Entities
 
         public int InvoiceId { get; set; }
 
-        [Column(TypeName = "datetime2")]
-        public DateTime PaymentDate { get; set; }
+        //[Column(TypeName = "datetime2")]
+        //public DateTime PaymentDate { get; set; }
 
         [Column(TypeName = "money")]
         public decimal PaymentAmount { get; set; }

@@ -227,6 +227,8 @@
     <Content Include="Content\Assets\Images\category_fruit_lg.png" />
     <Content Include="Content\Assets\Images\category_fruit_sm.png" />
     <Content Include="Content\Assets\Images\category_produce_lg.png" />
+    <Content Include="Content\Assets\Images\chat.png" />
+    <Content Include="Content\Assets\Images\comments.png" />
     <Content Include="Content\Assets\Images\Help.png" />
     <Content Include="Content\Assets\Images\Products\broccoli.png" />
     <Content Include="Content\Assets\Images\broccoli.jpg" />
@@ -407,6 +409,8 @@
     <Content Include="Views\Customer\_CustomerDetails.cshtml" />
     <Content Include="Views\Checkout\OrderSumbmitted.cshtml" />
     <Content Include="Views\Checkout\_OrderFullfilmentNotificatoin.cshtml" />
+    <Content Include="Views\Product\_MoreInfo.cshtml" />
+    <Content Include="Views\Product\_VenderImg.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

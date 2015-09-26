@@ -27,6 +27,9 @@ namespace CommonMarket.Core.Entities
         [Column(TypeName = "datetime2")]
         public DateTime InoviceDate { get; set; }
 
+        [Column(TypeName = "datetime2")]
+        public DateTime PaidDate { get; set; }
+
         public virtual ICollection<Order> Orders { get; set; }
 
         public virtual ICollection<Payment> Payments { get; set; }
