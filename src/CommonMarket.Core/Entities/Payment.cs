@@ -13,7 +13,7 @@ namespace CommonMarket.Core.Entities
 
         public int PaymentMethodId { get; set; }
 
-        public int InvoiceId { get; set; }
+        public int OrderId { get; set; }
 
         //[Column(TypeName = "datetime2")]
         //public DateTime PaymentDate { get; set; }
@@ -21,7 +21,8 @@ namespace CommonMarket.Core.Entities
         [Column(TypeName = "money")]
         public decimal PaymentAmount { get; set; }
 
-        public virtual Invoice Invoice { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime PaymentDate { get; set; }
 
         public virtual PaymentMethod PaymentMethod { get; set; }
     }

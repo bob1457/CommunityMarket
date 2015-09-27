@@ -35,7 +35,7 @@ namespace CommonMarket.Core.Entities
 
         public virtual Customer Customer { get; set; }
 
-        public virtual Invoice Invoice { get; set; }
+        //public virtual Invoice Invoice { get; set; }
 
         public virtual OrderStatu OrderStatu { get; set; }
 

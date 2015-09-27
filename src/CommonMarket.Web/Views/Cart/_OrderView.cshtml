@@ -32,6 +32,7 @@
         <div id="voucher" style="margin-top: 5px; margin-bottom: -15px; float: right;">Voucher Code: <input type="text" style="width:75px; vertical-align: top;" /></div><br/>
         <div id="subtotal" style="margin-top: 10px; float: right; color: #D85210">Subtotal: @ViewBag.Total.ToString("c")</div><br /><br />
         <div id="total" style="float: right; font-weight: bold; color:#ff0000;">Total:  @ViewBag.Total.ToString("c")</div>
+        <input id="order_total" type="hidden" value="@ViewBag.Total"/>
     </div>
 </div>
 

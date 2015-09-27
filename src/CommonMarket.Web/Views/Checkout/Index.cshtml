@@ -54,9 +54,9 @@
                                     <div>Please select a shipping method, which may be suject to handling and shipping fees. </div>
                                     <br />
                                     <div id="shipping-method">
-                                        <input type="radio" name="smethod" id="pickup" checked="checked" style="vertical-align: top;" /> Pickup<br />
-                                        <input type="radio" name="smethod" id="express" disabled="" style="vertical-align: top;" /> Express Shipping<br />
-                                        <input type="radio" name="smethod" id="standard " disabled="" style="vertical-align: top;" /> Standard Shipping<br />
+                                        <input type="radio" name="smethod" id="pickup" value="1" checked="checked" style="vertical-align: top;" /> Pickup<br />
+                                        <input type="radio" name="smethod" id="express" value="2" disabled="" style="vertical-align: top;" /> Standard Shipping<br />
+                                        <input type="radio" name="smethod" id="standard" value="3" disabled="" style="vertical-align: top;" /> Express Shipping<br />
                                     </div>
 
                                     <div>
@@ -84,9 +84,9 @@
                                     <div>Please select a payment method, and enter required information to proceed. </div>
                                     <br />
                                     <div id="payment-method">
-                                        <input type="radio" name="pmethod" id="cash" checked="checked" style="vertical-align: top;" title="Cash On Delivery" /> Cash on Delivery <i class="fa fa-money" style="color: #228b22"></i><br />
-                                        <input type="radio" name="pmethod" id="paypal" disabled="" style="vertical-align: top;" title="PayPal" /> PayPal <i class="fa fa-cc-paypal" style="color: #3b7bbf"></i><br />
-                                        <input type="radio" name="pmethod" id="credit-card " disabled="" style="vertical-align: top;" title="Major Credit Cards" /> Credit Card <i class="fa fa-cc-amex" style="color: #38a671"></i> <i class="fa fa-cc-visa" style="color: #1a1171f"></i> <i class="fa fa-cc-mastercard" style="color: #ff9900"></i><br />
+                                        <input type="radio" name="pmethod" id="cash" value="1" checked="checked" style="vertical-align: top;" title="Cash On Delivery" /> Cash on Delivery <i class="fa fa-money" style="color: #228b22"></i><br />
+                                        <input type="radio" name="pmethod" id="paypal" value="2" disabled="" style="vertical-align: top;" title="PayPal" /> PayPal <i class="fa fa-cc-paypal" style="color: #3b7bbf"></i><br />
+                                        <input type="radio" name="pmethod" id="credit-card" value="3" disabled="" style="vertical-align: top;" title="Major Credit Cards" /> Credit Card <i class="fa fa-cc-amex" style="color: #38a671"></i> <i class="fa fa-cc-visa" style="color: #1a1171f"></i> <i class="fa fa-cc-mastercard" style="color: #ff9900"></i><br />
                                     </div>
 
                                     <div id="d_payment">
@@ -140,22 +140,66 @@
     $(document).ready(function() {
         var pickup = $("#pickup").text();
 
+        var shppingMethodId = 1;
+        var paymentMethodId =1;
 
-        $("#submit_order").click(function() {
+        $("#shipping-method input").on('change', function () {
+            shppingMethodId = $('input[name="smethod"]:checked', '#shipping-method').val();
+        });
 
-            debugger;
+        $("#payment-method input").on('change', function () {
+            paymentMethodId = $('input[name="pmethod"]:checked', '#payment-method').val();
+            alert(paymentMethodId);
+        });
 
-            var shiping = {
+        var shipperId;
 
+        switch (shppingMethodId) {
+            case 1:
+                shipperId = 2;
+                break;
+            case 2:
+                shipperId = 2;
+                break;
+            case 3:
+                shipperId = 2;
+                break;
+            default:
+        }
+
+        $("#submit_order").click(function () {
+            //alert(paymentMethodId);
+            //alert(shppingMethodId);
+
+            var shipping = {
+                ShippingMethodId: shppingMethodId,
+                shipperId: shipperId
             };
 
             var payment = {
-
+                PaymentMethodId: paymentMethodId
             };
 
-            var totalAmount = "";
+            var totalAmount = $("#order_total").val();
+
+            //alert(totalAmount);
+
+            $.ajax({
+                url: '/Checkout/SubmitOrder',
+                type: 'post',
+                dataType: 'json',
+                // It is important to set the content type
+                // request header to application/json because
+                // that's how the client will send the request
+                contentType: 'application/json',
+                data: JSON.stringify({ shipping: shipping, payment: payment, totalAmount: totalAmount }),
+                cache: false,
+                success: function() {
+                    alert("all good, nect step...");
+                }
 
 
+            });
 
 
         });

@@ -24,7 +24,7 @@ namespace CommonMarket.DataAccess
         public virtual DbSet<Discount> Discounts { get; set; }
         public virtual DbSet<DiscountType> DiscountTypes { get; set; }
         public virtual DbSet<Fee> Fees { get; set; }
-        public virtual DbSet<Invoice> Invoices { get; set; }
+        //public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<OrderStatu> OrderStatus { get; set; }
@@ -91,15 +91,15 @@ namespace CommonMarket.DataAccess
                 .WithMany(e => e.Fees)
                 .Map(m => m.ToTable("OrderFee").MapLeftKey("FeeId").MapRightKey("OrderId"));
 
-            modelBuilder.Entity<Invoice>()
-                .HasMany(e => e.Orders)
-                .WithRequired(e => e.Invoice)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Invoice>()
+            //    .HasMany(e => e.Orders)
+            //    .WithRequired(e => e.Invoice)
+            //    .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Invoice>()
-                .HasMany(e => e.Payments)
-                .WithRequired(e => e.Invoice)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Invoice>()
+            //    .HasMany(e => e.Payments)
+            //    .WithRequired(e => e.Invoice)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Order>()
                 .Property(e => e.TotalAmount)

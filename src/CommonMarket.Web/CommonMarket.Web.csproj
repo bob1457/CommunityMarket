@@ -230,6 +230,7 @@
     <Content Include="Content\Assets\Images\chat.png" />
     <Content Include="Content\Assets\Images\comments.png" />
     <Content Include="Content\Assets\Images\Help.png" />
+    <Content Include="Content\Assets\Images\Order_Submitted.png" />
     <Content Include="Content\Assets\Images\Products\broccoli.png" />
     <Content Include="Content\Assets\Images\broccoli.jpg" />
     <Content Include="Content\Assets\Images\broccoli1.png" />
@@ -412,6 +413,7 @@
     <Content Include="Views\Product\_MoreInfo.cshtml" />
     <Content Include="Views\Product\_VenderImg.cshtml" />
     <Content Include="Views\Merchant\_MerchantEdit.cshtml" />
+    <Content Include="Views\Checkout\OrderSubmitted.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

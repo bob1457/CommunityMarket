@@ -76,6 +76,7 @@ namespace CommonMarket.DataAccess
                 var entry = _context.Entry(ent);
                 entry.State = EntityState.Deleted;
                 _dbset.Remove(ent);
+                _context.SaveChanges();
             }
             
         }
