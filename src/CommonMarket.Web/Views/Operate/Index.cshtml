@@ -14,6 +14,9 @@
     var currentUser = manager.FindById(User.Identity.GetUserId());
 
     var level = currentUser.UserProfile.Address2; //special consideration on temperory basis
+
+    var profileId = currentUser.UserProfile.Id;
+     
     
 }
 
@@ -97,7 +100,7 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-shopping-cart text-primary"></span><a href="http://www.jquery2dotnet.com"> Orders and Status</a> <span class="label label-success">25</span>
+                                        <span class="glyphicon glyphicon-shopping-cart text-primary"></span><a id="order" href="#"> Orders and Status</a> <span class="label label-success">25</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -206,18 +209,28 @@
                 <span>
                     Manage the products, orders, customers and viwe your business and financial reports.
                 </span>
-                <div id="cover">
-                    Cover page
-                </div>
-                <div id="product" style="display: none; margin-top: 19px;">@Html.Action("GetProductList")</div>
                 
-                
-                <div id="discount" style="display: none; margin-top: 19px;">@Html.Partial("_DiscountPromotion")</div>
+                <div class="table-responsive" style="margin-top: -10px;">
+                    <div id="cover">
+                        Cover page
+                    </div>
+                    <div id="product" style="display: none; margin-top: 19px;">@Html.Action("GetProductList")</div>
 
-                <div id="inventory">
 
+                    <div id="discount" style="display: none; margin-top: 19px;">@Html.Partial("_DiscountPromotion")</div>
+
+                    <div id="inventory">
+
+                    </div>
+
+
+
+
+
+
+
+                    <div id="order_processing" style="display: none; margin-top: 19px;">@Html.Action("GetAllOrders")</div>
                 </div>
-
             </div>
 
         </div>
@@ -377,6 +390,7 @@
         $("#product").hide();
         $("#cover").show();
         $("#discount").hide();
+        $("#order_processing").hide();
         //$("#content_da").hide();
         //$("#pf").addClass("profile-active-button");
 
@@ -384,18 +398,30 @@
             $("#product").show();
             $("#cover").hide();
             $("#discount").hide();
+            $("#order_processing").hide();
         });
         $("#cover").click(function () {
             $("#product").hide();
             $("#cover").show();
             $("#discount").hide();
+            $("#order_processing").hide();
         });
 
         $("#d_show").click(function () {
             $("#product").hide();
             $("#cover").hide();
             $("#discount").show();
+            $("#order_processing").hide();
         });
+
+
+        $("#order").click(function () {
+            $("#product").hide();
+            $("#cover").hide();
+            $("#discount").hide();
+            $("#order_processing").show();
+        });
+
 
     });
 </script>

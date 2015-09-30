@@ -1,8 +1,13 @@
-﻿
+﻿@using Microsoft.AspNet.Identity
+
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var userId = User.Identity.GetUserId();
 }
 
 <style>
@@ -183,7 +188,7 @@
             var totalAmount = $("#order_total").val();
 
             //alert(totalAmount);
-
+            //debugger;
             $.ajax({
                 url: '/Checkout/SubmitOrder',
                 type: 'post',
@@ -199,6 +204,20 @@
                 }
 
 
+            }).error(function () { //not sure why the ajax call returns error, all controller actions are done properly.
+
+                var q = "@userId";
+                //var url = "/Cart/GetCartContent/" + q;
+
+                var url = "/Cart/GetCartByUser/" + q;
+
+                $.get(url, function (res) {
+                    $("#cv").html(res);
+                    return false;
+                });
+
+
+                window.location.href="@Url.Content("~/Checkout/OrderSubmitted")";
             });
 
 

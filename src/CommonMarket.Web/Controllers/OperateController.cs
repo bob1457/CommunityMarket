@@ -49,11 +49,13 @@ namespace CommonMarket.Web.Controllers
 
         private readonly IProductServices _productServices;
         private readonly IMerchantService _merchantService;
+        private readonly IOrderProcessingService _orderProcessingService;
 
-        public OperateController(IProductServices productServices, IMerchantService merchantService )
+        public OperateController(IProductServices productServices, IMerchantService merchantService, IOrderProcessingService orderProcessingService )
         {
             _productServices = productServices;
             _merchantService = merchantService;
+            _orderProcessingService = orderProcessingService;
         }
 
 
@@ -117,6 +119,23 @@ namespace CommonMarket.Web.Controllers
             var products = allProducts.ToPagedList(pageNumber, pageSize);
 
             return PartialView("_AllProducts", products);
+        }
+
+        public ActionResult GetAllOrders(int? page) //All order list from all suppliers is for adminstration purpose
+        {
+            const int pageSize = 10; //for testing purpose, to be adjustetd
+            int pageIndex = (page ?? 1) - 1;
+            int pageNumber = (page ?? 1);
+
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var prfileId = currentUser.UserProfile.Id;
+            var supplierId = _merchantService.FindSupplierBy(prfileId).Id;
+
+            var allOrders = _orderProcessingService.OrderListBySupplier(supplierId);
+
+
+
+            return PartialView("_AllOrders", allOrders);
         }
     }
 }

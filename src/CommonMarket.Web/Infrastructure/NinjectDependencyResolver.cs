@@ -53,6 +53,7 @@ namespace CommonMarket.Web.Infrastructure
             kernel.Bind<IDiscountService>().To<DiscountService>();
             kernel.Bind<ICheckOutService>().To<CheckOutService>();
             kernel.Bind<ICustomerOrderService>().To<CustomerOrderService>();
+            kernel.Bind<IOrderProcessingService>().To<OrderProcessingService>();
 
             kernel.Bind<IQuickSearchRepository>().To<QuickSearchRepository>();
 
@@ -61,6 +62,8 @@ namespace CommonMarket.Web.Infrastructure
             kernel.Bind<ICartContentRepository>().To<CartContentRepository>();
             kernel.Bind<IOrderRepository>().To<OrderRepository>();
             kernel.Bind<IMerchantRepository>().To<MerchantRepository>();
+            kernel.Bind<IOrderProcessingRepository>().To<OrderProcessingRepository>();
+            kernel.Bind<IOrderByVendorRepository>().To<OrderByVendorRepository>();
 
         }
     }

@@ -61,6 +61,7 @@
     <Compile Include="Entities\DiscountType.cs" />
     <Compile Include="Entities\Fee.cs" />
     <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderByVendor.cs" />
     <Compile Include="Entities\OrderItem.cs" />
     <Compile Include="Entities\OrderStatu.cs" />
     <Compile Include="Entities\Payment.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Interface\IDepartmentService.cs" />
     <Compile Include="Interface\IDiscountService.cs" />
     <Compile Include="Interface\IMerchantService.cs" />
+    <Compile Include="Interface\IOrderProcessingService.cs" />
     <Compile Include="Interface\IProductServices.cs" />
     <Compile Include="Interface\ISearchSerivce.cs" />
     <Compile Include="Interface\IValueCalculator.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Product\TestProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CartContentViewModel.cs" />
+    <Compile Include="ViewModels\OrderByVendorViewModel.cs" />
     <Compile Include="ViewModels\QuickSearchViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
   </ItemGroup>

@@ -57,6 +57,8 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="MerchantRepository.cs" />
+    <Compile Include="OrderByVendorRepository.cs" />
+    <Compile Include="OrderProcessingRepository.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="QuickSearchRepository.cs" />

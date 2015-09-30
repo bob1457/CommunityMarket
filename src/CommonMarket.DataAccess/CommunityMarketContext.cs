@@ -46,6 +46,8 @@ namespace CommonMarket.DataAccess
         public virtual DbSet<WishList> WishLists { get; set; }
         public virtual DbSet<ClaimedCoupon> ClaimedCoupons { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
+        public virtual DbSet<OrderByVendor> OrderByVendors { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -201,6 +203,10 @@ namespace CommonMarket.DataAccess
                 .HasMany(e => e.CartItems)
                 .WithRequired(e => e.Cart)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<OrderByVendor>()
+                .Property(e => e.Amount)
+                .HasPrecision(19, 4);
 
         }
     }
