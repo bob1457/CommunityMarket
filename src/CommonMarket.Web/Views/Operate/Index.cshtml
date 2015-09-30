@@ -100,7 +100,7 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-shopping-cart text-primary"></span><a id="order" href="#"> Orders and Status</a> <span class="label label-success">25</span>
+                                        <span class="glyphicon glyphicon-shopping-cart text-primary"></span><a id="order" href="#"> Orders and Status</a> <span class="label label-success"><span id="order_count"></span></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -448,6 +448,8 @@
         var p_count = $("#p_count").val();
         $("#product_count").text(p_count);
 
+        $("#order_count").text($("#o_count").val());
+
     });
 </script>
 <script type="text/javascript">
@@ -579,7 +581,7 @@
     $(document).ready(function () {
         
         $("#go_add").click(function () {
-            debugger;
+            //debugger;
 
             var product = {
                 ProductName: $("#pro_name").val(),
