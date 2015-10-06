@@ -56,14 +56,17 @@ namespace CommonMarket.Web.Controllers
         private readonly ICustomerService _customerService;
         private readonly IMerchantService _merchantServie;
         private readonly IDepartmentService _departmentService;
+        private readonly IOrderProcessingService _orderProcessingService;
 
 
-        public AdminController(ICategoryService categoryService, ICustomerService customerService, IMerchantService merchantServie, IDepartmentService departmentService)
+        public AdminController(ICategoryService categoryService, ICustomerService customerService, 
+            IMerchantService merchantServie, IDepartmentService departmentService, IOrderProcessingService orderProcessingService )
         {
             _categoryService = categoryService;
             _customerService = customerService;
             _merchantServie = merchantServie;
             _departmentService = departmentService;
+            _orderProcessingService = orderProcessingService;
         }
 
         #region Home page with partial view
@@ -222,6 +225,25 @@ namespace CommonMarket.Web.Controllers
             var departments = allDepartments.ToPagedList(pageNumber, pageSize);
 
             return PartialView("_AllDepartments", departments);
+        }
+
+        #endregion
+
+
+        #region Order Fullfillment
+
+        public ActionResult AllOrderList(int? page)
+        {
+
+            const int pageSize = 10; //for testing purpose, to be adjustetd
+            int pageIndex = (page ?? 1) - 1;
+            int pageNumber = (page ?? 1);
+
+            var allOrders = _orderProcessingService.GetAllOrders();//.ToPagedList(pageNumber, pageSize);
+
+            var pagedList = allOrders.ToPagedList(pageNumber, pageSize);
+
+            return PartialView("_AllOrderList", pagedList);
         }
 
         #endregion

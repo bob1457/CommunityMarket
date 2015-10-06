@@ -75,6 +75,10 @@
       <Project>{da995943-f977-4369-ab7c-56986d8c8283}</Project>
       <Name>CommonMarket.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CommonMarket.Infrastructure\CommonMarket.Infrastructure.csproj">
+      <Project>{b090fcb8-69fc-42e4-bf22-ddf856384413}</Project>
+      <Name>CommonMarket.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

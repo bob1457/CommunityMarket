@@ -30,6 +30,7 @@
         /*font-weight: bold;*/
         margin: 5px auto 10px;
     }
+
     .media-date {
         /*position: absolute;*/
         right: 25px;
@@ -42,18 +43,18 @@
         overflow: hidden;
         margin: 10px;
     }
-    .fileUpload input.upload {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0;
-        padding: 0;
-        font-size: 20px;
-        cursor: pointer;
-        opacity: 0;
-        filter: alpha(opacity=0);
-    }
 
+        .fileUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
 </style>
 
 
@@ -83,7 +84,7 @@
                         {
                             <li>
                                 <a href="#activities" role="tab" data-toggle="tab">
-                                    <h4 class="text-capitalize"><i class="glyphicon glyphicon-info-sign"></i> User Info</h4>
+                                    <h4 class="text-capitalize"><i class="glyphicon glyphicon-info-sign"></i> More Info</h4>
                                 </a>
                             </li>
                         }
@@ -348,48 +349,160 @@
 
                     <div class="tab-pane" id="activities">
                         <div class="col-md-6">
-                            <fieldset style="margin-top: 25px;">
-                                <legend>Customer Profile</legend>
-                                <div id="c_details">@Html.Action("GetCustomerDetails", "Customer", new { id = @ViewBag.UserId})</div>
-
-                                <div id="c_edit"></div>
+                            <ul class="nav nav-tabs" role="tablist" style="margin-top: 20px;">
+                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" style="font-weight: bold">Customer Info</a></li>
+                                @if (roles.Contains("Merchant"))
+                                {
+                                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab" style="font-weight: bold">Merchant Info</a></li>
+                                }
                                 
-                                <div id="c_add"></div>
 
-                                <a href="#" id="Edit_c" class="btn btn-primary">Edit</a>
-                                <a href="#" id="c_Save" class="btn btn-success" style="display: none;">Save</a>
-                                <a href="#" id="c_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
-                            </fieldset>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home" style="margin-top: -25px;">
+                                    @*1111 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.*@
+                                    <fieldset style="margin-top: 25px;">
+                                        <legend></legend>
+                                        <div id="c_details">@Html.Action("GetCustomerDetails", "Customer", new { id = @ViewBag.UserId })</div>
+
+                                        <div id="c_edit"></div>
+
+                                        <div id="c_add"></div>
+
+                                        <a href="#" id="Edit_c" class="btn btn-primary">Edit</a>
+                                        <a href="#" id="c_Save" class="btn btn-success" style="display: none;">Save</a>
+                                        <a href="#" id="c_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
+                                    </fieldset>
+
+
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="messages" style="margin-top: -25px;">
+                                    @*2222 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.*@
+                                    <fieldset style="margin-top: 25px;">
+                                        <legend style="margin-top: 15px;"></legend>
+
+                                        <div id="details_m">
+                                            @Html.Action("GetMerchantDetails", "Merchant", new { id = @ViewBag.UserId })
+                                        </div><!-- Data loaded from JSON object from server side -->
+                                        <div id="edit_m" style="display: none;">
+                                            @Html.Action("GetMerchantEdit", "Merchant", new { id = @ViewBag.UserId })
+                                        </div>
+
+                                        <div id="edit_m" style="display: none">
+
+                                        </div><!-- Data loaded from JSON object from server side -->
+
+                                        <a href="#" id="m_Edit" class="btn btn-primary">Edit</a>
+                                        <a href="#" id="m_Save" class="btn btn-success" style="display: none;">Save</a>
+                                        <a href="#" id="m_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
+                                    </fieldset>
+                                </div>
+
+                            </div>
+                            
+
                         </div>
 
                         <div class="col-md-6">
-                            @if (roles.Contains("Merchant"))
-                            {
-                                <fieldset style="margin-top: 25px;">
-                                    <legend style="margin-top: 15px;">Supplier Profile</legend>
+                            
+                            <ul class="nav nav-tabs" role="tablist" style="margin-top: 20px;">
+                                <li role="presentation" class="active"><a href="#c_history" aria-controls="home" role="tab" data-toggle="tab" style="font-weight: bold">Purcahse History</a></li>
+                                @if (roles.Contains("Merchant"))
+                                {
+                                    <li role="presentation"><a href="#m_history" aria-controls="messages" role="tab" data-toggle="tab" style="font-weight: bold">Sales History</a></li>
+                                }
+                            </ul> 
+                                <!-- Tab panes -->
+                            <div class="tab-content" style="height: 340px; overflow-y: auto;">
+                                <div role="tabpanel" class="tab-pane active" id="c_history" style="margin-top: -25px;">
+                                    @*1111 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.*@
+                                    <fieldset style="margin-top: 25px; height: 340px;">
+                                        <div id="orders">@Html.Action("GetPurcahseHisotryForCustomer", "Customer")</div>
+                                    </fieldset>
 
-                                    <div id="details_m">
-                                        @Html.Action("GetMerchantDetails", "Merchant", new { id = @ViewBag.UserId })
-                                    </div><!-- Data loaded from JSON object from server side -->
-                                    <div id="edit_m" style="display: none;">
-                                        @Html.Action("GetMerchantEdit", "Merchant", new { id = @ViewBag.UserId })
+
+                            </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="m_history" style="margin-top: -25px;">
+                                        @*2222 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.*@
+                                        <fieldset style="margin-top: 25px; height: 340px;">
+                                            <legend style="margin-top: 15px;"></legend>
+
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Order #</th>
+                                                            <th>Order Date</th>
+                                                            <th>Order Time</th>
+                                                            <th>Amount (USD)</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>3326</td>
+                                                            <td>10/21/2013</td>
+                                                            <td>3:29 PM</td>
+                                                            <td>$321.33</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3325</td>
+                                                            <td>10/21/2013</td>
+                                                            <td>3:20 PM</td>
+                                                            <td>$234.34</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3324</td>
+                                                            <td>10/21/2013</td>
+                                                            <td>3:03 PM</td>
+                                                            <td>$724.17</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3323</td>
+                                                            <td>10/21/2013</td>
+                                                            <td>3:00 PM</td>
+                                                            <td>$23.71</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3322</td>
+                                                            <td>10/21/2013</td>
+                                                            <td>2:49 PM</td>
+                                                            <td>$8345.23</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3321</td>
+                                                            <td>10/21/2013</td>
+                                                            <td>2:23 PM</td>
+                                                            <td>$245.12</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3320</td>
+                                                            <td>10/21/2013</td>
+                                                            <td>2:15 PM</td>
+                                                            <td>$5663.54</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3319</td>
+                                                            <td>10/21/2013</td>
+                                                            <td>2:13 PM</td>
+                                                            <td>$943.45</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            
+                                        </fieldset>
                                     </div>
-                                        
-                                    <div id="edit_m" style="display: none">
-                                        
-                                    </div><!-- Data loaded from JSON object from server side -->
 
-                                    <a href="#" id="m_Edit" class="btn btn-primary">Edit</a>
-                                    <a href="#" id="m_Save" class="btn btn-success" style="display: none;">Save</a>
-                                    <a href="#" id="m_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
-                                </fieldset>
-                            }
-                            else{
-                                <fieldset style="margin-top: 25px;">
-                                    <legend style="margin-top: 15px;">Customer Activities</legend>
+                                </div>
+                                
 
-                                </fieldset>
-                            }
+                            
+                            
 
                         </div>
 
@@ -440,7 +553,6 @@
         </div>
     </div>
 </div> <!-- #/myModal -->
-
 <!-- Add Picture Dialog -->
 <div id="add_pic">
     <p></p>
@@ -704,7 +816,7 @@
 <!-- Edit Profile -->
 <script type="text/javascript">
     //$(document).on('change', '.btn-file :file', function () {
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         //var fname = $("#fname").val();
         //var lname = $("#lname").val();
@@ -778,7 +890,7 @@
     $(document).ready(function () {
 
         //Dsiplay control
-        $("#m_Edit").click(function() {
+        $("#m_Edit").click(function () {
             $("#details_m").hide();
             $("#m_Edit").hide();
             $("#m_Save").show();
@@ -839,7 +951,7 @@
             } else {
                 tr2.append("<td>Business Name:</td><td>" + data.CompnayName + "</td>");
             }
-           
+
             if (data.SupplierWebSite == null) {
                 tr3.append("<td>Web Site:</td><td></td>");
             } else {
@@ -856,7 +968,7 @@
             } else {
                 tr5.append("<td>Business Logo:</td><td>" + data.CompanyLogoImgUrl + "</td>");
             }
-            
+
             //tr.append("<td>" + data.UserOrifukeUd + "</td>");
             //tr.append("<td>" + data.CompanyName + "</td>");
             //tr.append("<td>" + data.IsActive + "</td>");
@@ -966,7 +1078,7 @@
         });*@
 
 
-        
+
 
         ////////////////////
 
@@ -976,9 +1088,8 @@
 
 <!-- Customer Info -->
 <script type="text/javascript">
-    $(document).ready(function()
-    {
-        
+    $(document).ready(function () {
+
 
 
     });
@@ -996,4 +1107,11 @@
     document.getElementById("upload").onchange = function () {
         document.getElementById("uploadFile").value = this.value;
     };
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        
+    });
 </script>

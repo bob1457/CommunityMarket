@@ -98,7 +98,11 @@ namespace CommonMarket.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if (returnUrl != null)
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+                    return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -106,7 +110,7 @@ namespace CommonMarket.Web.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    return View();
             }
         }
 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls.WebParts;
+using CommonMarket.Core.Entities;
 using CommonMarket.Core.Interface;
 using CommonMarket.Services.ProductServices;
 using CommonMarket.Web.Models;
@@ -114,16 +116,17 @@ namespace CommonMarket.Web.Controllers
             var supplierId = _merchantService.FindSupplierBy(prfileId).Id;
 
 
-            var allProducts = _productServices.FindAllProducts().OrderByDescending(d => d.CreateDate).Where(s => s.SupplierId == supplierId && s.ProductAvailable == true);
+            var allProducts = _productServices.FindAllProducts().OrderByDescending(d => d.CreateDate).Where(s => s.SupplierId == supplierId 
+                && s.ProductAvailable == true);
 
             var products = allProducts.ToPagedList(pageNumber, pageSize);
 
             return PartialView("_AllProducts", products);
         }
 
-        public ActionResult GetAllOrders(int? page) //All order list from all suppliers is for adminstration purpose
+        public ActionResult GetAllOrders(int? page) //All order by supplier
         {
-            const int pageSize = 10; //for testing purpose, to be adjustetd
+            const int pageSize = 10; //for testing purpose, to be adjustetd, PAGING NOT IMPLEMENTED YET
             int pageIndex = (page ?? 1) - 1;
             int pageNumber = (page ?? 1);
 
@@ -131,11 +134,61 @@ namespace CommonMarket.Web.Controllers
             var prfileId = currentUser.UserProfile.Id;
             var supplierId = _merchantService.FindSupplierBy(prfileId).Id;
 
+            ViewBag.SupplierId = supplierId;
+
             var allOrders = _orderProcessingService.OrderListBySupplier(supplierId);
 
-
-
             return PartialView("_AllOrders", allOrders);
+        }
+
+        //Ajax call coming GET
+        public ActionResult GetOrderItemsByVendorOrder(int oid)
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var prfileId = currentUser.UserProfile.Id;
+            var supplierId = _merchantService.FindSupplierBy(prfileId).Id;
+
+            IEnumerable<Core.Entities.OrderItem>  orderItems = _orderProcessingService.GetOrderItmesByVendorOrder(supplierId, oid);
+
+            //var customer = _orderProcessingService.GetCustomerByOrderId(oid);
+
+            //ViewBag.customerEmail = customer.ContactEmail;
+
+
+
+            decimal total = 0;
+
+            foreach (var item in orderItems)
+            {
+                total = total + item.Product.UnitPrice * item.Quantity;
+
+                ViewBag.Total = total;
+
+            }
+
+            return PartialView("_OrderItems", orderItems);
+        }
+
+
+        public JsonResult GetOrderStatus()  //id = order id
+        {
+
+            var statusList = _orderProcessingService.GetStatusList();
+
+            return Json(statusList.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        //[HttpPost]
+        //public void UpdateOrderByVendor(int orderId, int statusId, bool isPaid)
+        //{
+        //    _orderProcessingService.UpdateOrderByVendor(orderId, statusId, isPaid);
+        //}
+
+        [HttpPost]
+        public void UpdateOrderByVendor(OrderByVendor orderbyVendor)
+        {
+            orderbyVendor.UpdateDate = DateTime.Now;
+            _orderProcessingService.UpdateOrderByVendor(orderbyVendor);
         }
     }
 }

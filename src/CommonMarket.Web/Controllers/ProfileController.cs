@@ -22,15 +22,18 @@ namespace CommonMarket.Web.Controllers
     {
         private readonly ICustomerService _customerService;
         private readonly IMerchantService _merchantServie;
+        private readonly ICustomerOrderService _customerOrderService;
 
         public ProfileController()
         {
         }
         
-        public ProfileController(ApplicationUserManager userManager, ICustomerService customerService, IMerchantService merchantServie)
+        public ProfileController(ApplicationUserManager userManager, ICustomerService customerService, 
+            IMerchantService merchantServie, ICustomerOrderService customerOrderService)
         {
             _customerService = customerService;
             _merchantServie = merchantServie;
+            _customerOrderService = customerOrderService;
             UserManager = userManager;
         }
 
@@ -507,6 +510,25 @@ namespace CommonMarket.Web.Controllers
             IdentityResult result = UserManager.Update(user);
 
         }
+
+
+        //public ActionResult GetPurcahseHisotryForCustomer(string id)
+        //{
+        //    var profileId = UserManager.FindById(id).UserProfile.Id;
+
+        //    var customer = _customerService.FindCustomerBy(profileId);
+
+        //    var orders = _customerOrderService.GetOrderByCustomer(customer.Id);
+
+        //    return PartialView("_OrderByCustomer", orders);
+        //}
+
+        //private int GetCustomerId(int id) //id: profile id
+        //{
+        //    var customer = 
+
+        //    return customer.Id;
+        //}
 
         #region Helper
 

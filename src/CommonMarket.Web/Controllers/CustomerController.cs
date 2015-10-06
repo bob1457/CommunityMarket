@@ -16,6 +16,7 @@ namespace CommonMarket.Web.Controllers
     public class CustomerController : Controller
     {
         private readonly ICustomerService _customerService;
+        private readonly ICustomerOrderService _customerOrderService;
 
         #region Identity system
         private ApplicationUserManager _userManager;
@@ -46,9 +47,10 @@ namespace CommonMarket.Web.Controllers
 
         #endregion
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(ICustomerService customerService, ICustomerOrderService customerOrderService)
         {
             _customerService = customerService;
+            _customerOrderService = customerOrderService;
         }
 
         // GET: Customer
@@ -73,8 +75,9 @@ namespace CommonMarket.Web.Controllers
                 var fName = currentUser.UserProfile.FirstName;
                 var lName = currentUser.UserProfile.LastName;
                 var alias = fName + " " + lName;
+                var email = currentUser.UserProfile.Email;
 
-                AddCustomer(alias, profileId);
+                AddCustomer(alias, email, profileId);
 
                 var newCustomer = _customerService.FindCustomerBy(profileId);
 
@@ -85,7 +88,7 @@ namespace CommonMarket.Web.Controllers
             
         }
 
-        private void AddCustomer(string customerAlias, int profileId)
+        private void AddCustomer(string customerAlias, string email, int profileId)
         {
             var customer = new Customer();
 
@@ -94,8 +97,22 @@ namespace CommonMarket.Web.Controllers
                 customer.CustomerAlias = customerAlias;
                 customer.UserProfileId = profileId;
                 customer.IsActive = true;
+                customer.ContactEmail = email;
+
                 _customerService.AddCustomer(customer);
             }
+        }
+
+
+        public ActionResult GetPurcahseHisotryForCustomer()
+        {
+            var profileId = UserManager.FindById(User.Identity.GetUserId()).UserProfile.Id;
+
+            var customer = _customerService.FindCustomerBy(profileId);
+
+            var orders = _customerOrderService.GetOrderByCustomer(customer.Id);
+
+            return PartialView("_OrderByCustomer", orders);
         }
     }
 }

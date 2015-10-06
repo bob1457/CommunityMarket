@@ -26,6 +26,12 @@ namespace CommonMarket.Core.Entities
         [StringLength(255)]
         public string ShippingAddress { get; set; }
 
+        [StringLength(255)]
+        public string ContactEmail { get; set; }
+
+        [StringLength(30)]
+        public string ContactTel { get; set; }
+
         public bool IsActive { get; set; }
 
         public bool IsPreferred { get; set; }

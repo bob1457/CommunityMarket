@@ -40,3 +40,9 @@ C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\N
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\obj\Debug\CommonMarket.Services.csprojResolveAssemblyReference.cache
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\obj\Debug\CommonMarket.Services.dll
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\obj\Debug\CommonMarket.Services.pdb
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\CommonMarket.Infrastructure.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\SendGridMail.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\SendGrid.SmtpApi.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\CommonMarket.Infrastructure.pdb
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Microsoft.AspNet.Identity.Core.xml

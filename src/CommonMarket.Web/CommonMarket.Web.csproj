@@ -415,6 +415,9 @@
     <Content Include="Views\Merchant\_MerchantEdit.cshtml" />
     <Content Include="Views\Checkout\OrderSubmitted.cshtml" />
     <Content Include="Views\Operate\_AllOrders.cshtml" />
+    <Content Include="Views\Operate\_OrderItems.cshtml" />
+    <Content Include="Views\Customer\_OrderByCustomer.cshtml" />
+    <Content Include="Views\Admin\_AllOrderList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
