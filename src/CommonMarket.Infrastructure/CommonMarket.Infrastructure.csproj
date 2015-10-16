@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\FileProcessor.cs" />
     <Compile Include="Utilities\FileUpload.cs" />
+    <Compile Include="Utilities\GenerateString.cs" />
     <Compile Include="Utilities\ImageProcessor.cs" />
   </ItemGroup>
   <ItemGroup>

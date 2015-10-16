@@ -8,6 +8,9 @@ namespace CommonMarket.Core.Interface
         IEnumerable<Entities.Product> FindAllProducts();
         Entities.Product FindProductById(int id);
         IEnumerable<Entities.Product> FindProductByCategory(int id); //id: category id
+        IEnumerable<Entities.Product> GetProductOnPromotion(int id, int discountId); //id: supplier id
+        IEnumerable<Entities.Product> GetProductNotOnPromotion(int id); //id: supplier id
+        IEnumerable<Entities.Product> ListAllProductsOnPromotion();
 
         void AddNewProduct(Entities.Product product, ProductCategory category);
         void AddAdditionalImage(AdditionalProductImg image);

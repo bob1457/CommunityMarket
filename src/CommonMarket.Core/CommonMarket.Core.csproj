@@ -92,6 +92,7 @@
     <Compile Include="Interface\IMerchantService.cs" />
     <Compile Include="Interface\IOrderProcessingService.cs" />
     <Compile Include="Interface\IProductServices.cs" />
+    <Compile Include="Interface\IPromotionService.cs" />
     <Compile Include="Interface\ISearchSerivce.cs" />
     <Compile Include="Interface\IValueCalculator.cs" />
     <Compile Include="Interface\ValueCalculator.cs" />

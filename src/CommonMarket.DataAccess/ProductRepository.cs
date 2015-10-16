@@ -10,7 +10,11 @@ namespace CommonMarket.DataAccess
     {
         IEnumerable<Product> GetAll();
         IEnumerable<Product> FindBy(System.Linq.Expressions.Expression<System.Func<Product, bool>> predicate);
-        IEnumerable<Product> FindByCategory(int id); 
+        IEnumerable<Product> FindByCategory(int id);
+        IEnumerable<Product> GetProductNotOnPromotionBySupplier(int id);
+        IEnumerable<Product> GetProductOnPromotionBySupplier(int id, int discountId);
+        IEnumerable<Product> FindAllProductsOnPromotion();
+
         void Add(Product product, ProductCategory category);
         void Delete(Product entity);
         void DeleteAll(IEnumerable<Product> entity);
@@ -79,6 +83,64 @@ namespace CommonMarket.DataAccess
             catch (Exception)
             {
                 
+                throw;
+            }
+        }
+
+        public IEnumerable<Product> GetProductNotOnPromotionBySupplier(int id)
+        {
+            try
+            {
+
+                using (var context = new CommunityMarketContext())
+                {
+                    return context.Products.Where(p => p.DiscountId == null && p.SupplierId == id).ToList();
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public IEnumerable<Product> GetProductOnPromotionBySupplier(int id, int discountId)
+        {
+            try
+            {
+
+                using (var context = new CommunityMarketContext())
+                {
+                    return context.Products.Where(p => p.DiscountId == discountId && p.SupplierId == id).ToList();
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public IEnumerable<Product> FindAllProductsOnPromotion()
+        {
+            try
+            {
+
+                using (var context = new CommunityMarketContext())
+                {
+                    return context.Products.Where(p => p.DiscountId != null).ToList();
+                }
+
+
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

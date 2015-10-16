@@ -7,6 +7,7 @@ using System.Web.Security;
 using CommonMarket.Core.Interface;
 using CommonMarket.Core.Product;
 using CommonMarket.DataAccess;
+using CommonMarket.Services.MarketingServices;
 using CommonMarket.Services.OrderServices;
 using CommonMarket.Services.ProductServices;
 using CommonMarket.Services.ShopServices;
@@ -54,6 +55,7 @@ namespace CommonMarket.Web.Infrastructure
             kernel.Bind<ICheckOutService>().To<CheckOutService>();
             kernel.Bind<ICustomerOrderService>().To<CustomerOrderService>();
             kernel.Bind<IOrderProcessingService>().To<OrderProcessingService>();
+            kernel.Bind<IPromotionService>().To<PromotionService>();
 
             kernel.Bind<IQuickSearchRepository>().To<QuickSearchRepository>();
 
@@ -64,6 +66,7 @@ namespace CommonMarket.Web.Infrastructure
             kernel.Bind<IMerchantRepository>().To<MerchantRepository>();
             kernel.Bind<IOrderProcessingRepository>().To<OrderProcessingRepository>();
             kernel.Bind<IOrderByVendorRepository>().To<OrderByVendorRepository>();
+            kernel.Bind<IPromotionRepository>().To<PromotionRepository>();
 
         }
     }

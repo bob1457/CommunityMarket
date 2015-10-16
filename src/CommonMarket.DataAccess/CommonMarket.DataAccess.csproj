@@ -52,6 +52,7 @@
     <Compile Include="Base\IBaseRepositoryAsync.cs" />
     <Compile Include="CartContentRepository.cs" />
     <Compile Include="CommunityMarketContext.cs" />
+    <Compile Include="PromotionRepository.cs" />
     <Compile Include="IDbContext.cs" />
     <Compile Include="IRepositoryAsync.cs" />
     <Compile Include="IRepository.cs" />

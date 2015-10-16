@@ -47,12 +47,15 @@ namespace CommonMarket.Web.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IMerchantService _merchantServie;
         private readonly IProductServices _productServices;
+        private readonly IPromotionService _promotionService;
 
-        public ShopController(ICategoryService categoryService, IMerchantService merchantServie, IProductServices productServices)
+        public ShopController(ICategoryService categoryService, IMerchantService merchantServie, IProductServices productServices,
+            IPromotionService promotionService)
         {
             _categoryService = categoryService;
             _merchantServie = merchantServie;
             _productServices = productServices;
+            _promotionService = promotionService;
         }
 
         // GET: Shop
@@ -95,10 +98,11 @@ namespace CommonMarket.Web.Controllers
         }
 
 
-        public JsonResult GetSpecialProducts() //get products on promotion with lower price
+        public ActionResult GetSpecialProducts() //get products on promotion with lower price
         {
+            var products = _productServices.ListAllProductsOnPromotion();
 
-            return Json("");
+            return PartialView("_SpecialsList", products);
         }
 
     }

@@ -16,10 +16,12 @@
     var level = currentUser.UserProfile.Address2; //special consideration on temperory basis
 
     var profileId = currentUser.UserProfile.Id;
-    
-     
-    
+
+
+
 }
+<link href="~/Content/Styles/datepicker.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
 
 <style>
     .panel-default > .panel-heading {
@@ -33,13 +35,14 @@
     .regular_weight {
         font-weight: normal;
     }
+    .datepicker{z-index:1151 !important;}
 </style>
 
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             <div class="panel-group" id="accordion">
-                
+
                 <div style="margin-top: 35px;">
                     <img src="@Url.Content(@currentUser.UserProfile.AvatarImgUrl)" width="50" height="50" title="@currentUser.UserProfile.FirstName" style="float: left;" />
                     <div style="position: relative; left: 15px;">
@@ -47,7 +50,7 @@
                         <span><a href="#">@currentUser.UserProfile.Email</a></span>
                     </div>
                 </div>
-                
+
                 <div class="panel panel-default" style="margin-top: 25px;">
                     <div class="panel-heading">
                         <h4 class="panel-title regular_weight">
@@ -63,7 +66,7 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-dashboard text-primary"></span><a id="f_show" href="#" style="font-weight: bold"> Dashboard</a>
-                                        
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -74,15 +77,16 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-blackboard text-success"></span><a href="http://www.jquery2dotnet.com"> Inventory Control</a>
+                                        <span class="glyphicon glyphicon-flash text-info"></span><a id="d_show" href="#"> Discounts & Coupons</a>
+                                        <span class="badge"><span id="discount_count" class="badge">0</span></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-flash text-info"></span><a id="d_show" href="#"> Discount & Promotion</a>
-                                        <span class="badge"><span id="discount_count" class="badge">0</span></span>
+                                        <span class="glyphicon glyphicon-blackboard text-success"></span><a href="http://www.jquery2dotnet.com"> Marketing & Promotion</a>
                                     </td>
                                 </tr>
+                                
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-fire text-success"></span><a href="http://www.jquery2dotnet.com"> Tax and Fee</a>
@@ -161,8 +165,8 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
-                                                                                                       Delete Account
-                                                                                                   </a>
+                                            Delete Account
+                                        </a>
                                     </td>
                                 </tr>
                             </table>
@@ -199,8 +203,8 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
-                                                                                                       Delete Account
-                                                                                                   </a>
+                                            Delete Account
+                                        </a>
                                     </td>
                                 </tr>
                             </table>
@@ -216,11 +220,11 @@
                 <span>
                     Manage the products, orders, customers and viwe your business and financial reports.
                 </span>
-                
+
                 <div class="" style="margin-top: -10px;">
-                    
+
                     <div id="front">
-                        
+
                         <div class="row">
                             <div class="col-lg-12" style="overflow: hidden; margin-left: 18px; margin-top: 5px;">
                                 <h4 class="page-header" style=" margin-bottom: 0;">
@@ -228,7 +232,7 @@
                                 </h4>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-3 col-sm-6" style="margin-left: 18px; margin-right: -10px">
                                 <div class="panel panel-primary">
@@ -319,7 +323,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-lg-4" style="margin-left: 15px; margin-right: -10px;">
                                 <div class="panel panel-default">
@@ -457,7 +461,7 @@
                         </div>
 
                     </div>
-                    
+
 
                     <div id="product" style="display: none; margin-top: 19px;">@Html.Action("GetProductList")</div>
 
@@ -479,11 +483,6 @@
             </div>
 
         </div>
-
-
-
-
-
 
 
 
@@ -509,14 +508,14 @@
                         -->
                         <div class="form-group">
                             <select id="all_category" style="margin-bottom: -5px;">
-                               <option aria-valuemax="0">--Select Major Cateegory</option>
+                                <option aria-valuemax="0">--Select Major Cateegory</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <textarea id="pro_desc" rows="2" class="form-control" placeholder=" Description - Short" style="margin-bottom: -5px;"></textarea>
                         </div>
-                       
+
                         <div class="form-group">
                             <textarea id="pro_desc2" rows="2" class="form-control" placeholder=" Description - Long" style="margin-bottom: -5px;"></textarea>
                         </div>
@@ -556,7 +555,7 @@
                 <!-- /.modal-content -->
             </div>
         </div>
-        
+
         <!-- Modal Dialogs - ADD Discount -->
         <div class="modal " id="add_dis" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="overflow: visible;">
             <div class="modal-dialog" style="width: 100%; margin-top: 0;">
@@ -571,11 +570,12 @@
                                 <option value="0">--Select Discount Type</option>
                             </select>
                         </div>
-
+<!--
                         <div class="form-group">
-                            <input id="disc_code" class="form-control" type="text" placeholder="Discount Code" style="height: 35px; margin-bottom: -5px;" title="Discount Code">
+                            <input id="disc_code" class="form-control" type="text" placeholder="Discount Code" style="height: 35px; margin-bottom: -5px; width: 15.8em; margin-right: 15px;" title="Discount Code">
+                            <span><input id="auto" type="checkbox" style="vertical-align: baseline; margin-right: 5px;" /> Auto Generate</span>
                         </div>
-                        <!--
+                        
                             <div class="form-group">
                                 <input id="pro_vId" class="form-control" type="text" placeholder="Vendor Product ID -- Optional" style="height: 35px; margin-bottom: -5px;" >
                             </div>
@@ -583,41 +583,45 @@
                                 <input id="pro_sku" class="form-control" type="text" placeholder="Product SKU Nubmer -- Optional" style="height: 35px; margin-bottom: -5px;" >
                             </div>
                             -->
-                        
+
 
                         <div class="form-group">
                             <textarea id="disc_desc" rows="2" class="form-control" placeholder=" Description" style="margin-bottom: -5px;"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <select id="prod_unit" style="margin-bottom: -5px;">
-                                <option>-- Select Unit Name --</option>
-                                <option>lb</option>
-                                <option>kg</option>
-                                <option>Case</option>
-                                <option>Package</option>
-                                <option>Each</option>
+                            <select id="d_type" style="margin-bottom: -5px;">
+                                <option>-- Select Value Type --</option>
+                                <option value="0">Percent</option>
+                                <option value="1">Amount</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <input id="prod_price" class="form-control" type="text" placeholder="Unit Price" style="height: 35px; margin-bottom: -5px;">
+                            <input id="d_value" class="form-control" type="text" placeholder="Discount Value" style="height: 35px; margin-bottom: -5px;">
                         </div>
                         <div class="form-group">
-                            <input id="qty_perUnit" class="form-control" type="text" placeholder="Quantity per Unit if unit name is Case or Package" style="height: 35px; margin-bottom: -5px;">
+                            <input id="d_volume" class="form-control" type="text" placeholder="Minimum Purchase Value" style="height: 35px; margin-bottom: -5px;">
                         </div>
-                        <!--<div class="form-group">
-                                <input id="unit_inStock" class="form-control" type="text" placeholder="Units In Stock" style="height: 35px; margin-bottom: -5px;">
-                            </div>-->
-                        <div class="form-group">
-                            <input id="availabe" type="checkbox" checked="checked" style="vertical-align: baseline;"> &nbsp;Available
+                        <label style="font-weight: bold;">Effective Period</label>
+                        
+                        <div style="margin-left: 0;" data-date="" data-date-format="dd-mm-yyyy">
+                            START: <input id="from" type="text" style="height: 33px; vertical-align: baseline;" value="@DateTime.Now.ToShortDateString()" /><span><i class="icon-th" style="font-size: 1em; padding: 10px; background-color: #E1E1E1;"></i></span>
                         </div>
+                        
+                        <div style="margin-left: 0;" data-date="" data-date-format="dd-mm-yyyy">
+                            END: &nbsp; &nbsp;<input id="to" type="text" style="height: 33px; vertical-align: baseline; margin-left: 5px;" value="@DateTime.Now.ToShortDateString()" /><span><i class="icon-th" style="font-size: 1em; padding: 10px; background-color: #E1E1E1;"></i></span>
+                        </div>
+                       
+                        @*<div class="form-group">
+                            <input id="active" type="checkbox" checked="checked" style="vertical-align: baseline;"> &nbsp;Active
+                        </div>*@
                         <div class="form-group">
-                            <textarea id="pro_notes" rows="2" class="form-control" placeholder="Additional Notes" style="margin-bottom: -5px;"></textarea>
+                            <textarea id="d_notes" rows="2" class="form-control" placeholder="Additional Notes" style="margin-bottom: -5px;"></textarea>
                         </div>
 
                     </div>
                     <div class="modal-footer ">
-                        <button id="go_add" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+                        <button id="d_add" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-ok-sign"></span> Create</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
                     </div>
                 </div>
@@ -632,6 +636,13 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        //Date picker
+        //
+        //$("#from").datepicker();
+
+
+
         $("#product").hide();
         //$("#front").show();
         $("#discount").hide();
@@ -774,9 +785,9 @@
 </script>
 
 @*<script type="text/javascript">
-    $('input[type=file]').bootstrapFileInput();
-    $('.file-inputs').bootstrapFileInput();
-</script>*@
+        $('input[type=file]').bootstrapFileInput();
+        $('.file-inputs').bootstrapFileInput();
+    </script>*@
 
 
 
@@ -810,7 +821,7 @@
 
 <!-- populate diccount type dropdown box -->
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         var url = "/Product/DiscountTypeList";
         var option = $('<option />');
 
@@ -834,9 +845,9 @@
 <!-- Add Product -->
 <script type="text/javascript">
     $(document).ready(function () {
-        
+
         $("#go_add").click(function () {
-            debugger;
+            //debugger;
 
             var product = {
                 ProductName: $("#pro_name").val(),
@@ -872,7 +883,7 @@
                     $('#msg').delay(5000).fadeOut(400);
 
 
-                    debugger;
+                    //debugger;
                     var url = "/Operate/ListProducts";
                     $.get(url, function (data) {
                         $("#product").html(data);
@@ -900,9 +911,78 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#from").datepicker().on('changeDate', function (e) {
+            var date = $("#from").val();
+            //alert(date);
+            $("#from").datepicker('hide');
+           
+        });
 
+        $("#to").datepicker().on('changeDate', function (e) {
+            //var date = $("#from").val();
+            //alert(date);
+            $("#to").datepicker('hide');
 
+        });
+        
+
+    })
+</script>
+
+<!-- Add Discount -->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#d_add").click(function () {
+
+            var discountData = {
+                Description: $("#disc_desc").val(),
+                DiscountTypeId: $("#all_type").val(),
+                DiscountValue: $("#d_value").val(),
+                ValueType: $("#d_type").val(),
+                Notes: $("#d_notes").val(),
+                StartDate: $("#from").val(),
+                EndDate: $("#to").val()
+            };
+
+            $.ajax({
+                url: '/Marketing/AddDiscount',
+                type: 'post',
+                dataType: 'json',
+                // It is important to set the content type
+                // request header to application/json because
+                // that's how the client will send the request
+                contentType: 'application/json',
+                data: JSON.stringify({ discount: discountData }),
+                cache: false,
+                success: function (data) {
+
+                    //var q = "id=" + sId;
+
+                    var url = "/Marketing/ListAllDiscountsBySupplier";
+                    $.get(url, function (resp) {
+                        $("#disct").html(resp);
+                        return false;
+                    });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert(thrownError);
+                    //debugger; this part will be fixed when the jquery error "unexpected end of input: is resolved
+                    //var q = "id=" + sId;
+
+                    var url = "/Marketing/ListAllDiscountsBySupplier";
+                    $.get(url, function (data) {
+                        $("#disct").html(data);
+                        return false;
+                    });
+                }
+            });
+
+            $('#add_dis').modal('hide');
+        });
 
 
     });
 </script>
+
+

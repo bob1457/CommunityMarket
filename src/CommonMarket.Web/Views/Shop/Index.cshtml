@@ -64,7 +64,7 @@
                 </div>
                 <div class="panel-body">
                     
-                    <div id="specials">@Html.Partial("_SpecialList")</div>
+                    <div id="specials"></div>
                     
 
                     
@@ -125,6 +125,20 @@
 
 
         
+    });
+</script>
+
+<!-- Get Products in Special -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        var url = "/Shop/GetSpecialProducts";
+        $.get(url, function (data) {
+            $("#specials").html(data);
+            return false;
+        });
+
+
     });
 </script>
 

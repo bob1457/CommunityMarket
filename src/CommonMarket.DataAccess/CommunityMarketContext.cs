@@ -70,10 +70,10 @@ namespace CommonMarket.DataAccess
                 .Property(e => e.Notes)
                 .IsFixedLength();
 
-            modelBuilder.Entity<Discount>()
-                .HasMany(e => e.Products)
-                .WithMany(e => e.Discounts)
-                .Map(m => m.ToTable("ProductDiscount").MapLeftKey("DiscountId").MapRightKey("ProductId"));
+            //modelBuilder.Entity<Discount>()
+            //    .HasMany(e => e.Products)
+            //    .WithMany(e => e.Discounts)
+            //    .Map(m => m.ToTable("ProductDiscount").MapLeftKey("DiscountId").MapRightKey("ProductId"));
 
             modelBuilder.Entity<DiscountType>()
                 .Property(e => e.DiscountTypeName)
@@ -206,6 +206,10 @@ namespace CommonMarket.DataAccess
 
             modelBuilder.Entity<OrderByVendor>()
                 .Property(e => e.Amount)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<Coupon>()
+                .Property(e => e.ValueAmount)
                 .HasPrecision(19, 4);
 
         }

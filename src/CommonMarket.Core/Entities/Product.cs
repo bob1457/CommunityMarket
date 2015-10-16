@@ -13,7 +13,7 @@ namespace CommonMarket.Core.Entities
         {
             OrderItems = new HashSet<OrderItem>();
             ProductCategories = new HashSet<ProductCategory>();
-            Discounts = new HashSet<Discount>();
+            //Discounts = new HashSet<Discount>();
             Taxes = new HashSet<Tax>();
         }
 
@@ -56,6 +56,8 @@ namespace CommonMarket.Core.Entities
 
         public bool ProductAvailable { get; set; }
 
+        public int? DiscountId { get; set; }
+
         [StringLength(255)]
         public string Notes { get; set; }
 
@@ -71,7 +73,7 @@ namespace CommonMarket.Core.Entities
 
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
 
-        public virtual ICollection<Discount> Discounts { get; set; }
+        //public virtual ICollection<Discount> Discounts { get; set; }
 
         public virtual ICollection<Tax> Taxes { get; set; }
     }

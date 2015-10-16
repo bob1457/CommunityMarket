@@ -6,6 +6,26 @@
     var userId = User.Identity.GetUserId();
 }
 
+<style>
+    .shape {
+        border-color: rgba(255,255,255,0) #d9534f rgba(255,255,255,0) rgba(255,255,255,0);
+    }
+
+    .shape-text {
+        color: #fff;
+        font-size: 12px;
+        font-weight: bold;
+        position: relative;
+        right: -40px;
+        top: 2px;
+        white-space: nowrap;
+        -ms-transform: rotate(30deg); /* IE 9 */
+        -o-transform: rotate(360deg); /* Opera 10.5 */
+        -webkit-transform: rotate(30deg); /* Safari and Chrome */
+        transform: rotate(30deg);
+    }
+</style>
+
 <ul class="list-unstyled ">
     @foreach (var item in Model)
     {
@@ -13,7 +33,12 @@
         {
             <li>
                 <div class="col-sm-3 col-lg-3 col-md-3">
-                    <div class="thumbnail" style="height: auto; margin-bottom: 0;">
+                    <div class="shape" id="onSale_@item.Id" style="display: none; position: absolute; right: 13px;">
+                        <div class="shape-text">
+                            <span style="margin-left: -9px; font-size: .8em;"> On Sale</span>
+                        </div>
+                    </div>
+                    <div class="thumbnail" style="height: 335px; overflow-y: hidden; margin-bottom: 0;">
                         <a href="@Url.Action("ProductDetails", "Product", new {id=@item.Id})"><img src="@Url.Content(@item.ProductImgLargeUrl)" /></a>
                         <div class="caption">
                             <h4>
@@ -27,11 +52,12 @@
                                 }
                                 else
                                 {
-                                    @item.ProductDescLong
+                                    @item.ProductDescShort
                                 }
-
+                                <h4 id="specials_@item.Id" style="position: absolute; color: #f70808; "></h4>
                             </p><br />
-                            <h4 class="pull-left product_price" style="margin-top: 0;">@item.UnitPrice.ToString("c")/@item.UnitName.ToLower()</h4>
+                            <input type="hidden" id="o_price_@item.Id" value="@item.UnitPrice"/>
+                            <h4 class="pull-left product_price"  id="oldpr_@item.Id" style="margin-top: 0;">@item.UnitPrice.ToString("c")/@item.UnitName.ToLower()</h4>
                             @*<br/>*@
                             @*<div>
                                 <input type="text" id="qty_@item.Id" style="display: inline-block;width: 35px;height: 25px;vertical-align: baseline;" value="1" /> @if (@item.UnitName == "Each")
@@ -112,7 +138,51 @@
 
 
                     });
-</script>
+                </script>
+                
+                <!-- Deal with Discounted Products -->
+                
+                <script type="text/javascript">
+                    $(document).ready(function() {
+
+                        if (@item.DiscountId != null) {
+                            
+                            var disocuntId = @item.DiscountId; //$("#d_id_@item.Id").val();
+                            var url = "/Marketing/GetDiscountById/" + disocuntId;
+                            //debugger;
+                            $.getJSON(url, function (data) {
+
+                                var rate = data.DiscountValue;
+                                var type = data.ValueType;
+
+                                $("#d_rate2_@item.Id").val(data.DiscountValue);
+                                $("#d_type2_@item.Id").val(data.ValueType);
+
+                                //alert($("#d_type_@item.Id").val());
+
+                                var odlPrice = $("#o_price_@item.Id").val();
+                                var newPrice;
+                                //var rate = $("#d_rate2_@item.Id").val();
+
+                                //alert(rate);
+                                if (type == 0) {
+                                    newPrice = accounting.formatMoney(odlPrice * (1 - rate / 100));
+                                    //alert(newPrice);
+                                    $("#specials_@item.Id").text(newPrice + "/@item.UnitName.ToLower()");
+
+                                } else {
+                                    //Add logics for flat amount discount
+                                }
+
+                                $("#oldpr_@item.Id").css("text-decoration", "line-through");
+                                $("#onSale_@item.Id").show();
+                            });
+
+                        }
+
+
+                    });
+                </script>
             </li>
         }
         else

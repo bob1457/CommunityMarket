@@ -70,6 +70,23 @@ namespace CommonMarket.Services.ProductServices
 
         }
 
+        public IEnumerable<Product> GetProductOnPromotion(int id, int discountId)
+        {
+            //return _proRepository.FindBy(p=> p.SupplierId == id).Where(p=>p.DiscountId != null || p.DiscountId != 0);
+            return _productRepository.GetProductOnPromotionBySupplier(id, discountId);
+        }
+        
+        public IEnumerable<Product> GetProductNotOnPromotion(int id)
+        {
+            //return _proRepository.FindBy(p => p.DiscountId == null || p.DiscountId == 0 && p.SupplierId == id);
+            return _productRepository.GetProductNotOnPromotionBySupplier(id);
+        }
+
+        public IEnumerable<Product> ListAllProductsOnPromotion()
+        {
+            return _productRepository.FindAllProductsOnPromotion();
+        }
+
 
         public void UpdateProduct(Product product)
         {

@@ -115,6 +115,7 @@ namespace CommonMarket.Web.Controllers
             var prfileId = currentUser.UserProfile.Id;
             var supplierId = _merchantService.FindSupplierBy(prfileId).Id;
 
+            ViewBag.supplierId = supplierId;
 
             var allProducts = _productServices.FindAllProducts().OrderByDescending(d => d.CreateDate).Where(s => s.SupplierId == supplierId 
                 && s.ProductAvailable == true);
@@ -136,7 +137,7 @@ namespace CommonMarket.Web.Controllers
 
             ViewBag.SupplierId = supplierId;
 
-            var allOrders = _orderProcessingService.OrderListBySupplier(supplierId);
+            var allOrders = _orderProcessingService.OrderListBySupplier(supplierId).ToPagedList(pageNumber, pageSize);
 
             return PartialView("_AllOrders", allOrders);
         }
