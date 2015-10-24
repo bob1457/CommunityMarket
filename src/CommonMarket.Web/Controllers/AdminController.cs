@@ -84,9 +84,13 @@ namespace CommonMarket.Web.Controllers
         
         //Users and Roles
         [ChildActionOnly]
-        public ActionResult GetUserList()
+        public ActionResult GetUserList(int? page)
         {
-            var users = UserManager.Users;
+            const int pageSize = 10; //for testing purpose, to be adjustetd
+            int pageIndex = (page ?? 1) - 1;
+            int pageNumber = (page ?? 1);
+
+            var users = UserManager.Users.OrderByDescending((d => d.UserProfile.CreateDate)).ToPagedList(pageNumber, pageSize);
 
             return PartialView("_UserList", users);
         }
