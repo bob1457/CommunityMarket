@@ -62,13 +62,34 @@
 
                                 </td>
                                 <td>
-                                    <strong>@item.Product.UnitPrice.ToString("c") <span class="text-muted"></span></strong>
+                                    @{
+                                        var rate = ViewBag.dicountRate;
+
+                                        var uPrice = "0";
+
+                                        if (@item.Product.DiscountId != null)
+                                        {
+
+
+                                            uPrice = ((@item.Product.UnitPrice) * rate).ToString("c");
+                                        }
+                                        else
+                                        {
+                                            uPrice = @item.Product.UnitPrice.ToString("c");
+                                        }
+
+                                    }
+                                    
+                                    
+                                    
+
+                                    <strong>@uPrice <span class="text-muted"></span> </strong>
                                 </td>
                                 <td>
                                     <input type="email" class="form-control" id="exampleInputEmail1" value="@item.Quantity" disabled="" />
                                 </td>
                                 <td>
-                                    <strong>@((item.Quantity * item.Product.UnitPrice).ToString("c")) <span class="text-muted"></span></strong>
+                                    <strong>@uPrice <span class="text-muted"></span></strong>
                                 </td>
                                 <td>
                                     <span class="glyphicon glyphicon-remove-sign remove_link" title="Remove from cart" style="font-size: 1.5em; cursor: pointer; text-align: right; color:#a52a2a; visibility: hidden;"></span>

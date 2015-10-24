@@ -57,16 +57,19 @@ namespace CommonMarket.Web.Controllers
         private readonly IMerchantService _merchantServie;
         private readonly IDepartmentService _departmentService;
         private readonly IOrderProcessingService _orderProcessingService;
+        private readonly IPromotionService _promotionService;
 
 
         public AdminController(ICategoryService categoryService, ICustomerService customerService, 
-            IMerchantService merchantServie, IDepartmentService departmentService, IOrderProcessingService orderProcessingService )
+            IMerchantService merchantServie, IDepartmentService departmentService, 
+            IOrderProcessingService orderProcessingService, IPromotionService promotionService )
         {
             _categoryService = categoryService;
             _customerService = customerService;
             _merchantServie = merchantServie;
             _departmentService = departmentService;
             _orderProcessingService = orderProcessingService;
+            _promotionService = promotionService;
         }
 
         #region Home page with partial view
@@ -245,6 +248,51 @@ namespace CommonMarket.Web.Controllers
 
             return PartialView("_AllOrderList", pagedList);
         }
+
+
+        public ActionResult GetAllOrderItems(int id) //id: order id
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            
+            IEnumerable<Core.Entities.OrderItem> orderItems = _orderProcessingService.GetOrderItemsFromOrder(id);
+            
+            decimal total = 0;
+
+            foreach (var item in orderItems)
+            {
+                //if (item.Product.DiscountId != null)
+                //{
+                //    int? dId = item.Product.DiscountId;
+                //    var discount = GetDiscountById(dId);
+
+                //    if (discount.ValueType == 0)
+                //    {
+                //        decimal rate = 1 - Convert.ToDecimal(discount.DiscountValue / 100.00);
+
+                //        ViewBag.dicountAmt = rate;
+
+                //        var newPrice = item.Product.UnitPrice * rate;
+                //        total = total + newPrice * item.Quantity;
+                //    }
+                //    else
+                //    {
+                //        //Deal with flat amount discount
+                //    }
+                //}
+                //else
+                //{
+                //    total = total + item.Product.UnitPrice * item.Quantity;
+                //}
+
+                total = total + item.Product.UnitPrice * item.Quantity;
+
+                ViewBag.Total = total;
+
+            }
+
+            return PartialView("_AllOrderItems", orderItems);
+        }
+
 
         #endregion
 
@@ -452,7 +500,11 @@ namespace CommonMarket.Web.Controllers
 
         #endregion
 
-        
+        private Discount GetDiscountById(int? id)
+        {
+            return _promotionService.FindAllDiscounts().FirstOrDefault(d => d.Id == id);//.ToList();
+
+        }
 
     }
 }

@@ -18,7 +18,36 @@
         @foreach (var item in Model.CartItems)
         {
             <li class="list-group-item">
-                <div class="row toggle" data-toggle="de_@item.Id">@item.Product.ProductName, <em>@item.Quantity @item.Product.UnitName.ToLower()</em>, subtotal:  @((@item.Quantity * @item.Product.UnitPrice).ToString("c") )<span style="float: right; cursor: pointer; margin-right: 5px;" title="Details"><span id="symbo"><i class="fa fa-chevron-down pull-right"></i></span><span id="symbo2"><i class="fa fa-chevron-up pull-right" style="display: none"></i></span></span></div>
+                
+                @{
+                    var rate = ViewBag.dicountAmount;
+
+                    var uPrice = "0";
+
+                    if (@item.Product.DiscountId != null)
+                    {
+
+
+                        uPrice = ((@item.Product.UnitPrice) * rate).ToString("c");
+                    }
+                    else
+                    {
+                        uPrice = @item.Product.UnitPrice.ToString("c");
+                    }
+
+                }
+                
+
+                <div class="row toggle" data-toggle="de_@item.Id">@item.Product.ProductName, <em>@item.Quantity@if (@item.Product.UnitName == "Each")
+                                                                                                    {
+                                                                                                        <em>unit</em>
+                                                                                                    }
+                                                                                                               else
+                                                                                                               {
+                                                                                                                    @item.Product.UnitName.ToLower()
+                                                                                                               }
+                                                                                                 
+                                                                                             </em>, subtotal:  @uPrice<span style="float: right; cursor: pointer; margin-right: 5px;" title="Details"><span id="symbo"><i class="fa fa-chevron-down pull-right"></i></span><span id="symbo2"><i class="fa fa-chevron-up pull-right" style="display: none"></i></span></span></div>
                 <div class="divider"></div>
                 <div id="de_@item.Id" style="font-size:.8em; display: none;">
                     <img src="@Url.Content(@item.Product.ProductImgSmallUrl)" height="32" width="32" style="float: left; margin-right: 10px; margin-top: 5px;" /> <span style="font-weight: bold; font-size: 1em;">@item.Product.ProductName</span><br /> @item.Quantity @item.Product.UnitName at @item.Product.UnitPrice per @item.Product.UnitName.ToLower().
@@ -29,7 +58,7 @@
         
     </ul>
     <div id="oreder_result" style=" color: #000;">
-        <div id="voucher" style="margin-top: 5px; margin-bottom: -15px; float: right;">Voucher Code: <input type="text" style="width:75px; vertical-align: top;" /></div><br/>
+        <div id="voucher" style="margin-top: 5px; margin-bottom: -15px; float: right;">Promo Code: <input type="text" style="width:75px; vertical-align: top;" /></div><br/>
         <div id="subtotal" style="margin-top: 10px; float: right; color: #D85210">Subtotal: @ViewBag.Total.ToString("c")</div><br /><br />
         <div id="total" style="float: right; font-weight: bold; color:#ff0000;">Total:  @ViewBag.Total.ToString("c")</div>
         <input id="order_total" type="hidden" value="@ViewBag.Total"/>

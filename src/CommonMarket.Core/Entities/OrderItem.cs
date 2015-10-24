@@ -19,6 +19,9 @@ namespace CommonMarket.Core.Entities
 
         public int SupplierId { get; set; }
 
+        [Column(TypeName = "money")]
+        public decimal UnitPrice { get; set; }
+
         public int Quantity { get; set; }
 
         [Column(TypeName = "money")]

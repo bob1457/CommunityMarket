@@ -427,6 +427,8 @@
     <Content Include="Views\Marketing\_ProductsOnPromotion.cshtml" />
     <Content Include="Views\Marketing\_ProductsNotOnPromotion.cshtml" />
     <Content Include="Views\Shop\_SpecialsList.cshtml" />
+    <Content Include="Views\Cart\_CartSummary.cshtml" />
+    <Content Include="Views\Admin\_AllOrderItems.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
