@@ -499,7 +499,33 @@
                 </div>
                 
                 <div id="merchant_acct">
-                    Merchant Account Manager
+                    <div class="" style="margin-top: 25px;">
+                        <ul class="nav nav-tabs" role="tablist" style="margin-bottom: 0;">
+                            @*<li ><a href="#users" role="tab" data-toggle="tab" style="padding: 0 10px 0 10px;"><h4 class="text-capitalize"><i class="glyphicon glyphicon-user"></i> Users</h4></a></li>*@
+
+                            <li class="active"><a href="#vender" role="tab" data-toggle="tab" style="padding: 0 10px 0 10px;"><h4 class="text-capitalize"><i class="icon-user"></i> All Merchants <span style="font-weight:normal;" class="label label-info" id="count"></span></h4></a></li>                            
+                        </ul>
+                    </div>
+                    <div class="tab-content" style="background-color: white;">
+
+                        <div class="tab-pane active" id="vender" style="background-color: white;">
+                            <ul class="media-list">
+                                <li class="media">
+                                    @*<a class="pull-left" href="#" style="margin-top: 15px;">
+                            <img class="media-object img-circle" src="~/Content/Assets/Images/users.png" alt="Users" width="60" height="60" style="margin-left: 5px;" />
+                        </a>*@
+                                    <div class="media-body">
+                                        @*<div id="find">
+                                <input type="text" style="height: 30px; margin-bottom: 0;" placeholder="Find User" />
+                            </div>*@
+
+                                        <div id="mlist" style="margin-top: 20px;">@Html.Action("GetSuppliers")</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
 
                 
@@ -518,9 +544,9 @@
                         <div class="tab-pane active" id="managers" style="background-color: white;">
                             <ul class="media-list">
                                 <li class="media">
-                                    <a class="pull-left" href="#" style="margin-top: 15px;">
+                                    @*<a class="pull-left" href="#" style="margin-top: 15px;">
                                         <img class="media-object img-circle" src="~/Content/Assets/Images/users.png" alt="Users" width="60" height="60" style="margin-left: 5px;" />
-                                    </a>
+                                    </a>*@
                                     <div class="media-body">
                                         @*<div id="find">
                                     <input type="text" style="height: 30px; margin-bottom: 0;" placeholder="Find User" />
@@ -535,9 +561,9 @@
                         <div class="tab-pane" id="roles">
                             <ul class="media-list">
                                 <li class="media">
-                                    <a class="pull-left" href="#" style="margin-top: 15px;">
+                                    @*<a class="pull-left" href="#" style="margin-top: 15px;">
                                         <img class="media-object img-circle" src="~/Content/Assets/Images/work.png" alt="Roles" width="60" height="60" style="margin-left: 5px;" />
-                                    </a>
+                                    </a>*@
                                     <div class="media-body">
                                         <div>
                                             <button class="btn btn-primary" style="margin-bottom: -25px; margin-left: 7px; margin-top: 25px; color: rgb(241, 198, 128);" data-title="Add" data-toggle="modal" data-target="#addrole"><span class="glyphicon glyphicon-plus-sign"></span> Add New</button>

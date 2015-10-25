@@ -104,7 +104,7 @@ namespace CommonMarket.Web.Controllers
 
 
 
-        public ActionResult GetSuppliers() //Testing
+        public ActionResult GetSuppliers(int? page) //Testing
         {
             //var suppliers = RoleManager.FindByName("Merchant").Users;
 
@@ -113,7 +113,12 @@ namespace CommonMarket.Web.Controllers
             //    from user in role.Users
             //    select user.UserId;
 
-            var supplier = UserManager.Users.Where(m => m.Roles.Any(r => r.RoleId == "6ca46ec2-a996-4788-92ec-5c255a174eb4"));
+            const int pageSize = 10; //for testing purpose, to be adjustetd, PAGING NOT IMPLEMENTED YET
+            int pageIndex = (page ?? 1) - 1;
+            int pageNumber = (page ?? 1);
+            
+
+            var supplier = UserManager.Users.Where(m => m.Roles.Any(r => r.RoleId == "6ca46ec2-a996-4788-92ec-5c255a174eb4")).OrderByDescending(d=>d.UserProfile.LastName).ToPagedList(pageNumber, pageSize);
 
             return PartialView("_SupplierList", supplier);
         }
@@ -236,7 +241,6 @@ namespace CommonMarket.Web.Controllers
 
         #endregion
 
-
         #region Order Fullfillment
 
         public ActionResult AllOrderList(int? page)
@@ -299,7 +303,7 @@ namespace CommonMarket.Web.Controllers
 
 
         #endregion
-
+        
         #region Helper
         /**/
         [HttpPost]
@@ -484,6 +488,10 @@ namespace CommonMarket.Web.Controllers
 
             return Json(id + " Deactivated!");
         }
+
+
+
+
 
         #endregion
 
