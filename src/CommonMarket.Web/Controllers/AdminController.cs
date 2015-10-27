@@ -489,7 +489,17 @@ namespace CommonMarket.Web.Controllers
             return Json(id + " Deactivated!");
         }
 
+        public ActionResult GetTransactionsBySupplier(string id) //id: supplier userid
+        {
+            var userInfo = UserManager.FindById(id);
+            var profileId = userInfo.UserProfile.Id;
 
+            var supplier = _merchantServie.FindSupplierBy(profileId);
+
+            var transactions = _orderProcessingService.GetOrderItemssbyVendor(supplier.Id);
+
+            return PartialView("_TransactionsByVendor", transactions);
+        }
 
 
 

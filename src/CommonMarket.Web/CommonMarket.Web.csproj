@@ -429,6 +429,7 @@
     <Content Include="Views\Shop\_SpecialsList.cshtml" />
     <Content Include="Views\Cart\_CartSummary.cshtml" />
     <Content Include="Views\Admin\_AllOrderItems.cshtml" />
+    <Content Include="Views\Admin\_TransactionsByVendor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
