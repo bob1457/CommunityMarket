@@ -1365,10 +1365,14 @@ background-color: #00aced;
 
 
 .checkout-panel {
-    border: 1px solid #F8B688;
+    border: 1px
+    solid #F8B688;
 }
 
+.date {
+    margin-top: -20px;
 
+}
 /* Responsive Settings */
 
 @media(max-width:800px) {
@@ -1423,6 +1427,7 @@ background-color: #00aced;
     margin-top: -1em;
     margin-bottom: 1em;
 }
+
 @media(max-width:600px) {
     #ib2 {
         margin-right: 25px;

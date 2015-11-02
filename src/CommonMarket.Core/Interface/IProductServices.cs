@@ -11,6 +11,11 @@ namespace CommonMarket.Core.Interface
         IEnumerable<Entities.Product> GetProductOnPromotion(int id, int discountId); //id: supplier id
         IEnumerable<Entities.Product> GetProductNotOnPromotion(int id); //id: supplier id
         IEnumerable<Entities.Product> ListAllProductsOnPromotion();
+        IEnumerable<Comment> GetComments(int id);
+        //void AddCommentsOnProduct(int pid, string commentBody, string uid);
+
+        void AddCommentsOnProduct(Comment comment);
+        void AddCommentsOnSupplier(Comment comment);
 
         void AddNewProduct(Entities.Product product, ProductCategory category);
         void AddAdditionalImage(AdditionalProductImg image);

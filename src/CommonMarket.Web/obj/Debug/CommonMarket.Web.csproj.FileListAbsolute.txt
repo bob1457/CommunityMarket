@@ -357,3 +357,7 @@ C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Web\bin\PagedList.dll
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Web\bin\PagedList.Mvc.dll
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Web\bin\PagedList.xml
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Web\bin\PagedList.Mvc.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Web\bin\log4net.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Web\bin\log4net.xml
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Web\bin\log4net.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Web\bin\log4net.xml

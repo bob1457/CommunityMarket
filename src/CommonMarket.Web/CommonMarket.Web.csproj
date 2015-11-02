@@ -59,6 +59,9 @@
     <Reference Include="ImageResizer.Plugins.PrettyGifs">
       <HintPath>..\packages\ImageResizer.Plugins.PrettyGifs.3.4.3\lib\ImageResizer.Plugins.PrettyGifs.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -278,16 +281,6 @@
     <Content Include="Content\Styles\MetroJs.css" />
     <Content Include="Content\Styles\Site-BAK.css" />
     <Content Include="Content\Styles\site.css" />
-    <Content Include="Models\ProductDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductDataModel.edmx</DependentUpon>
-      <LastGenOutput>ProductDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ProductDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductDataModel.edmx</DependentUpon>
-      <LastGenOutput>ProductDataModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\accounting.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-typeahead.min.js" />
@@ -330,13 +323,6 @@
     <Content Include="Content\Styles\fonts\metro.eot" />
     <Content Include="Content\Styles\fonts\metro.ttf" />
     <Content Include="Content\Styles\fonts\metro.woff" />
-    <EntityDeploy Include="Models\ProductDataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProductDataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ProductDataModel.edmx.diagram">
-      <DependentUpon>ProductDataModel.edmx</DependentUpon>
-    </Content>
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -430,6 +416,10 @@
     <Content Include="Views\Cart\_CartSummary.cshtml" />
     <Content Include="Views\Admin\_AllOrderItems.cshtml" />
     <Content Include="Views\Admin\_TransactionsByVendor.cshtml" />
+    <Content Include="Views\Admin\_totalAmt.cshtml" />
+    <Content Include="Views\Product\_CommentsOnProduct.cshtml" />
+    <Content Include="Views\Product\_CommentBy.cshtml" />
+    <Content Include="Views\Order\_OrderUpdates.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -545,24 +535,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityRepository.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ProductCategory.cs">
-      <DependentUpon>ProductDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductDataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductDataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductDataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductDataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductDataModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -589,7 +561,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Assets\Images\Products\Originals\" />
-    <Folder Include="Views\Order\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>

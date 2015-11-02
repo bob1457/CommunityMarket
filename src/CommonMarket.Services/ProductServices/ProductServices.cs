@@ -13,16 +13,18 @@ namespace CommonMarket.Services.ProductServices
         private readonly IRepository<Product> _proRepository;
         private readonly IProductRepository _productRepository;
         private readonly IRepository<ProductCategory> _categoryRepository;
+        private readonly IRepository<Comment> _commentRepository;
         private readonly IRepository<AdditionalProductImg> _addImageRepository;
 
         private readonly IUnitOfWork _uow;
 
         public ProductServices(IRepository<Product> proRepository, IProductRepository productRepository, 
-            IRepository<ProductCategory> categoryRepository, IRepository<AdditionalProductImg> addImageRepository, IUnitOfWork uow)
+            IRepository<ProductCategory> categoryRepository, IRepository<Comment> commentRepository, IRepository<AdditionalProductImg> addImageRepository, IUnitOfWork uow)
         {
             _proRepository = proRepository;
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
+            _commentRepository = commentRepository;
             _addImageRepository = addImageRepository;
 
             _uow = uow;
@@ -151,7 +153,44 @@ namespace CommonMarket.Services.ProductServices
 
         #endregion
 
+        #region Social
 
+        public void AddCommentsOnProduct(Comment comment)
+        {
+            //comment.CreateDate = DateTime.Now;
+            //var newComment = new Comment();
+
+            //newComment.EntityRecordId = comment.EntityRecordId;
+            //newComment.CommentBody = comment.CommentBody;
+            //newComment.DomainEntityId = 1;
+            //newComment.CommentedBy = comment.CommentedBy;
+            //newComment.CreateDate = DateTime.Now;
+
+            _commentRepository.Add(comment);
+        }
+
+
+        public void AddCommentsOnSupplier(Comment comment)
+        {
+            //comment.CreateDate = DateTime.Now;
+            //var newComment = new Comment();
+
+            //newComment.EntityRecordId = comment.EntityRecordId;
+            //newComment.CommentBody = comment.CommentBody;
+            //newComment.DomainEntityId = 1;
+            //newComment.CommentedBy = comment.CommentedBy;
+            //newComment.CreateDate = DateTime.Now;
+
+            _commentRepository.Add(comment);
+        }
+
+
+        public IEnumerable<Comment> GetComments(int id) //id: product id
+        {
+            return _commentRepository.GetAll().Where(p => p.EntityRecordId == id).OrderByDescending(d=>d.CreateDate);
+        }
+
+        #endregion
 
     }
 }

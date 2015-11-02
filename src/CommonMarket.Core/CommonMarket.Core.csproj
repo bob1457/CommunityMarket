@@ -59,7 +59,11 @@
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Discount.cs" />
     <Compile Include="Entities\DiscountType.cs" />
+    <Compile Include="Entities\DomainEntity.cs" />
     <Compile Include="Entities\Fee.cs" />
+    <Compile Include="Entities\Log4Net_Error.cs" />
+    <Compile Include="Entities\MerchantFeePayment.cs" />
+    <Compile Include="Entities\MerchantFeeType.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderByVendor.cs" />
     <Compile Include="Entities\OrderItem.cs" />

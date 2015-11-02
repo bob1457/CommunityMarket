@@ -48,6 +48,11 @@ namespace CommonMarket.DataAccess
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<OrderByVendor> OrderByVendors { get; set; }
 
+        public virtual DbSet<DomainEntity> DomainEntities { get; set; }
+        public virtual DbSet<MerchantFeePayment> MerchantFeePayments { get; set; }
+        public virtual DbSet<MerchantFeeType> MerchantFeeTypes { get; set; }
+        public virtual DbSet<Log4Net_Error> Log4Net_Error { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -211,6 +216,35 @@ namespace CommonMarket.DataAccess
             modelBuilder.Entity<Coupon>()
                 .Property(e => e.ValueAmount)
                 .HasPrecision(19, 4);
+
+            modelBuilder.Entity<MerchantFeePayment>()
+                .Property(e => e.FeeAmount)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<MerchantFeeType>()
+                .HasMany(e => e.MerchantFeePayments)
+                .WithRequired(e => e.MerchantFeeType)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Log4Net_Error>()
+                .Property(e => e.Thread)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Log4Net_Error>()
+                .Property(e => e.Level)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Log4Net_Error>()
+                .Property(e => e.Logger)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Log4Net_Error>()
+                .Property(e => e.Message)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Log4Net_Error>()
+                .Property(e => e.Exception)
+                .IsUnicode(false);
 
         }
     }

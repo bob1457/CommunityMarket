@@ -167,9 +167,9 @@ namespace CommonMarket.Web.Controllers
 
 
         [HttpPost]
-        public void AddCategory(Core.Entities.ProductCategory category)
+        public void AddCategory(ProductCategory category)
         {
-            var newCategory = new Core.Entities.ProductCategory();
+            var newCategory = new ProductCategory();
 
             if (ModelState.IsValid)
             {
@@ -501,7 +501,17 @@ namespace CommonMarket.Web.Controllers
             return PartialView("_TransactionsByVendor", transactions);
         }
 
+        public ActionResult GetTransactionsBySupplierByMonth(string id, string month) //id: user id
+        {
+            var userInfo = UserManager.FindById(id);
+            var profileId = userInfo.UserProfile.Id;
 
+            var supplier = _merchantServie.FindSupplierBy(profileId);
+
+            var transactions = _orderProcessingService.GetOrderItemssbyVendorByMonth(supplier.Id, month);
+
+            return PartialView("_TransactionsByVendor", transactions);
+        }
 
         #endregion
 

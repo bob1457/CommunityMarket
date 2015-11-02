@@ -429,6 +429,92 @@ namespace CommonMarket.Web.Controllers
         }
 
 
+        [HttpPost]
+        public void AddCommentsOnProduct(Comment comment)
+        {
+            var newComment = new Comment();
+
+            try
+            {
+                //if (ModelState.IsValid)
+                //{
+                    newComment.DomainEntityId = 1;
+                    newComment.CommentedBy = User.Identity.GetUserId();
+                    newComment.CommentBody = comment.CommentBody;
+                    newComment.EntityRecordId = comment.EntityRecordId;
+                    newComment.CreateDate = DateTime.Now;
+
+                    _productServices.AddCommentsOnProduct(newComment);
+                //}
+                
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
+            
+        }
+
+
+        [HttpPost]
+        public void AddCommentsOnSupplier(Comment comment)
+        {
+            var newComment = new Comment();
+
+            try
+            {
+                //if (ModelState.IsValid)
+                //{
+                newComment.DomainEntityId = 2;
+                newComment.CommentedBy = User.Identity.GetUserId();
+                newComment.CommentBody = comment.CommentBody;
+                newComment.EntityRecordId = comment.EntityRecordId;
+                newComment.CreateDate = DateTime.Now;
+
+                _productServices.AddCommentsOnSupplier(newComment);
+                //}
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
+
+
+        public ActionResult GetUserInfo(string id)
+        {
+            var user = UserManager.FindById(id);
+
+            int profileId = user.UserProfile.Id;
+
+            var userProfile = UserManager.Users.Single(p => p.UserProfile.Id == profileId);
+
+            return PartialView("_CommentBy", userProfile);
+        }
+
+        public ActionResult DisplayCommentsOnProducts(int id) //id: product id
+        {
+            var comments = _productServices.GetComments(id);
+
+            return PartialView("_CommentsOnProduct", comments);
+        }
+
+
+        public ActionResult DisplayCommentsOnSupplier(int id) //id: supplier id
+        {
+            var comments = _productServices.GetComments(id);
+
+            return PartialView("_CommentsOnProduct", comments);
+        }
+
+
 
         #region Product Discount and Promotion
 

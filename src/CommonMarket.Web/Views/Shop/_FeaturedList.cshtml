@@ -27,163 +27,168 @@
 </style>
 
 <ul class="list-unstyled ">
-    @foreach (var item in Model)
-    {
-        if (Model.Count() != 0)
+    
+        @if (Model.Count() != 0)
         {
-            <li>
-                <div class="col-sm-3 col-lg-3 col-md-3">
-                    <div class="shape" id="onSale_@item.Id" style="display: none; position: absolute; right: 13px;">
-                        <div class="shape-text">
-                            <span style="margin-left: -9px; font-size: .8em;"> On Sale</span>
+            foreach (var item in Model)
+            {
+                <li>
+                    <div class="col-sm-3 col-lg-3 col-md-3">
+                        <div class="shape" id="onSale_@item.Id" style="display: none; position: absolute; right: 13px;">
+                            <div class="shape-text">
+                                <span style="margin-left: -9px; font-size: .8em;"> On Sale</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="thumbnail" style="height: 335px; overflow-y: hidden; margin-bottom: 0;">
-                        <a href="@Url.Action("ProductDetails", "Product", new {id=@item.Id})"><img src="@Url.Content(@item.ProductImgLargeUrl)" /></a>
-                        <div class="caption">
-                            <h4>
-                                <a href="#">@item.ProductName</a>
-                            </h4>
-                            <p style="margin-bottom: 0;">
+                        <div class="thumbnail" style="height: 335px; overflow-y: hidden; margin-bottom: 0;">
+                            <a href="@Url.Action("ProductDetails", "Product", new {id=@item.Id})"><img src="@Url.Content(@item.ProductImgLargeUrl)" /></a>
+                            <div class="caption">
+                                <h4>
+                                    <a href="#">@item.ProductName</a>
+                                </h4>
+                                <p style="margin-bottom: 0;">
 
-                                @if ((@item.ProductDescLong).Length > 45)
+                                    @if ((@item.ProductDescLong).Length > 45)
+                                    {
+                                        <span>@item.ProductDescLong.Substring(0, 40)  <a href="#">&nbsp;more...</a></span>
+                                    }
+                                    else
+                                    {
+                                        @item.ProductDescShort
+                                    }
+                                    <h4 id="specials_@item.Id" style="position: absolute; color: #f70808; "></h4>
+                                </p><br />
+                                <input type="hidden" id="o_price_@item.Id" value="@item.UnitPrice" />
+                                <h4 class="pull-left product_price" id="oldpr_@item.Id" style="margin-top: 0;">@item.UnitPrice.ToString("c")/@item.UnitName.ToLower()</h4>
+                                @*<br/>*@
+                                @*<div>
+                                        <input type="text" id="qty_@item.Id" style="display: inline-block;width: 35px;height: 25px;vertical-align: baseline;" value="1" /> @if (@item.UnitName == "Each")
+                                        {
+                                            <em>unit</em>
+                                        }
+                                        else
+                                        {
+                                            <em>@item.UnitName.ToLower()</em>
+                                        }
+                                    </div>*@
+
+                                &nbsp;
+                                <input id="sId" type="hidden" value="@userId" />
+                                @if (User.Identity.IsAuthenticated)
                                 {
-                                    <span>@item.ProductDescLong.Substring(0, 40)  <a href="#">&nbsp;more...</a></span>
+                                    <input type="text" id="qty_@item.Id" style="display: inline-block;width: 35px;height: 25px;vertical-align: baseline;" value="1" title="Quantity" />
+
+                                    <a class="btn btn-success" id="add_@item.Id"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</a>
                                 }
                                 else
                                 {
-                                    @item.ProductDescShort
+                                    <a href="@Url.Content("~/Account/Login?returnUrl=/Shop")" class="btn btn-warning"><span class="glyphicon glyphicon-lock" style="color: #F70808;"></span>&nbsp; Login to Buy</a>
                                 }
-                                <h4 id="specials_@item.Id" style="position: absolute; color: #f70808; "></h4>
-                            </p><br />
-                            <input type="hidden" id="o_price_@item.Id" value="@item.UnitPrice"/>
-                            <h4 class="pull-left product_price"  id="oldpr_@item.Id" style="margin-top: 0;">@item.UnitPrice.ToString("c")/@item.UnitName.ToLower()</h4>
-                            @*<br/>*@
-                            @*<div>
-                                <input type="text" id="qty_@item.Id" style="display: inline-block;width: 35px;height: 25px;vertical-align: baseline;" value="1" /> @if (@item.UnitName == "Each")
-                                {
-                                    <em>unit</em>
-                                }
-                                else
-                                {
-                                    <em>@item.UnitName.ToLower()</em>
-                                }
-                            </div>*@
 
-                            &nbsp;
-                            <input id="sId" type="hidden" value="@userId" /> 
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <input type="text" id="qty_@item.Id" style="display: inline-block;width: 35px;height: 25px;vertical-align: baseline;" value="1" title="Quantity" /> 
-                                
-                                <a class="btn btn-success" id="add_@item.Id"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp; Add to Cart</a>
-                            }
-                            else
-                            {
-                                <a href="@Url.Content("~/Account/Login?returnUrl=/Shop")" class="btn btn-warning"><span class="glyphicon glyphicon-lock" style="color: #F70808;"></span>&nbsp; Login to Buy</a>
-                            }
-                            
-                            <div id="msg" style="color:#8b0000;"></div>
-                        </div>
-                        <div class="ratings">
-                            @*<p class="pull-right" id="produst_comment">15 reviews</p>
-                                <p class="product_rating">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>*@
+                                <div id="msg" style="color:#8b0000;"></div>
+                            </div>
+                            <div class="ratings">
+                                @*<p class="pull-right" id="produst_comment">15 reviews</p>
+                                    <p class="product_rating">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </p>*@
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <script type="text/javascript">
-                    $(document).ready(function() {
 
-                        
+                    <script type="text/javascript">
+                        $(document).ready(function() {
 
-                        $("#add_@item.Id").click(function() {
-                            //debugger;
-                            var item = {
-                                productId: @item.Id,
-                                quantity:$("#qty_@item.Id").val()
-                            };
 
-                            $.ajax({
-                                url: "/Cart/AddToCart",
-                                type: "POST",
-                                data: JSON.stringify(item),
-                                contentType: 'application/json',
 
-                                success: function (data) {
+                            $("#add_@item.Id").click(function() {
+                                //debugger;
+                                var item = {
+                                    productId: @item.Id,
+                                    quantity:$("#qty_@item.Id").val()
+                                };
 
-                                   
-                                    //$('#msg').html(data);
-                                    //$('#msg').delay(5000).fadeOut(400);
-                                    //debugger;
-                                    var q = $("#sId").val();
-                                    //var url = "/Cart/GetCartContent/" + q;
+                                $.ajax({
+                                    url: "/Cart/AddToCart",
+                                    type: "POST",
+                                    data: JSON.stringify(item),
+                                    contentType: 'application/json',
 
-                                    var url = "/Cart/GetCartByUser/" + q;
+                                    success: function (data) {
 
-                                    $.get(url, function (res) {
-                                        $("#cv").html(res);
-                                        return false;
-                                    });
-                                }
 
+                                        //$('#msg').html(data);
+                                        //$('#msg').delay(5000).fadeOut(400);
+                                        //debugger;
+                                        var q = $("#sId").val();
+                                        //var url = "/Cart/GetCartContent/" + q;
+
+                                        var url = "/Cart/GetCartByUser/" + q;
+
+                                        $.get(url, function (res) {
+                                            $("#cv").html(res);
+                                            return false;
+                                        });
+                                    }
+
+                                });
                             });
+
+
                         });
+                    </script>
+
+                    <!-- Deal with Discounted Products -->
+
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+
+                            if (@item.DiscountId != null) {
+
+                                var disocuntId = @item.DiscountId; //$("#d_id_@item.Id").val();
+                                var url = "/Marketing/GetDiscountById/" + disocuntId;
+                                //debugger;
+                                $.getJSON(url, function (data) {
+
+                                    var rate = data.DiscountValue;
+                                    var type = data.ValueType;
+
+                                    $("#d_rate2_@item.Id").val(data.DiscountValue);
+                                    $("#d_type2_@item.Id").val(data.ValueType);
+
+                                    //alert($("#d_type_@item.Id").val());
+
+                                    var odlPrice = $("#o_price_@item.Id").val();
+                                    var newPrice;
+                                    //var rate = $("#d_rate2_@item.Id").val();
+
+                                    //alert(rate);
+                                    if (type == 0) {
+                                        newPrice = accounting.formatMoney(odlPrice * (1 - rate / 100));
+                                        //alert(newPrice);
+                                        $("#specials_@item.Id").text(newPrice + "/@item.UnitName.ToLower()");
+
+                                    } else {
+                                        //Add logics for flat amount discount
+                                    }
+
+                                    $("#oldpr_@item.Id").css("text-decoration", "line-through");
+                                    $("#onSale_@item.Id").show();
+                                });
+
+                            }
 
 
-                    });
-                </script>
-                
-                <!-- Deal with Discounted Products -->
-                
-                <script type="text/javascript">
-                    $(document).ready(function() {
-
-                        if (@item.DiscountId != null) {
-                            
-                            var disocuntId = @item.DiscountId; //$("#d_id_@item.Id").val();
-                            var url = "/Marketing/GetDiscountById/" + disocuntId;
-                            //debugger;
-                            $.getJSON(url, function (data) {
-
-                                var rate = data.DiscountValue;
-                                var type = data.ValueType;
-
-                                $("#d_rate2_@item.Id").val(data.DiscountValue);
-                                $("#d_type2_@item.Id").val(data.ValueType);
-
-                                //alert($("#d_type_@item.Id").val());
-
-                                var odlPrice = $("#o_price_@item.Id").val();
-                                var newPrice;
-                                //var rate = $("#d_rate2_@item.Id").val();
-
-                                //alert(rate);
-                                if (type == 0) {
-                                    newPrice = accounting.formatMoney(odlPrice * (1 - rate / 100));
-                                    //alert(newPrice);
-                                    $("#specials_@item.Id").text(newPrice + "/@item.UnitName.ToLower()");
-
-                                } else {
-                                    //Add logics for flat amount discount
-                                }
-
-                                $("#oldpr_@item.Id").css("text-decoration", "line-through");
-                                $("#onSale_@item.Id").show();
-                            });
-
-                        }
+                        });
+                    </script>
+                </li>
+            }
 
 
-                    });
-                </script>
-            </li>
+
         }
         else
         {
@@ -194,7 +199,7 @@
             </li>
         }
 
-    }
+    
 
 
 </ul>

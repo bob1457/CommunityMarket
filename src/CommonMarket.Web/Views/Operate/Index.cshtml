@@ -111,7 +111,7 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-shopping-cart text-primary"></span><a id="order" href="#"> Orders and Status</a> <span class="label label-success" id="order_ct">25</span>
+                                        <span class="glyphicon glyphicon-shopping-cart text-primary"></span><a id="order" href="#"> Order Fullfillment</a> <span class="label label-success" id="order_ct">25</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -468,17 +468,12 @@
 
                     <div id="discount" style="display: none; margin-top: 19px;">@Html.Partial("_DiscountPromotion")</div>
 
-                    <div id="inventory">
-
-                    </div>
-
-
-
-
-
-
+                    <div id="inventory"></div>
 
                     <div id="order_processing" style="display: none; margin-top: 19px;">@Html.Action("GetAllOrders")</div>
+                    
+                    
+
                 </div>
             </div>
 
@@ -487,8 +482,8 @@
 
 
         <!-- Modal Dialogs - ADD Product -->
-        <div class="modal " id="add" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="overflow: visible;">
-            <div class="modal-dialog" style="width: 100%; margin-top: 0;">
+        <div class="modal " id="add" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="overflow: visible; height: 200px;">
+            <div class="modal-dialog" style=" margin-top: 0;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
@@ -557,8 +552,8 @@
         </div>
 
         <!-- Modal Dialogs - ADD Discount -->
-        <div class="modal " id="add_dis" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="overflow: visible;">
-            <div class="modal-dialog" style="width: 100%; margin-top: 0;">
+        <div class="modal " id="add_dis" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" style="overflow: visible; height: 200px;">
+            <div class="modal-dialog" style="margin-top: 0;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>

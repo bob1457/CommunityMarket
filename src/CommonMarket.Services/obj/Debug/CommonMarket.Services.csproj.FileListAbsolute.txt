@@ -52,3 +52,15 @@ C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\S
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\SendGrid.SmtpApi.dll
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\CommonMarket.Infrastructure.pdb
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.Core.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Ninject.Extensions.Quartz.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Quartz.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.pdb
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.Core.pdb
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.Core.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Quartz.pdb
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Quartz.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\log4net.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\log4net.xml

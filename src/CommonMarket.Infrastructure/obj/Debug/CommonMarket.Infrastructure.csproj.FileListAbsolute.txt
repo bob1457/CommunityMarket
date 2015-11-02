@@ -41,3 +41,16 @@ C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\D
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\PagedList.xml
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\PagedList.Mvc.xml
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\obj\Debug\CommonMarket.Infrastructure.csprojResolveAssemblyReference.cache
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\CommonMarket.Infrastructure.dll.config
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Common.Logging.Core.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Common.Logging.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Ninject.Extensions.Quartz.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Quartz.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Common.Logging.pdb
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Common.Logging.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Common.Logging.Core.pdb
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Common.Logging.Core.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Quartz.pdb
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Quartz.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\log4net.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\log4net.xml
