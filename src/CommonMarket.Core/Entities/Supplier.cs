@@ -52,5 +52,8 @@ namespace CommonMarket.Core.Entities
         public virtual ICollection<Product> Products { get; set; }
 
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+
+        public virtual ICollection<MerchantFeePayment> MerchantFeePayments { get; set; }
+
     }
 }

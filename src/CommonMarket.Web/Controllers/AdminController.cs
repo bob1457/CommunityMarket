@@ -118,7 +118,7 @@ namespace CommonMarket.Web.Controllers
             int pageNumber = (page ?? 1);
             
 
-            var supplier = UserManager.Users.Where(m => m.Roles.Any(r => r.RoleId == "6ca46ec2-a996-4788-92ec-5c255a174eb4")).OrderByDescending(d=>d.UserProfile.LastName).ToPagedList(pageNumber, pageSize);
+            var supplier = UserManager.Users.Where(m => m.Roles.Any(r => r.RoleId == "6ca46ec2-a996-4788-92ec-5c255a174eb4")).OrderByDescending(d=>d.UserProfile.CreateDate).ToPagedList(pageNumber, pageSize);
 
             return PartialView("_SupplierList", supplier);
         }
@@ -511,6 +511,27 @@ namespace CommonMarket.Web.Controllers
             var transactions = _orderProcessingService.GetOrderItemssbyVendorByMonth(supplier.Id, month);
 
             return PartialView("_TransactionsByVendor", transactions);
+        }
+
+
+        public void BillMerchant(MerchantFeePayment payment, string id) //id: user identity id, used to find supplierId
+        {
+            var userInfo = UserManager.FindById(id);
+            var profileId = userInfo.UserProfile.Id;
+
+            var supplierId = _merchantServie.FindSupplierBy(profileId).Id;
+
+            var newPayment = new MerchantFeePayment();
+
+            newPayment.BillingDate = DateTime.Now;
+            newPayment.IsPaid = false;
+            newPayment.MerchantFeeTypeId = 2;
+            newPayment.FeeAmount = payment.FeeAmount;
+            newPayment.SupplierId = supplierId;
+            newPayment.Notes = payment.Notes;
+
+
+
         }
 
         #endregion
