@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CommonMarket.Core.Interface;
 using CommonMarket.Core.Product;
+using CommonMarket.Web.Models;
 
 namespace CommonMarket.Web.Controllers
 {
@@ -38,5 +39,31 @@ namespace CommonMarket.Web.Controllers
 
             return View(totalValue);
         }
+
+
+
+        #region Test of Event Drive Pattern
+
+        //public void RaiseEvent()
+        //{
+        //    Car car = new Car();
+        //    HighwayPatrol highwayPolice = new HighwayPatrol();
+
+        //    //Write event handler of the listener to the event
+        //    car.CarSpeedChanged += highwayPolice.HandelWhenExceedSpeed;
+
+        //    car.Speed = 100;
+        //    System.Threading.Thread.Sleep(1000);
+        //    car.Speed = 120;
+
+        //    System.Console.ReadKey();
+
+
+        //}
+
+
+
+
+        #endregion
     }
 }

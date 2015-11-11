@@ -13,12 +13,14 @@ namespace CommonMarket.Services.UserServices
     {
         private readonly IRepository<Supplier> _supplierRepository;
         private readonly IMerchantRepository _merchantRepository;
+        private readonly IRepository<MerchantFeePayment> _merchanteFeeRepository;
         private readonly IUnitOfWork _uow;
 
-        public MerchantService(IRepository<Supplier> supplierRepository, IMerchantRepository merchantRepository, IUnitOfWork uow )
+        public MerchantService(IRepository<Supplier> supplierRepository, IMerchantRepository merchantRepository, IRepository<MerchantFeePayment> merchanteFeeRepository, IUnitOfWork uow )
         {
             _supplierRepository = supplierRepository;
             _merchantRepository = merchantRepository;
+            _merchanteFeeRepository = merchanteFeeRepository;
             _uow = uow;
         }
 
@@ -66,6 +68,25 @@ namespace CommonMarket.Services.UserServices
             }
         }
 
+
+        public void UpdateSupplierLogoUrl(int id, string url) //customer id
+        {
+            try
+            {
+                Supplier supplier = _supplierRepository.GetAll().FirstOrDefault(i => i.Id == id);
+                //customer.UpdateDate = DateTime.Now;
+                //category.DepartmentId = 1;
+                supplier.CompanyLogoImgUrl = url;
+
+                _supplierRepository.Update(supplier);
+                _uow.Save();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed updating the url", ex);
+            }
+        }
+
         public void DeleteSupplier()
         {
 
@@ -88,6 +109,22 @@ namespace CommonMarket.Services.UserServices
         public IEnumerable<CartItem> GetCartItemsBySupplier(int id, int cid)
         {
             return _merchantRepository.GetCartItmesBySupplier(id, cid);
+        }
+
+        public void AddBillPayment(MerchantFeePayment payment)
+        {
+            _merchanteFeeRepository.Add(payment);
+        }
+
+        public IEnumerable<MerchantFeePayment> GetBillPaymentListByVendor(int id) //id: supplier id
+        {
+            return _merchanteFeeRepository.GetAll().Where(s => s.SupplierId == id);
+        }
+
+        public void UpdateSupplierInfo(Supplier supplier)
+        {
+            _supplierRepository.Update(supplier);
+            //_uow.Save();
         }
     }
 }

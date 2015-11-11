@@ -180,33 +180,33 @@ namespace CommonMarket.Web.Controllers
         }
 
         //Receive Ajax call
-        public ActionResult GetMerchantDetails(string id)
-        {
-            //Get current user
-            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+        //public ActionResult GetMerchantDetails(string id)
+        //{
+        //    //Get current user
+        //    //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
-            var profileId = UserManager.FindById(id).UserProfile.Id;
+        //    var profileId = UserManager.FindById(id).UserProfile.Id;
 
-            //var currentUser = UserManager.FindById(User.Identity.GetUserId());
+        //    //var currentUser = UserManager.FindById(User.Identity.GetUserId());
 
-            var merchant = _merchantServie.FindSupplierBy(profileId);
+        //    var merchant = _merchantServie.FindSupplierBy(profileId);
             
 
-            return PartialView("_MerchantDetails", merchant);
-        }
+        //    return PartialView("_MerchantDetails", merchant);
+        //}
 
 
-        public ActionResult GetMerchantEdit(string id)
-        {
-            var profileId = UserManager.FindById(id).UserProfile.Id;
+        //public ActionResult GetMerchantEdit(string id)
+        //{
+        //    var profileId = UserManager.FindById(id).UserProfile.Id;
 
-            //var currentUser = UserManager.FindById(User.Identity.GetUserId());
+        //    //var currentUser = UserManager.FindById(User.Identity.GetUserId());
 
-            var merchant = _merchantServie.FindSupplierBy(profileId);
+        //    var merchant = _merchantServie.FindSupplierBy(profileId);
 
 
-            return PartialView("_MerchantEdit", merchant);
-        }
+        //    return PartialView("_MerchantEdit", merchant);
+        //}
 
 
         //Ajax call to get full name

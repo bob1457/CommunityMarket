@@ -143,6 +143,34 @@ namespace CommonMarket.Web.Controllers
         }
 
         //Ajax call coming GET
+        public ActionResult GetAllBills(int? page)
+        {
+            const int pageSize = 10; //for testing purpose, to be adjustetd, PAGING NOT IMPLEMENTED YET
+            int pageIndex = (page ?? 1) - 1;
+            int pageNumber = (page ?? 1);
+
+            //Get current supplier id, then retrieve all bills for the supplier
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var profileId = currentUser.UserProfile.Id;
+
+            var supplierId = _merchantService.FindSupplierBy(profileId).Id;
+
+            var billPaymentInfo = _merchantService.GetBillPaymentListByVendor(supplierId).ToPagedList(pageNumber, pageSize);
+
+            return PartialView("_BillPayment", billPaymentInfo);
+        }
+
+
+
+        public ActionResult GetBilPaymentByVendor(int id) //id: supplierId
+        {
+
+
+            return PartialView("_BillPayment");
+        }
+
+
+        //Ajax call coming GET
         public ActionResult GetOrderItemsByVendorOrder(int oid)
         {
             var currentUser = UserManager.FindById(User.Identity.GetUserId());
@@ -168,6 +196,62 @@ namespace CommonMarket.Web.Controllers
             }
 
             return PartialView("_OrderItems", orderItems);
+        }
+
+        public ActionResult TransactionsBySupplierByMonth(string month) //id: suppler id
+        {
+            var userInfo = UserManager.FindById(User.Identity.GetUserId());
+            var profileId = userInfo.UserProfile.Id;
+
+            var supplier = _merchantService.FindSupplierBy(profileId);
+
+            var mth = "";
+
+            switch (month)
+            {
+                case "January":
+                    mth = "1";
+                    break;
+                case "Februray":
+                    mth = "2";
+                    break;
+                case "March":
+                    mth = "3";
+                    break;
+                case "April":
+                    mth = "4";
+                    break;
+                case "May":
+                    mth = "5";
+                    break;
+                case "June":
+                    mth = "6";
+                    break;
+                case "July":
+                    mth = "7";
+                    break;
+                case "August":
+                    mth = "8";
+                    break;
+                case "September":
+                    mth = "9";
+                    break;
+                case "October":
+                    mth = "10";
+                    break;
+                case "November":
+                    mth = "11";
+                    break;
+                case "December":
+                    mth = "12";
+                    break;
+
+            }
+
+
+            var transactions = _orderProcessingService.GetOrderItemssbyVendorByMonth(supplier.Id, mth);
+
+            return PartialView("_TransactionsByVendor", transactions);
         }
 
 

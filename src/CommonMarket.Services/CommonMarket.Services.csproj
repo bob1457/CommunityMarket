@@ -63,6 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventServices\EventSubscriptioinService.cs" />
+    <Compile Include="EventServices\IConsumer.cs" />
+    <Compile Include="EventServices\IEventSubscriptioinService.cs" />
     <Compile Include="MarketingServices\PromotionService.cs" />
     <Compile Include="OrderServices\CustomerOrderService.cs" />
     <Compile Include="OrderServices\OrderProcessingService.cs" />

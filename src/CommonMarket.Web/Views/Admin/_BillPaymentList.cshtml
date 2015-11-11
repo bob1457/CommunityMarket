@@ -1,0 +1,118 @@
+﻿@model IEnumerable<CommonMarket.Core.Entities.MerchantFeePayment>
+          
+
+<style>
+    #payment_list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        /*font-size: 0.8em;*/
+        font-family: Arial;
+    }
+
+        #payment_list li.header div {
+            background-color: #ccc;
+            font-weight: bold;
+            cursor: default;
+        }
+
+        #payment_list li {
+            line-height: 30px;
+        }
+
+            #payment_list li div {
+                display: block;
+                float: left;
+                padding-left: 10px;
+                padding-right: 10px;
+                border-bottom: 1px solid #ccc;
+            }
+
+                #payment_list li div.listitem_id {
+                    width: 60px;
+                    border-left: 1px solid #ccc;
+                }
+
+                #payment_list li div.listitem_name {
+                    width: 100px;
+                    border-left: 1px solid #ccc;
+                }
+
+                #tpayment_list li div.listitem_qty {
+                    width: 100px;
+                    border-left: 1px solid #ccc;
+                }
+
+                #tpayment_list li div.listitem_price {
+                    width: 90px;
+                    border-left: 1px solid #ccc;
+                }
+
+                #payment_list li div.listitem_total {
+                    width: 130px;
+                    border-left: 1px solid #ccc;
+                    border-right: 1px solid #ccc;
+                }
+
+                #payment_list li div.listitem_button {
+                    width: 100px;
+                    border-left: 1px solid #ccc;
+                    border-right: 1px solid #ccc;
+                }
+</style>
+
+
+<ul id="payment_list">
+    <li id="listitem" class="clearfix header">
+        <div class="listitem_id">ID</div>
+        <div class="listitem_name">Billing Date</div>
+        <div class="listitem_qty">Amount</div>
+        <div class="listitem_price" >Paid</div>
+        <div class="listitem_total" @*style="width: 82px; border-right:1px solid #ccc; "*@>Payment Date</div>
+        <div class="listitem_button" @*style="width: 82px; border-right:1px solid #ccc; "*@>Manage</div>
+
+
+    </li>
+    @if (@Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+            <li class="clearfix">
+                <div class="listitem_id" id="date_@item.Id">@item.Id</div>
+                <div class="listitem_name">@item.BillingDate.ToString().Substring(0, 10)</div>
+                <div class="listitem_qty" style="padding-right: 30px; border-left: 1px solid #ccc;">@item.FeeAmount.ToString("c")</div>
+                <div class="listitem_price" style="width: 50px; padding-left: 15px; border-left: 1px solid #ccc;">
+                    @if (@item.IsPaid)
+                    {
+                        <span>Yes</span>
+                    }
+                    else
+                    {
+                        <span>No</span>
+                    }
+
+                </div>
+                <div class="listitem_total" style="width: 118px;">
+                    @if (@item.IsPaid)
+                    {
+                        @item.PaymentDate
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                    
+                </div>
+                <div class="listitem_button" style="padding-left: 15px; width: 108px;"><button class="btn btn-sm btn-twitter">Update</button></div>
+
+            </li>
+        }
+
+
+    }
+    else
+    {
+        <li>No Bill Payment Information!</li>
+
+    }
+</ul>

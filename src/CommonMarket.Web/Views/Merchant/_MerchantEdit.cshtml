@@ -7,7 +7,7 @@
             <td>Compay Name:</td>
             <td>
 
-                <input id="c_alias" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.CompnayName)" autofocus="">
+                <input id="m_comName" class="form-control" type="text" placeholder="Business Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.CompnayName)" autofocus="">
 
             </td>
         </tr>
@@ -15,7 +15,7 @@
             <td>Contact First Name:</td>
             <td>
 
-                <input id="c_alias" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.ContactFirstName)" >
+                <input id="m_conFname" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.ContactFirstName)" >
 
             </td>
         </tr>
@@ -23,7 +23,15 @@
             <td>Contact Last Name:</td>
             <td>
 
-                <input id="c_alias" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.ContactLastName)" >
+                <input id="m_conLname" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.ContactLastName)" >
+
+            </td>
+        </tr>
+        <tr>
+            <td>Contact Email:</td>
+            <td>
+
+                <input id="m_conEmail" class="form-control" type="text" placeholder="Email" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.CompanyIconImgUrl)">
 
             </td>
         </tr>
@@ -31,18 +39,37 @@
             <td>Company Website:</td>
             <td>
 
-                <input id="c_alias" class="form-control" type="text" placeholder="First Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.SupplierWebSite)">
+                <input id="m_web" class="form-control" type="text" placeholder="Website Url" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.SupplierWebSite)">
 
             </td>
         </tr>
-
+        <tr>
+            <td colspan="2">
+                <form id="form" action="@Url.Content("/Profile/UpdateAvatarImg/")" method="post" enctype="multipart/form-data">
+                    
+                    <div class="modal-body">
+                        <div class="pull-left" style="margin-left: -15px;">Upload comapny logo</div>
+                        <input id="upload" type="file" name="file" class="pull-right" />
+                    </div>
+                    
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Bio:</td>
+            <td>
+                <textarea id="m_bio" class="form-control" type="text" placeholder="Last Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;">@Html.DisplayFor(model => model.ShortBio)</textarea>
+            </td>
+        </tr>
 
         <tr>
             <td>Notes:</td>
             <td>
-                <textarea id="baddress" class="form-control" type="text" placeholder="Last Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;">@Html.DisplayFor(model => model.Notes)</textarea>
+                <textarea id="m_notes" class="form-control" type="text" placeholder="Additional Notes" style="height: 35px; margin-bottom: -2px; margin-top: -5px;">@Html.DisplayFor(model => model.Notes)</textarea>
             </td>
         </tr>
 
     </tbody>
 </table>
+
+

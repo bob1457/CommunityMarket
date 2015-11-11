@@ -24,12 +24,22 @@
             <td>@Html.DisplayFor(model => model.SupplierWebSite)</td>
         </tr>
         <tr>
-            <td>Merchante Information</td>
+            <td>Merchant Information</td>
             <td>@Html.DisplayFor(model => model.ShortBio)</td>
         </tr>
         <tr>
-            <td>Company Logo Url</td>
-            <td>@Html.DisplayFor(model => model.CompanyLogoImgUrl)</td>
+            <td>Company Logo</td>
+            <td>
+                @if ((@Model.CompanyLogoImgUrl) != null)
+                {
+                    <img src="@Url.Content(@Model.CompanyLogoImgUrl)" title="@Model.ContactFirstName"/>
+                }
+                else
+                {
+                    <em>No available</em>
+                }
+                
+            </td>
         </tr>
 
     </tbody>

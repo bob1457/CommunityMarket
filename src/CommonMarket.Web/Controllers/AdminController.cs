@@ -5,15 +5,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 //using System.Web.HttpContext;
+using System.Web.UI.WebControls.WebParts;
 using CommonMarket.Core.Entities;
 //using CommonMarket.core.Entities;
 using CommonMarket.Core.Interface;
+using CommonMarket.Web.Infrastructure;
 using CommonMarket.Web.Models;
 using ImageResizer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
 using CommonMarket.Infrastructure.Utilities;
+using CommonMarket.Infrastructure.Email;
 //using CommonMarket.Infrastructure.Utilities;
 using PagedList;
 
@@ -116,10 +119,9 @@ namespace CommonMarket.Web.Controllers
             const int pageSize = 10; //for testing purpose, to be adjustetd, PAGING NOT IMPLEMENTED YET
             int pageIndex = (page ?? 1) - 1;
             int pageNumber = (page ?? 1);
-            
 
             var supplier = UserManager.Users.Where(m => m.Roles.Any(r => r.RoleId == "6ca46ec2-a996-4788-92ec-5c255a174eb4")).OrderByDescending(d=>d.UserProfile.CreateDate).ToPagedList(pageNumber, pageSize);
-
+            
             return PartialView("_SupplierList", supplier);
         }
         
@@ -131,6 +133,16 @@ namespace CommonMarket.Web.Controllers
 
             return PartialView("_RoleList", roles);//Json(roles.ToList(), JsonRequestBehavior.AllowGet); //
         }
+
+
+        public int GetSupplierId(string id) //id: user identity id
+        {
+            var profileId = UserManager.FindById(id).UserProfile.Id;
+            var supplier = _merchantServie.FindSupplierBy(profileId);
+
+            return supplier.Id;
+        }
+
 
         #endregion
 
@@ -513,7 +525,7 @@ namespace CommonMarket.Web.Controllers
             return PartialView("_TransactionsByVendor", transactions);
         }
 
-
+        [HttpPost]
         public void BillMerchant(MerchantFeePayment payment, string id) //id: user identity id, used to find supplierId
         {
             var userInfo = UserManager.FindById(id);
@@ -528,11 +540,32 @@ namespace CommonMarket.Web.Controllers
             newPayment.MerchantFeeTypeId = 2;
             newPayment.FeeAmount = payment.FeeAmount;
             newPayment.SupplierId = supplierId;
+            newPayment.BillingYear = payment.BillingYear;
+            newPayment.BillingMonth = payment.BillingMonth;
             newPayment.Notes = payment.Notes;
 
+            _merchantServie.AddBillPayment(newPayment);
+
+            //Send invoice and email notification
+            //
 
 
         }
+
+
+        public ActionResult GetBillsAndPaymentByVendor(string id) 
+        {
+            var userInfo = UserManager.FindById(id);
+            var profileId = userInfo.UserProfile.Id;
+
+            var supplier = _merchantServie.FindSupplierBy(profileId);
+
+            var payment = _merchantServie.GetBillPaymentListByVendor(supplier.Id);
+
+            return PartialView("_BillPaymentList", payment);
+        }
+
+
 
         #endregion
 
@@ -553,11 +586,31 @@ namespace CommonMarket.Web.Controllers
 
         #endregion
 
+
+        #region Private helpers
         private Discount GetDiscountById(int? id)
         {
             return _promotionService.FindAllDiscounts().FirstOrDefault(d => d.Id == id);//.ToList();
 
         }
+
+
+        private void SendOrderReadyNotificationToCustomer(Order order, string email)
+        {
+            var message = this.RenderView("~/Views/Admin/_BillInvoiceNotification.cshtml", order); //update the template
+
+            SendNotificaiton(email, "Your order is ready", message);
+        }
+
+        private void SendNotificaiton(string emailAddress, string subject, string message)
+        {
+            var emailNotification = new EmailNotification();
+
+            emailNotification.SendEmail(emailAddress, subject, message);
+
+        }
+
+        #endregion
 
     }
 }

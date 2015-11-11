@@ -62,6 +62,22 @@ namespace CommonMarket.Services.UserServices
             }
         }
 
+
+        public void UpdateCustomerInfo(Customer customer)
+        {
+            try
+            {
+                _customerRepository.Update(customer);
+                _uow.Save();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed updating the customer", ex);
+            }
+        }
+
+
+
         public void DeleteCustomer()
         {
             

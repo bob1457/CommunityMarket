@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Linq;
-using System.Web.UI.WebControls.WebParts;
+using CommonMarket.Core.Entities;
 using CommonMarket.Core.Interface;
-using CommonMarket.DataAccess;
-using CommonMarket.Services.ProductServices;
+using CommonMarket.Infrastructure.Utilities;
 using CommonMarket.Web.Models;
+using ImageResizer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -22,6 +21,7 @@ namespace CommonMarket.Web.Controllers
         private readonly ICustomerService _customerService;
         private readonly IMerchantService _merchantServie;
         private readonly IProductServices _productServices;
+        private readonly IOrderProcessingService _orderProcessingService;
 
         #region Identity system
 
@@ -53,11 +53,13 @@ namespace CommonMarket.Web.Controllers
 
         #endregion
 
-        public MerchantController(ICustomerService customerService, IMerchantService merchantServie, IProductServices productServices)
+        public MerchantController(ICustomerService customerService, IMerchantService merchantServie, 
+            IProductServices productServices, IOrderProcessingService orderProcessingService)
         {
             _customerService = customerService;
             _merchantServie = merchantServie;
             _productServices = productServices;
+            _orderProcessingService = orderProcessingService;
         }
 
 
@@ -84,6 +86,13 @@ namespace CommonMarket.Web.Controllers
             //return Json(merchant, JsonRequestBehavior.AllowGet);
         }
 
+        public string GetMerchantBio(int id)
+        {
+            var merchant = _merchantServie.FindSupplierById(id);
+
+            return merchant.ShortBio;
+        }
+
 
         public ActionResult GetMerchantEdit(string id)
         {
@@ -105,6 +114,8 @@ namespace CommonMarket.Web.Controllers
 
             //Get supplierId
 
+            ViewBag.uId = id;
+
             var profileId = UserManager.FindById(id).UserProfile.Id;
 
             int supplierId = _merchantServie.FindSupplierBy(profileId).Id;
@@ -114,6 +125,145 @@ namespace CommonMarket.Web.Controllers
             return View();
             //return PartialView("_MerchanteInfo", merchant);
         }
+
+
+        public ActionResult GetMerchantHeadInfo(string id)
+        {
+            var profileId = UserManager.FindById(id).UserProfile.Id;
+
+            var supplier = _merchantServie.FindSupplierBy(profileId);
+
+            return PartialView("_MerchantStoreHead", supplier);
+        }
+
+
+        //Receive Ajax call
+        [HttpPost]
+        public void UpdateMerchantInfo(Supplier supplier)
+        {
+            var profileId = UserManager.FindById(User.Identity.GetUserId()).UserProfile.Id;
+
+            var merchant = _merchantServie.FindSupplierBy(profileId);
+
+            merchant.ContactFirstName = supplier.ContactFirstName;
+            merchant.ContactLastName = supplier.ContactLastName;
+            merchant.CompnayName = supplier.CompnayName;
+            merchant.CompanyIconImgUrl = supplier.CompanyIconImgUrl; //actually this one is used to store merchant's email
+            merchant.SupplierWebSite = supplier.SupplierWebSite;
+            merchant.ShortBio = supplier.ShortBio;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _merchantServie.UpdateSupplierInfo(merchant);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+            }
+        }
+
+        public void UploadLogoImg() //to be reviewd for file save location, etc.
+        {
+            HttpPostedFile file = System.Web.HttpContext.Current.Request.Files["UploadedImage"];
+
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            if (file != null)
+            {
+                string fileName = file.FileName;
+                string fileExtenstion = FileProcessor.GetFileExtension(fileName);
+
+
+                if (file.ContentLength > 0 && file.ContentLength < 10 * 1024 * 1024)
+                {
+                    if (fileExtenstion == ".jpg" || fileExtenstion == ".jepg" || fileExtenstion == ".png" ||
+                        fileExtenstion == ".gif")
+                    {
+
+                        string path = Path.Combine(Server.MapPath("~/Content/Assets/Images/Users/"), Path.GetFileName(file.FileName));
+
+                        string picPath = Path.Combine("~/Content/Assets/Images/Users/", file.FileName);
+
+                        //string extension = FileProcessor.GetFileExtension(file.FileName);
+
+                        string purePath = Server.MapPath("~/Content/Assets/Images/Users/");
+
+                        file.SaveAs(path);
+
+                        //Image img = Image.FromFile(path);
+
+                        string newFName = user.Id + "_logo";// + fileExtenstion;
+
+                        string newFileName = Path.Combine(purePath, newFName);
+
+                        //if (img.Width > 100 || img.Height > 100)
+                        //{
+                        //    //resize image
+                        //    //
+
+                        //    ImageProcessor.SaveResizedImage(purePath, fileName, newFileName, 100, 100);
+                        //}
+
+                        ResizeSettings settings = new ResizeSettings();
+
+                        switch (fileExtenstion)
+                        {
+                            case ".png":
+                                settings = new ResizeSettings("width=35&height=35&crop=auto&format=png");
+                                break;
+                            case ".jpg":
+                                settings = new ResizeSettings("width=35&height=35&crop=auto&format=jpg");
+                                break;
+                            case ".jepg":
+                                settings = new ResizeSettings("width=35&height=35&crop=auto&format=jpg");
+                                break;
+                            case ".gif":
+                                settings = new ResizeSettings("width=35&height=35&crop=auto&format=gif");
+                                break;
+                            default:
+                                settings = new ResizeSettings("width=35&height=35&crop=auto&format=jpg");
+                                break;
+
+                        }
+
+                        ImageBuilder.Current.Build(file, newFileName, settings, false, true);
+                        
+                        //Update the database with the image Url
+
+                        var newUrl = "~/Content/Assets/Images/Users/" + newFName + fileExtenstion;
+
+                        var profileId = UserManager.FindById(user.Id).UserProfile.Id;
+
+                        var supplier = _merchantServie.FindSupplierBy(profileId);
+
+                        supplier.CompanyLogoImgUrl = newUrl;
+
+                        _merchantServie.UpdateSupplierLogoUrl(supplier.Id, newUrl);
+
+                    }
+                    
+                   
+
+                }
+
+                
+
+                
+            }
+        }
+
+
+        public void UpdateCustomerInfo(Customer customer)
+        {
+            
+            
+        }
+
 
         [ChildActionOnly]
         public ActionResult GetMerchantInfo(string id)
@@ -141,6 +291,26 @@ namespace CommonMarket.Web.Controllers
             ViewBag.MerchantId = user.Id;
 
             return PartialView("_ProductInfo", products);
+        }
+
+        public ActionResult GetSalesHisotryForSupplier()
+        {
+            var profileId = UserManager.FindById(User.Identity.GetUserId()).UserProfile.Id;
+
+            var supplier = _merchantServie.FindSupplierBy(profileId);
+
+            var orders = _orderProcessingService.GetOrderItemssbyVendor(supplier.Id); //GetOrdersByMerchant(supplier.Id);
+
+            //if (orders != null)
+            //{
+            //    return PartialView("_OrderBySupplier", orders);
+            //}
+            //else
+            //{
+            //    return PartialView("");
+            //}
+
+            return PartialView("_OrderBySupplier", orders);
         }
 
     }

@@ -64,3 +64,15 @@ C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Q
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Quartz.xml
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\log4net.dll
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\log4net.xml
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.Core.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\log4net.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Ninject.Extensions.Quartz.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Quartz.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.pdb
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.xml
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.Core.pdb
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Common.Logging.Core.xml
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\log4net.xml
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Quartz.pdb
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Quartz.xml

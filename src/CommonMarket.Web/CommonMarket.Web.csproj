@@ -420,6 +420,13 @@
     <Content Include="Views\Product\_CommentsOnProduct.cshtml" />
     <Content Include="Views\Product\_CommentBy.cshtml" />
     <Content Include="Views\Order\_OrderUpdates.cshtml" />
+    <Content Include="Views\Operate\_BillPayment.cshtml" />
+    <Content Include="Views\Admin\_BillInvoiceNotification.cshtml" />
+    <Content Include="Views\Admin\_BillPaymentList.cshtml" />
+    <Content Include="Views\Operate\_TransactionsByVendor.cshtml" />
+    <Content Include="Views\Customer\_CustomerEdit.cshtml" />
+    <Content Include="Views\Merchant\_OrderBySupplier.cshtml" />
+    <Content Include="Views\Merchant\_MerchantStoreHead.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -532,6 +539,7 @@
     <Compile Include="Infrastructure\ViewRender.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Car.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityRepository.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

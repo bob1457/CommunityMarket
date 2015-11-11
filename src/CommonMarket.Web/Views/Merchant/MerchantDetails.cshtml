@@ -60,7 +60,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#" style="width: 10em;"><img src="~/Content/Assets/Images/Users/shop_logo_default.png" width="35" height="35" class="pull-left" style="margin-top: -10px; margin-right: 10px;" />My Store</a>
+                    <a class="navbar-brand" href="#" style="width: 10em;">@Html.Action("GetMerchantHeadInfo", new { id = @ViewBag.uId })</a>
                 </div>
                 <div class="collapse navbar-collapse js-navbar-collapse">
                     <ul class="nav navbar-nav">

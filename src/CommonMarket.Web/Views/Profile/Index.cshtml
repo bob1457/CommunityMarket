@@ -365,15 +365,22 @@
                                     @*1111 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.*@
                                     <fieldset style="margin-top: 25px;">
                                         <legend></legend>
-                                        <div id="c_details">@Html.Action("GetCustomerDetails", "Customer", new { id = @ViewBag.UserId })</div>
+                                        <div id="c_details">
+                                            <div id="c_d">
+                                                @Html.Action("GetCustomerDetails", "Customer", new { id = @ViewBag.UserId })
+                                            </div>
+                                            <a href="#" id="Edit_c" class="btn btn-primary">Edit</a>
+                                        </div>
 
-                                        <div id="c_edit"></div>
+                                        <div id="c_edit" style="display: none;">
+                                            @Html.Action("GetCustomerEdit", "Customer", new { id = @ViewBag.UserId})
 
-                                        <div id="c_add"></div>
+                                            <a href="#" id="c_Save" class="btn btn-success" >Save</a>
+                                            <a href="#" id="c_Cancel" class="btn btn-danger" >Cancel</a>
+                                        </div>
+                                        <div id="c_add">
+                                        </div>
 
-                                        <a href="#" id="Edit_c" class="btn btn-primary">Edit</a>
-                                        <a href="#" id="c_Save" class="btn btn-success" style="display: none;">Save</a>
-                                        <a href="#" id="c_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
                                     </fieldset>
 
 
@@ -385,19 +392,25 @@
                                         <legend style="margin-top: 15px;"></legend>
 
                                         <div id="details_m">
-                                            @Html.Action("GetMerchantDetails", "Merchant", new { id = @ViewBag.UserId })
+                                            <div id="m_d">
+                                                @Html.Action("GetMerchantDetails", "Merchant", new { id = @ViewBag.UserId })
+                                            </div>
+                                            <a href="#" id="m_Edit" class="btn btn-primary">Edit</a>
+
                                         </div><!-- Data loaded from JSON object from server side -->
                                         <div id="edit_m" style="display: none;">
                                             @Html.Action("GetMerchantEdit", "Merchant", new { id = @ViewBag.UserId })
+
+                                            <a href="#" id="m_Save" class="btn btn-success" style="display: none;">Save</a>
+                                            <a href="#" id="m_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
                                         </div>
 
                                         <div id="edit_m" style="display: none">
 
                                         </div><!-- Data loaded from JSON object from server side -->
 
-                                        <a href="#" id="m_Edit" class="btn btn-primary">Edit</a>
-                                        <a href="#" id="m_Save" class="btn btn-success" style="display: none;">Save</a>
-                                        <a href="#" id="m_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
+                                        
+                                        
                                     </fieldset>
                                 </div>
 
@@ -424,79 +437,22 @@
                                     </fieldset>
 
 
-                            </div>
-
+                                </div>
+                                
+                                
+                                @if (roles.Contains("Merchant"))
+                                {
                                     <div role="tabpanel" class="tab-pane" id="m_history" style="margin-top: -25px;">
                                         @*2222 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.*@
                                         <fieldset style="margin-top: 25px; height: 340px;">
                                             <legend style="margin-top: 15px;"></legend>
-
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-hover table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Order #</th>
-                                                            <th>Order Date</th>
-                                                            <th>Order Time</th>
-                                                            <th>Amount (USD)</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>3326</td>
-                                                            <td>10/21/2013</td>
-                                                            <td>3:29 PM</td>
-                                                            <td>$321.33</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3325</td>
-                                                            <td>10/21/2013</td>
-                                                            <td>3:20 PM</td>
-                                                            <td>$234.34</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3324</td>
-                                                            <td>10/21/2013</td>
-                                                            <td>3:03 PM</td>
-                                                            <td>$724.17</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3323</td>
-                                                            <td>10/21/2013</td>
-                                                            <td>3:00 PM</td>
-                                                            <td>$23.71</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3322</td>
-                                                            <td>10/21/2013</td>
-                                                            <td>2:49 PM</td>
-                                                            <td>$8345.23</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3321</td>
-                                                            <td>10/21/2013</td>
-                                                            <td>2:23 PM</td>
-                                                            <td>$245.12</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3320</td>
-                                                            <td>10/21/2013</td>
-                                                            <td>2:15 PM</td>
-                                                            <td>$5663.54</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3319</td>
-                                                            <td>10/21/2013</td>
-                                                            <td>2:13 PM</td>
-                                                            <td>$943.45</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <div id="sales">
+                                                @Html.Action("GetSalesHisotryForSupplier", "Merchant")
                                             </div>
-
-                                            
                                         </fieldset>
                                     </div>
+                                }
+                                
 
                                 </div>
                                 
@@ -898,13 +854,13 @@
             $("#edit_m").show();
         });
 
-        $("#m_Save").click(function () {
-            $("#details_m").show();
-            $("#m_Edit").show();
-            $("#m_Save").hide();
-            $("#m_Cancel").hide();
-            $("#edit_m").hide();
-        });
+        //$("#m_Save").click(function () {
+        //    $("#details_m").show();
+        //    $("#m_Edit").show();
+        //    $("#m_Save").hide();
+        //    $("#m_Cancel").hide();
+        //    $("#edit_m").hide();
+        //});
 
         $("#m_Cancel").click(function () {
             $("#details_m").show();
@@ -914,6 +870,29 @@
             $("#edit_m").hide();
         });
 
+
+
+
+        $("#Edit_c").click(function () {
+            $("#c_details").hide();
+            $("#c_edit").show();
+            //$("#c_Save").show();
+            //$("#c_Cancel").show();
+            $("#Edit_c").hide();
+        });
+
+        //$("#c_Save").click(function () {
+        //    $("#c_details").show();
+        //    $("#c_edit").hide();
+        //    $("#Edit_c").show();
+
+        //});
+
+        $("#c_Cancel").click(function () {
+            $("#c_details").show();
+            $("#c_edit").hide();
+            $("#Edit_c").show();
+        });
 
 
         //debugger;
@@ -984,10 +963,6 @@
 
             $("#details_m").append(table);
 
-
-
-
-
             //Load edit form
 
             var table_0 = $("<table></table>").addClass("table");
@@ -1052,26 +1027,6 @@
 
             $("#edit_m").append(table_0);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             //debugger;
             //$("#details_m").html(data);
             return false;
@@ -1086,16 +1041,22 @@
 </script>
 
 
-<!-- Customer Info -->
+<!-- Update Customer Info 
 <script type="text/javascript">
     $(document).ready(function () {
 
+        var cusotmerInfo = {
 
+        };
+
+        $("#c_Save").click(function() {
+
+        });
 
     });
 </script>
 
-
+-->
 
 
 <script type="text/javascript">
@@ -1109,9 +1070,160 @@
     };
 </script>
 
+<!-- Update Merchant info -->
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        
+        $("#m_Save").click(function () {
+            debugger;
+            var merchantInfo = {
+                "CompnayName": $("#m_comName").val(),
+                "ContactFirstName": $("#m_conFname").val(),
+                "ContactLastName": $("#m_conLname").val(),
+                "CompanyIconImgUrl": $("#m_conEmail").val(),
+                "SupplierWebSite": $("#m_web").val(),
+                "ShortBio": $("#m_bio").val()
+            };
+
+
+            $("#details_m").show();
+            $("#m_Edit").show();
+            $("#m_Save").hide();
+            $("#m_Cancel").hide();
+            $("#edit_m").hide();
+
+            $.ajax({
+                type: "POST",
+                url: "/Merchant/UpdateMerchantInfo",
+                data: { supplier: merchantInfo },
+                contenType: "application/json; charset=utf-8",
+                //dataType: "json",
+                cache: false,
+                success: suceeded,
+                error: error
+            });
+
+            function suceeded() {
+
+                $("#cBody").val("");
+                //alert("It seems ok....");
+                var url = "/Merchant/GetMerchantDetails/" + "@UserId";
+
+                $.get(url, function (res) {
+                    $("#m_d").html(res);
+
+                    debugger;
+
+                    if ($("#upload").val() != null) {
+                        //Upload image file
+
+                        var data = new FormData();
+
+                        var files = $("#upload").get(0).files;
+
+                        if (files.length > 0) {
+                            data.append("UploadedImage", files[0]);
+                        }
+
+                        // Make Ajax request with the contentType = false, and procesDate = false
+                        var ajaxRequest = $.ajax({
+                            type: "POST",
+                            url: "/Merchant/UploadLogoImg",
+                            contentType: false,
+                            processData: false,
+                            data: data
+                        });
+
+                        //debugger;
+                        ajaxRequest.done(function () {
+                            // Do other operation
+
+                            $("#upload").val('');
+
+                            var url = "/Merchant/GetMerchantDetails/" + "@UserId";
+
+                            $.get(url, function (res) {
+                                $("#m_d").html(res);
+
+
+                                return false;
+
+
+                            });
+                        });
+                    }
+
+
+                    return false;
+                });
+
+                return false;
+            }
+
+            function error() {
+
+                return false;
+            }
+
+        });
+
+
+
+
+        $("#c_Save").click(function () {
+            debugger;
+            var cusotmerInfo = {
+                "CustomerAlias": $("#c_alias").val(),
+                "BillingAddress": $("#c_billing").val(),
+                "ShippingAddress": $("#c_shipping").val(),
+                "ContactEmail": $("#c_email").val(),
+                "ContactTel": $("#c_tel").val()
+
+            };
+
+
+            $("#c_details").show();
+            $("#c_edit").hide();
+            $("#Edit_c").show();
+
+            $.ajax({
+                type: "POST",
+                url: "/Customer/UpdateCustomerInfo",
+                data: { customer: cusotmerInfo },
+                contenType: "application/json; charset=utf-8",
+                //dataType: "json",
+                cache: false,
+                success: suceeded,
+                error: error
+            });
+
+            function suceeded() {
+
+                $("#cBody").val("");
+                //alert("It seems ok....");
+                var url = "/Customer/GetCustomerDetails/" + "@UserId";
+
+                $.get(url, function (res) {
+                    $("#c_d").html(res);
+
+
+                    return false;
+                });
+
+                return false;
+            }
+
+            function error() {
+
+                return false;
+            }
+        });
+
+
+
+
+
+
     });
 </script>
+

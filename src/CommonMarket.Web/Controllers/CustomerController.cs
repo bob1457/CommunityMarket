@@ -88,6 +88,35 @@ namespace CommonMarket.Web.Controllers
             
         }
 
+
+        public ActionResult GetCustomerEdit(string id)
+        {
+            var profileId = UserManager.FindById(id).UserProfile.Id;
+
+            var customer = _customerService.FindCustomerBy(profileId);
+
+            if (customer != null)
+            {
+                return PartialView("_CustomerEdit", customer);
+            }
+            else
+            {
+                var currentUser = UserManager.FindById(id);
+                var fName = currentUser.UserProfile.FirstName;
+                var lName = currentUser.UserProfile.LastName;
+                var alias = fName + " " + lName;
+                var email = currentUser.UserProfile.Email;
+
+                AddCustomer(alias, email, profileId);
+
+                var newCustomer = _customerService.FindCustomerBy(profileId);
+
+                return PartialView("_CustomerEdit", newCustomer);
+
+            }
+        }
+
+
         private void AddCustomer(string customerAlias, string email, int profileId)
         {
             var customer = new Customer();
@@ -101,6 +130,21 @@ namespace CommonMarket.Web.Controllers
 
                 _customerService.AddCustomer(customer);
             }
+        }
+
+        public void UpdateCustomerInfo(Customer customer)
+        {
+            var profileId = UserManager.FindById(User.Identity.GetUserId()).UserProfile.Id;
+
+            var custo = _customerService.FindCustomerBy(profileId);
+
+            custo.CustomerAlias = customer.CustomerAlias;
+            custo.BillingAddress = customer.BillingAddress;
+            custo.ShippingAddress = customer.ShippingAddress;
+            custo.ContactEmail = customer.ContactEmail;
+            custo.ContactTel = customer.ContactTel;
+
+            _customerService.UpdateCustomerInfo(custo);
         }
 
 
