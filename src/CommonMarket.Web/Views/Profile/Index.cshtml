@@ -288,7 +288,7 @@
                         </div>
                         <div class="col-md-6">
                             <fieldset style="margin-top: 25px;">
-                                <legend style="margin-top: 15px;"></span><span class="glyphicon glyphicon-link"></span> Other Settings</legend>
+                                <legend style="margin-top: 15px;"><span class="glyphicon glyphicon-link"></span> Other Settings</legend>
                                 <p>
                                     Phone Number: @(Model.PhoneNumber ?? "None") [
                                     @if (Model.PhoneNumber != null)
@@ -385,34 +385,37 @@
 
 
                                 </div>
+                                @if (roles.Contains("Merchant"))
+                                {
+                                    <div role="tabpanel" class="tab-pane" id="messages" style="margin-top: -25px;">
+                                        @*2222 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.*@
+                                        <fieldset style="margin-top: 25px;">
+                                            <legend style="margin-top: 15px;"></legend>
 
-                                <div role="tabpanel" class="tab-pane" id="messages" style="margin-top: -25px;">
-                                    @*2222 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.*@
-                                    <fieldset style="margin-top: 25px;">
-                                        <legend style="margin-top: 15px;"></legend>
+                                            <div id="details_m">
+                                                <div id="m_d">
+                                                    @Html.Action("GetMerchantDetails", "Merchant", new { id = @ViewBag.UserId })
+                                                </div>
+                                                <a href="#" id="m_Edit" class="btn btn-primary">Edit</a>
 
-                                        <div id="details_m">
-                                            <div id="m_d">
-                                                @Html.Action("GetMerchantDetails", "Merchant", new { id = @ViewBag.UserId })
+                                            </div><!-- Data loaded from JSON object from server side -->
+                                            <div id="edit_m" style="display: none;">
+                                                @Html.Action("GetMerchantEdit", "Merchant", new { id = @ViewBag.UserId })
+
+                                                <a href="#" id="m_Save" class="btn btn-success" style="display: none;">Save</a>
+                                                <a href="#" id="m_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
                                             </div>
-                                            <a href="#" id="m_Edit" class="btn btn-primary">Edit</a>
 
-                                        </div><!-- Data loaded from JSON object from server side -->
-                                        <div id="edit_m" style="display: none;">
-                                            @Html.Action("GetMerchantEdit", "Merchant", new { id = @ViewBag.UserId })
+                                            <div id="edit_m" style="display: none">
 
-                                            <a href="#" id="m_Save" class="btn btn-success" style="display: none;">Save</a>
-                                            <a href="#" id="m_Cancel" class="btn btn-danger" style="display: none;">Cancel</a>
-                                        </div>
+                                            </div><!-- Data loaded from JSON object from server side -->
 
-                                        <div id="edit_m" style="display: none">
 
-                                        </div><!-- Data loaded from JSON object from server side -->
 
-                                        
-                                        
-                                    </fieldset>
-                                </div>
+                                        </fieldset>
+                                    </div>
+                                }
+                                
 
                             </div>
                             

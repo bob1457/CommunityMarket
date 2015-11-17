@@ -491,6 +491,9 @@ namespace CommonMarket.Web.Controllers
             emailNotification.SendEmail(email, "New User Registration", message);
 
 
+            //Bill merchant for setup fee: $50.00
+            //
+
             return Json(id + " Activated!");
         }
 
