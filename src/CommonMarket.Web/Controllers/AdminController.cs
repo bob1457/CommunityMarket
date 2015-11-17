@@ -12,6 +12,7 @@ using CommonMarket.Core.Interface;
 using CommonMarket.Web.Infrastructure;
 using CommonMarket.Web.Models;
 using ImageResizer;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -472,6 +473,7 @@ namespace CommonMarket.Web.Controllers
                     newSupplier.ContactFirstName = UserManager.FindById(id).UserProfile.FirstName;
                     newSupplier.ContactLastName = UserManager.FindById(id).UserProfile.LastName;
                     newSupplier.IsActive = true;
+                    newSupplier.CompanyIconImgUrl = UserManager.FindById(id).UserProfile.Email;
                     newSupplier.UserProfileId = profileId;
                     
                     _merchantServie.AddSupplier(newSupplier);
@@ -480,9 +482,13 @@ namespace CommonMarket.Web.Controllers
                 
             }
 
-            //Make account active
+            //Send notification
             //
+            var emailNotification = new EmailNotification();
 
+            string message = "Your merchante account has been activated and ready for user. If you need help, please contact us! Thanks for choosing CommunityMarket for your ecommerce needs!";
+
+            emailNotification.SendEmail(email, "New User Registration", message);
 
 
             return Json(id + " Activated!");
@@ -531,24 +537,92 @@ namespace CommonMarket.Web.Controllers
             var userInfo = UserManager.FindById(id);
             var profileId = userInfo.UserProfile.Id;
 
-            var supplierId = _merchantServie.FindSupplierBy(profileId).Id;
+            var supplier = _merchantServie.FindSupplierBy(profileId);
+            var supplierId =supplier.Id;
+            var supplierEmail = supplier.CompanyIconImgUrl;
 
             var newPayment = new MerchantFeePayment();
 
-            newPayment.BillingDate = DateTime.Now;
-            newPayment.IsPaid = false;
-            newPayment.MerchantFeeTypeId = 2;
-            newPayment.FeeAmount = payment.FeeAmount;
-            newPayment.SupplierId = supplierId;
-            newPayment.BillingYear = payment.BillingYear;
-            newPayment.BillingMonth = payment.BillingMonth;
-            newPayment.Notes = payment.Notes;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    newPayment.BillingDate = DateTime.Now;
+                    newPayment.IsPaid = false;
+                    newPayment.MerchantFeeTypeId = 2;
+                    newPayment.FeeAmount = payment.FeeAmount;
+                    newPayment.SupplierId = supplierId;
+                    newPayment.BillingYear = payment.BillingYear;
+                    newPayment.BillingMonth = payment.BillingMonth;
+                    newPayment.Notes = payment.Notes;
 
-            _merchantServie.AddBillPayment(newPayment);
+                    _merchantServie.AddBillPayment(newPayment);
 
-            //Send invoice and email notification
-            //
+                    //Send invoice and email notification
+                    //
 
+
+                    var month = "";
+
+                    switch ( newPayment.BillingMonth)
+                    {
+                        case "January":
+                            month = "1";
+                            break;
+                        case "February":
+                            month = "2";
+                            break;
+                        case "March":
+                            month = "3";
+                            break;
+                        case "April":
+                            month = "4";
+                            break;
+                        case "May":
+                            month = "5";
+                            break;
+                        case "June":
+                            month = "6";
+                            break;
+                        case "July":
+                            month = "7";
+                            break;
+                        case "August":
+                            month = "8";
+                            break;
+                        case "September":
+                            month = "9";
+                            break;
+                        case "October":
+                            month = "10";
+                            break;
+                        case "November":
+                            month = "11";
+                            break;
+                        case "December":
+                            month = "12";
+                            break;
+                    }
+
+
+
+
+
+
+                    var allTransactions = GetTransactionsByVendor(newPayment.SupplierId, month);
+
+                    var emailNotification = new EmailNotification();
+
+                    string message = this.RenderView("~/Views/Admin/_TransactionSummary.cshtml", allTransactions);
+
+                    emailNotification.SendEmail(supplierEmail, "Merchant Management Fee Bill: " + newPayment.BillingMonth + " " + newPayment.BillingYear, message);
+                }
+                catch (Exception)
+                {
+                
+                    throw;
+                }
+            }
 
         }
 
@@ -601,6 +675,12 @@ namespace CommonMarket.Web.Controllers
 
             SendNotificaiton(email, "Your order is ready", message);
         }
+
+        private IEnumerable<OrderItem>  GetTransactionsByVendor(int id, string month)
+        {
+            return _orderProcessingService.GetOrderItemssbyVendorByMonth(id, month);
+        }
+
 
         private void SendNotificaiton(string emailAddress, string subject, string message)
         {

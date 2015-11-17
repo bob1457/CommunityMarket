@@ -427,6 +427,7 @@
     <Content Include="Views\Customer\_CustomerEdit.cshtml" />
     <Content Include="Views\Merchant\_OrderBySupplier.cshtml" />
     <Content Include="Views\Merchant\_MerchantStoreHead.cshtml" />
+    <Content Include="Views\Admin\_TransactionSummary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

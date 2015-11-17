@@ -13,6 +13,9 @@ body {
     padding: 0;
 }
 
+.modal {
+     overflow-y: auto;
+}
 * {
     border-radius: 0 !important; /* no round-corner button */
 }
