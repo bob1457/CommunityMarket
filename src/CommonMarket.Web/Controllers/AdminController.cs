@@ -499,13 +499,18 @@ namespace CommonMarket.Web.Controllers
 
         public JsonResult DeActivateMerchantAccount(string id) // id = user id 
         {
+            var profileId = UserManager.FindById(id).UserProfile.Id;
+            var email = UserManager.FindById(id).UserName; //find user login name (in email) by userid
 
+            var supplier = _merchantServie.FindSupplierById(profileId);
            
-
             //Make account inactive
             //
+            supplier.IsActive = false;
+            supplier.UserProfileId = profileId;
+            supplier.CompanyIconImgUrl = email; //user this field to pass the username(email) to supplier information table
 
-
+            _merchantServie.UpdateSupplier(supplier.Id);
 
             return Json(id + " Deactivated!");
         }

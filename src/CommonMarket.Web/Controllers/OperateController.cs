@@ -67,11 +67,25 @@ namespace CommonMarket.Web.Controllers
             //var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
 
             //int profileId = 
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var prfileId = currentUser.UserProfile.Id;
+            var supplier = _merchantService.FindSupplierBy(prfileId);
 
-
-            return View();
+            if (supplier.IsActive)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("NotActivated");
+            }
+            
         }
 
+        public ActionResult NotActivated()
+        {
+            return View();
+        }
 
         [ChildActionOnly]
         public ActionResult GetProductList(int? page)
