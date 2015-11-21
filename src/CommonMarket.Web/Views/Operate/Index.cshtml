@@ -84,13 +84,13 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-blackboard text-success"></span><a href="http://www.jquery2dotnet.com"> Marketing & Promotion</a>
+                                        <span class="glyphicon glyphicon-blackboard text-success"></span><a id="promo" href="#"> Marketing & Promotion</a>
                                     </td>
                                 </tr>
                                 
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-fire text-success"></span><a href="http://www.jquery2dotnet.com"> Tax and Fee</a>
+                                        <span class="glyphicon glyphicon-list-alt text-success"></span><a id="ac_show" href="#"> Accounting</a>
                                         @*<span class="badge">42</span>*@
                                     </td>
                                 </tr>
@@ -118,12 +118,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-file text-primary"></span><a href="http://www.jquery2dotnet.com"> Customer Invoices & Payments</a>
+                                        <span class="glyphicon glyphicon-file text-primary"></span><a id="cus_invoice" href="#"> Customer Invoices & Payments</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-send text-primary"></span><a href="http://www.jquery2dotnet.com"> Shipments and Tracking</a>
+                                        <span class="glyphicon glyphicon-send text-primary"></span><a id="shipping"href="#"> Shipments and Tracking</a>
                                     </td>
                                 </tr>
                                 @*<tr>
@@ -195,7 +195,7 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="http://www.jquery2dotnet.com"> Change Password</a>
+                                        <a id="customer_accts" href="#"> Customer Accounts</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -523,6 +523,19 @@
                     <div id="back" style="display: none; margin-top: 19px;">
                         @Html.Action("GetAllBills")
                     </div>
+                    
+                    
+
+                    <div id="accting" style="display: none; margin-top: 19px;">@Html.Partial("_Accounting")</div>
+                    
+                    <div id="c_invoice" style="display: none; margin-top: 19px;">@Html.Partial("_CusotmerInvoice")</div>
+                    
+                    <div id="c_shipping" style="display: none; margin-top: 19px;">@Html.Partial("_ShippingTrack")</div>
+                   
+                    <div id="marketing" style="display: none; margin-top: 19px;">@Html.Partial("_MarketingCampaign")</div>
+                    
+                    
+                    <div id="acct_customer" style="display: none; margin-top: 19px;">@Html.Action("GetCustomerList")</div>
 
                 </div>
             </div>
@@ -692,6 +705,11 @@
         //$("#front").show();
         $("#discount").hide();
         $("#order_processing").hide();
+        $("#accting").hide();
+        $("#c_invoice").hide();
+        $("#c_shipping").hide();
+        $("#marketing").hide();
+        $("#acct_customer").hide();
         //$("#content_da").hide();
         //$("#pf").addClass("profile-active-button");
 
@@ -701,6 +719,11 @@
             $("#discount").hide();
             $("#order_processing").hide();
             $("#back").hide();
+            $("#accting").hide();
+            $("#c_invoice").hide();
+            $("#c_shipping").hide();
+            $("#marketing").hide();
+            $("#acct_customer").hide();
         });
         //$("#cover").click(function () {
         //    $("#product").hide();
@@ -715,6 +738,11 @@
             $("#discount").show();
             $("#order_processing").hide();
             $("#back").hide();
+            $("#accting").hide();
+            $("#c_invoice").hide();
+            $("#c_shipping").hide();
+            $("#marketing").hide();
+            $("#acct_customer").hide();
         });
 
 
@@ -724,6 +752,11 @@
             $("#discount").hide();
             $("#order_processing").show();
             $("#back").hide();
+            $("#accting").hide();
+            $("#c_invoice").hide();
+            $("#c_shipping").hide();
+            $("#marketing").hide();
+            $("#acct_customer").hide();
         });
 
         $("#f_show").click(function () {
@@ -732,10 +765,27 @@
             $("#discount").hide();
             $("#order_processing").hide();
             $("#back").hide();
+            $("#accting").hide();
+            $("#c_invoice").hide();
+            $("#c_shipping").hide();
+            $("#marketing").hide();
+            $("#acct_customer").hide();
         });
 
+        
 
-
+        $("#cus_invoice").click(function () {
+            $("#product").hide();
+            $("#front").hide();
+            $("#discount").hide();
+            $("#order_processing").hide();
+            $("#back").hide();
+            $("#accting").hide();
+            $("#c_invoice").show();
+            $("#c_shipping").hide();
+            $("#marketing").hide();
+            $("#acct_customer").hide();
+        });
 
 
         $("#back_office").click(function () {
@@ -744,7 +794,67 @@
             $("#discount").hide();
             $("#order_processing").hide();
             $("#back").show();
+            $("#accting").hide();
+            $("#c_invoice").hide();
+            $("#c_shipping").hide();
+            $("#marketing").hide();
+            $("#acct_customer").hide();
         });
+
+        $("#ac_show").click(function () {
+            $("#product").hide();
+            $("#front").hide();
+            $("#discount").hide();
+            $("#order_processing").hide();
+            $("#back").hide();
+            $("#accting").show();
+            $("#c_invoice").hide();
+            $("#c_shipping").hide();
+            $("#marketing").hide();
+            $("#acct_customer").hide();
+        });
+
+
+        $("#shipping").click(function () {
+            $("#product").hide();
+            $("#front").hide();
+            $("#discount").hide();
+            $("#order_processing").hide();
+            $("#back").hide();
+            $("#accting").hide();
+            $("#c_invoice").hide();
+            $("#c_shipping").show();
+            $("#marketing").hide();
+            $("#acct_customer").hide();
+        });
+
+
+        $("#promo").click(function () {
+            $("#product").hide();
+            $("#front").hide();
+            $("#discount").hide();
+            $("#order_processing").hide();
+            $("#back").hide();
+            $("#accting").hide();
+            $("#c_invoice").hide();
+            $("#c_shipping").hide();
+            $("#marketing").show();
+            $("#acct_customer").hide();
+        });
+
+        $("#customer_accts").click(function () {
+            $("#product").hide();
+            $("#front").hide();
+            $("#discount").hide();
+            $("#order_processing").hide();
+            $("#back").hide();
+            $("#accting").hide();
+            $("#c_invoice").hide();
+            $("#c_shipping").hide();
+            $("#marketing").hide();
+            $("#acct_customer").show();
+        });
+
     });
 </script>
 

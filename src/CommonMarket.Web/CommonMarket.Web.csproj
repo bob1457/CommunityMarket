@@ -429,6 +429,13 @@
     <Content Include="Views\Merchant\_MerchantStoreHead.cshtml" />
     <Content Include="Views\Admin\_TransactionSummary.cshtml" />
     <Content Include="Views\Operate\NotActivated.cshtml" />
+    <Content Include="Views\Operate\_Accounting.cshtml" />
+    <Content Include="Views\Operate\_CusotmerInvoice.cshtml" />
+    <Content Include="Views\Operate\_ShippingTrack.cshtml" />
+    <Content Include="Views\Operate\_MarketingCampaign.cshtml" />
+    <Content Include="Views\Operate\_CustomerList.cshtml" />
+    <Content Include="Views\Operate\_CustomerOrder.cshtml" />
+    <Content Include="Views\Operate\_OrderItemsByCustomer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

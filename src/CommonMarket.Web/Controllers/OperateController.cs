@@ -191,7 +191,7 @@ namespace CommonMarket.Web.Controllers
             var prfileId = currentUser.UserProfile.Id;
             var supplierId = _merchantService.FindSupplierBy(prfileId).Id;
 
-            IEnumerable<Core.Entities.OrderItem>  orderItems = _orderProcessingService.GetOrderItmesByVendorOrder(supplierId, oid);
+            IEnumerable<OrderItem>  orderItems = _orderProcessingService.GetOrderItmesByVendorOrder(supplierId, oid);
 
             //var customer = _orderProcessingService.GetCustomerByOrderId(oid);
 
@@ -288,6 +288,47 @@ namespace CommonMarket.Web.Controllers
         {
             orderbyVendor.UpdateDate = DateTime.Now;
             _orderProcessingService.UpdateOrderByVendor(orderbyVendor);
+        }
+
+
+        public ActionResult GetCustomerList(int? page) //id: user identity id
+        {
+            const int pageSize = 10; //for testing purpose, to be adjustetd, PAGING NOT IMPLEMENTED YET
+            int pageIndex = (page ?? 1) - 1;
+            int pageNumber = (page ?? 1);
+
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var prfileId = currentUser.UserProfile.Id;
+            var supplierId = _merchantService.FindSupplierBy(prfileId).Id;
+
+            var cusotmers = _merchantService.ListCustomersByVendor(supplierId).Distinct().ToPagedList(pageNumber, pageSize);
+
+            return PartialView("_CustomerList", cusotmers);
+        }
+
+
+        public ActionResult GetOrderAndOrderItemsByCusotmer(int id) //id: custoemr id
+        {
+            var order = _merchantService.GetOrderAndOrderItemsByCustomer(id);
+
+            //var orderItemsInOrder = _orderProcessingService.GetOrderItemsFromOrder(id);
+
+            //foreach (var item in orderItemsInOrder)
+            //{
+            //    item.Product = order.FirstOrDefault().OrderItems.FirstOrDefault().Product;
+            //}
+
+            return PartialView("_CustomerOrder", order);
+        }
+
+        public ActionResult GetOrderItemsByCustomer(int id) //id: order id
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var prfileId = currentUser.UserProfile.Id;
+            var supplierId = _merchantService.FindSupplierBy(prfileId).Id;
+
+            var orderItems = _merchantService.GetOrderItemsByCustomer(id, supplierId);
+            return PartialView("_OrderItemsByCustomer", orderItems);
         }
     }
 }

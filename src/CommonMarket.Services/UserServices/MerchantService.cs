@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommonMarket.Core.Entities;
 using CommonMarket.Core.Interface;
+using CommonMarket.Core.ViewModels;
 using CommonMarket.DataAccess;
 
 namespace CommonMarket.Services.UserServices
@@ -16,7 +17,9 @@ namespace CommonMarket.Services.UserServices
         private readonly IRepository<MerchantFeePayment> _merchanteFeeRepository;
         private readonly IUnitOfWork _uow;
 
-        public MerchantService(IRepository<Supplier> supplierRepository, IMerchantRepository merchantRepository, IRepository<MerchantFeePayment> merchanteFeeRepository, IUnitOfWork uow )
+        public MerchantService(IRepository<Supplier> supplierRepository, IMerchantRepository merchantRepository, 
+            IRepository<MerchantFeePayment> merchanteFeeRepository, 
+            IUnitOfWork uow )
         {
             _supplierRepository = supplierRepository;
             _merchantRepository = merchantRepository;
@@ -125,6 +128,21 @@ namespace CommonMarket.Services.UserServices
         {
             _supplierRepository.Update(supplier);
             //_uow.Save();
+        }
+
+        public IEnumerable<CustomerViewModel> ListCustomersByVendor(int id) //id: supplier id
+        {
+            return _merchantRepository.GetCustomerList(id);
+        }
+
+        public IEnumerable<Order> GetOrderAndOrderItemsByCustomer(int id)
+        {
+            return _merchantRepository.GetOrderAndOrderItemsByCusotmer(id);
+        }
+
+        public IEnumerable<OrderItem> GetOrderItemsByCustomer(int id, int sId )
+        {
+            return _merchantRepository.GetOrderItemsByCustomer(id, sId);
         }
     }
 }

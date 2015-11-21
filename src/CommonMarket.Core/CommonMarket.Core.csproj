@@ -103,6 +103,7 @@
     <Compile Include="Product\TestProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CartContentViewModel.cs" />
+    <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\OrderByVendorViewModel.cs" />
     <Compile Include="ViewModels\QuickSearchViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
