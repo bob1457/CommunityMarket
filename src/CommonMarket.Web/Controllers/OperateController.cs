@@ -51,12 +51,15 @@ namespace CommonMarket.Web.Controllers
 
         private readonly IProductServices _productServices;
         private readonly IMerchantService _merchantService;
+        private readonly ICustomerService _customerService;
         private readonly IOrderProcessingService _orderProcessingService;
 
-        public OperateController(IProductServices productServices, IMerchantService merchantService, IOrderProcessingService orderProcessingService )
+        public OperateController(IProductServices productServices, IMerchantService merchantService, ICustomerService customerService,
+            IOrderProcessingService orderProcessingService )
         {
             _productServices = productServices;
             _merchantService = merchantService;
+            _customerService = customerService;
             _orderProcessingService = orderProcessingService;
         }
 
@@ -174,7 +177,14 @@ namespace CommonMarket.Web.Controllers
             return PartialView("_BillPayment", billPaymentInfo);
         }
 
+        public string GetCustomerJoinDate(int id)
+        {
+            var customer = _customerService.FindCustomerById(id);
 
+            var user = UserManager.FindByEmail(customer.ContactEmail);
+
+            return user.UserProfile.CreateDate.ToShortDateString();
+        }
 
         public ActionResult GetBilPaymentByVendor(int id) //id: supplierId
         {

@@ -71,3 +71,7 @@ C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Infrastructure\bin\De
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\PagedList.Mvc.xml
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Quartz.pdb
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Quartz.xml
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\PayPal.dll
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Infrastructure\bin\Debug\PayPal.xml
