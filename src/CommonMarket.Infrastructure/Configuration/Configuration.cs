@@ -27,7 +27,7 @@ namespace CommonMarket.Infrastructure.Configuration
         // getting properties from the web.config
         public static Dictionary<string, string> GetConfig()
         {
-            return ConfigManager.Instance.GetProperties();// PayPal.CertificateManager.Instance.GetProperties();
+            return ConfigManager.Instance.GetProperties();
         }
 
         private static string GetAccessToken()

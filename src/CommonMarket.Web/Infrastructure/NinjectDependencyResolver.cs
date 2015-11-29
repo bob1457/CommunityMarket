@@ -56,6 +56,7 @@ namespace CommonMarket.Web.Infrastructure
             kernel.Bind<ICustomerOrderService>().To<CustomerOrderService>();
             kernel.Bind<IOrderProcessingService>().To<OrderProcessingService>();
             kernel.Bind<IPromotionService>().To<PromotionService>();
+            kernel.Bind<IPayPalServices>().To<PayPalServices>();
 
             kernel.Bind<IQuickSearchRepository>().To<QuickSearchRepository>();
 

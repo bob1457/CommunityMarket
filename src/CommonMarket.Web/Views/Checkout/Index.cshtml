@@ -19,6 +19,56 @@
     .row {
         margin-left: 0;
     }
+
+    fieldset {
+        margin-top: 5px;
+    }
+
+
+
+
+    .credit-card-box .panel-title {
+    display: inline;
+    font-weight: bold;
+    }
+    .credit-card-box .form-control.error {
+        border-color: red;
+        outline: 0;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(255,0,0,0.6);
+    }
+    .credit-card-box label.error {
+      font-weight: bold;
+      color: red;
+      padding: 2px 8px;
+      margin-top: 2px;
+    }
+    .credit-card-box .payment-errors {
+      font-weight: bold;
+      color: red;
+      padding: 2px 8px;
+      margin-top: 2px;
+    }
+    .credit-card-box label {
+        display: block;
+    }
+    /* The old "center div vertically" hack */
+    .credit-card-box .display-table {
+        display: table;
+    }
+    .credit-card-box .display-tr {
+        display: table-row;
+    }
+    .credit-card-box .display-td {
+        display: table-cell;
+        vertical-align: middle;
+        width: 50%;
+    }
+    /* Just looks nicer */
+    .credit-card-box .panel-heading img {
+        min-width: 180px;
+    }
+
+
 </style>
 
 <div class="container">
@@ -90,20 +140,106 @@
                                     <br />
                                     <div id="payment-method">
                                         <input type="radio" name="pmethod" id="cash" value="1" checked="checked" style="vertical-align: top;" title="Cash On Delivery" /> Cash on Delivery <i class="fa fa-money" style="color: #228b22"></i><br />
-                                        <input type="radio" name="pmethod" id="paypal" value="2" disabled="" style="vertical-align: top;" title="PayPal" /> PayPal <i class="fa fa-cc-paypal" style="color: #3b7bbf"></i><br />
-                                        <input type="radio" name="pmethod" id="credit-card" value="3" disabled="" style="vertical-align: top;" title="Major Credit Cards" /> Credit Card <i class="fa fa-cc-amex" style="color: #38a671"></i> <i class="fa fa-cc-visa" style="color: #1a1171f"></i> <i class="fa fa-cc-mastercard" style="color: #ff9900"></i><br />
+                                        <input type="radio" name="pmethod" id="paypal" value="2" @*disabled=""*@ style="vertical-align: top;" title="PayPal" /> PayPal <i class="fa fa-cc-paypal" style="color: #3b7bbf"></i><br />
+                                        <input type="radio" name="pmethod" id="credit-card" value="3" @*disabled=""*@ style="vertical-align: top;" title="Major Credit Cards" /> Credit Card <i class="fa fa-cc-amex" style="color: #38a671"></i> <i class="fa fa-cc-visa" style="color: #1a1171f"></i> <i class="fa fa-cc-mastercard" style="color: #ff9900"></i><br />
                                     </div>
 
                                     <div id="d_payment">
                                         <fieldset>
                                             <legend> <i class="fa fa-info-circle"></i> Details </legend>
-                                            <p>You will pay for your order in cash when you pickup the order or when you receive your order if you have chosen shipping.</p>
+                                            <div id="cod">
+                                                <p>You will pay for your order in cash when you pickup the order or when you receive your order if you have chosen shipping.</p>
 
-                                            <p>For more information, please contact the vendor directly. You can find the vendors' contact informatoin of your products in your order.</p>
+                                                <p>For more information, please contact the vendor directly. You can find the vendors' contact informatoin of your products in your order.</p>
+                                            </div>
+                                            <div id="d_paypal" style="display: none;">
+                                                <p>
+                                                    You will be redirected to PayPal site and you need to login with your PayPal account to nmake payment.
+                                                </p>
+                                                <p>
+                                                    If you do not have a PayPal account, create one in Paypal's website <a href="https://www.paypal.com/us/webapps/mpp/account-selection" target="_blank">here</a>.
+                                                </p>
+                                            </div>
+                                            <div id="d_cc" style="display: none; ">
+                                                <div class="col-md-12" style="margin-bottom: -25px;">
+
+
+                                                    <!-- CREDIT CARD FORM STARTS HERE -->
+                                                    <div class="panel panel-default credit-card-box">
+                                                        <div class="panel-heading display-table">
+                                                            <div class="row display-tr">
+                                                                <div class="display-td">
+                                                                    <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <form role="form" id="payment-form" style=" margin-bottom: 10px;">
+                                                                <div class="row">
+                                                                    <div class="col-xs-12">
+                                                                        <div class="form-group">
+                                                                            @*<label for="cardNumber">CARD NUMBER</label>*@
+                                                                            <div>
+                                                                                <input type="radio" name="ccd" id="visa" value="1" checked="checked" style="vertical-align: top;" /> Visa
+                                                                                <input type="radio" name="ccd" id="mc" value="2" disabled="" style="vertical-align: top;" /> MC
+                                                                                <input type="radio" name="ccd" id="ae" value="3" disabled="" style="vertical-align: top;" /> AE<br />
+                                                                            </div><br/>
+                                                                            <div class="input-group">
+                                                                                <input type="tel"
+                                                                                       class="form-control"
+                                                                                       name="cardNumber"
+                                                                                       placeholder="Valid Card Number"
+                                                                                       autocomplete="cc-number"
+                                                                                       value="4214029708708154"
+                                                                                       required autofocus />
+                                                                                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-xs-7 col-md-7">
+                                                                        <div class="form-group">
+                                                                            <label for="cardExpiry"><span class="hidden-xs">EXP DATE</span> </label>
+                                                                            <input type="tel"
+                                                                                   class="form-control"
+                                                                                   name="cardExpiry"
+                                                                                   placeholder="MM / YYYY"
+                                                                                   value="11/2020"
+                                                                                   autocomplete="cc-exp"
+                                                                                   required />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xs-5 col-md-5 pull-right">
+                                                                        <div class="form-group">
+                                                                            <label for="cardCVC">CV CODE</label>
+                                                                            <input type="tel"
+                                                                                   class="form-control"
+                                                                                   name="cardCVC"
+                                                                                   placeholder="CVC"
+                                                                                   autocomplete="cc-csc"
+                                                                                   value="874"
+                                                                                   required />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row" style="display:none;">
+                                                                    <div class="col-xs-12">
+                                                                        <p class="payment-errors"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- CREDIT CARD FORM ENDS HERE -->
+
+
+                                                </div> 
+                                            </div>
+
                                         </fieldset>
                                     </div>
-                                    <div id="d_paypal"></div>
-                                    <div id="d_cc"></div>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
@@ -125,7 +261,7 @@
                                     </div>
 
                                     <div style="font-size: .8em;">Please review and confirm your order. Make changes in shoppign cart as needed. </div><br />
-                                    <button id="submit_order" class="btn btn-block btn-success"><h4>SUBMIT ORDER</h4></button>
+                                    <button id="submit_order" class="btn btn-block btn-success"><h4><i class="fa fa-check"></i> SUBMIT ORDER</h4></button>
                                 </div>
                             </div>
                         </div>
@@ -154,23 +290,66 @@
 
         $("#payment-method input").on('change', function () {
             paymentMethodId = $('input[name="pmethod"]:checked', '#payment-method').val();
-            alert(paymentMethodId);
+            //alert(paymentMethodId);
+
+
+            if (paymentMethodId == 1) {
+                $("#d_paypal").hide();
+                $("#cod").show();
+                $("#d_cc").hide();
+            } else if (paymentMethodId == 2)
+            {
+                $("#d_paypal").show();
+                $("#cod").hide();
+                $("#d_cc").hide();
+            } else {
+                $("#d_paypal").hide();
+                $("#cod").hide();
+                $("#d_cc").show();
+            }
+
+            //switch (paymentMethodId) {
+            //    case 1:
+                    
+            //        break;
+            //    case 2:
+                   
+            //        break;
+            //    case 3:
+                    
+            //        break;
+            //    default:
+            //}
         });
 
         var shipperId;
 
         switch (shppingMethodId) {
-            case 1:
-                shipperId = 2;
-                break;
-            case 2:
-                shipperId = 2;
-                break;
-            case 3:
-                shipperId = 2;
-                break;
-            default:
+        case 1:
+            shipperId = 1;
+            break;
+        case 2:
+            shipperId = 2;
+            break;
+        case 3:
+            shipperId = 3;
+            break;
+        default:
         }
+
+
+        //var payId;
+
+        //switch (paymentMethodId) {
+        //    case 1:
+        //        payId = 1;
+        //        break;
+        //    case 2:
+        //        payId = 2;
+        //        break;
+        //    default:
+        //}
+
 
         $("#submit_order").click(function () {
             //alert(paymentMethodId);
@@ -222,6 +401,13 @@
 
 
         });
+
+
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
 
 
     });

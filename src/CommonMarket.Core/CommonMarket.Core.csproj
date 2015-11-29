@@ -62,6 +62,7 @@
     <Compile Include="Entities\DomainEntity.cs" />
     <Compile Include="Entities\Fee.cs" />
     <Compile Include="Entities\Log4Net_Error.cs" />
+    <Compile Include="Entities\MerchantFeeInfo.cs" />
     <Compile Include="Entities\MerchantFeePayment.cs" />
     <Compile Include="Entities\MerchantFeeType.cs" />
     <Compile Include="Entities\Order.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Entities\OrderStatu.cs" />
     <Compile Include="Entities\Payment.cs" />
     <Compile Include="Entities\PaymentMethod.cs" />
+    <Compile Include="Entities\PayPalAcctInfo.cs" />
+    <Compile Include="Entities\PayPalCcInfo.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductCategory.cs" />
     <Compile Include="Entities\ProductWishList.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="Interface\IDiscountService.cs" />
     <Compile Include="Interface\IMerchantService.cs" />
     <Compile Include="Interface\IOrderProcessingService.cs" />
+    <Compile Include="Interface\IPayPalServices.cs" />
     <Compile Include="Interface\IProductServices.cs" />
     <Compile Include="Interface\IPromotionService.cs" />
     <Compile Include="Interface\ISearchSerivce.cs" />

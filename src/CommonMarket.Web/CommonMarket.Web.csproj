@@ -441,6 +441,9 @@
     <Content Include="Views\Operate\_CustomerList.cshtml" />
     <Content Include="Views\Operate\_CustomerOrder.cshtml" />
     <Content Include="Views\Operate\_OrderItemsByCustomer.cshtml" />
+    <Content Include="Views\PayPal\Index.cshtml" />
+    <Content Include="Views\PayPal\SuccessView.cshtml" />
+    <Content Include="Views\PayPal\FailureView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -584,7 +587,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Assets\Images\Products\Originals\" />
-    <Folder Include="Views\PayPal\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>

@@ -381,3 +381,5 @@ C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Web\bin\Common.Loggi
 C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Web\bin\Common.Logging.xml
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Web\bin\PayPal.dll
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Web\bin\PayPal.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Web\bin\PayPal.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Web\bin\PayPal.xml

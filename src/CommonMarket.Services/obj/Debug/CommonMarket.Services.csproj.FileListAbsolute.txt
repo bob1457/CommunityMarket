@@ -80,3 +80,7 @@ C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Pa
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Newtonsoft.Json.dll
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\PayPal.xml
 C:\Projects\SourceControl\CommunityMarket\src\CommonMarket.Services\bin\Debug\Newtonsoft.Json.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\PayPal.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Newtonsoft.Json.dll
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\PayPal.xml
+C:\Development\Projects\SC\CommunityMarket\src\CommonMarket.Services\bin\Debug\Newtonsoft.Json.xml
