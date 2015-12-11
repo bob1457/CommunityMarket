@@ -88,6 +88,36 @@ namespace CommonMarket.Web.Controllers
             
         }
 
+        public ActionResult GetShippingAddress(int id)
+        {
+            var shippingAddressByCustomerid = _customerService.FindCustomerAddress(id, 2);
+
+            return PartialView("_ShippingAddress", shippingAddressByCustomerid);
+        }
+
+        public ActionResult GetBillingAddress(int id)
+        {
+            var billingAddressByCustomerid = _customerService.FindCustomerAddress(id, 1);
+
+            return PartialView("_BillingAddress", billingAddressByCustomerid);
+        }
+
+
+        public ActionResult GetShippingAddrForEdit(int id)
+        {
+            var shippingAddressByCustomerid = _customerService.FindCustomerAddress(id, 2);
+
+            return PartialView("_ShippingAddressEdit", shippingAddressByCustomerid);
+        }
+
+
+        public ActionResult GetBillingAddrForEdit(int id)
+        {
+            var billingAddressByCustomerid = _customerService.FindCustomerAddress(id, 2);
+
+            return PartialView("_BillingAddressEdit", billingAddressByCustomerid);
+        }
+
 
         public ActionResult GetCustomerEdit(string id)
         {
@@ -132,19 +162,58 @@ namespace CommonMarket.Web.Controllers
             }
         }
 
-        public void UpdateCustomerInfo(Customer customer)
+        public void UpdateCustomerInfo(Customer customer, CustomerAddress billingAddress, CustomerAddress shippingAddress)
         {
-            var profileId = UserManager.FindById(User.Identity.GetUserId()).UserProfile.Id;
+            try
+            {
+                var profileId = UserManager.FindById(User.Identity.GetUserId()).UserProfile.Id;
 
-            var custo = _customerService.FindCustomerBy(profileId);
+                var custo = _customerService.FindCustomerBy(profileId);
 
-            custo.CustomerAlias = customer.CustomerAlias;
-            custo.BillingAddress = customer.BillingAddress;
-            custo.ShippingAddress = customer.ShippingAddress;
-            custo.ContactEmail = customer.ContactEmail;
-            custo.ContactTel = customer.ContactTel;
+                custo.CustomerAlias = customer.CustomerAlias;
+                custo.BillingAddress = customer.BillingAddress;
+                custo.ShippingAddress = customer.ShippingAddress;
+                custo.ContactEmail = customer.ContactEmail;
+                custo.ContactTel = customer.ContactTel;
 
-            _customerService.UpdateCustomerInfo(custo);
+                //_customerService.UpdateCustomerInfo(custo);
+
+                //new code: customer address
+                var billingAddr = _customerService.FindCustomerAddress(custo.Id, 1); //get billing address
+                var shippingAddr = _customerService.FindCustomerAddress(custo.Id, 2); //get shipping address
+
+                if (billingAddr != null)
+                {
+                    billingAddr.AddressStreet = billingAddress.AddressStreet;
+                    billingAddr.AddressCity = billingAddress.AddressCity;
+                    billingAddr.AddressProState = billingAddress.AddressProState;
+                    billingAddr.AddressPostZipCode = billingAddress.AddressPostZipCode;
+                    billingAddr.AddressType = billingAddress.AddressType;
+                    billingAddr.CustomerId = customer.Id;
+                    billingAddress.AddressCountry = "Canada";
+                }
+
+                if (shippingAddr != null)
+                {
+                    shippingAddr.AddressStreet = shippingAddress.AddressStreet;
+                    shippingAddr.AddressCity = shippingAddress.AddressCity;
+                    shippingAddr.AddressProState = shippingAddress.AddressProState;
+                    shippingAddr.AddressPostZipCode = shippingAddress.AddressPostZipCode;
+                    shippingAddr.AddressType = shippingAddress.AddressType;
+                    shippingAddr.CustomerId = customer.Id;
+                    shippingAddr.AddressCountry = "Canada";
+                }
+                
+
+                _customerService.UpdateCustomerInfo(custo, billingAddress, shippingAddress);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
+
         }
 
 

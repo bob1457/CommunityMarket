@@ -47,6 +47,8 @@ namespace CommonMarket.DataAccess
         public virtual DbSet<ClaimedCoupon> ClaimedCoupons { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<OrderByVendor> OrderByVendors { get; set; }
+        public virtual DbSet<CustomerAddress> CustomerAddresses { get; set; }
+        
 
         public virtual DbSet<DomainEntity> DomainEntities { get; set; }
         public virtual DbSet<MerchantFeePayment> MerchantFeePayments { get; set; }

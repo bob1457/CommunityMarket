@@ -444,6 +444,11 @@
     <Content Include="Views\PayPal\Index.cshtml" />
     <Content Include="Views\PayPal\SuccessView.cshtml" />
     <Content Include="Views\PayPal\FailureView.cshtml" />
+    <Content Include="Views\Customer\_ShippingAddress.cshtml" />
+    <Content Include="Views\Customer\_BillingAddress.cshtml" />
+    <Content Include="Views\Customer\_BillingAddressEdit.cshtml" />
+    <Content Include="Views\Customer\_ShippingAddressEdit.cshtml" />
+    <Content Include="Views\Operate\_merchantBillingAddress.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

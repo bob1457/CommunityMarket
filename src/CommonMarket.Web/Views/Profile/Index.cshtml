@@ -563,7 +563,7 @@
             title: 'Update Avatar Image'
 
 
-        }
+        };
 
         $("#add_pic").dialog(dialogOpts).dialog('open');
 
@@ -1073,10 +1073,11 @@
     };
 </script>
 
-<!-- Update Merchant info -->
+<!-- Update Merchant and customer info -->
 <script type="text/javascript">
     $(document).ready(function () {
 
+    //Edit merchant
         $("#m_Save").click(function () {
             debugger;
             var merchantInfo = {
@@ -1172,7 +1173,7 @@
 
 
 
-
+        //Edit customer
         $("#c_Save").click(function () {
             debugger;
             var cusotmerInfo = {
@@ -1184,6 +1185,30 @@
 
             };
 
+            //new code for billing and shipping address
+            //
+            var billingAddr = {
+                "AddressStreet": $("#baddress1").val(),
+                "AddressCity": $("#baddress2").val(),
+                "AddressProState": $("#baddress3").val(),
+                "AddressPostZipCode": $("#baddress4").val(),
+                "AddressType": 1,
+                "AddressCountry": "Canada",
+                "CustomerId": $("#customer_id").text()
+            };
+
+            var shippingAddr = {
+                "AddressStreet": $("#saddress1").val(),
+                "AddressCity": $("#saddress2").val(),
+                "AddressProState": $("#saddress3").val(),
+                "AddressPostZipCode": $("#saddress4").val(),
+                "AddressType": 2,
+                "AddressCountry": "Canada",
+                "CustomerId": $("#customer_id").text()
+            };
+
+            
+            //
 
             $("#c_details").show();
             $("#c_edit").hide();
@@ -1192,7 +1217,7 @@
             $.ajax({
                 type: "POST",
                 url: "/Customer/UpdateCustomerInfo",
-                data: { customer: cusotmerInfo },
+                data: { customer: cusotmerInfo, billingAddress: billingAddr, shippingAddress: shippingAddr },
                 contenType: "application/json; charset=utf-8",
                 //dataType: "json",
                 cache: false,

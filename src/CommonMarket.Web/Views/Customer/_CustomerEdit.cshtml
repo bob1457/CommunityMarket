@@ -1,4 +1,5 @@
 ﻿@model CommonMarket.Core.Entities.Customer
+@*@model CommonMarket.Core.ViewModels.CustomerAddressViewModel*@
     
 <table class="table table-user-information">
     <tbody>
@@ -8,18 +9,25 @@
                 <input id="c_alias" type="text" class="form-control" placeholder="Full Name" style="height: 35px; margin-bottom: -2px; margin-top: -5px;" value="@Html.DisplayFor(model=>model.CustomerAlias)" autofocus="" />
             </td>
         </tr>
-        <tr>
-            <td>Shipping Address::</td>
-            <td>
-                <textarea id="c_shipping" class="form-control" placeholder="Shipping Address" style="height: 35px; margin-bottom: -2px; margin-top: -5px; height: 40px;" >@Html.DisplayFor(model => model.ShippingAddress)</textarea>
-            </td>
-        </tr>
-        <tr>
-            <td>Billing Address::</td>
-            <td>
-                <textarea id="c_billing" class="form-control" placeholder="Billing Address" style="height: 35px; margin-bottom: -2px; margin-top: -5px; height: 40px;">@Html.DisplayFor(model => model.ShippingAddress)</textarea>
-            </td>
-        </tr>
+        
+        
+        <!-- Shipping address -->
+        <div id="shipping_addr">
+            @Html.Action("GetShippingAddrForEdit", new { id = @Model.Id })
+        </div>
+        
+        
+
+
+        
+        
+        <!-- Billing address -->
+        <div id="billing_addr">
+            @Html.Action("GetBillingAddrForEdit", new { id = @Model.Id})
+        </div>
+        
+        
+
         <tr>
             <td>Contact Telephone:</td>
             <td>

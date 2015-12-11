@@ -278,6 +278,19 @@ namespace CommonMarket.Web.Controllers
             return PartialView("_TransactionsByVendor", transactions);
         }
 
+        public ActionResult GetMerchantBillingAddress()
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var profileId = currentUser.UserProfile.Id;
+
+            var customer = _customerService.FindCustomerBy(profileId);
+
+            var billingAddress = _customerService.FindCustomerAddress(customer.Id, 1);
+
+            return PartialView("_merchantBillingAddress", billingAddress);
+
+        }
+
 
         public JsonResult GetOrderStatus()  //id = order id
         {

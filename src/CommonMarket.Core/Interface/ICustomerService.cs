@@ -12,7 +12,12 @@ namespace CommonMarket.Core.Interface
         void AddCustomer(Customer customer);
         void UpdateCustomer(int id); //customer id
         void UpdateCustomerInfo(Customer customer);
+        void UpdateCustomerInfo(Customer customer, CustomerAddress billingAddress,
+            CustomerAddress shippingAddress);
 
         void DeleteCustomer();
+
+        CustomerAddress FindCustomerAddress(int id, int addrType);
+
     }
 }

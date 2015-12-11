@@ -68,6 +68,7 @@ namespace CommonMarket.Web.Infrastructure
             kernel.Bind<IOrderProcessingRepository>().To<OrderProcessingRepository>();
             kernel.Bind<IOrderByVendorRepository>().To<OrderByVendorRepository>();
             kernel.Bind<IPromotionRepository>().To<PromotionRepository>();
+            kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
 
         }
     }
