@@ -1,4 +1,6 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using CommonMarket.Web.Models
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
 
 
 @{
@@ -6,8 +8,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 @{
     var userId = User.Identity.GetUserId();
+    
+    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+    var currentUser = manager.FindById(User.Identity.GetUserId());
+
+    var level = currentUser.UserProfile.Address2; //special consideration on temperory basis
+
+    var profileId = currentUser.UserProfile.Id;
+
 }
 
 <style>
@@ -165,6 +176,9 @@
 
 
                                                     <!-- CREDIT CARD FORM STARTS HERE -->
+                                                    
+
+
                                                     <div class="panel panel-default credit-card-box">
                                                         <div class="panel-heading display-table">
                                                             <div class="row display-tr">
@@ -174,67 +188,123 @@
                                                             </div>
                                                         </div>
                                                         <div class="panel-body">
-                                                            <form role="form" id="payment-form" style=" margin-bottom: 10px;">
-                                                                <div class="row">
-                                                                    <div class="col-xs-12">
-                                                                        <div class="form-group">
-                                                                            @*<label for="cardNumber">CARD NUMBER</label>*@
-                                                                            <div>
-                                                                                <input type="radio" name="ccd" id="visa" value="1" checked="checked" style="vertical-align: top;" /> Visa
-                                                                                <input type="radio" name="ccd" id="mc" value="2" disabled="" style="vertical-align: top;" /> MC
-                                                                                <input type="radio" name="ccd" id="ae" value="3" disabled="" style="vertical-align: top;" /> AE<br />
-                                                                            </div><br/>
-                                                                            <div class="input-group">
-                                                                                <input type="tel"
-                                                                                       class="form-control"
-                                                                                       name="cardNumber"
-                                                                                       placeholder="Valid Card Number"
-                                                                                       autocomplete="cc-number"
-                                                                                       value="4214029708708154"
-                                                                                       required autofocus />
-                                                                                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                                            
+                                                            <ul class="nav nav-tabs" role="tablist" style="display: inline-block; width: 100%; margin-left: -10px; margin-bottom: 0;">
+                                                                <li role="presentation" class="active"><a href="#cc_info1" aria-controls="home" role="tab" data-toggle="tab">Card Info</a></li>
+                                                                <li role="presentation"><a href="#billing_addr1" aria-controls="home" role="tab" data-toggle="tab">Billing Address</a></li>
+                                                            </ul>
+                                                            <div class="tab-content" style="margin-left: -30px; overflow-x: hidden;">
+                                                                
+                                                                    <div role="tabpanel" class="tab-pane active" id="cc_info1" style="width: 100%; margin-left: 5px; margin-top: 5px; overflow: hidden;">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-12">
+                                                                                <div class="form-group" style="margin-left: 5px;">
+                                                                                    @*<label for="cardNumber">CARD NUMBER</label>*@
+                                                                                    <div>
+                                                                                        <input type="radio" name="ccd" id="visa" value="1" checked="checked" style="vertical-align: top;" /> Visa
+                                                                                        <input type="radio" name="ccd" id="mc" value="2" disabled="" style="vertical-align: top;" /> MC
+                                                                                        <input type="radio" name="ccd" id="ae" value="3" disabled="" style="vertical-align: top;" /> AE<br />
+                                                                                    </div><br />
+                                                                                    <div class="input-group">
+                                                                                        <input type="tel"
+                                                                                               class="form-control"
+                                                                                               name="cardNumber"
+                                                                                               placeholder="Valid Card Number"
+                                                                                               autocomplete="cc-number"
+                                                                                               value="4214029708708154"
+                                                                                               required autofocus />
+                                                                                        <span class="input-group-addon" style="width: 20%;"><i class="fa fa-credit-card"></i></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-xs-7 col-md-7" style="margin-bottom: -20px; margin-top: -10px;">
+                                                                                <div class="form-group" style="margin-left: 10px;">
+                                                                                    <label for="cardExpiry"><span class="hidden-xs">EXP DATE</span> </label>
+
+                                                                                    <input type="tel"
+                                                                                           class="form-control"
+                                                                                           name="ccExp"
+                                                                                           placeholder="MM / YYYY"
+                                                                                           value="11/2020"
+                                                                                           autocomplete="cc-exp"
+                                                                                           required style="width: 60%" />
+                                                                                    <!--
+                                                                                                                                <select style="width:30%;">
+                                                                                                                                    <option value="0">MM</option>
+                                                                                                                                    <option value="1">01</option>
+                                                                                                                                    <option value="2">02</option>
+                                                                                                                                    <option value="3">03</option>
+                                                                                                                                    <option value="4">04</option>
+                                                                                                                                    <option value="5">05</option>
+                                                                                                                                    <option value="6">06</option>
+                                                                                                                                    <option value="7">07</option>
+                                                                                                                                    <option value="8">08</option>
+                                                                                                                                    <option value="9">09</option>
+                                                                                                                                    <option value="10">10</option>
+                                                                                                                                    <option value="11">11</option>
+                                                                                                                                    <option value="12">12</option>
+                                                                                                                                </select>
+                                                                                                                                <select style="width:40%;">
+                                                                                                                                    <option>YYYY</option>
+                                                                                                                                    <option>2015</option>
+                                                                                                                                    <option>2016</option>
+                                                                                                                                    <option>2017</option>
+                                                                                                                                    <option>2018</option>
+                                                                                                                                    <option>2019</option>
+                                                                                                                                    <option>2020</option>
+                                                                                                                                    <option>2021</option>
+                                                                                                                                    <option>2022</option>
+                                                                                                                                    <option>2023</option>
+                                                                                                                                    <option>2024</option>
+                                                                                                                                    <option>2025</option>
+                                                                                                                                </select>
+
+    -->
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-xs-5 col-md-5 pull-right" style="margin-bottom: -20px; margin-top: -10px;">
+                                                                                <div class="form-group">
+                                                                                    <label for="cardCVC">CV CODE</label>
+                                                                                    <input type="tel"
+                                                                                           class="form-control"
+                                                                                           name="cardCVC"
+                                                                                           placeholder="CVC"
+                                                                                           autocomplete="cc-csc"
+                                                                                           value="874"
+                                                                                           required style="width: 70%" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row" style="display:none;">
+                                                                            <div class="col-xs-12">
+                                                                                <p class="payment-errors"></p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-xs-7 col-md-7">
-                                                                        <div class="form-group">
-                                                                            <label for="cardExpiry"><span class="hidden-xs">EXP DATE</span> </label>
-                                                                            <input type="tel"
-                                                                                   class="form-control"
-                                                                                   name="cardExpiry"
-                                                                                   placeholder="MM / YYYY"
-                                                                                   value="11/2020"
-                                                                                   autocomplete="cc-exp"
-                                                                                   required />
+                                                                    
+                                                                    <div role="tabpanel" class="tab-pane" id="billing_addr1" style="margin-left: 20px;">
+                                                                        <div style="margin-left: 10px;">
+                                                                            Name on card : @currentUser.UserProfile.FirstName @currentUser.UserProfile.LastName
+                                                                            <input id="fName" type="hidden" value="@currentUser.UserProfile.FirstName" readonly="" />
+                                                                            <input id="lName" type="hidden" value="@currentUser.UserProfile.LastName" readonly="" />
                                                                         </div>
+                                                                        @Html.Action("GetCustomertBillingAddress")
                                                                     </div>
-                                                                    <div class="col-xs-5 col-md-5 pull-right">
-                                                                        <div class="form-group">
-                                                                            <label for="cardCVC">CV CODE</label>
-                                                                            <input type="tel"
-                                                                                   class="form-control"
-                                                                                   name="cardCVC"
-                                                                                   placeholder="CVC"
-                                                                                   autocomplete="cc-csc"
-                                                                                   value="874"
-                                                                                   required />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row" style="display:none;">
-                                                                    <div class="col-xs-12">
-                                                                        <p class="payment-errors"></p>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
+                                                                <form role="form" action="" id="payment-form" style=" margin-bottom: 10px;"></form>
+                                                            </div>
+
+                                                            
                                                         </div>
                                                     </div>
+
+                                                    
                                                     <!-- CREDIT CARD FORM ENDS HERE -->
 
 
-                                                </div> 
+                                                </div>
                                             </div>
 
                                         </fieldset>

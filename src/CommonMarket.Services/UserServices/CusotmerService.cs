@@ -106,7 +106,12 @@ namespace CommonMarket.Services.UserServices
                 else
                 {
                     //_custRepository.AddCusotmerAddress(customer.Id, billingAddress);
-                    _customerAddressRepository.Add(billingAddress);
+                    if (billingAddress.AddressStreet != null && billingAddress.AddressCity != null && billingAddress.AddressProState != null
+                        && billingAddress.AddressPostZipCode != null)
+                    {
+                        _customerAddressRepository.Add(billingAddress);
+                    }
+                    
                 }
 
                 var sAddress = _customerAddressRepository.GetAll().FirstOrDefault(c => c.CustomerId == customer.Id && c.AddressType == 2);
@@ -125,7 +130,12 @@ namespace CommonMarket.Services.UserServices
                 else
                 {
                     //_custRepository.AddCusotmerAddress(customer.Id, shippingAddress);
-                    _customerAddressRepository.Add(shippingAddress);
+                    if (shippingAddress.AddressStreet != null && shippingAddress.AddressCity != null && shippingAddress.AddressProState != null
+                        && shippingAddress.AddressPostZipCode != null)
+                    {
+                        _customerAddressRepository.Add(shippingAddress);
+                    }
+                    
                 }
 
                 _uow.Save();

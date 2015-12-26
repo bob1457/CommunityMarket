@@ -1,0 +1,17 @@
+﻿@model CommonMarket.Core.Entities.CustomerAddress
+
+@if (@Model != null)
+{
+    <div style="margin-left: 10px;">
+        @Model.AddressStreet, <br />
+        @Model.AddressCity, <br />
+        @Model.AddressProState, <br />
+        @Model.AddressPostZipCode,<br />
+        @Model.AddressCountry &nbsp;&nbsp;&nbsp;<i style="font-size: .8em;">Changes can be made on profile page</i>
+        <br /><br />
+    </div>
+}
+else
+{
+    <div>You need to have billing address to make a payment. Please add it on your profile.</div>
+}
